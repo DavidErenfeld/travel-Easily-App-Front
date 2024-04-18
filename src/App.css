@@ -5,3 +5,107 @@
   text-align: center;
 }
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  /* font-family: "Josefin Sans", sans-serif; */
+  line-height: 1;
+  font-weight: 400;
+  overflow-x: hidden;
+  height: 100vh;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+}
+
+/*************************
+ # FLEX-BOX TYPES
+**************************/
+.flex-center-column {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.flex-center-column-gap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.flex-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-center-column-large-gap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/*************************
+# BUTTON-TYPES
+**************************/
+.btn-l {
+  font-size: 1.6rem;
+  padding: 8px 8px;
+  width: 20rem;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-l:hover {
+  background: linear-gradient(135deg, #a777e3, #6e8efb);
+  transition: all 0.4s;
+  color: #232d59;
+}
+
+/*************************
+# INPUT-TYPES
+**************************/
+input {
+  border-radius: 7px;
+  height: 4rem;
+  width: 100%;
+  padding: 7px;
+  border: none;
+  background-color: #fff;
+}
+
+input:focus {
+  outline: none;
+}
+
+.text-danger {
+  color: red;
+  text-align: start;
+}
+
+/*************************
+# ICONS
+**************************/
+.drop-list-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+}

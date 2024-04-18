@@ -1,0 +1,81 @@
+.profile-container {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  max-height: 55rem;
+  width: 35rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1rem;
+  border-radius: 8px;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #6e8efb, #5edb0a);
+  z-index: 15;
+}
+
+.main-title {
+  grid-row: 1;
+  grid-column: 1/-1;
+}
+
+.sub-title {
+  align-self: flex-start;
+  font-size: 1.4rem;
+  color: #2c3964;
+  font-weight: 500;
+}
+
+.form-image-profile {
+  grid-row: 2;
+  grid-column: 1/-1;
+}
+
+.date-container {
+  grid-column: 1/5;
+  grid-row: 3;
+}
+
+.date {
+  cursor: pointer;
+  height: auto;
+  padding: 0.8rem 4px;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.gender-container {
+  grid-column: 5/-1;
+  grid-row: 3;
+}
+
+.seasons-container {
+  grid-row: 4;
+  grid-column: 1/-1;
+  z-index: 10;
+}
+
+.regions-container {
+  grid-row: 5;
+  grid-column: 1/-1;
+}
+
+.diet-options-container {
+  grid-row: 6;
+  grid-column: 1/4;
+}
+
+.travel-tyles-container {
+  grid-row: 6;
+  grid-column: 4/-1;
+}
+
+.send-btn {
+  grid-row: 7;
+  grid-column: 1/-1;
+  justify-self: center;
+  margin-top: 1rem;
+  font-weight: 400;
+}
