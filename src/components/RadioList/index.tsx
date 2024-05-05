@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import DropList from "../Icons/DropList";
 import "./style.css";
 
@@ -6,6 +7,7 @@ interface RadioListProps {
   optionsList: string[];
   isOpen: boolean;
   onTitleClick: () => void;
+  onOptionSelected: (selected: string) => void; // פונקציה חדשה לעדכון האופציה שנבחרה
 }
 
 const RadioList = ({
@@ -13,29 +15,39 @@ const RadioList = ({
   optionsList,
   isOpen,
   onTitleClick,
+  onOptionSelected,
 }: RadioListProps) => {
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleOptionChange = (option: string) => {
+    setSelectedOption(option);
+    onOptionSelected(option); // עדכון האופציה הנוכחית
+    onTitleClick(); // סגירת הרשימה לאחר בחירה
+  };
+
   const titleClass = !isOpen ? "complet-border" : "";
   return (
     <>
       <section className="flex-center-column-gap">
         <h3 onClick={onTitleClick} className={`options-title ${titleClass}`}>
-          {title}
+          {selectedOption ? `${selectedOption}` : `${title}`}
         </h3>
         <div className="icon-box" onClick={onTitleClick}>
           <DropList />
         </div>
-        <div className={`details flex-center-column ${isOpen ? "open" : ""}`}>
+
+        <div className={`flex-center-column ${isOpen ? "open" : "details"}`}>
           {optionsList.map((option, index) => (
-            <label className="option-box flex-space-between">
-              <p className="radio-option" key={index}>
-                {option}
-              </p>
+            <label className="option-box flex-space-between" key={index}>
+              <p className="radio-option">{option}</p>
               <input
                 className="radio-button"
                 type="radio"
                 name={title}
                 value={option}
-              ></input>
+                checked={option === selectedOption}
+                onChange={() => handleOptionChange(option)}
+              />
             </label>
           ))}
         </div>

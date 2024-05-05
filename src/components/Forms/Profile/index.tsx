@@ -1,58 +1,66 @@
 import { useState } from "react";
-import MultiSelect from "../../MultiSelect/index";
 import "./style.css";
 import "../style.css";
 import CloseIcon from "../../Icons/Close";
 import RadioList from "../../RadioList";
+import CountriesList from "../../ContriesList";
 
 const Profile = () => {
-  const [selectedFavouriteFood, setSelectedFavouriteFood] = useState<string[]>(
-    []
-  );
-  const [selectedSeasons, setSelectedSeasons] = useState<string[]>([]);
-  const [selectedTravelStyles, setSelectedTravelStyles] = useState<string[]>(
-    []
-  );
-  const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const [imgSrc, setImgSrc] = useState("/images/user.png");
-  const favouriteFood = ["Kosher", "Vegan", "Meat Eaters", "Dairy"];
-  const seasonsOptions = ["Summer", "Winter", "Spring", "Autumn"];
-  const travelStyles = [
-    "Sightseeing & Attractions",
-    "Adventure & Adrenaline",
-    "Romantic Getaways",
-    "Nature & Scenery",
-    "Relaxation & Leisure ",
-  ];
-  const InterestRegions = [
-    "Europe",
-    "Asia",
-    "South America",
-    "North America",
-    "Australia & Oceania",
-    "Africa",
-  ];
+  const [openRadioList, setOpenRadioList] = useState<string | null>(null);
+  const [selectedDateOfBirth, setSelectedDateOfBirth] = useState("");
+  const [selectedGender, setSelectedGender] = useState<string>("");
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
+  const [selectedReligion, setSelectedReligion] = useState<string>("");
+  const [selectedStatus, setSelectedStatus] = useState<string>("");
+  const [selectedAccessibility, setSelectedAccessibility] =
+    useState<string>("");
 
-  const [openMultiSelect, setOpenMultiSelect] = useState<string | null>(null);
-
-  // פונקציה לעדכון הMultiSelect הפתוח
-  const handleOpenMultiSelect = (id: string) => {
-    if (openMultiSelect === id) {
-      setOpenMultiSelect(null);
+  const handleRadioList = (id: string) => {
+    if (openRadioList === id) {
+      setOpenRadioList(null);
     } else {
-      setOpenMultiSelect(id);
+      setOpenRadioList(id);
     }
   };
 
-  const toggleOption = (
-    option: string,
-    setter: React.Dispatch<React.SetStateAction<string[]>>
-  ) => {
-    setter((prev) =>
-      prev.includes(option)
-        ? prev.filter((o) => o !== option)
-        : [...prev, option]
-    );
+  const handleGenderSelected = (gender: string) => {
+    setSelectedGender(gender);
+    setOpenRadioList(null);
+  };
+
+  const handleReligionSelected = (religion: string) => {
+    setSelectedReligion(religion);
+    setOpenRadioList(null);
+  };
+  const handleStatusSelected = (status: string) => {
+    setSelectedStatus(status);
+    setOpenRadioList(null);
+  };
+
+  const handleAccessibilitySelected = (accessibility: string) => {
+    setSelectedAccessibility(accessibility);
+    setOpenRadioList(null);
+  };
+
+  const saveCountryName = (countryName: string) => {
+    setSelectedCountry(countryName);
+  };
+
+  const saveDateOfBirth = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedDateOfBirth(event.target.value);
+  };
+
+  const onClickSend = () => {
+    const profileData = {
+      dateOfBirth: selectedDateOfBirth,
+      gender: selectedGender,
+      country: selectedCountry,
+      accessibility: selectedAccessibility,
+      religion: selectedReligion,
+      status: selectedStatus,
+    };
+    console.log(profileData);
   };
 
   return (
@@ -61,76 +69,75 @@ const Profile = () => {
         <div className="form-close-icon">
           <CloseIcon onClick={() => console.log("close")} />
         </div>
-
         <h2 className="form-title main-title">profile</h2>
         <div className="form-image-profile">
           {imgSrc && (
             <img src={imgSrc} alt="Preview" className="register-img" />
           )}
         </div>
-        <div className="date-container flex-center-column-gap">
+        <div className="date-container flex-stretch-column-gap">
           <h3 className="sub-title">date of birth</h3>
-          <input className="date" type="date" placeholder="date of birth" />
+          <input
+            className="date"
+            type="date"
+            placeholder="date of birth"
+            value={selectedDateOfBirth}
+            onChange={saveDateOfBirth}
+          />
         </div>
 
-        <section className="gender-container ">
+        <section className="gender-container flex-stretch-column-gap">
+          <h3 className="sub-title">gender</h3>
           <RadioList
             title="gender"
             optionsList={["Male", "Female", "Other"]}
-            isOpen={openMultiSelect === "gender"}
-            onTitleClick={() => handleOpenMultiSelect("gender")}
+            isOpen={openRadioList === "gender"}
+            onTitleClick={() => handleRadioList("gender")}
+            onOptionSelected={handleGenderSelected}
           />
         </section>
 
-        <section className="diet-options-container">
-          <MultiSelect
-            selectedOptions={selectedFavouriteFood}
-            toggleOption={(option) =>
-              toggleOption(option, setSelectedFavouriteFood)
-            }
-            options={favouriteFood}
-            title="favourite food"
-            isOpen={openMultiSelect === "favouriteFood"}
-            onTitleClick={() => handleOpenMultiSelect("favouriteFood")}
+        <section className="country-container flex-stretch-column-gap">
+          <h3 className="sub-title">country</h3>
+          <CountriesList saveCountryName={saveCountryName} />
+        </section>
+
+        <section className="accessibility-container flex-stretch-column-gap">
+          <h3 className="sub-title">accessibility</h3>
+          <RadioList
+            title="accessibility"
+            optionsList={["Accessible", "Not Accessible"]}
+            isOpen={openRadioList === "accessibility"}
+            onTitleClick={() => handleRadioList("accessibility")}
+            onOptionSelected={handleAccessibilitySelected}
           />
         </section>
 
-        <section className="seasons-container">
-          <MultiSelect
-            selectedOptions={selectedSeasons}
-            toggleOption={(option) => toggleOption(option, setSelectedSeasons)}
-            options={seasonsOptions}
-            title=" Favorite Seasons Traveling"
-            isOpen={openMultiSelect === "seasonsOptions"}
-            onTitleClick={() => handleOpenMultiSelect("seasonsOptions")}
+        <section className="religion-container flex-stretch-column-gap">
+          <h3 className="sub-title">religion</h3>
+          <RadioList
+            title="religion"
+            optionsList={["Religious", "Secular", "Ultra-Orthodox"]}
+            isOpen={openRadioList === "religion"}
+            onTitleClick={() => handleRadioList("religion")}
+            onOptionSelected={handleReligionSelected}
           />
         </section>
 
-        <section className="travel-tyles-container">
-          <MultiSelect
-            selectedOptions={selectedTravelStyles}
-            toggleOption={(option) =>
-              toggleOption(option, setSelectedTravelStyles)
-            }
-            options={travelStyles}
-            title=" Travel Styles"
-            isOpen={openMultiSelect === "travelStyles"}
-            onTitleClick={() => handleOpenMultiSelect("travelStyles")}
+        <section className="status-container flex-stretch-column-gap">
+          <h3 className="sub-title">status</h3>
+          <RadioList
+            title="status"
+            optionsList={["Single", "Married", "Married +"]}
+            isOpen={openRadioList === "status"}
+            onTitleClick={() => handleRadioList("status")}
+            onOptionSelected={handleStatusSelected}
           />
         </section>
 
-        <section className="regions-container">
-          <MultiSelect
-            selectedOptions={selectedRegions}
-            toggleOption={(option) => toggleOption(option, setSelectedRegions)}
-            options={InterestRegions}
-            title=" Interest Regions"
-            isOpen={openMultiSelect === "InterestRegions"}
-            onTitleClick={() => handleOpenMultiSelect("InterestRegions")}
-          />
-        </section>
-
-        <button className="send-btn btn-l">send</button>
+        <button onClick={() => onClickSend()} className="send-btn btn-l">
+          send
+        </button>
       </section>
     </>
   );

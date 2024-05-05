@@ -29,7 +29,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         <DropList />
       </div>
 
-      <div className={`options ${isOpen ? "open" : ""} flex-center-column `}>
+      <div className={` ${isOpen ? "open" : "options"} flex-center-column `}>
         {options.map((option, index) => (
           <div
             key={index}

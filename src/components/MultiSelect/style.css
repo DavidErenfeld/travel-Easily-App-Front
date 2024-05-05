@@ -22,6 +22,11 @@
 }
 
 .options {
+  display: none;
+}
+
+.open {
+  max-height: 50rem;
   position: absolute;
   top: 34px;
   left: 50%;
@@ -29,11 +34,6 @@
   width: 100%;
   overflow: hidden;
   transition: max-height 0.5s ease-out;
-  max-height: 0;
-}
-
-.options.open {
-  max-height: 50rem;
 }
 
 .option {
