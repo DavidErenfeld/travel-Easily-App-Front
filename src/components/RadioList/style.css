@@ -11,6 +11,10 @@
 }
 
 .details {
+  display: none;
+}
+
+.open {
   position: absolute;
   top: 34px;
   left: 50%;
@@ -18,12 +22,8 @@
   width: 100%;
   overflow: hidden;
   transition: max-height 0.5s ease-out;
-  max-height: 0;
   color: #212b4b;
   z-index: 11;
-}
-
-.details.open {
   max-height: 30rem;
 }
 

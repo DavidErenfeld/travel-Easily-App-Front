@@ -7,8 +7,9 @@ import Register from "./components/Forms/Register";
 function App() {
   return (
     <>
-      {/* <Profile /> */}
-      <Login onClickClose={() => console.log("close")} />
+      {/* <DemoProfile /> */}
+      <Profile />
+      {/* <Login onClickClose={() => console.log("close")} /> */}
       {/* <Register onClickClose={() => console.log("close")} /> */}
     </>
   );
