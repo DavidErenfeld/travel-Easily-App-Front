@@ -17,19 +17,26 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
   /* font-family: "Josefin Sans", sans-serif; */
   line-height: 1;
   font-weight: 400;
   overflow-x: hidden;
   height: 100vh;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #082f49;
 }
 
 /*************************
  # FLEX-BOX TYPES
 **************************/
+
+.flex-center-gap-s {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
 .flex-center-column {
   display: flex;
   align-items: center;
@@ -70,12 +77,18 @@ body {
 /*************************
 # BUTTON-TYPES
 **************************/
+.btn-container-gap-m {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-m,
 .btn-l {
   font-size: 1.6rem;
   padding: 8px 8px;
   width: 20rem;
   border-radius: 9px;
-  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  background: #00a8ff;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -83,8 +96,15 @@ body {
   transition: all 0.3s;
 }
 
+.btn-m {
+  padding: 6px;
+  width: 10rem;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.btn-m:hover,
 .btn-l:hover {
-  background: linear-gradient(135deg, #a777e3, #6e8efb);
+  background: #bae6fd;
   transition: all 0.4s;
   color: #232d59;
 }
@@ -98,7 +118,7 @@ input {
   width: 100%;
   padding: 7px;
   border: none;
-  background-color: #fff;
+  background-color: #e0f2fe;
 }
 
 input:focus {
@@ -116,4 +136,18 @@ input:focus {
 .drop-list-icon {
   width: 1.8rem;
   height: 1.8rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.hidden {
+  display: none;
 }

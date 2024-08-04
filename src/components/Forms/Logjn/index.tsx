@@ -1,10 +1,12 @@
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import z from "zod";
 import "../style.css";
 import "./style.css";
 import CloseIcon from "../../Icons/Close";
+import { Link } from "react-router-dom";
 
 const schema = z.object({
   userName: z
@@ -23,11 +25,7 @@ type FormData = z.infer<typeof schema> & {
   imgUrl?: string;
 };
 
-interface RegisterProps {
-  onClickClose: () => void;
-}
-
-function Login({ onClickClose }: RegisterProps) {
+function Login() {
   const [imgSrc, setImgSrc] = useState("/images/user.png");
   const [registerError, setRegisterError] = useState<string | null>(null);
   const imageRef = useRef<HTMLInputElement>(null);
@@ -52,7 +50,7 @@ function Login({ onClickClose }: RegisterProps) {
     >
       {registerError && <div className="text-danger">{registerError}</div>}
       <div className="form-close-icon">
-        <CloseIcon onClick={onClickClose} />
+        <CloseIcon color="#000" />
       </div>
       <p className="form-title">login</p>
 
@@ -87,7 +85,9 @@ function Login({ onClickClose }: RegisterProps) {
           login
         </button>
         <p>or</p>
-        <button className="btn-l">register</button>
+        <Link to="/register">
+          <button className="btn-l">register</button>
+        </Link>
       </div>
     </form>
   );

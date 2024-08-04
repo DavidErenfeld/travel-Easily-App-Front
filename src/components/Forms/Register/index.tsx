@@ -53,7 +53,7 @@ function Register({ onClickClose }: RegisterProps) {
     >
       {registerError && <div className="text-danger">{registerError}</div>}
       <div className="form-close-icon">
-        <CloseIcon onClick={onClickClose} />
+        <CloseIcon color="#000" onClick={onClickClose} />
       </div>
       <p className="form-title">Register</p>
 

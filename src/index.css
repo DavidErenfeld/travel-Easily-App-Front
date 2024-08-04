@@ -3,3 +3,8 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.day-name {
+  font-size: 2rem;
+  color: #e0f2fe;
+}

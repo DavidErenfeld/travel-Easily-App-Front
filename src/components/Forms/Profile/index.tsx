@@ -67,7 +67,7 @@ const Profile = () => {
     <>
       <section className="profile-container">
         <div className="form-close-icon">
-          <CloseIcon onClick={() => console.log("close")} />
+          <CloseIcon color="#fff" onClick={() => console.log("close")} />
         </div>
         <h2 className="form-title main-title">profile</h2>
         <div className="form-image-profile">
