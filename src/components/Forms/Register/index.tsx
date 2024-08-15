@@ -1,11 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
-import "../style.css";
+import { useNavigate } from "react-router-dom";
+import CloseIcon from "../../UIComponents/Icons/Close";
+import AddImgsIcon from "../../UIComponents/Icons/AddImage";
+import { uploadPhoto } from "../../../services/fileService";
+import { registerUser } from "../../../services/registerService";
+import axios from "axios";
+import LoadingDots from "../../UIComponents/Loader";
 import "./style.css";
-import CloseIcon from "../../Icons/Close";
-import AddImgsIcon from "../../Icons/AddImage";
+import "../formeStyle.css";
+
+const defaultImage = "/images/user.png";
 
 const schema = z.object({
   userName: z
@@ -24,26 +31,69 @@ type FormData = z.infer<typeof schema> & {
   imgUrl?: string;
 };
 
-interface RegisterProps {
-  onClickClose: () => void;
-}
-
-function Register({ onClickClose }: RegisterProps) {
-  const [imgSrc, setImgSrc] = useState("/images/user.png");
+function Register() {
+  const [imgFile, setImgFile] = useState<File | null>(null);
+  const [imgSrc, setImgSrc] = useState(defaultImage);
   const [registerError, setRegisterError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const imageRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate(); // שימוש ב-useNavigate
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
-  const onSubmit = async (data: FormData) => {
-    console.log(data);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImgFile(e.target.files[0]);
+      setImgSrc(URL.createObjectURL(e.target.files[0]));
+    }
   };
 
-  const handleChange = () => {
-    console.log("Change");
+  useEffect(() => {
+    return () => {
+      if (imgSrc) URL.revokeObjectURL(imgSrc);
+    };
+  }, [imgSrc]);
+
+  const handleUploadImage = async (imgFile: File) => {
+    try {
+      const uploadedUrl = await uploadPhoto(imgFile);
+      console.log(`Image uploaded successfully: ${uploadedUrl}`);
+      return uploadedUrl;
+    } catch (error) {
+      console.error("Upload failed:", error);
+      alert("Failed to upload image.");
+      return null;
+    }
+  };
+
+  const onSubmit = async (data: FormData) => {
+    let imgUrl = defaultImage;
+    if (imgFile) {
+      imgUrl = (await handleUploadImage(imgFile)) || defaultImage;
+    }
+    try {
+      setLoading(true);
+      await registerUser({
+        userName: data.userName,
+        email: data.email,
+        password: data.password,
+        imgUrl: imgUrl,
+      });
+      setLoading(false);
+      navigate("/login"); // ניתוב לדף ה-Login לאחר הרשמה מוצלחת
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        const errorMessage = error.response.data;
+        setLoading(false);
+        setRegisterError(errorMessage + " Please try again");
+      } else {
+        setLoading(false);
+        setRegisterError("An unexpected error occurred. Please try again.");
+      }
+    }
   };
 
   return (
@@ -53,7 +103,7 @@ function Register({ onClickClose }: RegisterProps) {
     >
       {registerError && <div className="text-danger">{registerError}</div>}
       <div className="form-close-icon">
-        <CloseIcon color="#000" onClick={onClickClose} />
+        <CloseIcon color="#fff" />
       </div>
       <p className="form-title">Register</p>
 
@@ -108,9 +158,16 @@ function Register({ onClickClose }: RegisterProps) {
           <p className="text-danger">{errors.password.message}</p>
         )}
       </div>
-      <button type="submit" className="btn-l">
-        Submit
-      </button>
+
+      {loading ? (
+        <div className="loader-section">
+          <LoadingDots />
+        </div>
+      ) : (
+        <button type="submit" className="btn-l">
+          Submit
+        </button>
+      )}
     </form>
   );
 }

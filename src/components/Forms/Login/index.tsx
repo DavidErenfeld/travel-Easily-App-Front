@@ -1,46 +1,60 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useNavigate, Link } from "react-router-dom";
 import z from "zod";
-import "../style.css";
+import CloseIcon from "../../UIComponents/Icons/Close";
+import { loginUser } from "../../../services/loginService";
+import axios from "axios";
+import LoadingDots from "../../UIComponents/Loader";
+import { useAuth } from "../../../Context/AuthContext";
+import "../formeStyle.css";
 import "./style.css";
-import CloseIcon from "../../Icons/Close";
-import { Link } from "react-router-dom";
 
-const schema = z.object({
-  userName: z
-    .string()
-    .min(2, "Name must be longer than 2 characters")
-    .max(20, "Name must be less than 20 characters"),
+const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
-  password: z
-    .string()
-    .min(4, "Password must be at least 4 characters long")
-    .regex(/[a-z]/, "Password must include a lowercase letter"),
+  password: z.string().min(4, "Password must be at least 4 characters long"),
 });
 
-type FormData = z.infer<typeof schema> & {
-  image: FileList;
-  imgUrl?: string;
-};
+type LoginFormData = z.infer<typeof loginSchema>;
 
 function Login() {
   const [imgSrc, setImgSrc] = useState("/images/user.png");
-  const [registerError, setRegisterError] = useState<string | null>(null);
-  const imageRef = useRef<HTMLInputElement>(null);
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const { login } = useAuth(); // שימוש ב-context
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  } = useForm<LoginFormData>({ resolver: zodResolver(loginSchema) });
 
-  const onSubmit = async (data: FormData) => {
-    console.log(data);
-  };
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = () => {
-    console.log("Change");
+  const onSubmit = async (data: LoginFormData) => {
+    console.log("Submitting form with data:", data); // הדפסת נתוני הטופס
+    try {
+      setLoading(true);
+      const response = await loginUser({
+        email: data.email,
+        password: data.password,
+      });
+      console.log("Login successful:", response); // הדפסת תגובת ההתחברות
+      setLoading(false);
+      login(); // עדכון המצב הגלובלי ושמירתו ב-`localStorage`
+      navigate("/");
+    } catch (error) {
+      console.error("Login error:", error); // הדפסת שגיאות
+      if (axios.isAxiosError(error) && error.response) {
+        const errorMessage = error.response.data;
+        setLoginError(errorMessage + " Please try again");
+        setLoading(false);
+      } else {
+        setLoginError("An unexpected error occurred. Please try again.");
+        setLoading(false);
+      }
+    }
   };
 
   return (
@@ -48,7 +62,7 @@ function Login() {
       className="form-container flex-center-column-large-gap"
       onSubmit={handleSubmit(onSubmit)}
     >
-      {registerError && <div className="text-danger">{registerError}</div>}
+      {loginError && <div className="text-danger">{loginError}</div>}
       <div className="form-close-icon">
         <CloseIcon color="#000" />
       </div>
@@ -65,6 +79,7 @@ function Login() {
           id="email"
           placeholder="UserName@gmail.com"
           className="email"
+          autoComplete="email"
         />
         {errors.email && <p className="text-danger">{errors.email.message}</p>}
       </div>
@@ -75,20 +90,27 @@ function Login() {
           id="password"
           placeholder="Password"
           className="password"
+          autoComplete="current-password"
         />
         {errors.password && (
           <p className="text-danger">{errors.password.message}</p>
         )}
       </div>
-      <div className="buttons-box flex-center-column-gap">
-        <button type="submit" className="btn-l">
-          login
-        </button>
-        <p>or</p>
-        <Link to="/register">
-          <button className="btn-l">register</button>
-        </Link>
-      </div>
+      {loading ? (
+        <div className="main-loader-section">
+          <LoadingDots />
+        </div>
+      ) : (
+        <div className="buttons-box flex-center-column-gap">
+          <button type="submit" className="btn-l">
+            login
+          </button>
+          <p>or</p>
+          <Link to="/register">
+            <button className="btn-l">register</button>
+          </Link>
+        </div>
+      )}
     </form>
   );
 }

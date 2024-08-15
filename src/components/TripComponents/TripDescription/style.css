@@ -1,0 +1,13 @@
+.trip-description-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  row-gap: 2rem;
+  margin-bottom: 6rem;
+}
+
+.trip-day-title {
+  font-size: 2rem;
+  color: #00a8ff;
+}
