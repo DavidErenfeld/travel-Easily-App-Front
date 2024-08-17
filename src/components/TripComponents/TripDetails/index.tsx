@@ -1,4 +1,3 @@
-// components/TripDetails/index.tsx
 import { useEffect, useState } from "react";
 import Rating from "../../UIComponents/Rating/index.tsx";
 import TripDescription from "../TripDescription/index.tsx";
@@ -72,9 +71,9 @@ const TripDetails = () => {
 
   return (
     <section className="main-card-section flex-center-column-large-gap">
-      {trip && <TripHeader trip={trip} />}
       {!updateMode ? (
         <>
+          {trip && <TripHeader trip={trip} />}
           <section className="details-container flex-center-column">
             {loggedUserId === trip?.owner?._id && (
               <button className="btn-l" onClick={onClickUpdateMode}>

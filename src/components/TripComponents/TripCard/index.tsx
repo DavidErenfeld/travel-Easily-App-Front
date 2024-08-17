@@ -1,4 +1,3 @@
-// components/TripCard/index.tsx
 import React from "react";
 import { FaHeart, FaRegComment } from "react-icons/fa";
 import "./style.css";

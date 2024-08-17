@@ -1,8 +1,8 @@
 import { useState } from "react";
-import "./style.css";
 import tripsService, { ITrips } from "../../../services/tripsService";
 import { useNavigate } from "react-router-dom";
 import PopUp from "../../CommentsComponent/PopUp";
+import "./style.css";
 
 interface TripDay {
   dayNum: number;

@@ -7,7 +7,7 @@ interface TripHeaderProps {
 
 const TripHeader = ({ trip }: TripHeaderProps) => {
   return (
-    <div className="trip-header">
+    <>
       <div className="tags">
         <span className="tag">{trip.typeTraveler}</span>
         <span className="tag">{trip.typeTrip}</span>
@@ -19,7 +19,7 @@ const TripHeader = ({ trip }: TripHeaderProps) => {
           <span className="photo-tag">photos</span>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
