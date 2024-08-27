@@ -23,10 +23,17 @@ const ViewComment = ({ comments, closeComments }: ViewCommentProps) => {
       {comments &&
         comments.map((comment, index) => (
           <div key={index} className="comment-container">
-            <p className="comment-content">{comment.comment}</p>
-            <div className="comment-details">
-              <p className="comment-owner">{comment.owner}</p>
-              <p className="comment-date">{comment.date}</p>
+            <img
+              className="user-comment-img"
+              src="/images/user.png"
+              alt="Profile"
+            />
+            <div className="comment-content">
+              <p>{comment.comment}</p>
+              <div className="comment-details">
+                <p className="comment-owner">{comment.owner}</p>
+                <p className="comment-date">{comment.date}</p>
+              </div>
             </div>
           </div>
         ))}
