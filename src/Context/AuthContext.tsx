@@ -24,7 +24,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const logout = async () => {
     try {
-      await tripsService.logout(); // קריאה לטריפס סרוויס להתנתקות
+      await tripsService.logout(); 
       setIsAuthenticated(false);
       localStorage.removeItem("isAuthenticated");
     } catch (error) {

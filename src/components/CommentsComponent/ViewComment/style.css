@@ -8,7 +8,9 @@
   gap: 4rem;
   border-radius: 6px;
   padding: 3rem 1rem;
-  background-color: #2a4858;
+  /* background-color: #2a4858; */
+  background-color: #082f49;
+  background-color: #2b3d8e;
 }
 
 .comment-container {

@@ -3,6 +3,7 @@ import "./style.css";
 
 interface Comment {
   _id?: string;
+  imgUrl?: string;
   ownerId?: string;
   owner?: string;
   comment: string;
@@ -25,7 +26,7 @@ const ViewComment = ({ comments, closeComments }: ViewCommentProps) => {
           <div key={index} className="comment-container">
             <img
               className="user-comment-img"
-              src="/images/user.png"
+              src={comment.imgUrl || "/images/user.png"}
               alt="Profile"
             />
             <div className="comment-content">

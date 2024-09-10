@@ -18,6 +18,7 @@ export interface ITrips {
 
   comments?: Array<{
     _id?: string;
+    imgUrl?: string;
     ownerId?: string;
     owner?: string;
     comment: string;
@@ -183,6 +184,9 @@ const logout = () => {
         console.log(response);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
+        localStorage.removeItem("loggedUserId");
+        localStorage.removeItem("imgUrl");
+        localStorage.removeItem("userName");
         resolve();
       })
       .catch((error) => {

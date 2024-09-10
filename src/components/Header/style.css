@@ -1,0 +1,36 @@
+.main-page-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 2rem;
+}
+
+.logo {
+  font-size: 3.6rem;
+}
+
+.user-main-page-img {
+  height: 4.2rem;
+  width: 4.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6rem;
+}
+
+.menu-item {
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.menu-item:hover {
+  color: #00a8ff;
+}

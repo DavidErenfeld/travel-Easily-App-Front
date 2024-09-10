@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
+import tripsService, { ITrips } from "../../../services/tripsService.ts";
 import Rating from "../../UIComponents/Rating/index.tsx";
 import TripDescription from "../TripDescription/index.tsx";
 import UpdateTrip from "../UpdateTrip/index.tsx";
-import tripsService, { ITrips } from "../../../services/tripsService.ts";
-import { useParams, useSearchParams } from "react-router-dom";
 import AddComment from "../../CommentsComponent/AddComment/index.tsx";
 import ViewComment from "../../CommentsComponent/ViewComment/index.tsx";
 import TripHeader from "../TripHeader/index.tsx";
 import "./style.css";
+import Header from "../../Header/index.tsx";
 
 const TripDetails = () => {
   const [viewMode, setViewMode] = useState("main"); // 'main', 'addComment', 'viewComments'
@@ -29,6 +30,7 @@ const TripDetails = () => {
     try {
       const data = await tripsService.getByTripId(id!);
       setTrip(data);
+      console.log(trip);
     } catch (err) {
       console.error("Failed to load trip:", err);
     } finally {
@@ -54,6 +56,7 @@ const TripDetails = () => {
       comment: newCommentText || "",
       owner: loggedUserName || "",
       date: new Date().toISOString(),
+      imgUrl: localStorage.getItem("imgUrl"),
     };
 
     try {
@@ -70,54 +73,57 @@ const TripDetails = () => {
   };
 
   return (
-    <section className="main-card-section flex-center-column-large-gap">
+    <section className="flex-center-column-large-gap">
       {!updateMode ? (
         <>
-          {trip && <TripHeader trip={trip} />}
-          <section className="details-container flex-center-column">
-            {loggedUserId === trip?.owner?._id && (
-              <button className="btn-l" onClick={onClickUpdateMode}>
-                Editing Mode
-              </button>
-            )}
-            {trip && <TripDescription trip={trip} />}
-          </section>
-          {viewMode === "main" && (
-            <section className="btn-container-gap-m">
-              <button
-                className="btn-l"
-                onClick={() => setViewMode("addComment")}
-              >
-                Add Comment
-              </button>
-              {trip?.comments && trip.comments.length > 0 && (
-                <button
-                  className="btn-l"
-                  onClick={() => setViewMode("viewComments")}
-                >
-                  View Comments
+          <Header />
+          <div className="main-card-section flex-center-column-large-gap">
+            {trip && <TripHeader trip={trip} />}
+            <section className="details-container flex-center-column">
+              {loggedUserId === trip?.owner?._id && (
+                <button className="btn-l mode-btn" onClick={onClickUpdateMode}>
+                  Editing Mode
                 </button>
               )}
+              {trip && <TripDescription trip={trip} />}
             </section>
-          )}
-          {viewMode === "addComment" && (
-            <AddComment
-              onClickCancel={() => setViewMode("main")}
-              onSendComment={onClickSend}
-            />
-          )}
-          {viewMode === "viewComments" && trip && (
-            <>
-              <ViewComment
-                comments={trip.comments}
-                closeComments={() => setViewMode("main")}
-              />
+            {viewMode === "main" && (
+              <section className="btn-container-gap-m">
+                <button
+                  className="btn-l"
+                  onClick={() => setViewMode("addComment")}
+                >
+                  Add Comment
+                </button>
+                {trip?.comments && trip.comments.length > 0 && (
+                  <button
+                    className="btn-l"
+                    onClick={() => setViewMode("viewComments")}
+                  >
+                    View Comments
+                  </button>
+                )}
+              </section>
+            )}
+            {viewMode === "addComment" && (
               <AddComment
                 onClickCancel={() => setViewMode("main")}
-                onSendComment={(text) => onClickSend(text, true)}
+                onSendComment={onClickSend}
               />
-            </>
-          )}
+            )}
+            {viewMode === "viewComments" && trip && (
+              <>
+                <ViewComment
+                  comments={trip.comments}
+                  closeComments={() => setViewMode("main")}
+                />
+                <AddComment
+                  onClickCancel={() => setViewMode("main")}
+                  onSendComment={(text) => onClickSend(text, true)}
+                />
+              </>
+            )}
+          </div>
         </>
       ) : (
         trip && (

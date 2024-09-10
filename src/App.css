@@ -1,6 +1,11 @@
 /*************************
  # FLEX-BOX TYPES
 **************************/
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
 
 .flex-center-gap-s {
   display: flex;
@@ -51,6 +56,23 @@
 .btn-container-gap-m {
   display: flex;
   gap: 1rem;
+}
+
+.btn-el {
+  font-size: 2rem;
+  padding: 10px 10px;
+  width: 20rem;
+  border-radius: 9px;
+  background: #00a8ff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-el:hover {
+  background-color: #007bbf;
 }
 
 .btn-m,

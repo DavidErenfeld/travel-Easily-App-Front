@@ -4,6 +4,7 @@ import TripCard from "../TripCard";
 import "./style.css";
 import LoadingDots from "../../UIComponents/Loader";
 import tripsService, { ITrips } from "../../../services/tripsService";
+import Header from "../../Header";
 
 const MyTrips = () => {
   const [trips, setTrips] = useState<ITrips[]>([]);
@@ -39,17 +40,20 @@ const MyTrips = () => {
   };
 
   return (
-    <section className="trips-section">
-      {loading ? (
-        <div className="main-loader-section">
-          <LoadingDots />
-        </div>
-      ) : trips.length === 0 ? (
-        <p>No trips found.</p>
-      ) : (
-        renderMyTrips()
-      )}
-    </section>
+    <>
+      <Header />
+      <section className="trips-section">
+        {loading ? (
+          <div className="main-loader-section">
+            <LoadingDots />
+          </div>
+        ) : trips.length === 0 ? (
+          <p>No trips found.</p>
+        ) : (
+          renderMyTrips()
+        )}
+      </section>
+    </>
   );
 };
 

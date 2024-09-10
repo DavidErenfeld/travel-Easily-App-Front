@@ -1,0 +1,184 @@
+import React, { useState, useEffect } from "react";
+import "./style.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+const TripForm: React.FC = () => {
+  const [selectedGroupType, setSelectedGroupType] = useState<string>("");
+  const [selectedTripType, setSelectedTripType] = useState<string>("");
+  const [numberOfDays, setNumberOfDays] = useState<string>(""); // מספר הימים
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
+  const [countries, setCountries] = useState<string[]>([]);
+
+  const [errors, setErrors] = useState<{ [key: string]: string }>({}); // סטייט להודעות שגיאה
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get("https://restcountries.com/v3.1/all");
+        const countryNames = response.data.map(
+          (country: any) => country.name.common
+        );
+        setCountries(countryNames);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
+
+  const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedCountry(event.target.value);
+    setErrors((prevErrors) => ({ ...prevErrors, selectedCountry: "" })); // ניקוי הודעת שגיאה
+  };
+
+  const handleDaysChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNumberOfDays(event.target.value);
+    setErrors((prevErrors) => ({ ...prevErrors, numberOfDays: "" })); // ניקוי הודעת שגיאה
+  };
+
+  const validateForm = () => {
+    let valid = true;
+    const newErrors: { [key: string]: string } = {};
+
+    if (!selectedGroupType) {
+      newErrors.selectedGroupType = "Please select a group type.";
+      valid = false;
+    }
+    if (!selectedTripType) {
+      newErrors.selectedTripType = "Please select a trip type.";
+      valid = false;
+    }
+    if (!numberOfDays) {
+      newErrors.numberOfDays = "Please enter the number of days.";
+      valid = false;
+    }
+    if (!selectedCountry) {
+      newErrors.selectedCountry = "Please select a country.";
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
+
+  const goToCreateTripPage = () => {
+    if (validateForm()) {
+      navigate("/create-trip", {
+        state: {
+          selectedGroupType,
+          selectedTripType,
+          numberOfDays: parseInt(numberOfDays, 10),
+          selectedCountry,
+        },
+      });
+    }
+  };
+
+  return (
+    <div className="profile-container">
+      <div className="form-header">
+        <h2 className="form-title">Trip Details</h2>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="groupType">We are</label>
+        <select
+          id="groupType"
+          value={selectedGroupType}
+          onChange={(e) => {
+            setSelectedGroupType(e.target.value);
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              selectedGroupType: "",
+            })); // ניקוי הודעת שגיאה
+          }}
+          className="form-control"
+        >
+          <option value="">Select Group Type</option>
+          <option value="romantic couple">Romantic Couple</option>
+          <option value="happy family">Happy Family</option>
+          <option value="friends">Friends</option>
+          <option value="seniors">Seniors</option>
+          <option value="single">Single</option>
+          <option value="groups">Groups</option>
+        </select>
+        {errors.selectedGroupType && (
+          <p className="error-message">{errors.selectedGroupType}</p>
+        )}
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="tripType">Trip Type</label>
+        <select
+          id="tripType"
+          value={selectedTripType}
+          onChange={(e) => {
+            setSelectedTripType(e.target.value);
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              selectedTripType: "",
+            })); // ניקוי הודעת שגיאה
+          }}
+          className="form-control"
+        >
+          <option value="">Select Trip Type</option>
+          <option value="attractions">Attractions</option>
+          <option value="romantic">Romantic</option>
+          <option value="nature">Nature</option>
+          <option value="parties">Parties</option>
+          <option value="food">Food</option>
+          <option value="integrated">Integrated</option>
+        </select>
+        {errors.selectedTripType && (
+          <p className="error-message">{errors.selectedTripType}</p>
+        )}
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="days">Number of Days</label>
+        <input
+          type="number"
+          id="days"
+          value={numberOfDays}
+          onChange={handleDaysChange}
+          className="form-control"
+          placeholder="Enter number of days..."
+          min="1"
+        />
+        {errors.numberOfDays && (
+          <p className="error-message">{errors.numberOfDays}</p>
+        )}
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="country">Country</label>
+        <input
+          list="countries"
+          id="country"
+          value={selectedCountry}
+          onChange={handleCountryChange}
+          className="form-control"
+          placeholder="Start typing to search..."
+        />
+        <datalist id="countries">
+          {countries.map((country) => (
+            <option key={country} value={country} />
+          ))}
+        </datalist>
+        {errors.selectedCountry && (
+          <p className="error-message">{errors.selectedCountry}</p>
+        )}
+      </div>
+
+      <button className="btn-l" onClick={goToCreateTripPage}>
+        Next
+      </button>
+    </div>
+  );
+};
+
+export default TripForm;

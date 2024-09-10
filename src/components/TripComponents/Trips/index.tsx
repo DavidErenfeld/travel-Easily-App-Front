@@ -2,8 +2,8 @@
 import React from "react";
 import TripCard from "../TripCard";
 import "./style.css";
-import LoadingDots from "../../UIComponents/Loader";
 import { useTrips } from "../../../Context/TripContext";
+import Header from "../../Header";
 
 const Trips = () => {
   const { trips, refreshTrips } = useTrips();
@@ -21,15 +21,18 @@ const Trips = () => {
   }, []);
 
   return (
-    <section className="trips-section">
-      {trips.length === 0 ? (
-        <div className="main-loader-section">
-          <LoadingDots />
-        </div>
-      ) : (
-        renderTrips()
-      )}
-    </section>
+    <>
+      <Header />
+      <section className="trips-section">
+        {trips.length === 0 ? (
+          <div className="main-loader-section">
+            <h1>No trips have been added to the system yet</h1>
+          </div>
+        ) : (
+          renderTrips()
+        )}
+      </section>
+    </>
   );
 };
 

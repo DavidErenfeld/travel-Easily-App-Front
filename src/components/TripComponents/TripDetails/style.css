@@ -1,8 +1,23 @@
 .main-card-section {
   position: relative;
   padding: 5rem;
-  min-height: 100vh;
-  margin-top: 2rem;
+  padding-top: 7rem;
+  margin-top: 3rem;
+  background-color: #344aab;
+  border-radius: 9px;
+  width: 100%;
+}
+
+.mode-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1.4rem;
+}
+
+.main-card-section > .tags {
+  top: 1rem;
+  right: 0rem;
+  background-color: #344aab;
 }
 
 .images-container {
