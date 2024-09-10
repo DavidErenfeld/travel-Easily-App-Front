@@ -219,12 +219,11 @@ const addComment = (tripId: string, comment: IComment) => {
       });
   });
 };
-
 const deleteComment = (tripId: string, commentId: string) => {
   return new Promise<void>((resolve, reject) => {
     console.log("Delete Comment...");
     apiClient
-      .delete(`/trips/comments/${tripId}/${commentId}`, {
+      .delete(`/trips/${tripId}/${commentId}`, {
         headers: {
           Authorization: `jwt ${accessToken}`,
         },

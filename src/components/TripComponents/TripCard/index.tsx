@@ -38,7 +38,7 @@ const TripCard = ({ trip }: TripCardProps) => {
         <div className="trip-card-profile">
           <img
             className="user-profile"
-            src={trip.imgUrl || "/images/user.png"}
+            src={trip.owner?.imgUrl || "/images/user.png"}
             alt="Profile"
           />
           <p className="profile-name">{trip.userName}</p>

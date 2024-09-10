@@ -9,6 +9,12 @@ import ViewComment from "../../CommentsComponent/ViewComment/index.tsx";
 import TripHeader from "../TripHeader/index.tsx";
 import "./style.css";
 import Header from "../../Header/index.tsx";
+import ImageCarousel from "../../UIComponents/ImageCarousel/index.tsx";
+
+interface Images {
+  src: string;
+  alt: string;
+}
 
 const TripDetails = () => {
   const [viewMode, setViewMode] = useState("main"); // 'main', 'addComment', 'viewComments'
@@ -61,7 +67,9 @@ const TripDetails = () => {
 
     try {
       await tripsService.addComment(trip?._id || "", commentToAdd);
-      await loadTrip();
+      const updatedTrip = await tripsService.getByTripId(trip?._id || ""); // טעינת הטיול המעודכן עם התגובות החדשות
+      setTrip(updatedTrip); // עדכון הסטייט עם הטיול המעודכן
+
       if (!stayInViewMode) {
         setViewMode("main");
       }
@@ -72,11 +80,28 @@ const TripDetails = () => {
     }
   };
 
+  // פונקציה שתופעל לאחר מחיקת תגובה
+  const handleCommentDeleted = async () => {
+    await loadTrip(); // קריאה ל-loadTrip לעדכון הטיול והתגובות שלו
+  };
+
+  // המרת מערך tripPhotos למערך אובייקטים עם src ו-alt
+  const imageObjects: Images[] =
+    trip?.tripPhotos?.map((photoUrl) => ({
+      src: photoUrl,
+      alt: "Trip Photo", // תיאור ברירת מחדל
+    })) || [];
+
   return (
-    <section className="flex-center-column-large-gap">
-      {!updateMode ? (
-        <>
-          <Header />
+    <>
+      <Header />
+      {trip?.tripPhotos && (
+        <div className="imeges-section">
+          <ImageCarousel images={imageObjects} />
+        </div>
+      )}
+      <section className="flex-center-column-large-gap">
+        {!updateMode ? (
           <div className="main-card-section flex-center-column-large-gap">
             {trip && <TripHeader trip={trip} />}
             <section className="details-container flex-center-column">
@@ -113,10 +138,14 @@ const TripDetails = () => {
             )}
             {viewMode === "viewComments" && trip && (
               <>
-                <ViewComment
-                  comments={trip.comments}
-                  closeComments={() => setViewMode("main")}
-                />
+                {trip._id && (
+                  <ViewComment
+                    comments={trip.comments}
+                    closeComments={() => setViewMode("main")}
+                    tripId={trip._id}
+                    onCommentDeleted={handleCommentDeleted} // העברת הפונקציה כפרופס ל-ViewComment
+                  />
+                )}
                 <AddComment
                   onClickCancel={() => setViewMode("main")}
                   onSendComment={(text) => onClickSend(text, true)}
@@ -124,22 +153,22 @@ const TripDetails = () => {
               </>
             )}
           </div>
-        </>
-      ) : (
-        trip && (
-          <UpdateTrip
-            onClickClose={() => setUpdateMode(false)}
-            trip={trip}
-            onClickReadMode={onClickUpdateMode}
-          />
-        )
-      )}
-      {!updateMode && (
-        <section className="rating-section">
-          <Rating />
-        </section>
-      )}
-    </section>
+        ) : (
+          trip && (
+            <UpdateTrip
+              onClickClose={() => setUpdateMode(false)}
+              trip={trip}
+              onClickReadMode={onClickUpdateMode}
+            />
+          )
+        )}
+        {/* {!updateMode && (
+          <section className="rating-section">
+            <Rating />
+          </section>
+        )} */}
+      </section>
+    </>
   );
 };
 

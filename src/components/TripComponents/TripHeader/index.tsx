@@ -14,11 +14,11 @@ const TripHeader = ({ trip }: TripHeaderProps) => {
         <span className="tag">{trip.country}</span>
         <span className="tag">{trip.numOfDays} days</span>
       </div>
-      {trip.tripPhotos && (
+      {/* {trip.tripPhotos && (
         <div className="photos-btn">
           <span className="photo-tag">photos</span>
         </div>
-      )}
+      )} */}
     </>
   );
 };

@@ -1,5 +1,22 @@
-.title {
-  font-size: 3rem;
-  align-self: center;
-  margin: 3.6rem;
+.create-trip-section {
+  margin-top: 9.6rem;
+  padding-bottom: 9.6rem;
+  position: relative;
+}
+
+.update-trip-description::placeholder {
+  color: #fff;
+}
+
+.text-area {
+  position: relative;
+}
+.add-image-icon {
+  position: absolute;
+  bottom: 2rem;
+  right: 8.8rem;
+}
+
+.submit-trip-btn {
+  margin-bottom: 3rem;
 }

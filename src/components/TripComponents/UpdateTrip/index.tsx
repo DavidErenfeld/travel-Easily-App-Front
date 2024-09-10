@@ -3,7 +3,6 @@ import tripsService, { ITrips } from "../../../services/tripsService";
 import { useNavigate } from "react-router-dom";
 import PopUp from "../../CommentsComponent/PopUp";
 import "./style.css";
-import Header from "../../Header";
 
 interface TripDay {
   dayNum: number;
@@ -139,7 +138,6 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
 
   return (
     <>
-      <Header />
       {!isDeleteClicked && !deleteAction ? (
         <section className="update-trip-section flex-stretch-column-gap">
           <div className="update-trip-container">

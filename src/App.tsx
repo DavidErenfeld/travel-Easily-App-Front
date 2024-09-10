@@ -14,6 +14,7 @@ import MyTrips from "./components/TripComponents/myTrips";
 import AddTrip from "./components/AddTrip";
 import UpdateTrip from "./components/TripComponents/UpdateTrip";
 import CreateTrip from "./components/CreateTrip";
+import PersonalArea from "./components/Forms/PersonalArea";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path="/myTrips" element={<MyTrips />} />
               <Route path="/addTrip" element={<AddTrip />} />
               <Route path="/create-trip" element={<CreateTrip />} />
+              <Route path="/personal-area" element={<PersonalArea />} />
             </Route>
             <Route path="/trips" element={<Trips />} />
           </Routes>

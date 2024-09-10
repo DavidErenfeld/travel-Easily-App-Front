@@ -1,5 +1,5 @@
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // הוספת useNavigate
 import { useAuth } from "../../Context/AuthContext";
 import { useEffect, useState } from "react";
 
@@ -9,6 +9,7 @@ const Header = () => {
     localStorage.getItem("imgUrl") || "/images/user.png"
   );
   const [isUserConect, setIsUserConect] = useState(false); // סטייט שמציין אם המשתמש מחובר
+  const navigate = useNavigate(); // ייבוא השימוש ב-useNavigate
 
   const handleLogout = async () => {
     try {
@@ -18,6 +19,10 @@ const Header = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleProfileClick = () => {
+    navigate("/personal-area"); // ניווט לעמוד האזור האישי
   };
 
   useEffect(() => {
@@ -34,6 +39,7 @@ const Header = () => {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+
   return (
     <>
       <header className="main-page-header">
@@ -54,6 +60,7 @@ const Header = () => {
                 className="user-main-page-img"
                 src={profileImg}
                 alt="Profile"
+                onClick={handleProfileClick} // הוספת פונקציית ניווט בלחיצה על התמונה
               />
             </div>
           ) : (

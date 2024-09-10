@@ -56,6 +56,40 @@
   font-weight: 500;
 }
 
+.delete-comment-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: -webkit-fill-available;
+  background-color: #4353a5;
+  color: #ffffff;
+  text-align: center;
+  border: none;
+  border-radius: 3px;
+  padding: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+
+.delete-comment-btn:hover {
+  background-color: #fff;
+  color: #4353a5;
+  cursor: pointer;
+}
+.delete-comment-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: -webkit-fill-available;
+  background-color: #4353a5;
+  color: #ffffff;
+  text-align: center;
+  border: none;
+  border-radius: 3px;
+  padding: 1.2rem;
+  cursor: pointer;
+}
+
 .close-comments {
   position: absolute;
   top: 1rem;
