@@ -1,39 +1,38 @@
-import "./style.css";
-import { Link, useNavigate } from "react-router-dom"; // הוספת useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { useEffect, useState } from "react";
+import "./style.css";
 
 const Header = () => {
   const { logout } = useAuth();
   const [profileImg, setProfileImg] = useState(
     localStorage.getItem("imgUrl") || "/images/user.png"
   );
-  const [isUserConect, setIsUserConect] = useState(false); // סטייט שמציין אם המשתמש מחובר
-  const navigate = useNavigate(); // ייבוא השימוש ב-useNavigate
+  const [isUserConect, setIsUserConect] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       await logout();
-      setIsUserConect(false); // עדכון הסטייט לאחר התנתקות
-      setProfileImg("/images/user.png"); // עדכון התמונה לאחר התנתקות
+      setIsUserConect(false);
+      setProfileImg("/images/user.png");
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleProfileClick = () => {
-    navigate("/personal-area"); // ניווט לעמוד האזור האישי
+    navigate("/personal-area");
   };
 
   useEffect(() => {
-    // מעדכן את התמונה כשמשתמש משנה את כתובת התמונה ב-LocalStorage
     const handleStorageChange = () => {
       setProfileImg(localStorage.getItem("imgUrl") || "/images/user.png");
     };
 
     window.addEventListener("storage", handleStorageChange);
 
-    if (localStorage.getItem("loggedUserId")) setIsUserConect(true); // בדיקה אם המשתמש מחובר
+    if (localStorage.getItem("loggedUserId")) setIsUserConect(true);
 
     return () => {
       window.removeEventListener("storage", handleStorageChange);
@@ -60,7 +59,7 @@ const Header = () => {
                 className="user-main-page-img"
                 src={profileImg}
                 alt="Profile"
-                onClick={handleProfileClick} // הוספת פונקציית ניווט בלחיצה על התמונה
+                onClick={handleProfileClick}
               />
             </div>
           ) : (

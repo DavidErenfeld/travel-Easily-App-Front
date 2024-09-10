@@ -1,4 +1,3 @@
-// hooks/useTripCard.tsx
 import { useState, useEffect } from "react";
 import tripsService, { ITrips } from "../services/tripsService";
 

@@ -19,7 +19,6 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
   const navigate = useNavigate();
 
-  // Assume tripDescription is an array of strings
   const [dayEdits, setDayEdits] = useState<TripDay[]>(
     trip.tripDescription.map((description, index) => ({
       dayNum: index + 1,

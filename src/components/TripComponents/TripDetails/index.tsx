@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import tripsService, { ITrips } from "../../../services/tripsService.ts";
-import Rating from "../../UIComponents/Rating/index.tsx";
 import TripDescription from "../TripDescription/index.tsx";
 import UpdateTrip from "../UpdateTrip/index.tsx";
 import AddComment from "../../CommentsComponent/AddComment/index.tsx";
@@ -17,7 +16,7 @@ interface Images {
 }
 
 const TripDetails = () => {
-  const [viewMode, setViewMode] = useState("main"); // 'main', 'addComment', 'viewComments'
+  const [viewMode, setViewMode] = useState("main");
   const [updateMode, setUpdateMode] = useState(false);
   const { id } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
@@ -67,8 +66,8 @@ const TripDetails = () => {
 
     try {
       await tripsService.addComment(trip?._id || "", commentToAdd);
-      const updatedTrip = await tripsService.getByTripId(trip?._id || ""); // טעינת הטיול המעודכן עם התגובות החדשות
-      setTrip(updatedTrip); // עדכון הסטייט עם הטיול המעודכן
+      const updatedTrip = await tripsService.getByTripId(trip?._id || "");
+      setTrip(updatedTrip);
 
       if (!stayInViewMode) {
         setViewMode("main");
@@ -80,16 +79,14 @@ const TripDetails = () => {
     }
   };
 
-  // פונקציה שתופעל לאחר מחיקת תגובה
   const handleCommentDeleted = async () => {
-    await loadTrip(); // קריאה ל-loadTrip לעדכון הטיול והתגובות שלו
+    await loadTrip();
   };
 
-  // המרת מערך tripPhotos למערך אובייקטים עם src ו-alt
   const imageObjects: Images[] =
     trip?.tripPhotos?.map((photoUrl) => ({
       src: photoUrl,
-      alt: "Trip Photo", // תיאור ברירת מחדל
+      alt: "Trip Photo",
     })) || [];
 
   return (

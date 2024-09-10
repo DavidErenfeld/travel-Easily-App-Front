@@ -12,7 +12,6 @@ import { AuthProvider } from "./Context/AuthContext";
 import { TripProvider } from "./Context/TripContext";
 import MyTrips from "./components/TripComponents/myTrips";
 import AddTrip from "./components/AddTrip";
-import UpdateTrip from "./components/TripComponents/UpdateTrip";
 import CreateTrip from "./components/CreateTrip";
 import PersonalArea from "./components/Forms/PersonalArea";
 

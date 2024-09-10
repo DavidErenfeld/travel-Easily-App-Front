@@ -7,11 +7,11 @@ import Header from "../Header";
 const TripForm: React.FC = () => {
   const [selectedGroupType, setSelectedGroupType] = useState<string>("");
   const [selectedTripType, setSelectedTripType] = useState<string>("");
-  const [numberOfDays, setNumberOfDays] = useState<string>(""); // מספר הימים
+  const [numberOfDays, setNumberOfDays] = useState<string>("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [countries, setCountries] = useState<string[]>([]);
 
-  const [errors, setErrors] = useState<{ [key: string]: string }>({}); // סטייט להודעות שגיאה
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const navigate = useNavigate();
 
@@ -33,12 +33,12 @@ const TripForm: React.FC = () => {
 
   const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCountry(event.target.value);
-    setErrors((prevErrors) => ({ ...prevErrors, selectedCountry: "" })); // ניקוי הודעת שגיאה
+    setErrors((prevErrors) => ({ ...prevErrors, selectedCountry: "" }));
   };
 
   const handleDaysChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNumberOfDays(event.target.value);
-    setErrors((prevErrors) => ({ ...prevErrors, numberOfDays: "" })); // ניקוי הודעת שגיאה
+    setErrors((prevErrors) => ({ ...prevErrors, numberOfDays: "" }));
   };
 
   const validateForm = () => {
@@ -97,7 +97,7 @@ const TripForm: React.FC = () => {
               setErrors((prevErrors) => ({
                 ...prevErrors,
                 selectedGroupType: "",
-              })); // ניקוי הודעת שגיאה
+              }));
             }}
             className="form-control"
           >
@@ -124,7 +124,7 @@ const TripForm: React.FC = () => {
               setErrors((prevErrors) => ({
                 ...prevErrors,
                 selectedTripType: "",
-              })); // ניקוי הודעת שגיאה
+              }));
             }}
             className="form-control"
           >

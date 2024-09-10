@@ -1,4 +1,3 @@
-// Context/TripContext.tsx
 import React, {
   createContext,
   useContext,

@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom"; // ייבוא useLocation
-import "./style.css";
+import { useLocation, useNavigate } from "react-router-dom";
 import tripsService, { ITrips } from "../../services/tripsService";
-import Header from "../Header";
 import { uploadPhoto } from "../../services/fileService";
+import Header from "../Header";
 import AddImgs from "../UIComponents/Icons/AddImage";
-import ImageCarousel from "../UIComponents/ImageCarousel"; // ייבוא קומפוננטת הקרוסלה
+import ImageCarousel from "../UIComponents/ImageCarousel";
+import "./style.css";
 
 interface TripDay {
   dayNum: number;
@@ -20,7 +20,7 @@ interface Images {
 const CreateTrip: React.FC = () => {
   const location = useLocation();
   const { numberOfDays, selectedGroupType, selectedTripType, selectedCountry } =
-    location.state || {}; // קבלת הנתונים
+    location.state || {};
 
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
   const [dayEdits, setDayEdits] = useState<TripDay[]>(
@@ -30,12 +30,12 @@ const CreateTrip: React.FC = () => {
     }))
   );
 
-  const [successMessage, setSuccessMessage] = useState<string | null>(null); // הודעת הצלחה
-  const [errorMessages, setErrorMessages] = useState<string[]>([]); // הודעות שגיאה לכל יום
-  const [tripImages, setTripImages] = useState<File[]>([]); // סטייט לתמונות שנבחרו
-  const [imagePreviews, setImagePreviews] = useState<Images[]>([]); // סטייט לתצוגה מקדימה של תמונות עם src ו-alt
-  const [uploadedUrls, setUploadedUrls] = useState<string[]>([]); // מערך של כתובות שהועלו
-  const imageRef = useRef<HTMLInputElement>(null); // ייחוס ל-input להעלאת תמונות
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
+  const [tripImages, setTripImages] = useState<File[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<Images[]>([]);
+  const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
+  const imageRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
 
@@ -49,7 +49,6 @@ const CreateTrip: React.FC = () => {
     );
     setDayEdits(updatedDays);
 
-    // ניקוי הודעת השגיאה עבור היום הנוכחי
     const updatedErrors = [...errorMessages];
     updatedErrors[currentDayIndex] = "";
     setErrorMessages(updatedErrors);
@@ -69,11 +68,10 @@ const CreateTrip: React.FC = () => {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const files = Array.from(e.target.files); // המרת FileList למערך של קבצים
-      const newTripImages = [...tripImages, ...files]; // הוספת התמונות החדשות למערך הקיים
+      const files = Array.from(e.target.files);
+      const newTripImages = [...tripImages, ...files];
       setTripImages(newTripImages);
 
-      // יצירת URLs לתצוגה מקדימה של תמונות שנבחרו
       const newPreviews = files.map((file) => ({
         src: URL.createObjectURL(file),
         alt: "Trip Image",
@@ -82,7 +80,6 @@ const CreateTrip: React.FC = () => {
     }
   };
 
-  // ניקוי URLs של התמונות לאחר השימוש
   useEffect(() => {
     return () => {
       imagePreviews.forEach((preview) => URL.revokeObjectURL(preview.src));
@@ -97,7 +94,7 @@ const CreateTrip: React.FC = () => {
         urls.push(uploadedUrl);
       }
     }
-    setUploadedUrls(urls); // שמירת הכתובות של כל התמונות שהועלו
+    setUploadedUrls(urls);
     return urls;
   };
 
@@ -114,7 +111,6 @@ const CreateTrip: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    // בדיקה אם יש ימים ריקים
     const errors: string[] = [];
     dayEdits.forEach((day, index) => {
       if (!day.description.trim()) {
@@ -124,23 +120,20 @@ const CreateTrip: React.FC = () => {
       }
     });
 
-    // אם יש שגיאות, הצגת הודעות שגיאה
     if (errors.length > 0) {
       setErrorMessages(errors);
       return;
     }
 
-    // סינון הימים שאינם ריקים
     const filteredTripData = dayEdits.filter(
       (day) => day.description.trim() !== ""
     );
     const tripData = filteredTripData.map((day) => day.description);
 
-    // העלאת התמונות והכנסת ה-URLs למערך
     const tripPhotos = await handleUploadImages(tripImages);
 
     const trip: ITrips = {
-      userName: localStorage.getItem("userName") || undefined, // שינוי null ל-undefined
+      userName: localStorage.getItem("userName") || undefined,
       typeTraveler: selectedGroupType,
       country: selectedCountry,
       typeTrip: selectedTripType,
@@ -148,7 +141,7 @@ const CreateTrip: React.FC = () => {
       tripDescription: tripData,
       numOfComments: 0,
       numOfLikes: 0,
-      tripPhotos, // שמירת מערך ה-URLs של התמונות
+      tripPhotos,
     };
 
     try {
@@ -160,16 +153,13 @@ const CreateTrip: React.FC = () => {
         selectedCountry,
       });
 
-      // הצגת הודעת הצלחה
       setSuccessMessage("Trip saved successfully!");
 
-      // הסרת הודעת ההצלחה אחרי 5 שניות
       setTimeout(() => {
         setSuccessMessage(null);
-        navigate("/"); // חזרה לדף הבית או לכל דף אחר שתבחר
+        navigate("/");
       }, 3000);
 
-      // מניעת חזרה אחורה
       window.history.replaceState(null, "", "/");
     } catch (error) {
       console.error("Failed to save the trip:", error);
@@ -198,7 +188,6 @@ const CreateTrip: React.FC = () => {
             <p className="error-message">{errorMessages[currentDayIndex]}</p>
           )}
 
-          {/* אייקון להוספת תמונות */}
           <div
             className="add-image-icon"
             onClick={() => imageRef.current?.click()}
@@ -233,7 +222,7 @@ const CreateTrip: React.FC = () => {
             Submit
           </button>
         )}
-        {/* תצוגה מקדימה של התמונות שנבחרו בקרוסלה */}
+
         {imagePreviews.length > 0 && <ImageCarousel images={imagePreviews} />}
       </section>
     </>

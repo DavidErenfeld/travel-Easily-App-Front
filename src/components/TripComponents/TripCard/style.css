@@ -7,7 +7,6 @@
   justify-content: center;
   gap: 2rem;
   border: solid 1px #00a8ff;
-  /* box-shadow: 0.1px 1.4px 6px 0.1px #7dd3fc; */
   padding: 2rem;
   border-radius: 9px;
   margin-bottom: 9rem;
@@ -81,8 +80,6 @@
 .photo-tag {
   font-size: 1.4rem;
   padding: 0.5rem 1rem;
-  /* background-color: #6edf23;
-  color: #132c02; */
   background-color: #00a8ff;
   border-radius: 7px;
   cursor: pointer;

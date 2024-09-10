@@ -1,4 +1,3 @@
-import { string } from "zod";
 import "./style.css";
 
 interface PopUpProps {

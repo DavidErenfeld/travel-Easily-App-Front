@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import "./style.css";
 
 interface Images {
@@ -11,7 +11,7 @@ interface ImageCarouselProps {
 }
 
 const ImageCarousel = ({ images }: ImageCarouselProps) => {
-  const carouselRef = useRef<HTMLDivElement>(null); 
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
     if (carouselRef.current) {

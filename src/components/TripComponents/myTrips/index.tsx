@@ -1,4 +1,3 @@
-// components/MyTrips/index.tsx
 import { useEffect, useState } from "react";
 import TripCard from "../TripCard";
 import "./style.css";
@@ -17,7 +16,7 @@ const MyTrips = () => {
       try {
         const data = (await tripsService.getByOwnerId(
           loggedUserId!
-        )) as ITrips[]; // המרת הסוג ל-ITrips[]
+        )) as ITrips[];
         setTrips(data);
       } catch (error) {
         console.error("Failed to load trips:", error);

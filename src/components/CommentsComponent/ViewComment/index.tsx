@@ -1,6 +1,6 @@
 import CloseIcon from "../../UIComponents/Icons/Close";
+import tripsService from "../../../services/tripsService";
 import "./style.css";
-import tripsService from "../../../services/tripsService"; // ייבוא הפונקציה למחיקת תגובה
 
 interface Comment {
   _id?: string;
@@ -15,23 +15,23 @@ interface ViewCommentProps {
   comments?: Comment[];
   closeComments: () => void;
   tripId: string;
-  onCommentDeleted: () => void; // הוספת הפרופס החדש
+  onCommentDeleted: () => void;
 }
 
 const ViewComment = ({
   comments = [],
   closeComments,
   tripId,
-  onCommentDeleted, // הוספת הפרופס
+  onCommentDeleted,
 }: ViewCommentProps) => {
-  const loggedUserId = localStorage.getItem("loggedUserId"); // קבלת מזהה המשתמש המחובר
+  const loggedUserId = localStorage.getItem("loggedUserId");
 
   const handleDeleteComment = async (commentId: string) => {
     if (window.confirm("Are you sure you want to delete this comment?")) {
       try {
-        await tripsService.deleteComment(tripId, commentId); // מחיקת התגובה דרך tripsService
+        await tripsService.deleteComment(tripId, commentId);
         console.log(`Comment with ID: ${commentId} deleted successfully.`);
-        onCommentDeleted(); // קריאה לפונקציה לאחר מחיקת תגובה
+        onCommentDeleted();
       } catch (error) {
         console.error("Failed to delete comment:", error);
       }

@@ -1,4 +1,3 @@
-// components/Trips/index.tsx
 import React from "react";
 import TripCard from "../TripCard";
 import "./style.css";

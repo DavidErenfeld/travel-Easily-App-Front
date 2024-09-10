@@ -37,7 +37,7 @@ function Register() {
   const [registerError, setRegisterError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const imageRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate(); // שימוש ב-useNavigate
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -83,7 +83,7 @@ function Register() {
         imgUrl: imgUrl,
       });
       setLoading(false);
-      navigate("/login"); // ניתוב לדף ה-Login לאחר הרשמה מוצלחת
+      navigate("/login");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data;

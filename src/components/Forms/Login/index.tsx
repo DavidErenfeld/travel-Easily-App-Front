@@ -22,7 +22,7 @@ function Login() {
   const [imgSrc, setImgSrc] = useState("/images/user.png");
   const [loginError, setLoginError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const { login } = useAuth(); // שימוש ב-context
+  const { login } = useAuth();
 
   const {
     register,
@@ -33,19 +33,19 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data: LoginFormData) => {
-    console.log("Submitting form with data:", data); // הדפסת נתוני הטופס
+    console.log("Submitting form with data:", data);
     try {
       setLoading(true);
       const response = await loginUser({
         email: data.email,
         password: data.password,
       });
-      console.log("Login successful:", response); // הדפסת תגובת ההתחברות
+      console.log("Login successful:", response);
       setLoading(false);
-      login(); // עדכון המצב הגלובלי ושמירתו ב-`localStorage`
+      login(); 
       navigate("/");
     } catch (error) {
-      console.error("Login error:", error); // הדפסת שגיאות
+      console.error("Login error:", error); 
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data;
         setLoginError(errorMessage + " Please try again");
@@ -64,7 +64,7 @@ function Login() {
     >
       {loginError && <div className="text-danger">{loginError}</div>}
       <div className="form-close-icon">
-        <CloseIcon color="#000" />
+        <CloseIcon color="#fff" />
       </div>
       <p className="form-title">login</p>
 

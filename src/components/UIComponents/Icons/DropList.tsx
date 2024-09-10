@@ -1,4 +1,3 @@
-// import "../Forms/multiSelect/style.css";
 const DropList = () => {
   return (
     <>
