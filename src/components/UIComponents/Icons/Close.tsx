@@ -18,6 +18,7 @@ function CloseIcon({ color, onClose }: CloseIconProps) {
 
   return (
     <svg
+      className="icon"
       fill="none"
       height="25px"
       viewBox="0 0 24 24"

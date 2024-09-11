@@ -3,6 +3,7 @@ import "./style.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
+import CloseIcon from "../UIComponents/Icons/Close";
 
 const TripForm: React.FC = () => {
   const [selectedGroupType, setSelectedGroupType] = useState<string>("");
@@ -83,6 +84,9 @@ const TripForm: React.FC = () => {
     <>
       <Header />
       <div className="profile-container">
+        <div className="form-close-icon">
+          <CloseIcon color="#fff" />
+        </div>
         <div className="form-header">
           <h2 className="form-title">Trip Details</h2>
         </div>

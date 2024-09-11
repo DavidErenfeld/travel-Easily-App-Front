@@ -6,11 +6,13 @@ import { useNavigate } from "react-router-dom";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import AddImgsIcon from "../../UIComponents/Icons/AddImage";
 import { uploadPhoto } from "../../../services/fileService";
-import { registerUser } from "../../../services/registerService";
+import { googleSignin, registerUser } from "../../../services/registerService";
 import axios from "axios";
 import LoadingDots from "../../UIComponents/Loader";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import "./style.css";
 import "../formeStyle.css";
+import { useAuth } from "../../../Context/AuthContext";
 
 const defaultImage = "/images/user.png";
 
@@ -32,6 +34,7 @@ type FormData = z.infer<typeof schema> & {
 };
 
 function Register() {
+  const { login } = useAuth();
   const [imgFile, setImgFile] = useState<File | null>(null);
   const [imgSrc, setImgSrc] = useState(defaultImage);
   const [registerError, setRegisterError] = useState<string | null>(null);
@@ -94,6 +97,25 @@ function Register() {
         setRegisterError("An unexpected error occurred. Please try again.");
       }
     }
+  };
+
+  const onGoogleLoginSuccess = async (
+    credentialResponse: CredentialResponse
+  ) => {
+    console.log(credentialResponse);
+    try {
+      await googleSignin(credentialResponse);
+      login();
+      navigate("/");
+      console.log("user is logt");
+      // onLogin(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onGoogleLoginFailure = () => {
+    console.log("Google login failed");
   };
 
   return (
@@ -168,6 +190,11 @@ function Register() {
           Submit
         </button>
       )}
+
+      <GoogleLogin
+        onSuccess={onGoogleLoginSuccess}
+        onError={onGoogleLoginFailure}
+      />
     </form>
   );
 }

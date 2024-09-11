@@ -1,11 +1,6 @@
 /*************************
  # FLEX-BOX TYPES
 **************************/
-.error-message {
-  color: red;
-  font-size: 0.9rem;
-  margin-top: 5px;
-}
 
 .flex-center-gap-s {
   display: flex;
@@ -123,9 +118,18 @@ input:focus {
   text-align: start;
 }
 
+.error-message {
+  color: #ff5151;
+  font-size: 1.2rem;
+  margin-top: 5px;
+}
+
 /*************************
 # ICONS
 **************************/
+.icon {
+  cursor: pointer;
+}
 .drop-list-icon {
   width: 1.8rem;
   height: 1.8rem;

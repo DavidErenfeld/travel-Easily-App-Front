@@ -42,7 +42,7 @@ const Header = () => {
   return (
     <>
       <header className="main-page-header">
-        <h1 className="logo">TRAVEL EASILY</h1>
+        <h1 className="logo">TRAVEL easily</h1>
         <div className="menu">
           {isUserConect ? (
             <div className="menu">
