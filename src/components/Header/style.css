@@ -26,11 +26,28 @@
 
 .menu-item {
   font-size: 1.8rem;
-  color: white;
+  color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .menu-item:hover {
   color: #00a8ff;
+}
+
+.menu-item.search-item {
+  color: #00a8ff;
+}
+
+.menu-item.search-item:hover {
+  color: #fff;
+}
+
+.search-btn {
+  font-size: 1.4rem;
+  background-color: #fff;
+  color: #00a8ff;
+  padding: 1rem;
+  width: 10rem;
+  transition: background-color 0.3s ease;
 }

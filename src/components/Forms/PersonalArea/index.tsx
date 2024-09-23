@@ -78,6 +78,7 @@ function PersonalArea() {
           <img className="register-img " src={imgSrc} alt="img profile" />
         )}
         <h1 className="profile-name">{userName}</h1>
+
         {loading ? (
           <div className="loader-section">
             <LoadingDots />
@@ -95,6 +96,7 @@ function PersonalArea() {
             )}
           </div>
         )}
+        <button className="btn-m delete-btn">Delete account</button>
       </section>
     </>
   );

@@ -22,8 +22,11 @@ body {
   overflow-x: hidden;
   height: 100vh;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #082f49;
-  max-width: 1280px;
+  background: linear-gradient(
+    120deg,
+    #082f49 50%,
+    #0a3958 50%
+  ); /* גרדיאנט אלכסוני */
 }
 
 #root {

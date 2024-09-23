@@ -33,7 +33,7 @@ const TripCard = ({ trip }: TripCardProps) => {
   };
 
   return (
-    <Link to={`/trip/${trip._id}`} className="trip-card-link">
+    <Link to={`/searchTrip/trip/${trip._id}`} className="trip-card-link">
       <section className="trip-card">
         <div className="trip-card-profile">
           <img

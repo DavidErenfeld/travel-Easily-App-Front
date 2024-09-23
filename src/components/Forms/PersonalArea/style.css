@@ -7,3 +7,14 @@
 .personal-area-section .profile-name {
   margin-bottom: 3rem;
 }
+
+.delete-btn {
+  font-size: 1.2rem;
+  background-color: #d70b0b;
+}
+
+.delete-btn:hover {
+  font-size: 1.2rem;
+  background-color: #ed3a3a;
+  color: #000;
+}

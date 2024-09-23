@@ -24,15 +24,15 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/searchTrip" element={<Trips />} />
             <Route element={<ProtectedRoute />}>
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/trip/:id" element={<TripDetails />} />
-              <Route path="/myTrips" element={<MyTrips />} />
-              <Route path="/addTrip" element={<AddTrip />} />
-              <Route path="/create-trip" element={<CreateTrip />} />
               <Route path="/personal-area" element={<PersonalArea />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
+              <Route path="/myTrips" element={<MyTrips />} />
+              <Route path="/AddTrip" element={<AddTrip />} />
+              <Route path="/create-trip" element={<CreateTrip />} />
             </Route>
-            <Route path="/trips" element={<Trips />} />
           </Routes>
         </BrowserRouter>
       </TripProvider>

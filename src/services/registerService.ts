@@ -37,9 +37,9 @@ export const googleSignin = (credentialResponse: CredentialResponse) => {
     apiClient
       .post("/auth/google", credentialResponse)
       .then((response: AxiosResponse) => {
-        localStorage.setItem("token", response.data.accessToken);
-        localStorage.setItem("loggedUserId", response.data.user_Id);
+        localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
+        localStorage.setItem("loggedUserId", response.data._id);
         localStorage.setItem("imgUrl", response.data.imgUrl);
         localStorage.setItem("userName", response.data.userName);
         console.log(response);

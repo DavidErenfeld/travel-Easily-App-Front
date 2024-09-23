@@ -48,27 +48,7 @@
   justify-content: flex-end;
 }
 
-.tags {
-  position: absolute;
-  top: -1.8rem;
-  right: 1.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  background-color: #082f49;
-}
 
-.tag {
-  font-size: 1.4rem;
-  padding: 1rem 1rem;
-  background-color: #00a8ff;
-  background-color: #6edf23;
-  color: #132c02;
-  border-radius: 7px;
-}
 .photos-btn {
   position: absolute;
   bottom: -0.7rem;

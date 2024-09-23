@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { useEffect, useState } from "react";
 import "./style.css";
@@ -10,6 +10,7 @@ const Header = () => {
   );
   const [isUserConect, setIsUserConect] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation(); // מקבל את המיקום הנוכחי
 
   const handleLogout = async () => {
     try {
@@ -46,15 +47,26 @@ const Header = () => {
         <div className="menu">
           {isUserConect ? (
             <div className="menu">
+              {/* מציג את הכפתור רק אם הנתיב כולל את "searchTrip" או עמודים אחריו */}
+
               <h1 className="menu-item" onClick={handleLogout}>
                 Logout
               </h1>
               <Link to="/">
-                <h1 className="menu-item">home</h1>
+                <h1 className="menu-item">Home</h1>
               </Link>
               <Link to="/myTrips">
-                <h1 className="menu-item">my trips</h1>
+                <h1 className="menu-item">My trips</h1>
               </Link>
+              {location.pathname.includes("/AddTrip") && (
+                <Link to="/searchTrip">
+                  <h1 className="menu-item">Search trip</h1>
+                </Link>
+              )}
+              {location.pathname.includes("/searchTrip") && (
+                <h1 className="menu-item search-item">Advanced search</h1>
+              )}
+
               <img
                 className="user-main-page-img"
                 src={profileImg}
