@@ -7,6 +7,7 @@ import axios, {
 
 export { CanceledError };
 interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+  skipAuthRefresh: any;
   _retry?: boolean;
 }
 
@@ -30,6 +31,11 @@ apiClient.interceptors.response.use(
   (response: AxiosResponse) => response,
   async (error: AxiosError) => {
     const originalRequest = error.config as CustomAxiosRequestConfig;
+
+    // אם הבקשה לא דורשת רענון טוקן, לדלג על רענון
+    if (originalRequest?.skipAuthRefresh) {
+      return Promise.reject(error); // דלג על רענון הטוקן
+    }
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       if (!isTokenRefreshing) {

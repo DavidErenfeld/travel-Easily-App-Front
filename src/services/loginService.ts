@@ -1,12 +1,18 @@
 import { apiClient } from "./apiClient";
 import { IUser } from "./registerService";
+import { AxiosRequestConfig } from "axios";
+
+interface CustomAxiosRequestConfig extends AxiosRequestConfig {
+  skipAuthRefresh?: boolean; // מוסיפים את skipAuthRefresh כסוג אופציונלי
+}
 
 export const loginUser = (user: IUser) => {
   return new Promise<IUser>((resolve, reject) => {
     console.log("Login...");
-    console.log(user);
+    const config: CustomAxiosRequestConfig = { skipAuthRefresh: true }; // משתמשים בממשק החדש
+
     apiClient
-      .post("/auth/login", user)
+      .post("/auth/login", user, config) // מוסיפים את config לבקשה
       .then((response: any) => {
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);

@@ -15,7 +15,8 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      setIsUserConect(false);
+      // setIsUserConect(false);
+
       setProfileImg("/images/user.png");
     } catch (error) {
       console.log(error);
@@ -45,10 +46,8 @@ const Header = () => {
       <header className="main-page-header">
         <h1 className="logo">TRAVEL easily</h1>
         <div className="menu">
-          {isUserConect ? (
+          {localStorage.getItem("loggedUserId") ? (
             <div className="menu">
-              {/* מציג את הכפתור רק אם הנתיב כולל את "searchTrip" או עמודים אחריו */}
-
               <h1 className="menu-item" onClick={handleLogout}>
                 Logout
               </h1>
@@ -64,7 +63,9 @@ const Header = () => {
                 </Link>
               )}
               {location.pathname.includes("/searchTrip") && (
-                <h1 className="menu-item search-item">Advanced search</h1>
+                <Link to="/searchTrip/advancedSearch">
+                  <h1 className="menu-item search-item">Advanced search</h1>
+                </Link>
               )}
 
               <img

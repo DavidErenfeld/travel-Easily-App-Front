@@ -14,6 +14,7 @@ import MyTrips from "./components/TripComponents/myTrips";
 import AddTrip from "./components/AddTrip";
 import CreateTrip from "./components/CreateTrip";
 import PersonalArea from "./components/Forms/PersonalArea";
+import AdvancedSearch from "./components/AdvancedSearch";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/searchTrip" element={<Trips />} />
+            <Route
+              path="/searchTrip/advancedSearch"
+              element={<AdvancedSearch />}
+            />
             <Route element={<ProtectedRoute />}>
               <Route path="/personal-area" element={<PersonalArea />} />
               <Route path="/profile" element={<Profile />} />

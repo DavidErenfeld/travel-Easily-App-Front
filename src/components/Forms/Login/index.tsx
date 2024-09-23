@@ -42,10 +42,10 @@ function Login() {
       });
       console.log("Login successful:", response);
       setLoading(false);
-      login(); 
+      login();
       navigate("/");
     } catch (error) {
-      console.error("Login error:", error); 
+      console.error("Login error:", error);
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data;
         setLoginError(errorMessage + " Please try again");

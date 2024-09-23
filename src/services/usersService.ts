@@ -35,3 +35,39 @@ export const updateUser = (userId: string, user: IUpdateUser) => {
       });
   });
 };
+
+export const deleteUser = (userId: string) => {
+  return new Promise<void>(async (resolve, reject) => {
+    console.log("Delete User...");
+
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (!accessToken) {
+      return reject("No access token available.");
+    }
+
+    try {
+      // בקשת מחיקה לשרת
+      await apiClient.delete(`/users/${userId}`, {
+        headers: {
+          Authorization: `JWT ${accessToken}`,
+        },
+      });
+
+      console.log("User deleted successfully");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("loggedUserId");
+      localStorage.removeItem("imgUrl");
+      localStorage.removeItem("userName");
+      resolve();
+    } catch (error: any) {
+      // הצגת השגיאה בצורה מפורטת יותר
+      console.error(
+        "Error deleting user:",
+        error?.response?.data || error.message || error
+      );
+      reject(error);
+    }
+  });
+};

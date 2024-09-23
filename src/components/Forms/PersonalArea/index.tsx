@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { updateUser } from "../../../services/usersService";
+import { deleteUser, updateUser } from "../../../services/usersService";
 import { uploadPhoto } from "../../../services/fileService";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import LoadingDots from "../../UIComponents/Loader";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
 
 function PersonalArea() {
   const imgRef = useRef<HTMLInputElement>(null);
@@ -13,6 +14,7 @@ function PersonalArea() {
   const [isButtonClicede, setButtonClicede] = useState(false);
   const loggedUserId = localStorage.getItem("loggedUserId");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   let imgUrl = localStorage.getItem("imgUrl") || "";
 
@@ -21,6 +23,25 @@ function PersonalArea() {
       setButtonClicede(true);
       setImgFile(e.target.files[0]);
       setImgSrc(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
+  const handleDeleteUser = async () => {
+    const userId = localStorage.getItem("loggedUserId");
+
+    if (!userId) {
+      console.log("No user logged in");
+      return;
+    }
+
+    console.log("User ID to delete:", userId); // בדוק שה-`userId` נכון
+
+    try {
+      await deleteUser(userId);
+      console.log("User deleted and logged out successfully");
+      navigate("/"); // נווט את המשתמש לדף הבית לאחר המחיקה וה-logout
+    } catch (error) {
+      console.log("Error deleting user:", error);
     }
   };
 
@@ -96,7 +117,9 @@ function PersonalArea() {
             )}
           </div>
         )}
-        <button className="btn-m delete-btn">Delete account</button>
+        <button className="btn-m delete-btn" onClick={handleDeleteUser}>
+          Delete account
+        </button>
       </section>
     </>
   );

@@ -162,6 +162,27 @@ const deleteTrip = (tripId: string) => {
   });
 };
 
+const searchTripsByParams = (params: Record<string, string | number>) => {
+  return new Promise<ITrips[]>((resolve, reject) => {
+    console.log("Search trips by params:", params);
+    apiClient
+      .get("/trips//search/parameters", {
+        params,
+        headers: {
+          Authorization: `JWT ${accessToken}`, // הוספת הטוקן ל-Authorization header
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        resolve(response.data.data); // assuming that response.data contains the results
+      })
+      .catch((error) => {
+        console.log("Error searching trips:", error);
+        reject(error);
+      });
+  });
+};
+
 const logout = () => {
   return new Promise<void>((resolve, reject) => {
     console.log("log out...");
@@ -268,6 +289,7 @@ export default {
   getByTripId,
   postTrip,
   updateTrip,
+  searchTripsByParams,
   addLike,
   deleteTrip,
   logout,
