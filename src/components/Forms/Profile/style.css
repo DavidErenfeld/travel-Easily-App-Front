@@ -13,6 +13,7 @@ body {
   position: relative;
   text-align: center;
   padding: 3rem;
+  backdrop-filter: blur(20px);
 }
 
 .form-header {

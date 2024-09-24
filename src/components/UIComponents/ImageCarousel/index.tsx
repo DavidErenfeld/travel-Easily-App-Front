@@ -1,16 +1,24 @@
+// ImageCarousel.tsx
 import { useRef } from "react";
 import "./style.css";
 
 interface Images {
   src: string;
   alt: string;
+  isFromServer?: boolean;
 }
 
 interface ImageCarouselProps {
   images: Images[];
+  deleteImage?: (src: string) => void;
+  showDeleteButton?: boolean;
 }
 
-const ImageCarousel = ({ images }: ImageCarouselProps) => {
+const ImageCarousel = ({
+  images,
+  deleteImage,
+  showDeleteButton,
+}: ImageCarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -27,13 +35,15 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
   return (
     <div className="carousel-container">
       <div className="carousel" ref={carouselRef}>
-        {images.map((image, index) => (
-          <img
-            key={index}
-            src={image.src}
-            alt={image.alt}
-            className="carousel-image"
-          />
+        {images.map((image) => (
+          <div className="img-container" key={image.src}>
+            <img src={image.src} alt={image.alt} className="carousel-image" />
+            {showDeleteButton && deleteImage && (
+              <p onClick={() => deleteImage(image.src)} className="delete-img">
+                delete
+              </p>
+            )}
+          </div>
         ))}
       </div>
       <button className="scroll-button left" onClick={() => scroll("left")}>

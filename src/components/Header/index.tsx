@@ -67,6 +67,9 @@ const Header = () => {
                   <h1 className="menu-item search-item">Advanced search</h1>
                 </Link>
               )}
+              <Link to="/profile">
+                <h1 className="menu-item">profile</h1>
+              </Link>
 
               <img
                 className="user-main-page-img"
@@ -80,9 +83,7 @@ const Header = () => {
               <Link to="/login">
                 <h1 className="menu-item">login</h1>
               </Link>
-              <Link to="/profile">
-                <h1 className="menu-item">profile</h1>
-              </Link>
+
               <Link to="/register">
                 <h1 className="menu-item">register</h1>
               </Link>

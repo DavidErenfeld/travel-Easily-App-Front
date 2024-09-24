@@ -22,9 +22,10 @@ const TripDetails = () => {
   const [searchParams] = useSearchParams();
   const [trip, setTrip] = useState<ITrips | null>(null);
   const [loading, setLoading] = useState(true);
+  // const [isThisTheOwner, setIsThisTheOwner] = useState(false);
   const loggedUserName = localStorage.getItem("userName") || "";
   const loggedUserId = localStorage.getItem("loggedUserId") || "";
-
+  const isThisTheOwner = loggedUserId !== trip?.owner?._id ? false : true;
   useEffect(() => {
     if (searchParams.get("viewMode") === "viewComments") {
       setViewMode("viewComments");
@@ -89,12 +90,48 @@ const TripDetails = () => {
       alt: "Trip Photo",
     })) || [];
 
+  const deleteImage = async (src: string) => {
+    if (trip) {
+      if (loggedUserId !== trip?.owner?._id) {
+        alert("You are not authorized to delete this image.");
+        return;
+      }
+      // סינון התמונות כדי להסיר את התמונה הנמחקת
+
+      const updatedTripPhotos = trip.tripPhotos.filter(
+        (photoUrl) => photoUrl !== src
+      );
+
+      // יצירת אובייקט טיול מעודכן
+      const updatedTrip = {
+        ...trip,
+        tripPhotos: updatedTripPhotos,
+      };
+
+      try {
+        // עדכון הטיול בשרת
+        await tripsService.updateTrip(updatedTrip);
+
+        // עדכון ה-state המקומי
+        setTrip(updatedTrip);
+
+        console.log("Image deleted and trip updated successfully.");
+      } catch (error) {
+        console.error("Failed to update trip after deleting image:", error);
+      }
+    }
+  };
+
   return (
     <>
       <Header />
-      {trip?.tripPhotos && (
+      {trip?.tripPhotos && !updateMode && (
         <div className="imeges-section">
-          <ImageCarousel images={imageObjects} />
+          <ImageCarousel
+            images={imageObjects}
+            deleteImage={deleteImage}
+            showDeleteButton={isThisTheOwner}
+          />
         </div>
       )}
       <section className="flex-center-column-large-gap">

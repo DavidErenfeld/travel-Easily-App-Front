@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import tripsService, { ITrips } from "../../../services/tripsService";
 import { useNavigate } from "react-router-dom";
 import PopUp from "../../CommentsComponent/PopUp";
+import { uploadPhoto } from "../../../services/fileService";
+import ImageCarousel from "../../UIComponents/ImageCarousel";
+import AddImgs from "../../UIComponents/Icons/AddImage"; // ייבוא האייקון
 import "./style.css";
 
 interface TripDay {
@@ -13,6 +16,13 @@ interface UpdateTripProps {
   trip: ITrips;
   onClickClose: () => void;
   onClickReadMode: () => void;
+}
+
+interface ImageWithFile {
+  file?: File; // שים לב שהפכנו את השדה לאופציונלי
+  src: string;
+  alt: string;
+  isFromServer?: boolean;
 }
 
 const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
@@ -28,6 +38,53 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
 
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const [deleteAction, setDeleteAction] = useState<"day" | "trip" | null>(null);
+
+  const [images, setImages] = useState<ImageWithFile[]>([]);
+  const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
+  const imageRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    // Initialize images with existing trip photos
+    const existingImages = (trip.tripPhotos || []).map((url) => ({
+      src: url,
+      alt: "Trip Photo",
+      isFromServer: true,
+    }));
+    setImages(existingImages);
+  }, [trip.tripPhotos]);
+
+  useEffect(() => {
+    return () => {
+      images.forEach((image) => {
+        if (!image.isFromServer) {
+          URL.revokeObjectURL(image.src);
+        }
+      });
+    };
+  }, [images]);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const files = Array.from(e.target.files);
+      const newImages = files.map((file) => ({
+        file,
+        src: URL.createObjectURL(file),
+        alt: file.name || "Trip Image",
+        isFromServer: false,
+      }));
+      setImages((prevImages) => [...prevImages, ...newImages]);
+    }
+  };
+
+  const deleteImage = (src: string) => {
+    setImages((prevImages) => {
+      const imageToDelete = prevImages.find((image) => image.src === src);
+      if (imageToDelete && !imageToDelete.isFromServer) {
+        URL.revokeObjectURL(imageToDelete.src);
+      }
+      return prevImages.filter((image) => image.src !== src);
+    });
+  };
 
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -121,11 +178,50 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
     setDeleteAction(null);
   };
 
+  const handleUploadImage = async (imgFile: File) => {
+    try {
+      const uploadedUrl = await uploadPhoto(imgFile);
+      console.log(`Image uploaded successfully: ${uploadedUrl}`);
+      return uploadedUrl;
+    } catch (error) {
+      console.error("Upload failed:", error);
+      alert("Failed to upload image.");
+      return null;
+    }
+  };
+
+  const handleUploadImages = async () => {
+    const newImages = images.filter((image) => !image.isFromServer);
+    const urls: string[] = [];
+    for (const image of newImages) {
+      if (image.file) {
+        const uploadedUrl = await handleUploadImage(image.file);
+        if (uploadedUrl) {
+          urls.push(uploadedUrl);
+        }
+      }
+    }
+    setUploadedUrls((prevUrls) => [...prevUrls, ...urls]);
+    return urls;
+  };
+
   const handleSave = async () => {
     try {
+      // Upload new images
+      const tripPhotos = await handleUploadImages();
+
+      // Combine existing trip photos with new ones
+      const updatedTripPhotos = [
+        ...images
+          .filter((image) => image.isFromServer)
+          .map((image) => image.src),
+        ...tripPhotos,
+      ];
+
       const updatedTrip = {
         ...trip,
         tripDescription: dayEdits.map((day) => day.description),
+        tripPhotos: updatedTripPhotos,
       };
       await tripsService.updateTrip(updatedTrip);
       navigate(-1);
@@ -139,6 +235,13 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
     <>
       {!isDeleteClicked && !deleteAction ? (
         <section className="update-trip-section flex-stretch-column-gap">
+          {images.length > 0 && (
+            <ImageCarousel
+              images={images}
+              deleteImage={deleteImage}
+              showDeleteButton={true}
+            />
+          )}
           <div className="update-trip-container">
             <div className="update-details">
               <p className="day-name">Day {dayEdits[currentDayIndex].dayNum}</p>
@@ -150,6 +253,19 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
               className="update-trip-description"
               value={dayEdits[currentDayIndex].description}
               onChange={handleDescriptionChange}
+            />
+            <div
+              className="add-image-icon-update-component"
+              onClick={() => imageRef.current?.click()}
+            >
+              <AddImgs />
+            </div>
+            <input
+              type="file"
+              multiple
+              ref={imageRef}
+              style={{ display: "none" }}
+              onChange={handleImageChange}
             />
             <button
               className="scroll-button left"
@@ -177,6 +293,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
               Add Day
             </button>
           </div>
+
           <button className="btn-l" onClick={handleSave}>
             Save
           </button>

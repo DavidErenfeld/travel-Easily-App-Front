@@ -20,6 +20,7 @@
 }
 
 .carousel-image {
+  position: relative;
   max-height: 200px;
   height: auto;
   margin-right: 10px;
@@ -56,4 +57,25 @@
 
 .scroll-button.right {
   right: 10px;
+}
+
+.carousel-image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.img-container {
+  position: relative;
+}
+.delete-img {
+  content: "";
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  background-color: red;
+  position: absolute;
+  top: 4px;
+  right: 15px;
+  border-radius: 7px;
+  cursor: pointer;
 }

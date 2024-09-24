@@ -12,9 +12,11 @@ interface TripDay {
   description: string;
 }
 
-interface Images {
+interface ImageWithFile {
+  file: File;
   src: string;
   alt: string;
+  isFromServer?: boolean;
 }
 
 const CreateTrip: React.FC = () => {
@@ -32,12 +34,20 @@ const CreateTrip: React.FC = () => {
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
-  const [tripImages, setTripImages] = useState<File[]>([]);
-  const [imagePreviews, setImagePreviews] = useState<Images[]>([]);
-  const [uploadedUrls, setUploadedUrls] = useState<string[]>([]);
+  const [images, setImages] = useState<ImageWithFile[]>([]);
   const imageRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
+
+  const deleteImage = (src: string) => {
+    setImages((prevImages) => {
+      const imageToDelete = prevImages.find((image) => image.src === src);
+      if (imageToDelete && !imageToDelete.isFromServer) {
+        URL.revokeObjectURL(imageToDelete.src);
+      }
+      return prevImages.filter((image) => image.src !== src);
+    });
+  };
 
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
@@ -69,34 +79,24 @@ const CreateTrip: React.FC = () => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const files = Array.from(e.target.files);
-      const newTripImages = [...tripImages, ...files];
-      setTripImages(newTripImages);
-
-      const newPreviews = files.map((file) => ({
+      const newImages = files.map((file) => ({
+        file,
         src: URL.createObjectURL(file),
-        alt: "Trip Image",
+        alt: file.name || "Trip Image",
       }));
-      setImagePreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
+      setImages((prevImages) => [...prevImages, ...newImages]);
     }
   };
 
   useEffect(() => {
     return () => {
-      imagePreviews.forEach((preview) => URL.revokeObjectURL(preview.src));
+      images.forEach((image) => {
+        if (!image.isFromServer) {
+          URL.revokeObjectURL(image.src);
+        }
+      });
     };
-  }, [imagePreviews]);
-
-  const handleUploadImages = async (imgFiles: File[]) => {
-    const urls: string[] = [];
-    for (const file of imgFiles) {
-      const uploadedUrl = await handleUploadImage(file);
-      if (uploadedUrl) {
-        urls.push(uploadedUrl);
-      }
-    }
-    setUploadedUrls(urls);
-    return urls;
-  };
+  }, []); // Empty dependency array to run only on unmount
 
   const handleUploadImage = async (imgFile: File) => {
     try {
@@ -108,6 +108,17 @@ const CreateTrip: React.FC = () => {
       alert("Failed to upload image.");
       return null;
     }
+  };
+
+  const handleUploadImages = async () => {
+    const urls: string[] = [];
+    for (const image of images) {
+      const uploadedUrl = await handleUploadImage(image.file);
+      if (uploadedUrl) {
+        urls.push(uploadedUrl);
+      }
+    }
+    return urls;
   };
 
   const handleSubmit = async () => {
@@ -125,12 +136,9 @@ const CreateTrip: React.FC = () => {
       return;
     }
 
-    const filteredTripData = dayEdits.filter(
-      (day) => day.description.trim() !== ""
-    );
-    const tripData = filteredTripData.map((day) => day.description);
+    const tripData = dayEdits.map((day) => day.description);
 
-    const tripPhotos = await handleUploadImages(tripImages);
+    const tripPhotos = await handleUploadImages();
 
     const trip: ITrips = {
       userName: localStorage.getItem("userName") || undefined,
@@ -223,7 +231,13 @@ const CreateTrip: React.FC = () => {
           </button>
         )}
 
-        {imagePreviews.length > 0 && <ImageCarousel images={imagePreviews} />}
+        {images.length > 0 && (
+          <ImageCarousel
+            deleteImage={deleteImage}
+            images={images}
+            showDeleteButton={true}
+          />
+        )}
       </section>
     </>
   );

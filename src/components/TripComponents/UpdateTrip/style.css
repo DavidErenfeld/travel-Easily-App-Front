@@ -13,6 +13,12 @@
   gap: 1rem;
 }
 
+.add-image-icon-update-component {
+  position: absolute;
+  right: 8.5rem;
+  bottom: 0.8rem;
+}
+
 .update-details {
   width: 100%;
   display: flex;
