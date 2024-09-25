@@ -1,10 +1,11 @@
+// UpdateTrip.tsx
 import { useState, useRef, useEffect } from "react";
 import tripsService, { ITrips } from "../../../services/tripsService";
 import { useNavigate } from "react-router-dom";
 import PopUp from "../../CommentsComponent/PopUp";
 import { uploadPhoto } from "../../../services/fileService";
 import ImageCarousel from "../../UIComponents/ImageCarousel";
-import AddImgs from "../../UIComponents/Icons/AddImage"; // ייבוא האייקון
+import AddImgs from "../../UIComponents/Icons/AddImage";
 import "./style.css";
 
 interface TripDay {
@@ -19,7 +20,7 @@ interface UpdateTripProps {
 }
 
 interface ImageWithFile {
-  file?: File; // שים לב שהפכנו את השדה לאופציונלי
+  file?: File;
   src: string;
   alt: string;
   isFromServer?: boolean;
@@ -36,7 +37,6 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
     }))
   );
 
-  const [isDeleteClicked, setIsDeleteClicked] = useState(false);
   const [deleteAction, setDeleteAction] = useState<"day" | "trip" | null>(null);
 
   const [images, setImages] = useState<ImageWithFile[]>([]);
@@ -44,7 +44,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
   const imageRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Initialize images with existing trip photos
+    // אתחול התמונות עם התמונות הקיימות של הטיול
     const existingImages = (trip.tripPhotos || []).map((url) => ({
       src: url,
       alt: "Trip Photo",
@@ -62,6 +62,15 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
       });
     };
   }, [images]);
+
+  // מניעת גלילה כאשר הפופ-אפ פתוח
+  useEffect(() => {
+    if (deleteAction) {
+      document.body.classList.add("popup-open");
+    } else {
+      document.body.classList.remove("popup-open");
+    }
+  }, [deleteAction]);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -141,7 +150,6 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
           tripDescription: renumberedDays.map((day) => day.description),
         };
         await tripsService.updateTrip(updatedTrip);
-        navigate(-1);
         console.log("Day deleted and trip updated successfully.");
       } catch (error) {
         console.error("Failed to update trip after deleting day:", error);
@@ -149,7 +157,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
     } else {
       alert("Cannot delete the last remaining day.");
     }
-    setIsDeleteClicked(false);
+    setDeleteAction(null);
   };
 
   const deleteTrip = async () => {
@@ -160,21 +168,18 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
     } catch (error) {
       console.error("Failed to delete trip:", error);
     }
-    setIsDeleteClicked(false);
+    setDeleteAction(null);
   };
 
   const handleDeleteDayClick = () => {
     setDeleteAction("day");
-    setIsDeleteClicked(true);
   };
 
   const handleDeleteTripClick = () => {
     setDeleteAction("trip");
-    setIsDeleteClicked(true);
   };
 
   const handleCancelDelete = () => {
-    setIsDeleteClicked(false);
     setDeleteAction(null);
   };
 
@@ -207,10 +212,10 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
 
   const handleSave = async () => {
     try {
-      // Upload new images
+      // העלאת תמונות חדשות
       const tripPhotos = await handleUploadImages();
 
-      // Combine existing trip photos with new ones
+      // שילוב התמונות הקיימות עם החדשות
       const updatedTripPhotos = [
         ...images
           .filter((image) => image.isFromServer)
@@ -224,8 +229,8 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
         tripPhotos: updatedTripPhotos,
       };
       await tripsService.updateTrip(updatedTrip);
-      navigate(-1);
       console.log("Trip updated successfully.");
+      navigate(-1); // לאחר השמירה, חוזרים לדף הקודם
     } catch (error) {
       console.error("Failed to update trip:", error);
     }
@@ -233,83 +238,85 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
 
   return (
     <>
-      {!isDeleteClicked && !deleteAction ? (
-        <section className="update-trip-section flex-stretch-column-gap section">
-          {images.length > 0 && (
-            <ImageCarousel
-              images={images}
-              deleteImage={deleteImage}
-              showDeleteButton={true}
-            />
-          )}
-          <div className="update-trip-container">
-            <div className="update-details">
-              <p className="day-name">Day {dayEdits[currentDayIndex].dayNum}</p>
-              <button className="btn-l" onClick={onClickReadMode}>
-                Read Mode
-              </button>
-            </div>
-            <textarea
-              className="update-trip-description"
-              value={dayEdits[currentDayIndex].description}
-              onChange={handleDescriptionChange}
-            />
-            <div
-              className="add-image-icon-update-component"
-              onClick={() => imageRef.current?.click()}
-            >
-              <AddImgs />
-            </div>
-            <input
-              type="file"
-              multiple
-              ref={imageRef}
-              style={{ display: "none" }}
-              onChange={handleImageChange}
-            />
-            <button
-              className="scroll-button left"
-              onClick={goToPreviousDay}
-              disabled={currentDayIndex === 0}
-            >
-              ‹
-            </button>
-            <button
-              className="scroll-button right"
-              onClick={goToNextDay}
-              disabled={currentDayIndex === dayEdits.length - 1}
-            >
-              ›
+      <section className="update-trip-section flex-stretch-column-gap section">
+        {images.length > 0 && (
+          <ImageCarousel
+            images={images}
+            deleteImage={deleteImage}
+            showDeleteButton={true}
+          />
+        )}
+        <div className="update-trip-container">
+          <div className="update-details">
+            <p className="day-name">Day {dayEdits[currentDayIndex].dayNum}</p>
+            <button className="btn-l" onClick={onClickReadMode}>
+              Read Mode
             </button>
           </div>
-          <div className="day-navigation flex-center-gap-s">
-            <button className="btn-m" onClick={handleDeleteDayClick}>
-              Delete Day
-            </button>
-            <button className="btn-m" onClick={handleDeleteTripClick}>
-              Delete Trip
-            </button>
-            <button className="btn-m add-day-btn" onClick={addNewDay}>
-              Add Day
-            </button>
+          <textarea
+            className="update-trip-description"
+            value={dayEdits[currentDayIndex].description}
+            onChange={handleDescriptionChange}
+          />
+          <div
+            className="add-image-icon-update-component"
+            onClick={() => imageRef.current?.click()}
+          >
+            <AddImgs />
           </div>
-
-          <button className="btn-l" onClick={handleSave}>
-            Save
+          <input
+            type="file"
+            multiple
+            ref={imageRef}
+            style={{ display: "none" }}
+            onChange={handleImageChange}
+          />
+          <button
+            className="scroll-button left"
+            onClick={goToPreviousDay}
+            disabled={currentDayIndex === 0}
+          >
+            ‹
           </button>
-        </section>
-      ) : (
-        <PopUp
-          message={
-            deleteAction === "day"
-              ? `Are you sure you want to delete day number ${dayEdits[currentDayIndex].dayNum} ?`
-              : "Are you sure you want to delete the entire trip?"
-          }
-          handleCancelBtn={handleCancelDelete}
-          handleDeleteBtn={
-            deleteAction === "day" ? deleteCurrentDay : deleteTrip
-          }
-        />
+          <button
+            className="scroll-button right"
+            onClick={goToNextDay}
+            disabled={currentDayIndex === dayEdits.length - 1}
+          >
+            ›
+          </button>
+        </div>
+        <div className="day-navigation flex-center-gap-s">
+          <button className="btn-m" onClick={handleDeleteDayClick}>
+            Delete Day
+          </button>
+          <button className="btn-m" onClick={handleDeleteTripClick}>
+            Delete Trip
+          </button>
+          <button className="btn-m add-day-btn" onClick={addNewDay}>
+            Add Day
+          </button>
+        </div>
+
+        <button className="btn-l" onClick={handleSave}>
+          Save
+        </button>
+      </section>
+
+      {deleteAction && (
+        <div className="popup-overlay">
+          <PopUp
+            message={
+              deleteAction === "day"
+                ? `Are you sure you want to delete day number ${dayEdits[currentDayIndex].dayNum}?`
+                : "Are you sure you want to delete the entire trip?"
+            }
+            handleCancelBtn={handleCancelDelete}
+            handleDeleteBtn={
+              deleteAction === "day" ? deleteCurrentDay : deleteTrip
+            }
+          />
+        </div>
       )}
     </>
   );

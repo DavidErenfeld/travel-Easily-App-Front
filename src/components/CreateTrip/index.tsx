@@ -6,6 +6,7 @@ import Header from "../Header";
 import AddImgs from "../UIComponents/Icons/AddImage";
 import ImageCarousel from "../UIComponents/ImageCarousel";
 import "./style.css";
+import SuccessMessage from "../UIComponents/SuccessMessage";
 
 interface TripDay {
   dayNum: number;
@@ -32,12 +33,13 @@ const CreateTrip: React.FC = () => {
     }))
   );
 
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
   const [images, setImages] = useState<ImageWithFile[]>([]);
   const imageRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
+
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const deleteImage = (src: string) => {
     setImages((prevImages) => {
@@ -96,7 +98,7 @@ const CreateTrip: React.FC = () => {
         }
       });
     };
-  }, []); // Empty dependency array to run only on unmount
+  }, [images]); // הוסף את images כתלות
 
   const handleUploadImage = async (imgFile: File) => {
     try {
@@ -161,14 +163,7 @@ const CreateTrip: React.FC = () => {
         selectedCountry,
       });
 
-      setSuccessMessage("Trip saved successfully!");
-
-      setTimeout(() => {
-        setSuccessMessage(null);
-        navigate("/");
-      }, 3000);
-
-      window.history.replaceState(null, "", "/");
+      setShowSuccessMessage(true);
     } catch (error) {
       console.error("Failed to save the trip:", error);
     }
@@ -177,11 +172,16 @@ const CreateTrip: React.FC = () => {
   return (
     <>
       <Header />
+      {showSuccessMessage && (
+        <SuccessMessage
+          message="Trip saved successfully!"
+          onAnimationEnd={() => {
+            setShowSuccessMessage(false);
+            navigate("/");
+          }}
+        />
+      )}
       <section className="create-trip-section update-trip-section flex-stretch-column-gap section">
-        {successMessage && (
-          <div className="success-message">{successMessage}</div>
-        )}
-
         <div className="update-trip-container">
           <div className="update-details">
             <p className="day-name">Day {dayEdits[currentDayIndex].dayNum}</p>

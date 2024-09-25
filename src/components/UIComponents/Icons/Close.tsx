@@ -8,7 +8,8 @@ interface CloseIconProps {
 function CloseIcon({ color, onClose }: CloseIconProps) {
   const navigate = useNavigate();
 
-  const handleClose = () => {
+  const handleClose = (event: React.MouseEvent) => {
+    event.stopPropagation(); // מונע התפשטות האירוע
     if (onClose) {
       onClose();
     } else {

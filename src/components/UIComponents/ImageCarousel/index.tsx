@@ -1,7 +1,7 @@
-// ImageCarousel.tsx
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import "./style.css";
+import PopUp from "../../CommentsComponent/PopUp";
 
 interface Images {
   src: string;
@@ -21,6 +21,7 @@ const ImageCarousel = ({
   showDeleteButton,
 }: ImageCarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [imageToDelete, setImageToDelete] = useState<string | null>(null);
 
   const scroll = (direction: "left" | "right") => {
     if (carouselRef.current) {
@@ -34,27 +35,44 @@ const ImageCarousel = ({
   };
 
   return (
-    <div className="carousel-container">
-      <div className="carousel" ref={carouselRef}>
-        {images.map((image) => (
-          <div className="img-container" key={image.src}>
-            <img src={image.src} alt={image.alt} className="carousel-image" />
-            {showDeleteButton && deleteImage && (
-              <MdDelete
-                onClick={() => deleteImage(image.src)}
-                className="delete-icon"
-              />
-            )}
-          </div>
-        ))}
+    <>
+      <div className="carousel-container">
+        <div className="carousel" ref={carouselRef}>
+          {images.map((image) => (
+            <div className="img-container" key={image.src}>
+              <img src={image.src} alt={image.alt} className="carousel-image" />
+              {showDeleteButton && deleteImage && (
+                <MdDelete
+                  onClick={() => setImageToDelete(image.src)}
+                  className="delete-icon"
+                />
+              )}
+            </div>
+          ))}
+        </div>
+        <button className="scroll-button left" onClick={() => scroll("left")}>
+          ‹
+        </button>
+        <button className="scroll-button right" onClick={() => scroll("right")}>
+          ›
+        </button>
       </div>
-      <button className="scroll-button left" onClick={() => scroll("left")}>
-        ‹
-      </button>
-      <button className="scroll-button right" onClick={() => scroll("right")}>
-        ›
-      </button>
-    </div>
+
+      {imageToDelete && (
+        <div className="popup-overlay">
+          <PopUp
+            message="Are you sure you want to delete this image?"
+            handleDeleteBtn={() => {
+              if (deleteImage) {
+                deleteImage(imageToDelete);
+              }
+              setImageToDelete(null);
+            }}
+            handleCancelBtn={() => setImageToDelete(null)}
+          />
+        </div>
+      )}
+    </>
   );
 };
 

@@ -15,6 +15,7 @@ function PersonalArea() {
   const loggedUserId = localStorage.getItem("loggedUserId");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
 
   let imgUrl = localStorage.getItem("imgUrl") || "";
 
@@ -26,6 +27,10 @@ function PersonalArea() {
     }
   };
 
+  const confirmDeleteUser = () => {
+    setShowDeletePopup(true);
+  };
+
   const handleDeleteUser = async () => {
     const userId = localStorage.getItem("loggedUserId");
 
@@ -33,8 +38,6 @@ function PersonalArea() {
       console.log("No user logged in");
       return;
     }
-
-    console.log("User ID to delete:", userId); // בדוק שה-`userId` נכון
 
     try {
       await deleteUser(userId);
@@ -80,6 +83,14 @@ function PersonalArea() {
     };
   }, [imgSrc]);
 
+  useEffect(() => {
+    if (showDeletePopup) {
+      document.body.classList.add("popup-open");
+    } else {
+      document.body.classList.remove("popup-open");
+    }
+  }, [showDeletePopup]);
+
   return (
     <>
       <section className="personal-area-section form-container flex-center-column-large-gap">
@@ -117,10 +128,29 @@ function PersonalArea() {
             )}
           </div>
         )}
-        <button className="btn-m delete-btn" onClick={handleDeleteUser}>
+        <button className="btn-m delete-btn" onClick={confirmDeleteUser}>
           Delete account
         </button>
       </section>
+
+      {showDeletePopup && (
+        <div className="popup-overlay">
+          <div className="pop-up">
+            <p>Are you sure you want to delete your account?</p>
+            <div className="pop-up-buttons">
+              <button className="btn-m" onClick={handleDeleteUser}>
+                Delete
+              </button>
+              <button
+                className="btn-m"
+                onClick={() => setShowDeletePopup(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

@@ -9,6 +9,19 @@
   padding: 2rem 2rem 0.5rem 2rem;
 }
 
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* רקע שקוף כהה */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* מוודא שהפופ-אפ מעל האלמנטים האחרים */
+}
+
 .pop-up p {
   font-size: 1.6rem;
   grid-column: 1/-1;
