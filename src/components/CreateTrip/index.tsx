@@ -177,7 +177,7 @@ const CreateTrip: React.FC = () => {
   return (
     <>
       <Header />
-      <section className="create-trip-section update-trip-section flex-stretch-column-gap">
+      <section className="create-trip-section update-trip-section flex-stretch-column-gap section">
         {successMessage && (
           <div className="success-message">{successMessage}</div>
         )}

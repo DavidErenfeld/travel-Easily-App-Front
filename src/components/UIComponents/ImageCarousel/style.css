@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 3rem;
 }
 
 .carousel {
@@ -13,6 +14,7 @@
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  gap: 1rem;
 }
 
 .carousel::-webkit-scrollbar {
@@ -59,23 +61,23 @@
   right: 10px;
 }
 
-.carousel-image-container {
-  position: relative;
-  display: inline-block;
-}
-
 .img-container {
   position: relative;
 }
-.delete-img {
-  content: "";
+
+.delete-icon {
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 3rem;
   padding: 0.5rem;
-  background-color: red;
+  background-color: #6edf23;
   position: absolute;
-  top: 4px;
+  bottom: 6px;
   right: 15px;
   border-radius: 7px;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.delete-icon:hover {
+  background-color: #ff010196;
 }

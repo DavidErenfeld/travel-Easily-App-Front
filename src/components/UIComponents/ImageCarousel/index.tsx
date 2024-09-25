@@ -1,5 +1,6 @@
 // ImageCarousel.tsx
 import { useRef } from "react";
+import { MdDelete } from "react-icons/md";
 import "./style.css";
 
 interface Images {
@@ -39,9 +40,10 @@ const ImageCarousel = ({
           <div className="img-container" key={image.src}>
             <img src={image.src} alt={image.alt} className="carousel-image" />
             {showDeleteButton && deleteImage && (
-              <p onClick={() => deleteImage(image.src)} className="delete-img">
-                delete
-              </p>
+              <MdDelete
+                onClick={() => deleteImage(image.src)}
+                className="delete-icon"
+              />
             )}
           </div>
         ))}

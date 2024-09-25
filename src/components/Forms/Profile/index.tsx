@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./style.css";
 import axios from "axios";
 import CloseIcon from "../../UIComponents/Icons/Close";
+import Header from "../../Header";
 
 const Profile: React.FC = () => {
-  const [imgSrc, setImgSrc] = useState("/images/user.png");
   const [selectedDateOfBirth, setSelectedDateOfBirth] = useState("");
   const [selectedGender, setSelectedGender] = useState<string>("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
@@ -51,109 +51,110 @@ const Profile: React.FC = () => {
   };
 
   return (
-    <div className="profile-container">
-      <div className="profile-close-icon">
-        <CloseIcon color="#fff" />
-      </div>
-      <div className="form-header">
-        <h2 className="form-title">Profile</h2>
-      </div>
+    <>
+      <Header />
+      <section className="main-section">
+        <div className="profile-container">
+          <div className="profile-close-icon">
+            <CloseIcon color="#fff" />
+          </div>
+          <div className="form-header">
+            <h2 className="form-title">Profile</h2>
+          </div>
 
-      <div className="form-image-profile">
-        <img src={imgSrc} alt="User" className="register-img" />
-      </div>
+          <div className="form-group">
+            <label htmlFor="dateOfBirth">Date of Birth</label>
+            <input
+              type="date"
+              id="dateOfBirth"
+              value={selectedDateOfBirth}
+              onChange={saveDateOfBirth}
+              className="form-control"
+            />
+          </div>
 
-      <div className="form-group">
-        <label htmlFor="dateOfBirth">Date of Birth</label>
-        <input
-          type="date"
-          id="dateOfBirth"
-          value={selectedDateOfBirth}
-          onChange={saveDateOfBirth}
-          className="form-control"
-        />
-      </div>
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="country">Country</label>
+              <input
+                list="countries"
+                id="country"
+                value={selectedCountry}
+                onChange={saveCountryName}
+                className="form-control"
+                placeholder="Start typing to search..."
+              />
+              <datalist id="countries">
+                {countries.map((country) => (
+                  <option key={country} value={country} />
+                ))}
+              </datalist>
+            </div>
 
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="country">Country</label>
-          <input
-            list="countries"
-            id="country"
-            value={selectedCountry}
-            onChange={saveCountryName}
-            className="form-control"
-            placeholder="Start typing to search..."
-          />
-          <datalist id="countries">
-            {countries.map((country) => (
-              <option key={country} value={country} />
-            ))}
-          </datalist>
+            <div className="form-group">
+              <label htmlFor="gender">Gender</label>
+              <select
+                id="gender"
+                value={selectedGender}
+                onChange={(e) => setSelectedGender(e.target.value)}
+                className="form-control"
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="accessibility">Accessibility</label>
+              <select
+                id="accessibility"
+                value={selectedAccessibility}
+                onChange={(e) => setSelectedAccessibility(e.target.value)}
+                className="form-control"
+              >
+                <option value="Accessible">Accessible</option>
+                <option value="Not Accessible">Not Accessible</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="religion">Religion</label>
+              <select
+                id="religion"
+                value={selectedReligion}
+                onChange={(e) => setSelectedReligion(e.target.value)}
+                className="form-control"
+              >
+                <option value="Religious">Religious</option>
+                <option value="Secular">Secular</option>
+                <option value="Ultra-Orthodox">Ultra-Orthodox</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="status">Status</label>
+            <select
+              id="status"
+              value={selectedStatus}
+              onChange={(e) => setSelectedStatus(e.target.value)}
+              className="form-control"
+            >
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Married +">Married +</option>
+            </select>
+          </div>
+
+          <button className="btn-l" onClick={onClickSend}>
+            SEND
+          </button>
         </div>
-
-        <div className="form-group">
-          <label htmlFor="gender">Gender</label>
-          <select
-            id="gender"
-            value={selectedGender}
-            onChange={(e) => setSelectedGender(e.target.value)}
-            className="form-control"
-          >
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="form-row">
-        <div className="form-group">
-          <label htmlFor="accessibility">Accessibility</label>
-          <select
-            id="accessibility"
-            value={selectedAccessibility}
-            onChange={(e) => setSelectedAccessibility(e.target.value)}
-            className="form-control"
-          >
-            <option value="Accessible">Accessible</option>
-            <option value="Not Accessible">Not Accessible</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="religion">Religion</label>
-          <select
-            id="religion"
-            value={selectedReligion}
-            onChange={(e) => setSelectedReligion(e.target.value)}
-            className="form-control"
-          >
-            <option value="Religious">Religious</option>
-            <option value="Secular">Secular</option>
-            <option value="Ultra-Orthodox">Ultra-Orthodox</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="status">Status</label>
-        <select
-          id="status"
-          value={selectedStatus}
-          onChange={(e) => setSelectedStatus(e.target.value)}
-          className="form-control"
-        >
-          <option value="Single">Single</option>
-          <option value="Married">Married</option>
-          <option value="Married +">Married +</option>
-        </select>
-      </div>
-
-      <button className="btn-l" onClick={onClickSend}>
-        SEND
-      </button>
-    </div>
+      </section>
+    </>
   );
 };
 

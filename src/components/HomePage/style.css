@@ -1,12 +1,11 @@
 .main-page-section {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem;
-  padding-top: 0rem;
+  padding-top: 28rem;
 }
 
 .main-title {
@@ -20,6 +19,10 @@
   justify-content: center;
   gap: 2rem;
   margin: 4rem;
+}
+
+.main-title-element {
+  justify-self: center;
 }
 
 .main-title {

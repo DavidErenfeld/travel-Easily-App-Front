@@ -134,7 +134,7 @@ const TripDetails = () => {
           />
         </div>
       )}
-      <section className="flex-center-column-large-gap">
+      <section className="flex-center-column-large-gap section">
         {!updateMode ? (
           <div className="main-card-section flex-center-column-large-gap">
             {trip && <TripHeader trip={trip} />}

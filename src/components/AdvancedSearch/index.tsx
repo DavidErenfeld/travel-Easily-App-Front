@@ -79,7 +79,7 @@ const AdvancedSearch: React.FC = () => {
   return (
     <>
       <Header />
-      <>
+      <section className="main-section">
         {isSearchSelected ? (
           <section className="trips-section">
             {searchResults.length === 0 ? (
@@ -174,7 +174,7 @@ const AdvancedSearch: React.FC = () => {
             </button>
           </div>
         )}
-      </>
+      </section>
     </>
   );
 };

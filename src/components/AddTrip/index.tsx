@@ -83,108 +83,110 @@ const TripForm: React.FC = () => {
   return (
     <>
       <Header />
-      <div className="profile-container">
-        <div className="form-close-icon">
-          <CloseIcon color="#fff" />
-        </div>
-        <div className="form-header">
-          <h2 className="form-title">Trip Details</h2>
-        </div>
+      <section className="main-section ">
+        <div className="profile-container">
+          <div className="form-close-icon">
+            <CloseIcon color="#fff" />
+          </div>
+          <div className="form-header">
+            <h2 className="form-title">Trip Details</h2>
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="groupType">We are</label>
-          <select
-            id="groupType"
-            value={selectedGroupType}
-            onChange={(e) => {
-              setSelectedGroupType(e.target.value);
-              setErrors((prevErrors) => ({
-                ...prevErrors,
-                selectedGroupType: "",
-              }));
-            }}
-            className="form-control"
-          >
-            <option value="">Select Group Type</option>
-            <option value="romantic couple">Romantic Couple</option>
-            <option value="happy family">Happy Family</option>
-            <option value="friends">Friends</option>
-            <option value="seniors">Seniors</option>
-            <option value="single">Single</option>
-            <option value="groups">Groups</option>
-          </select>
-          {errors.selectedGroupType && (
-            <p className="error-message">{errors.selectedGroupType}</p>
-          )}
-        </div>
+          <div className="form-group">
+            <label htmlFor="groupType">We are</label>
+            <select
+              id="groupType"
+              value={selectedGroupType}
+              onChange={(e) => {
+                setSelectedGroupType(e.target.value);
+                setErrors((prevErrors) => ({
+                  ...prevErrors,
+                  selectedGroupType: "",
+                }));
+              }}
+              className="form-control"
+            >
+              <option value="">Select Group Type</option>
+              <option value="romantic couple">Romantic Couple</option>
+              <option value="happy family">Happy Family</option>
+              <option value="friends">Friends</option>
+              <option value="seniors">Seniors</option>
+              <option value="single">Single</option>
+              <option value="groups">Groups</option>
+            </select>
+            {errors.selectedGroupType && (
+              <p className="error-message">{errors.selectedGroupType}</p>
+            )}
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="tripType">Trip Type</label>
-          <select
-            id="tripType"
-            value={selectedTripType}
-            onChange={(e) => {
-              setSelectedTripType(e.target.value);
-              setErrors((prevErrors) => ({
-                ...prevErrors,
-                selectedTripType: "",
-              }));
-            }}
-            className="form-control"
-          >
-            <option value="">Select Trip Type</option>
-            <option value="attractions">Attractions</option>
-            <option value="romantic">Romantic</option>
-            <option value="nature">Nature</option>
-            <option value="parties">Parties</option>
-            <option value="food">Food</option>
-            <option value="integrated">Integrated</option>
-          </select>
-          {errors.selectedTripType && (
-            <p className="error-message">{errors.selectedTripType}</p>
-          )}
-        </div>
+          <div className="form-group">
+            <label htmlFor="tripType">Trip Type</label>
+            <select
+              id="tripType"
+              value={selectedTripType}
+              onChange={(e) => {
+                setSelectedTripType(e.target.value);
+                setErrors((prevErrors) => ({
+                  ...prevErrors,
+                  selectedTripType: "",
+                }));
+              }}
+              className="form-control"
+            >
+              <option value="">Select Trip Type</option>
+              <option value="attractions">Attractions</option>
+              <option value="romantic">Romantic</option>
+              <option value="nature">Nature</option>
+              <option value="parties">Parties</option>
+              <option value="food">Food</option>
+              <option value="integrated">Integrated</option>
+            </select>
+            {errors.selectedTripType && (
+              <p className="error-message">{errors.selectedTripType}</p>
+            )}
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="days">Number of Days</label>
-          <input
-            type="number"
-            id="days"
-            value={numberOfDays}
-            onChange={handleDaysChange}
-            className="form-control"
-            placeholder="Enter number of days..."
-            min="1"
-          />
-          {errors.numberOfDays && (
-            <p className="error-message">{errors.numberOfDays}</p>
-          )}
-        </div>
+          <div className="form-group">
+            <label htmlFor="days">Number of Days</label>
+            <input
+              type="number"
+              id="days"
+              value={numberOfDays}
+              onChange={handleDaysChange}
+              className="form-control"
+              placeholder="Enter number of days..."
+              min="1"
+            />
+            {errors.numberOfDays && (
+              <p className="error-message">{errors.numberOfDays}</p>
+            )}
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="country">Country</label>
-          <input
-            list="countries"
-            id="country"
-            value={selectedCountry}
-            onChange={handleCountryChange}
-            className="form-control"
-            placeholder="Start typing to search..."
-          />
-          <datalist id="countries">
-            {countries.map((country) => (
-              <option key={country} value={country} />
-            ))}
-          </datalist>
-          {errors.selectedCountry && (
-            <p className="error-message">{errors.selectedCountry}</p>
-          )}
-        </div>
+          <div className="form-group">
+            <label htmlFor="country">Country</label>
+            <input
+              list="countries"
+              id="country"
+              value={selectedCountry}
+              onChange={handleCountryChange}
+              className="form-control"
+              placeholder="Start typing to search..."
+            />
+            <datalist id="countries">
+              {countries.map((country) => (
+                <option key={country} value={country} />
+              ))}
+            </datalist>
+            {errors.selectedCountry && (
+              <p className="error-message">{errors.selectedCountry}</p>
+            )}
+          </div>
 
-        <button className="btn-l" onClick={goToCreateTripPage}>
-          Next
-        </button>
-      </div>
+          <button className="btn-l" onClick={goToCreateTripPage}>
+            Next
+          </button>
+        </div>
+      </section>
     </>
   );
 };

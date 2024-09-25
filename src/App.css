@@ -135,6 +135,15 @@ input:focus {
   height: 1.8rem;
 }
 
+.add-img-icon {
+  stroke: #6edf23;
+  transition: all 0.2s;
+}
+
+.add-img-icon:hover {
+  stroke: #fff;
+}
+
 .overlay {
   position: fixed;
   top: 0;

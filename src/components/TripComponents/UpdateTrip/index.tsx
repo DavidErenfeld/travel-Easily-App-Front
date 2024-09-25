@@ -234,7 +234,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
   return (
     <>
       {!isDeleteClicked && !deleteAction ? (
-        <section className="update-trip-section flex-stretch-column-gap">
+        <section className="update-trip-section flex-stretch-column-gap section">
           {images.length > 0 && (
             <ImageCarousel
               images={images}

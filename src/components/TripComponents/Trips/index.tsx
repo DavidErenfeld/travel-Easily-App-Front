@@ -22,7 +22,7 @@ const Trips = () => {
   return (
     <>
       <Header />
-      <section className="trips-section">
+      <section className="trips-section section">
         {trips.length === 0 ? (
           <div className="main-loader-section">
             <h1>No trips have been added to the system yet</h1>

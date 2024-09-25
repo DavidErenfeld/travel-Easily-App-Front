@@ -19,21 +19,26 @@ body {
   font-family: "Poppins", sans-serif;
   line-height: 1;
   font-weight: 400;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   height: 100vh;
   color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(
-    120deg,
-    #082f49 50%,
-    #0a3958 50%
-  ); /* גרדיאנט אלכסוני */
+
+  background-color: #082f49;
 }
 
 #root {
   width: 100%;
-  padding: 2rem;
   text-align: center;
   height: 100vh;
+}
+
+.main-section {
+  padding-top: 12rem;
+}
+
+.section {
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
 .day-name {

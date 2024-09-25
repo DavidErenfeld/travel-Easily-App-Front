@@ -1,9 +1,16 @@
 .main-page-header {
+  position: fixed;
+  top: 0;
   width: 100%;
+  background-color: #082f49;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  z-index: 1000;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .logo {

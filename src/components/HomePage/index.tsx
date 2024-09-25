@@ -5,20 +5,22 @@ import Header from "../Header";
 
 const HomePage = () => {
   return (
-    <section className="main-page-section">
+    <>
       <Header />
-      <div className="main-title-element">
-        <h1 className="main-title">The new way to travel</h1>
-      </div>
-      <div className="main-buttons">
-        <Link to="/AddTrip">
-          <button className="btn-el">add trip</button>
-        </Link>
-        <Link to="/searchTrip">
-          <button className="btn-el">search trip</button>
-        </Link>
-      </div>
-    </section>
+      <section className="main-page-section">
+        <div className="main-title-element">
+          <h1 className="main-title">The new way to travel</h1>
+        </div>
+        <div className="main-buttons">
+          <Link to="/AddTrip">
+            <button className="btn-el">add trip</button>
+          </Link>
+          <Link to="/searchTrip">
+            <button className="btn-el">search trip</button>
+          </Link>
+        </div>
+      </section>
+    </>
   );
 };
 
