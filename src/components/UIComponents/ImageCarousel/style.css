@@ -6,6 +6,8 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 3rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
 }
 
 .carousel {
@@ -80,4 +82,28 @@
 
 .delete-icon:hover {
   background-color: #ff010196;
+}
+
+/*480*/
+@media (max-width: 30em) {
+  .carousel-container {
+    padding: 2rem;
+  }
+  .carousel-image {
+    max-width: 38rem;
+    height: 19rem;
+    border-radius: 7px;
+  }
+}
+
+/*480*/
+@media (max-width: 22em) {
+  .carousel-container {
+    padding: 1rem;
+  }
+  .carousel-image {
+    max-width: 38rem;
+    height: 19rem;
+    border-radius: 7px;
+  }
 }

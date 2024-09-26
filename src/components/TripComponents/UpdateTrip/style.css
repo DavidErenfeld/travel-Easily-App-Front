@@ -1,7 +1,7 @@
 .update-trip-section {
   position: relative;
   width: 100%;
-  margin-top: 12rem;
+  margin-top: 14rem;
 }
 
 .update-trip-container {
@@ -51,7 +51,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1000;
+  z-index: 20;
   cursor: pointer;
   font-size: 3.2rem;
   padding: 10px;
@@ -79,4 +79,11 @@
 .update-trip-section .add-day-btn:hover {
   background: #00a8ff;
   color: #fff;
+}
+
+/*1024*/
+@media (max-width: 64em) {
+  .update-trip-section {
+    margin-top: 18rem;
+  }
 }

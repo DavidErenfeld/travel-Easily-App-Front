@@ -4,15 +4,15 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* רקע שחור שקוף */
-  z-index: 9999; /* מתחת לתפריט */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
 }
 
 .sidebar-section {
   position: fixed;
   top: 0;
   right: 0;
-  transform: translateX(100%); /* התפריט מתחיל מחוץ למסך */
+  transform: translateX(100%);
   width: 20%;
   background-color: #bae6fd;
   height: 100%;
@@ -34,28 +34,73 @@
   transform: translateX(0); /* כאשר התפריט פתוח */
 }
 
+.sidebar-section::after {
+  content: "";
+  border-bottom: 2px solid #fff;
+  position: absolute;
+  top: 7rem;
+  left: 0;
+  width: 100%;
+}
+
 .close-sidebar {
   position: absolute;
   top: 1rem;
   left: 1rem;
 }
 
+.user-sidebar-img-container p {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #001a27;
+  align-self: flex-end;
+}
+
 .user-sidebar-img {
-  height: 6rem;
-  width: 6rem;
-  margin-bottom: 2rem;
-  border-radius: 50%;
   border: 2px solid #fff;
+  border-radius: 50%;
+  width: 6rem;
+  height: 6rem;
+  object-fit: cover;
+  object-position: center;
   cursor: pointer;
+  z-index: 15;
+}
+
+.user-sidebar-img:hover {
+  border: 2px solid #b8b8eb;
 }
 
 .sidebar-item {
-  font-size: 1.6rem;
-  color: #232d59;
+  font-size: 1.8rem;
+  color: #001a27;
+  font-weight: 400;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: color 0.2s;
 }
 
+.user-sidebar-img > p,
 .sidebar-item:hover {
-  color: #0081c2;
+  color: #1a8ec8;
+}
+
+/*1024*/
+@media (max-width: 64em) {
+  .sidebar-section {
+    width: 30%;
+  }
+}
+
+/*640*/
+@media (max-width: 40em) {
+  .sidebar-section {
+    width: 40%;
+  }
+}
+
+/*640*/
+@media (max-width: 30em) {
+  .sidebar-section {
+    width: 60%;
+  }
 }

@@ -58,21 +58,23 @@ const Header = () => {
         {!isSidebarOpen && (
           <div className="menu">
             {localStorage.getItem("loggedUserId") ? (
-              <div className="menu">
+              <div className="menu ">
                 <Link to="/">
-                  <h1 className="menu-item">Home</h1>
+                  <h1 className="menu-item connectet-menu">Home</h1>
                 </Link>
                 <Link to="/myTrips">
-                  <h1 className="menu-item">My trips</h1>
+                  <h1 className="menu-item connectet-menu">My trips</h1>
                 </Link>
                 {location.pathname.includes("/AddTrip") && (
                   <Link to="/searchTrip">
-                    <h1 className="menu-item">Search trip</h1>
+                    <h1 className="menu-item connectet-menu">Search trip</h1>
                   </Link>
                 )}
                 {location.pathname.includes("/searchTrip") && (
                   <Link to="/searchTrip/advancedSearch">
-                    <h1 className="menu-item search-item">Advanced search</h1>
+                    <h1 className="menu-item search-item connectet-menu">
+                      Advanced search
+                    </h1>
                   </Link>
                 )}
 

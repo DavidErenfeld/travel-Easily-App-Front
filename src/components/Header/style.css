@@ -58,3 +58,30 @@
   width: 10rem;
   transition: background-color 0.3s ease;
 }
+
+/*880*/
+@media (max-width: 55em) {
+  .menu-item.connectet-menu {
+    display: none;
+  }
+}
+
+/*480*/
+@media (max-width: 30em) {
+  .logo {
+    font-size: 2.7rem;
+  }
+}
+
+/*344*/
+@media (max-width: 21.5em) {
+  .main-page-header {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .logo {
+    font-size: 2.2rem;
+  }
+}

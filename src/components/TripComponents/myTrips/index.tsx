@@ -48,7 +48,7 @@ const MyTrips = () => {
   return (
     <>
       <Header />
-      <section className="trips-section">
+      <section className="trips-section section">
         {loading ? (
           <div className="main-loader-section">
             <LoadingDots />

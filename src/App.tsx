@@ -5,7 +5,6 @@ import Login from "./components/Forms/Login";
 import Register from "./components/Forms/Register";
 import HomePage from "./components/HomePage";
 import Trips from "./components/TripComponents/Trips";
-import "./App.css";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TripDetails from "./components/TripComponents/TripDetails";
 import { AuthProvider } from "./Context/AuthContext";
@@ -15,6 +14,8 @@ import AddTrip from "./components/AddTrip";
 import CreateTrip from "./components/CreateTrip";
 import PersonalArea from "./components/Forms/PersonalArea";
 import AdvancedSearch from "./components/AdvancedSearch";
+import "./App.css";
+import "./index.css";
 
 function App() {
   return (

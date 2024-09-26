@@ -43,3 +43,27 @@
     width: 100%;
   }
 }
+
+/*1024*/
+@media (max-width: 64em) {
+  .main-page-section {
+    padding-top: 34rem;
+  }
+}
+
+/*640*/
+@media (max-width: 40em) {
+  .main-title {
+    font-size: 4rem;
+  }
+}
+
+/*480*/
+@media (max-width: 30em) {
+  .main-page-section {
+    padding-top: 39rem;
+  }
+  .main-title {
+    font-size: 3rem;
+  }
+}

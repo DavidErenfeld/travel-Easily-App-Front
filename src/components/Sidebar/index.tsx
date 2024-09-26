@@ -42,10 +42,6 @@ const Sidebar = ({
         className={`sidebar-section ${isOpen ? "open" : ""}`}
         onClick={sidebarClick}
       >
-        <div className="close-sidebar">
-          <CloseIcon color="#000" onClose={toggleSidebar} />
-        </div>
-
         <img
           className="user-sidebar-img"
           src={profileImg}
@@ -75,14 +71,17 @@ const Sidebar = ({
           <h1 className="sidebar-item">Add trip</h1>
         </Link>
 
-        {/* אם אינך צריך את הקישור לדף הבית, תוכל להסיר אותו */}
-        {/* <Link to="/">
+        <Link to="/">
           <h1 className="sidebar-item">Home</h1>
-        </Link> */}
+        </Link>
 
         <h1 className="sidebar-item" onClick={handleLogout}>
           Logout
         </h1>
+
+        <div className="close-sidebar">
+          <CloseIcon color="#000" onClose={toggleSidebar} />
+        </div>
       </section>
     </>
   );

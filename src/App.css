@@ -8,6 +8,7 @@
   justify-content: center;
   gap: 1rem;
 }
+
 .flex-center-column {
   display: flex;
   align-items: center;
@@ -62,7 +63,7 @@
   color: #fff;
   border: none;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
   transition: all 0.3s;
 }
 
@@ -80,7 +81,7 @@
   color: #fff;
   border: none;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 500;
   transition: all 0.3s;
 }
 
@@ -88,13 +89,19 @@
   padding: 6px;
   width: 10rem;
   border-radius: 6px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .btn-m:hover,
 .btn-l:hover {
   background: #bae6fd;
   transition: all 0.4s;
   color: #232d59;
+}
+
+.mode-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1.4rem;
 }
 
 /*************************
@@ -136,12 +143,12 @@ input:focus {
 }
 
 .add-img-icon {
-  stroke: #6edf23;
+  stroke: #fff;
   transition: all 0.2s;
 }
 
 .add-img-icon:hover {
-  stroke: #fff;
+  stroke: #4bb543;
 }
 
 .overlay {
@@ -158,9 +165,27 @@ input:focus {
   display: none;
 }
 
-/*784*/
-@media (max-width: 49em) {
-  html {
-    font-size: 52%;
+/*640*/
+@media (max-width: 40em) {
+  .mode-btn {
+    position: absolute;
+    top: -4.6rem;
+    left: 0;
+  }
+}
+
+/*480*/
+@media (max-width: 30em) {
+  .btn-m,
+  .btn-l {
+    width: 14rem;
+    border-radius: 7px;
+  }
+
+  .btn-el {
+    font-size: 1.8rem;
+    padding: 9px 0px;
+    width: 15rem;
+    border-radius: 7px;
   }
 }

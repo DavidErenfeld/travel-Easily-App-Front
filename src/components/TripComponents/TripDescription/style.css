@@ -12,3 +12,10 @@
   font-size: 2rem;
   color: #00a8ff;
 }
+
+/*480*/
+@media (max-width: 30em) {
+  .trip-description-section {
+    padding-top: 2rem;
+  }
+}

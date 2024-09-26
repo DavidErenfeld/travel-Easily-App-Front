@@ -8,7 +8,7 @@
   gap: 2rem;
   border: solid 1px #00a8ff;
   padding: 2rem;
-  border-radius: 9px;
+  border-radius: 4px;
   margin-bottom: 9rem;
 }
 
@@ -114,4 +114,12 @@
 
 .like-icon.blue {
   fill: #00a8ff;
+}
+
+/*480*/
+@media (max-width: 30em) {
+  .trip-card-profile {
+    top: -5.6rem;
+    left: -1.1rem;
+  }
 }
