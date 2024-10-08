@@ -108,7 +108,7 @@
 }
 
 .like-icon.white {
-  background-color: #232d59;
+  /* background-color: #232d59; */
   fill: #fff;
 }
 
@@ -121,5 +121,9 @@
   .trip-card-profile {
     top: -5.6rem;
     left: -1.1rem;
+    background-color: #0d4e79;
+  }
+  .icons {
+    background-color: #0d4e79;
   }
 }

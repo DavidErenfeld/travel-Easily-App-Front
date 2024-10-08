@@ -1,6 +1,7 @@
 import CloseIcon from "../../UIComponents/Icons/Close";
 import tripsService from "../../../services/tripsService";
 import "./style.css";
+import { MdDelete } from "react-icons/md";
 
 interface Comment {
   _id?: string;
@@ -57,12 +58,18 @@ const ViewComment = ({
               <p className="comment-date">{comment.date}</p>
             </div>
             {comment.ownerId === loggedUserId && (
-              <button
-                className="delete-comment-btn"
+              // <button
+              //   className="delete-comment-btn"
+              //   onClick={() => handleDeleteComment(comment._id!)}
+              // >
+              //   Delete
+              // </button>
+              // <div className="delete-comment-icon">
+              <MdDelete
                 onClick={() => handleDeleteComment(comment._id!)}
-              >
-                Delete
-              </button>
+                className="delete-comment-icon"
+              />
+              // </div>
             )}
           </div>
         </div>

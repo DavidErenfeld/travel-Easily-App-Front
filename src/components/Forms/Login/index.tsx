@@ -103,11 +103,11 @@ function Login() {
       ) : (
         <div className="buttons-box flex-center-column-gap">
           <button type="submit" className="btn-l">
-            login
+            Sign in
           </button>
           <p>or</p>
           <Link to="/register">
-            <button className="btn-l">register</button>
+            <button className="btn-l">Sign un</button>
           </Link>
         </div>
       )}

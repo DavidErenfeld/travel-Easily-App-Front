@@ -29,7 +29,7 @@ const TripCard = ({ trip }: TripCardProps) => {
 
   const handleCommentsClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate(`/trip/${trip._id}?viewMode=viewComments`);
+    navigate(`/searchTrip/trip/${trip._id}`);
   };
 
   return (

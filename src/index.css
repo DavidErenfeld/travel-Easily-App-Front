@@ -86,8 +86,17 @@ a {
     font-size: 50%;
   }
 
+  body {
+    background-color: #0d4e79;
+    height: 90vh;
+  }
+
   .section {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .main-section {
+    padding-top: 23rem;
   }
 }

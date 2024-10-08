@@ -20,7 +20,7 @@ const schema = z.object({
   userName: z
     .string()
     .min(2, "Name must be longer than 2 characters")
-    .max(20, "Name must be less than 20 characters"),
+    .max(15, "Name must be less than 15 characters"),
   email: z.string().email("Please enter a valid email address"),
   password: z
     .string()

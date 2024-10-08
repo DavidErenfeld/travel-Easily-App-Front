@@ -42,12 +42,12 @@ const Sidebar = ({
         className={`sidebar-section ${isOpen ? "open" : ""}`}
         onClick={sidebarClick}
       >
-        <img
-          className="user-sidebar-img"
-          src={profileImg}
-          alt="Profile"
-          onClick={handleProfileClick}
-        />
+        <div className="user-sidebar-container" onClick={handleProfileClick}>
+          <div className="sidebar-user-name">
+            <p>{localStorage.getItem("userName")}</p>
+          </div>
+          <img className="user-sidebar-img" src={profileImg} alt="Profile" />
+        </div>
 
         <Link to="/profile">
           <h1 className="sidebar-item">Profile</h1>

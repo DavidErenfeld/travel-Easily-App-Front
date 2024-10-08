@@ -68,6 +68,10 @@
 
 /*480*/
 @media (max-width: 30em) {
+  .main-page-header {
+    background-color: #0d4e79;
+  }
+
   .logo {
     font-size: 2.7rem;
   }

@@ -67,9 +67,9 @@ const AdvancedSearch: React.FC = () => {
   const renderSearchResults = () => {
     return searchResults.length > 0 ? (
       searchResults.map((trip) => (
-        <article className="trip-list-item" key={trip._id}>
+        <section className="trip-list-item" key={trip._id}>
           <TripCard trip={trip} />
-        </article>
+        </section>
       ))
     ) : (
       <p>No trips found for the specified criteria.</p>
@@ -79,22 +79,27 @@ const AdvancedSearch: React.FC = () => {
   return (
     <>
       <Header />
-      <section className="main-section">
+      <>
         {isSearchSelected ? (
           <section className="trips-section">
             {searchResults.length === 0 ? (
-              <div className="massege-section">
-                <p>No trips found.</p>
+              <div className="no-trips-container">
+                <p className="no-trips-message">No trips found.</p>
                 <button className="btn-m" onClick={resetSearch}>
                   Try again
                 </button>
               </div>
             ) : (
-              renderSearchResults()
+              <section className="trips-section section">
+                {/* <button className="btn-m try-again" onClick={resetSearch}>
+                  Try again
+                </button> */}
+                {renderSearchResults()}
+              </section>
             )}
           </section>
         ) : (
-          <div className="profile-container">
+          <div className="profile-container advanced-search-section">
             <div className="form-close-icon">
               <CloseIcon color="#fff" />
             </div>
@@ -174,7 +179,7 @@ const AdvancedSearch: React.FC = () => {
             </button>
           </div>
         )}
-      </section>
+      </>
     </>
   );
 };

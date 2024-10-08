@@ -16,3 +16,17 @@
   outline: none;
   border-radius: 9px;
 }
+
+/*640*/
+@media (max-width: 40em) {
+  .comment-input {
+    width: 90%;
+  }
+}
+
+/*480*/
+@media (max-width: 30em) {
+  .comment-input {
+    width: 85%;
+  }
+}

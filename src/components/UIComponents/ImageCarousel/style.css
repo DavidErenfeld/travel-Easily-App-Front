@@ -46,7 +46,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 1000;
+  z-index: 14;
   cursor: pointer;
   font-size: 24px;
   padding: 10px;

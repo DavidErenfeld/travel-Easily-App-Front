@@ -25,6 +25,8 @@ const TripDetails = () => {
   const loggedUserName = localStorage.getItem("userName") || "";
   const loggedUserId = localStorage.getItem("loggedUserId") || "";
   const isThisTheOwner = loggedUserId !== trip?.owner?._id ? false : true;
+
+  const [mMargin, setMMargin] = useState("");
   useEffect(() => {
     if (searchParams.get("viewMode") === "viewComments") {
       setViewMode("viewComments");
@@ -36,6 +38,9 @@ const TripDetails = () => {
       const data = await tripsService.getByTripId(id!);
       setTrip(data);
       console.log(trip);
+      data.tripPhotos && data.tripPhotos?.length > 0
+        ? setMMargin("")
+        : setMMargin("m-margin");
     } catch (err) {
       console.error("Failed to load trip:", err);
     } finally {
@@ -119,7 +124,7 @@ const TripDetails = () => {
   return (
     <>
       <Header />
-      {trip?.tripPhotos && !updateMode && (
+      {trip?.tripPhotos?.length > 0 && !updateMode && (
         <div className="imeges-section">
           <ImageCarousel
             images={imageObjects}
@@ -130,7 +135,9 @@ const TripDetails = () => {
       )}
       <section className="flex-center-column-large-gap section">
         {!updateMode ? (
-          <div className="main-card-section flex-center-column-large-gap">
+          <div
+            className={`${mMargin} main-card-section flex-center-column-large-gap`}
+          >
             {trip && <TripHeader trip={trip} />}
             <section className="details-container flex-center-column">
               {loggedUserId === trip?.owner?._id && (

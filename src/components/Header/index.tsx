@@ -87,17 +87,17 @@ const Header = () => {
               </div>
             ) : (
               <div className="menu">
-                <Link to="/">
+                {/* <Link to="/">
                   <h1 className="menu-item">Home</h1>
-                </Link>
+                </Link> */}
 
                 <Link to="/login">
-                  <h1 className="menu-item">Login</h1>
+                  <h1 className="menu-item">Sign in</h1>
                 </Link>
 
-                <Link to="/register">
+                {/* <Link to="/register">
                   <h1 className="menu-item">Register</h1>
-                </Link>
+                </Link> */}
               </div>
             )}
           </div>

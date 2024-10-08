@@ -4,9 +4,13 @@
   padding-top: 7rem;
   margin-top: 3rem;
   margin-bottom: 3rem;
-  background-color: #344aab;
+  background-color: #032233;
   border-radius: 9px;
   width: 100%;
+}
+
+.m-margin {
+  margin-top: 14rem;
 }
 
 .imeges-section {
@@ -16,7 +20,7 @@
 .main-card-section > .tags {
   top: 1rem;
   right: 0rem;
-  background-color: #344aab;
+  background-color: #032233;
 }
 
 .images-container {
@@ -65,9 +69,12 @@
     padding-top: 2rem;
     margin-top: 3rem;
     margin-bottom: 3rem;
-    background-color: #344aab;
     border-radius: 4px;
     width: 100%;
+  }
+
+  .m-margin {
+    margin-top: 18rem;
   }
 }
 
@@ -78,7 +85,9 @@
     padding: 0.2rem;
     padding-top: 3rem;
     padding-bottom: 3rem;
+    background-color: #042d43;
   }
+
   .main-card-section .tags {
     right: 1rem;
   }
