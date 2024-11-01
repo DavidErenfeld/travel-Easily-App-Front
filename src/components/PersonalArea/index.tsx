@@ -70,11 +70,10 @@ function PersonalArea() {
     try {
       setLoading(true);
       if (imgFile) {
-        if (imgUrl) {
-          await deletePhotoFromCloudinary(imgUrl);
-          console.log(`Previous image ${imgUrl} deleted successfully.`);
-        }
-
+        // if (imgUrl) {
+        //   await deletePhotoFromCloudinary(imgUrl);
+        //   console.log(`Previous image ${imgUrl} deleted successfully.`);
+        // }
         imgUrl = (await handleUploadImage(imgFile)) || "";
       }
 
