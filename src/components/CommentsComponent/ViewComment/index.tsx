@@ -1,7 +1,7 @@
 import CloseIcon from "../../UIComponents/Icons/Close";
 import tripsService from "../../../services/tripsService";
-import "./style.css";
 import { MdDelete } from "react-icons/md";
+import "./style.css";
 
 interface Comment {
   _id?: string;

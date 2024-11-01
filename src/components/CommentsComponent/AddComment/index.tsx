@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react";
 import "./style.css";
-import useSocket from "../../../Hooks/useSocket";
 
 interface AddCommentProps {
   onSendComment: (comment: string) => void;

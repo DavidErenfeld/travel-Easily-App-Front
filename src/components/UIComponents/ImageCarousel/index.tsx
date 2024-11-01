@@ -1,9 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { MdDelete } from "react-icons/md";
+import LoadingDots from "../../UIComponents/Loader";
 import "./style.css";
-import PopUp from "../../CommentsComponent/PopUp";
-import LoadingDots from "../../UIComponents/Loader"; // ייבוא רכיב הטעינה
-import { EMPTY_PATH } from "zod";
+import PopUp from "../PopUp";
 
 export interface Images {
   src: string;

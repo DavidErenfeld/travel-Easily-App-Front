@@ -1,18 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
-import { useNavigate } from "react-router-dom";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import AddImgsIcon from "../../UIComponents/Icons/AddImage";
 import { uploadPhoto } from "../../../services/fileService";
 import { googleSignin, registerUser } from "../../../services/registerService";
-import axios from "axios";
 import LoadingDots from "../../UIComponents/Loader";
-import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import { useAuth } from "../../../Context/AuthContext";
 import "./style.css";
 import "../formeStyle.css";
-import { useAuth } from "../../../Context/AuthContext";
 
 const defaultImage = "/images/user.png";
 

@@ -10,12 +10,12 @@ import TripDetails from "./components/TripComponents/TripDetails";
 import { AuthProvider } from "./Context/AuthContext";
 import { TripProvider } from "./Context/TripContext";
 import MyTrips from "./components/TripComponents/myTrips";
-import AddTrip from "./components/AddTrip";
-import CreateTrip from "./components/CreateTrip";
-import PersonalArea from "./components/Forms/PersonalArea";
 import AdvancedSearch from "./components/AdvancedSearch";
 import "./App.css";
 import "./index.css";
+import PersonalArea from "./components/PersonalArea";
+import TripForm from "./components/TripComponents/TripForm";
+import CreateTrip from "./components/TripComponents/CreateTrip";
 
 function App() {
   return (
@@ -36,7 +36,7 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
               <Route path="/myTrips" element={<MyTrips />} />
-              <Route path="/AddTrip" element={<AddTrip />} />
+              <Route path="/AddTrip" element={<TripForm />} />
               <Route path="/create-trip" element={<CreateTrip />} />
             </Route>
           </Routes>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./style.css";
 import axios from "axios";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import Header from "../../Header";
+import "./style.css";
 
 const Profile: React.FC = () => {
   const [selectedDateOfBirth, setSelectedDateOfBirth] = useState("");
