@@ -1,30 +1,51 @@
-# React + TypeScript + Vite
+# Travel Easily - Share Your Journey
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+Travel Easily is a community-based travel sharing application where users can register, upload a profile picture, and start posting detailed travel routes. Each post can include a number of days, country, type of trip, type of traveler, daily activities, and images from the trip.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- User authentication (including Google sign-in).
+- Create posts with detailed descriptions and images of travel routes.
+- View posts from all users or only your own posts.
+- Comment on posts and like them, with real-time updates via Socket.IO.
+- Edit and delete posts and images.
+- Update profile picture and delete user account entirely.
+- Images are stored using Cloudinary.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Technologies
 
-- Configure the top-level `parserOptions` property like this:
+- **React (TypeScript)** for frontend development.
+- **CSS Modules** for modular and managed styling.
+- **React Router** for page navigation.
+- **Context API** for global state management.
+- **Socket.IO** for real-time communications.
+- **Cloudinary** for image storage.
+- **Netlify** for hosting the application.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
+## Custom Hooks
+
+- `useImageUpload` - A hook for uploading images to Cloudinary.
+- `useSocket` - Manages Socket.IO communications.
+- `useTripCard` - Manages the state of travel cards.
+- `useTripData` - Fetches and updates data on travels.
+
+## Project Setup
+
+To run the project in a development environment:
+
+```bash
+npm install     # Install dependencies
+npm run dev     # Start the development server
+
+
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Live Site
+
+The application is live at [Travel Easily](https://travel-easily-app.netlify.app/register) .
+
+## Author
+
+David Erenfeld
