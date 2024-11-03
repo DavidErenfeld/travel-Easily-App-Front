@@ -20,7 +20,7 @@ const useTripCard = (trip: ITrips) => {
 
         setIsLiked(liked);
         if (updatedTrip.likes) {
-          setNumOfLikes(updatedTrip.likes.length);
+          setNumOfLikes(updatedTrip.numOfLikes);
         }
         setNumOfComments(updatedTrip.numOfComments);
       } catch (error) {
@@ -34,7 +34,7 @@ const useTripCard = (trip: ITrips) => {
   // האזנה לאירועים דרך הסוקט עבור לייקים ותגובות
   useSocket("likeAdded", (updatedTrip) => {
     if (updatedTrip._id === trip._id) {
-      setNumOfLikes(updatedTrip.likes?.length);
+      setNumOfLikes(updatedTrip.numOfLikes);
     }
   });
 
@@ -55,7 +55,7 @@ const useTripCard = (trip: ITrips) => {
 
       setIsLiked(liked);
       if (updatedTrip.likes) {
-        setNumOfLikes(updatedTrip.likes.length);
+        setNumOfLikes(updatedTrip.numOfLikes);
       }
     } catch (error) {
       console.error("Failed to toggle like:", error);
