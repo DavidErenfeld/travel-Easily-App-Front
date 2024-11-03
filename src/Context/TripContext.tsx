@@ -30,9 +30,33 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
       setTrips((prevTrips) => [...prevTrips, newTrip]);
     });
 
+    // האזנה לאירוע likeRemoved כדי לעדכן את מספר הלייקים בטיול ספציפי
+    socket.on("likeRemoved", (updatedTrip) => {
+      setTrips((prevTrips) =>
+        prevTrips.map((trip) =>
+          trip._id === updatedTrip.tripId
+            ? { ...trip, numOfLikes: updatedTrip.numOfLikes }
+            : trip
+        )
+      );
+    });
+
+    // האזנה לאירוע likeAdded כדי לעדכן את מספר הלייקים בטיול ספציפי
+    socket.on("likeAdded", (updatedTrip) => {
+      setTrips((prevTrips) =>
+        prevTrips.map((trip) =>
+          trip._id === updatedTrip.tripId
+            ? { ...trip, numOfLikes: updatedTrip.numOfLikes }
+            : trip
+        )
+      );
+    });
+
     return () => {
-      // ניקוי ההאזנה בעת פריקת הקומפוננטה
+      // ניקוי כל ההאזנות בעת פריקת הקומפוננטה
       socket.off("tripPosted");
+      socket.off("likeRemoved");
+      socket.off("likeAdded");
     };
   }, []);
 

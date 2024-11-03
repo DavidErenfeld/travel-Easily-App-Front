@@ -29,7 +29,7 @@ const useTripCard = (trip: ITrips) => {
     };
 
     fetchLikeStatus();
-  }, [trip._id]);
+  }, [trip, trip._id]);
 
   // האזנה לאירועים דרך הסוקט עבור לייקים ותגובות
   useSocket("likeAdded", (updatedTrip) => {
