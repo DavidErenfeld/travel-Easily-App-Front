@@ -4,22 +4,14 @@ import useSocket from "./useSocket";
 
 const useTripCard = (trip: ITrips) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [numOfLikes, setNumOfLikes] = useState(trip.likes?.length);
+  const [numOfLikes, setNumOfLikes] = useState(trip.numOfLikes);
   const [numOfComments, setNumOfComments] = useState(trip.numOfComments);
 
   const { send } = useSocket();
 
   useEffect(() => {
     const fetchLikeStatus = async () => {
-      const userId = localStorage.getItem("loggedUserId");
-      const savedTripLikes = localStorage.getItem(`tripLikes_${trip._id}`);
-
-      if (savedTripLikes) {
-        const { liked, likesCount } = JSON.parse(savedTripLikes);
-        setIsLiked(liked);
-        setNumOfLikes(likesCount);
-        return;
-      }
+      const userId = localStorage.getItem("loggedUserId"); // אם יש צורך ב-ID המשתמש, נשקול לשמור אותו ב-Context או Redux store
 
       try {
         const updatedTrip = await tripsService.getByTripId(trip._id!);
@@ -27,13 +19,10 @@ const useTripCard = (trip: ITrips) => {
           updatedTrip.likes?.some((like) => like.owner === userId) || false;
 
         setIsLiked(liked);
-        updatedTrip.likes?.length && setNumOfLikes(updatedTrip.likes.length);
+        if (updatedTrip.likes) {
+          setNumOfLikes(updatedTrip.likes.length);
+        }
         setNumOfComments(updatedTrip.numOfComments);
-
-        localStorage.setItem(
-          `tripLikes_${trip._id}`,
-          JSON.stringify({ liked, likesCount: updatedTrip.numOfLikes })
-        );
       } catch (error) {
         console.error("Failed to fetch like status:", error);
       }
@@ -44,7 +33,6 @@ const useTripCard = (trip: ITrips) => {
 
   // האזנה לאירועים דרך הסוקט עבור לייקים ותגובות
   useSocket("likeAdded", (updatedTrip) => {
-    console.log("Received likeAdded event:", updatedTrip); // לוג לוודא שהאירוע מתקבל
     if (updatedTrip._id === trip._id) {
       setNumOfLikes(updatedTrip.likes?.length);
     }
@@ -60,19 +48,15 @@ const useTripCard = (trip: ITrips) => {
     try {
       await tripsService.addLike(trip._id!);
       const updatedTrip = await tripsService.getByTripId(trip._id!);
-      send("addLike", updatedTrip); // שינוי לשליחת addLike במקום likeAdded
+      send("addLike", updatedTrip);
+      const userId = localStorage.getItem("loggedUserId"); // גם כאן נשקול לאחסן את ה-ID במקום מרכזי יותר
       const liked =
-        updatedTrip.likes?.some(
-          (like) => like.owner === localStorage.getItem("loggedUserId")
-        ) || false;
+        updatedTrip.likes?.some((like) => like.owner === userId) || false;
 
       setIsLiked(liked);
-      updatedTrip.likes && setNumOfLikes(updatedTrip.likes.length);
-
-      localStorage.setItem(
-        `tripLikes_${trip._id}`,
-        JSON.stringify({ liked, likesCount: updatedTrip.likes?.length })
-      );
+      if (updatedTrip.likes) {
+        setNumOfLikes(updatedTrip.likes.length);
+      }
     } catch (error) {
       console.error("Failed to toggle like:", error);
     }
