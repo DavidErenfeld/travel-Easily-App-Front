@@ -44,12 +44,6 @@ const TripDetails = () => {
       const data = await tripsService.getByTripId(id!);
       setTrip(data);
 
-      const updatedTrips = [
-        ...JSON.parse(localStorage.getItem("trips") || "[]"),
-        data,
-      ];
-      localStorage.setItem("trips", JSON.stringify(updatedTrips));
-
       data.tripPhotos && data.tripPhotos?.length > 0
         ? setMMargin("")
         : setMMargin("m-margin");
@@ -62,21 +56,6 @@ const TripDetails = () => {
 
   const loadTrip = () => {
     setLoading(true);
-
-    const savedTrips = localStorage.getItem("trips");
-    if (savedTrips) {
-      const trips: ITrips[] = JSON.parse(savedTrips);
-      const foundTrip = trips.find((t) => t._id === id);
-      if (foundTrip) {
-        setTrip(foundTrip);
-        setMMargin(
-          foundTrip.tripPhotos && foundTrip.tripPhotos.length > 0
-            ? ""
-            : "m-margin"
-        );
-      }
-    }
-
     loadTripFromServer();
   };
 
