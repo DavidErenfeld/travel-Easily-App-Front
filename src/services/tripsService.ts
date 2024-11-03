@@ -167,12 +167,12 @@ const searchTripsByParams = (params: Record<string, string | number>) => {
       .get("/trips//search/parameters", {
         params,
         headers: {
-          Authorization: `JWT ${localStorage.getItem("accessToken")}`, // הוספת הטוקן ל-Authorization header
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
         },
       })
       .then((response) => {
         console.log(response);
-        resolve(response.data.data); // assuming that response.data contains the results
+        resolve(response.data.data);
       })
       .catch((error) => {
         console.log("Error searching trips:", error);

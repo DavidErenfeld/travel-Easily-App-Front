@@ -11,11 +11,11 @@ import { AuthProvider } from "./Context/AuthContext";
 import { TripProvider } from "./Context/TripContext";
 import MyTrips from "./components/TripComponents/myTrips";
 import AdvancedSearch from "./components/AdvancedSearch";
-import "./App.css";
-import "./index.css";
 import PersonalArea from "./components/PersonalArea";
 import TripForm from "./components/TripComponents/TripForm";
 import CreateTrip from "./components/TripComponents/CreateTrip";
+import "./App.css";
+import "./index.css";
 
 function App() {
   return (
