@@ -9,7 +9,6 @@ import TripHeader from "../TripHeader/index.tsx";
 import "./style.css";
 import Header from "../../Header/index.tsx";
 import ImageCarousel from "../../UIComponents/ImageCarousel/index.tsx";
-import { deletePhotoFromCloudinary } from "../../../services/fileService.ts";
 import LoadingDots from "../../UIComponents/Loader";
 import io from "socket.io-client";
 
@@ -208,7 +207,7 @@ const TripDetails = () => {
                 )}
                 {viewMode === "viewComments" && trip && (
                   <>
-                    {trip._id && (
+                    {trip._id && trip.comments.length > 0 && (
                       <ViewComment
                         comments={trip.comments}
                         closeComments={() => setViewMode("main")}

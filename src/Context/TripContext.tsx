@@ -41,26 +41,13 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
       const { req } = tripsService.getAllTrips();
       const response = await req;
       setTrips(response.data);
-      localStorage.setItem("trips", JSON.stringify(response.data));
-      localStorage.setItem("tripsTimestamp", Date.now().toString());
     } catch (error) {
       console.error("Failed to fetch trips:", error);
     }
   };
 
   useEffect(() => {
-    const savedTrips = localStorage.getItem("trips");
-    const savedTimestamp = parseInt(
-      localStorage.getItem("tripsTimestamp") || "0"
-    );
-    const timeElapsed = Date.now() - savedTimestamp;
-
-    // בדיקה אם הנתונים שמורים במטמון פחות משעה
-    if (timeElapsed < 3600000) {
-      savedTrips && setTrips(JSON.parse(savedTrips));
-    } else {
-      refreshTrips();
-    }
+    refreshTrips();
   }, []);
 
   return (
