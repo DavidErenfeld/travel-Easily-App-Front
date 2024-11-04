@@ -9,7 +9,7 @@
   border: solid 1px #00a8ff;
   padding: 2rem;
   border-radius: 4px;
-  margin-bottom: 9.6rem;
+  margin-bottom: 9.8rem;
 }
 
 .trip-card-profile {
@@ -142,6 +142,9 @@
 
 /*480*/
 @media (max-width: 30em) {
+  .trip-card {
+    margin-bottom: 12rem;
+  }
   .trip-card-profile {
     top: -5.6rem;
     left: -1.1rem;

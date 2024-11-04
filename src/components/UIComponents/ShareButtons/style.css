@@ -50,12 +50,12 @@
 }
 
 .show {
-  animation: fadeInLeft 1s forwards;
+  animation: fadeInLeft 0.7s forwards;
   visibility: visible;
 }
 
 .hide {
-  animation: fadeOutRight 1s forwards;
+  animation: fadeOutRight 0.7s forwards;
 }
 
 .hidden {
@@ -73,8 +73,6 @@
   }
 
   .show {
-    animation: fadeInLeft 1s forwards;
-    visibility: visible;
     /* border: solid 1px #00a8ff; */
     /* border-top: solid 1px #00a8ff; */
     border-bottom: solid 1px #4bb543;
