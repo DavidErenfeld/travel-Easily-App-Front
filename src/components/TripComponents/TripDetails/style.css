@@ -61,6 +61,15 @@
   color: #fff;
 }
 
+.trip-details-share-buttons .share-buttons {
+  position: absolute;
+  top: 11.3rem;
+  right: 1.8rem;
+  font-size: 2.6rem;
+  background-color: #082f49;
+  border-radius: 7px;
+}
+
 /*640*/
 @media (max-width: 40em) {
   .main-card-section {
@@ -90,5 +99,11 @@
 
   .main-card-section .tags {
     right: 1rem;
+  }
+
+  .trip-details-share-buttons .share-buttons {
+    background-color: #0d4e79;
+    top: 15.4rem;
+    right: -0.4rem;
   }
 }

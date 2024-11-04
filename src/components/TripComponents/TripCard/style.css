@@ -93,10 +93,21 @@
   padding-right: 1rem;
 }
 
+.trip-card-share-buttons {
+  position: absolute;
+  top: -0.4rem;
+  left: 17.6rem;
+}
+
 .icons svg {
   width: 3rem;
   height: 3rem;
   cursor: pointer;
+}
+
+.icons svg.share-icon {
+  width: 2.8rem;
+  height: 2.8rem;
 }
 
 .icons-area {

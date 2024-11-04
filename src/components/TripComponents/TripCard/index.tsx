@@ -16,7 +16,7 @@ interface TripCardProps {
 const TripCard = ({ trip }: TripCardProps) => {
   const { isLiked, numOfLikes, numOfComments, toggleLike } = useTripCard(trip);
   const [isShareClicked, setIsShareClicked] = useState(false);
-  const [isExiting, setIsExiting] = useState(false); // מצב חדש ליציאה
+  const [isExiting, setIsExiting] = useState(false);
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const likeColor = isLiked ? "blue" : "white";
@@ -75,14 +75,16 @@ const TripCard = ({ trip }: TripCardProps) => {
           <span>{numOfComments}</span>
           <FaRegComment />
         </div>
-        <FaShareAlt className="icon" onClick={handleShareClick} />
+        <FaShareAlt className="share-icon" onClick={handleShareClick} />
 
         {isShareClicked && (
-          <ShareButtons
-            url={`https://travel-easily-app.netlify.app/searchTrip/trip/${trip._id}`}
-            text={`Amazing trip to ${trip.country}! Join me on this adventure!`}
-            className={isExiting ? "hide" : "show"}
-          />
+          <div className="trip-card-share-buttons">
+            <ShareButtons
+              url={`https://travel-easily-app.netlify.app/searchTrip/trip/${trip._id}`}
+              text={`Amazing trip to ${trip.country}! Join me on this adventure!`}
+              className={isExiting ? "hide" : "show"}
+            />
+          </div>
         )}
       </div>
     </section>
