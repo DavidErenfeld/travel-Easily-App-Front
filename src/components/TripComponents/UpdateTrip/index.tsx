@@ -6,8 +6,8 @@ import ImageCarousel from "../../UIComponents/ImageCarousel";
 import AddImgs from "../../UIComponents/Icons/AddImage";
 import LoadingDots from "../../UIComponents/Loader";
 import useImageUpload from "../../../Hooks/useImageUpload";
-import "./style.css";
 import PopUp from "../../UIComponents/PopUp";
+import "./style.css";
 
 interface TripDay {
   dayNum: number;

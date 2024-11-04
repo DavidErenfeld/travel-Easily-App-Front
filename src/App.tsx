@@ -14,9 +14,11 @@ import AdvancedSearch from "./components/AdvancedSearch";
 import PersonalArea from "./components/PersonalArea";
 import TripForm from "./components/TripComponents/TripForm";
 import CreateTrip from "./components/TripComponents/CreateTrip";
+import ForgotPassword from "./components/Forms/ForgotPassword";
+import ResetPassword from "./components/Forms/ResetPassword";
+import FavoriteTrips from "./components/TripComponents/FavoriteTrips";
 import "./App.css";
 import "./index.css";
-import FavoriteTrips from "./components/TripComponents/FavoriteTrips";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgotPassword" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/searchTrip" element={<Trips />} />
             <Route
               path="/searchTrip/advancedSearch"

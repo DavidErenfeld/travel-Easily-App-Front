@@ -127,7 +127,7 @@ function Register() {
       <div className="form-close-icon">
         <CloseIcon color="#fff" />
       </div>
-      <p className="form-title">Register</p>
+      <p className="form-title">Sign up</p>
 
       <div className="form-image-profile">
         <div

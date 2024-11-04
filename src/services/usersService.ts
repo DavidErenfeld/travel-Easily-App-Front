@@ -83,6 +83,44 @@ export const updateUser = (userId: string, user: IUpdateUser) => {
   });
 };
 
+// פונקציה לשליחת בקשת שחזור סיסמה
+export const requestPasswordReset = (email: string) => {
+  return new Promise<void>((resolve, reject) => {
+    console.log("Requesting password reset...");
+
+    apiClient
+      .post("/users/request-password-reset", { email })
+      .then(() => {
+        console.log("Password reset link sent successfully.");
+        resolve();
+      })
+      .catch((error) => {
+        console.error("Error sending password reset link:", error);
+        reject(error);
+      });
+  });
+};
+
+// authService.ts
+
+// פונקציה לאיפוס סיסמה
+export const resetPassword = (token: string, newPassword: string) => {
+  return new Promise<void>((resolve, reject) => {
+    console.log("Resetting password...");
+
+    apiClient
+      .post("/users/reset-password", { token, newPassword })
+      .then(() => {
+        console.log("Password reset successfully.");
+        resolve();
+      })
+      .catch((error) => {
+        console.error("Error resetting password:", error);
+        reject(error);
+      });
+  });
+};
+
 // פונקציה למחיקת משתמש
 export const deleteUser = (userId: string) => {
   return new Promise<void>(async (resolve, reject) => {

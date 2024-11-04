@@ -66,7 +66,7 @@ function Login() {
       <div className="form-close-icon">
         <CloseIcon color="#fff" />
       </div>
-      <p className="form-title">login</p>
+      <p className="form-title">Sign in</p>
 
       <div className="form-image-profile">
         {imgSrc && <img src={imgSrc} alt="Preview" className="register-img" />}
@@ -107,10 +107,13 @@ function Login() {
           </button>
           <p>or</p>
           <Link to="/register">
-            <button className="btn-l">Sign un</button>
+            <button className="btn-l">Sign up</button>
           </Link>
         </div>
       )}
+      <Link to={`/forgotPassword`}>
+        <p className="forgot-password">Forgot password</p>
+      </Link>
     </form>
   );
 }

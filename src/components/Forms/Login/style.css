@@ -1,3 +1,16 @@
 .buttons-box p {
   font-size: 1.6rem;
 }
+
+.forgot-password {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.forgot-password:hover {
+  color: #22a6fd;
+}
