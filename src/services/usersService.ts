@@ -7,6 +7,55 @@ export interface IUpdateUser {
   imgUrl?: string;
 }
 
+// פונקציה להוספת טיול למועדפים
+export const addFavoriteTrip = (tripId: string) => {
+  return new Promise<void>((resolve, reject) => {
+    console.log("Adding trip to favorites...");
+
+    apiClient
+      .post(
+        `/users/favorites/${tripId}`,
+        {},
+        {
+          headers: {
+            Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      )
+      .then(() => {
+        console.log("Trip added to favorites successfully.");
+        resolve();
+      })
+      .catch((error) => {
+        console.error("Error adding trip to favorites:", error);
+        reject(error);
+      });
+  });
+};
+
+// פונקציה להסרת טיול מהמועדפים
+export const removeFavoriteTrip = (tripId: string) => {
+  return new Promise<void>((resolve, reject) => {
+    console.log("Removing trip from favorites...");
+
+    apiClient
+      .delete(`/users/favorites/${tripId}`, {
+        headers: {
+          Authorization: `JWT ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then(() => {
+        console.log("Trip removed from favorites successfully.");
+        resolve();
+      })
+      .catch((error) => {
+        console.error("Error removing trip from favorites:", error);
+        reject(error);
+      });
+  });
+};
+
+// פונקציה לעדכון משתמש
 export const updateUser = (userId: string, user: IUpdateUser) => {
   return new Promise<IUpdateUser>((resolve, reject) => {
     console.log("Update user....");
@@ -34,6 +83,7 @@ export const updateUser = (userId: string, user: IUpdateUser) => {
   });
 };
 
+// פונקציה למחיקת משתמש
 export const deleteUser = (userId: string) => {
   return new Promise<void>(async (resolve, reject) => {
     console.log("Delete User...");
@@ -55,13 +105,11 @@ export const deleteUser = (userId: string) => {
       console.log("User deleted successfully");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      console.log("localStorage removt = usersService line 58----------------");
       localStorage.removeItem("loggedUserId");
       localStorage.removeItem("imgUrl");
       localStorage.removeItem("userName");
       resolve();
     } catch (error: any) {
-      // הצגת השגיאה בצורה מפורטת יותר
       console.error(
         "Error deleting user:",
         error?.response?.data || error.message || error

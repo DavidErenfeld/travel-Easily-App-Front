@@ -181,6 +181,46 @@ const searchTripsByParams = (params: Record<string, string | number>) => {
   });
 };
 
+const getFavoriteTrips = (userId: string) => {
+  return new Promise<ITrips[]>((resolve, reject) => {
+    console.log("Fetching favorite trips...");
+    apiClient
+      .get(`/trips/favorites/${userId}`, {
+        headers: {
+          Authorization: `jwt ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        resolve(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching favorite trips:", error);
+        reject(error);
+      });
+  });
+};
+
+const getFavoriteTripIds = (userId: string) => {
+  return new Promise<string[]>((resolve, reject) => {
+    console.log("Fetching favorite trip IDs...");
+    apiClient
+      .get(`/users/${userId}/favorites`, {
+        headers: {
+          Authorization: `jwt ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((response) => {
+        console.log("Favorite trip IDs:", response.data);
+        resolve(response.data); // מחזיר רק את מזהי הטיולים המועדפים
+      })
+      .catch((error) => {
+        console.error("Error fetching favorite trip IDs:", error);
+        reject(error);
+      });
+  });
+};
+
 const logout = () => {
   return new Promise<void>((resolve, reject) => {
     console.log("log out...");
@@ -296,11 +336,13 @@ export default {
   getAllTrips,
   getByOwnerId,
   getByTripId,
+  getFavoriteTripIds,
   postTrip,
   updateTrip,
   searchTripsByParams,
   addLike,
   deleteTrip,
+  getFavoriteTrips,
   logout,
   addComment,
   deleteComment,

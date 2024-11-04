@@ -10,28 +10,24 @@ import "./style.css";
 const FavoriteTrips = () => {
   const [trips, setTrips] = useState<ITrips[]>([]);
   const [loading, setLoading] = useState(true);
-  const loggedUserId = localStorage.getItem("loggedUserId");
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loadMyTrips = async () => {
+    const loadFavoriteTrips = async () => {
       setLoading(true);
+      const userID = localStorage.getItem("loggedUserId") || "";
       try {
-        const data = (await tripsService.getByOwnerId(
-          loggedUserId!
-        )) as ITrips[];
+        const data = await tripsService.getFavoriteTrips(userID);
         setTrips(data);
       } catch (error) {
-        console.error("Failed to load trips:", error);
+        console.error("Failed to load favorite trips:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    if (loggedUserId) {
-      loadMyTrips();
-    }
-  }, [loggedUserId]);
+    loadFavoriteTrips();
+  }, []);
 
   useSocket("likeAdded", (newTrip) => {
     setTrips((prevTrips) =>
@@ -39,16 +35,12 @@ const FavoriteTrips = () => {
     );
   });
 
-  const renderMyTrips = () => {
+  const renderFavoriteTrips = () => {
     return trips.map((trip) => (
       <article className="trip-list-item" key={trip._id}>
         <TripCard trip={trip} />
       </article>
     ));
-  };
-
-  const handleCreateTrip = () => {
-    navigate("/AddTrip");
   };
 
   return (
@@ -64,7 +56,7 @@ const FavoriteTrips = () => {
             <h1>You don't have any favorite trips yet</h1>
           </div>
         ) : (
-          renderMyTrips()
+          renderFavoriteTrips()
         )}
       </section>
     </>
