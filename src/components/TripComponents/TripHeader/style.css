@@ -15,6 +15,8 @@
   font-size: 1.4rem;
   padding: 1rem 1rem;
   background-color: #4bb543;
+  background-color: #5c940d;
+  background-color: #66a80f;
   color: #fff;
   border-radius: 7px;
 }
@@ -48,9 +50,9 @@
   }
 
   .tag {
-    font-size: 1.2rem;
-    padding: 0.6rem 0.5rem;
-    border-radius: 4px;
+    font-size: 1.4rem;
+    padding: 0.9rem 0.6rem;
+    border-radius: 3px;
   }
 }
 

@@ -22,7 +22,6 @@ const Sidebar = ({
     navigate("/personal-area");
   };
 
-  // פונקציה למניעת סגירת התפריט בלחיצה בתוכו
   const sidebarClick = (event: React.MouseEvent) => {
     event.stopPropagation();
   };
@@ -55,6 +54,10 @@ const Sidebar = ({
 
         <Link to="/myTrips">
           <h1 className="sidebar-item">My trips</h1>
+        </Link>
+
+        <Link to="/favoriteTrips">
+          <h1 className="sidebar-item">Favorite trips</h1>
         </Link>
 
         <Link to="/searchTrip">

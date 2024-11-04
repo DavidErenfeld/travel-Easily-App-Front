@@ -66,12 +66,12 @@
 
 .trip-description {
   text-align: start;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   max-height: 20rem;
-  line-height: 1.6;
+  line-height: 1.7;
   letter-spacing: 0.1px;
   margin-bottom: 2rem;
-  overflow-y: auto;
+  overflow-y: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -145,15 +145,29 @@
   .trip-card {
     margin-bottom: 12rem;
   }
+
   .trip-card-profile {
     top: -5.6rem;
     left: -1.1rem;
     background-color: #0d4e79;
   }
+
   .icons {
     background-color: #0d4e79;
-    z-index: 1000;
   }
+
+  .trip-description {
+    text-align: start;
+    font-size: 1.6rem;
+    max-height: 20rem;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+    margin-bottom: 2rem;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
   .trip-card-share-buttons {
     position: absolute;
     top: 1.5rem;

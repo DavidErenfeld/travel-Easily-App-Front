@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { FaHeart, FaRegComment, FaShareAlt, FaThumbsUp } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import TripHeader from "../TripHeader";
 import { useAuth } from "../../../Context/AuthContext";
-import useTripCard from "../../../Hooks/useTripCard";
 import { ITrips } from "../../../services/tripsService";
+import TripHeader from "../TripHeader";
+import useTripCard from "../../../Hooks/useTripCard";
 import TripDescription from "../TripDescription";
 import ShareButtons from "../../UIComponents/ShareButtons";
 import "./style.css";
@@ -65,7 +65,6 @@ const TripCard = ({ trip }: TripCardProps) => {
       </Link>
       <div className="icons">
         <div className="icons-area">
-          {/* <span>{numOfLikes}</span> */}
           <FaThumbsUp
             onClick={handleLikeClick}
             className={`like-icon ${likeColor}`}

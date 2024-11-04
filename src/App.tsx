@@ -16,6 +16,7 @@ import TripForm from "./components/TripComponents/TripForm";
 import CreateTrip from "./components/TripComponents/CreateTrip";
 import "./App.css";
 import "./index.css";
+import FavoriteTrips from "./components/TripComponents/FavoriteTrips";
 
 function App() {
   return (
@@ -32,12 +33,13 @@ function App() {
               element={<AdvancedSearch />}
             />
             <Route element={<ProtectedRoute />}>
-              <Route path="/personal-area" element={<PersonalArea />} />
               <Route path="/profile" element={<Profile />} />
-              <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
-              <Route path="/myTrips" element={<MyTrips />} />
+              <Route path="/personal-area" element={<PersonalArea />} />
               <Route path="/AddTrip" element={<TripForm />} />
               <Route path="/create-trip" element={<CreateTrip />} />
+              <Route path="/myTrips" element={<MyTrips />} />
+              <Route path="/favoriteTrips" element={<FavoriteTrips />} />
+              <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
             </Route>
           </Routes>
         </BrowserRouter>

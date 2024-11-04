@@ -21,14 +21,14 @@ const Trips = () => {
   useEffect(() => {
     const loadTrips = async () => {
       setIsLoading(true);
-      setError(null); // איפוס שגיאה לפני טעינה
+      setError(null);
       try {
-        await refreshTrips(); // קריאה לפונקציה שמביאה את המידע
+        await refreshTrips();
       } catch (err) {
         setError("Failed to load trips. Please try again later."); // הגדרת שגיאה במידה ונכשל
         console.error("Error loading trips:", err);
       } finally {
-        setIsLoading(false); // תמיד נעדכן את הסטייט לסיום טעינה
+        setIsLoading(false);
       }
     };
 
@@ -45,7 +45,7 @@ const Trips = () => {
           </div>
         ) : error ? (
           <div className="main-loader-section">
-            <h1>{error}</h1> {/* הצגת הודעת שגיאה למשתמש */}
+            <h1>{error}</h1> 
           </div>
         ) : trips.length === 0 ? (
           <div className="main-loader-section">
