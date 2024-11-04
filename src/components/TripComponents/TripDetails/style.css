@@ -10,7 +10,7 @@
 }
 
 .m-margin {
-  margin-top: 14rem;
+  margin-top: 16rem;
 }
 
 .imeges-section {
@@ -63,8 +63,8 @@
 
 .trip-details-share-buttons .share-buttons {
   position: absolute;
-  top: 11.3rem;
-  right: 1.8rem;
+  top: -5.2rem;
+  right: -1.5rem;
   font-size: 2.6rem;
   background-color: #082f49;
   border-radius: 7px;
@@ -103,7 +103,7 @@
 
   .trip-details-share-buttons .share-buttons {
     background-color: #0d4e79;
-    top: 15.4rem;
-    right: -0.4rem;
+    top: -5.4rem;
+    right: -1.4rem;
   }
 }

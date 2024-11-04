@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { FaHeart, FaRegComment, FaShareAlt } from "react-icons/fa";
+import { FaHeart, FaRegComment, FaShareAlt, FaThumbsUp } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import TripHeader from "../TripHeader";
 import { useAuth } from "../../../Context/AuthContext";
 import useTripCard from "../../../Hooks/useTripCard";
 import { ITrips } from "../../../services/tripsService";
 import TripDescription from "../TripDescription";
+import ShareButtons from "../../UIComponents/ShareButtons";
 import "./style.css";
-import ShareButtons from "../ShareButtons";
 
 interface TripCardProps {
   trip: ITrips;
@@ -37,13 +37,13 @@ const TripCard = ({ trip }: TripCardProps) => {
 
   const handleShareClick = () => {
     if (isShareClicked) {
-      setIsExiting(true); // מתחילים אנימציית יציאה
+      setIsExiting(true);
       setTimeout(() => {
-        setIsShareClicked(false); // מסתירים לאחר שהאנימציה מסתיימת
-        setIsExiting(false); // מאפסים את מצב היציאה
-      }, 1000); // טיימר באורך זמן האנימציה (1 שנייה)
+        setIsShareClicked(false);
+        setIsExiting(false);
+      }, 1000);
     } else {
-      setIsShareClicked(true); // מציגים את הכפתורים
+      setIsShareClicked(true);
     }
   };
 
@@ -65,16 +65,16 @@ const TripCard = ({ trip }: TripCardProps) => {
       </Link>
       <div className="icons">
         <div className="icons-area">
-          <span>{numOfLikes}</span>
-          <FaHeart
+          {/* <span>{numOfLikes}</span> */}
+          <FaThumbsUp
             onClick={handleLikeClick}
             className={`like-icon ${likeColor}`}
           />
         </div>
-        <div className="icons-area" onClick={handleCommentsClick}>
-          <span>{numOfComments}</span>
-          <FaRegComment />
+        <div className="icons-area">
+          <FaHeart className={`like-icon`} />
         </div>
+
         <FaShareAlt className="share-icon" onClick={handleShareClick} />
 
         {isShareClicked && (
@@ -86,6 +86,10 @@ const TripCard = ({ trip }: TripCardProps) => {
             />
           </div>
         )}
+      </div>
+      <div className="details-coments-and-likes">
+        <p>{numOfComments} comments </p>
+        <p>{numOfLikes} likes </p>
       </div>
     </section>
   );

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
+import io from "socket.io-client";
 import tripsService, { ITrips } from "../../../services/tripsService.ts";
 import TripDescription from "../TripDescription/index.tsx";
 import UpdateTrip from "../UpdateTrip/index.tsx";
 import AddComment from "../../CommentsComponent/AddComment/index.tsx";
 import ViewComment from "../../CommentsComponent/ViewComment/index.tsx";
 import TripHeader from "../TripHeader/index.tsx";
-import "./style.css";
 import Header from "../../Header/index.tsx";
 import ImageCarousel from "../../UIComponents/ImageCarousel/index.tsx";
 import LoadingDots from "../../UIComponents/Loader";
-import io from "socket.io-client";
-import ShareButtons from "../ShareButtons/index.tsx";
+import "./style.css";
+import ShareButtons from "../../UIComponents/ShareButtons/index.tsx";
 
 // חיבור Socket.IO לשרת
 const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com");
@@ -168,18 +168,18 @@ const TripDetails = () => {
             </div>
           )}
           <section className="flex-center-column-large-gap section">
-            <div className="trip-details-share-buttons">
-              <ShareButtons
-                url={`https://travel-easily-app.netlify.app/searchTrip/trip/${trip?._id}`}
-                text={`Amazing trip to ${trip?.country}! Join me on this adventure!`}
-              />
-            </div>
             {!updateMode ? (
               <div
                 className={`${mMargin} main-card-section flex-center-column-large-gap`}
               >
                 {trip && <TripHeader trip={trip} />}
                 <section className="details-container flex-center-column">
+                  <div className="trip-details-share-buttons">
+                    <ShareButtons
+                      url={`https://travel-easily-app.netlify.app/searchTrip/trip/${trip?._id}`}
+                      text={`Amazing trip to ${trip?.country}! Join me on this adventure!`}
+                    />
+                  </div>
                   {loggedUserId === trip?.owner?._id && (
                     <button
                       className="btn-l mode-btn"
