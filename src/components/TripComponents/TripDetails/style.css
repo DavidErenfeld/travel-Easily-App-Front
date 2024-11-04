@@ -61,6 +61,12 @@
   color: #fff;
 }
 
+.trip-details-share-buttons .share-icon {
+  position: absolute;
+  top: -4rem;
+  right: 0.2rem;
+}
+
 .trip-details-share-buttons .share-buttons {
   position: absolute;
   top: -5.2rem;

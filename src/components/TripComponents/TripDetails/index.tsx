@@ -12,6 +12,7 @@ import ImageCarousel from "../../UIComponents/ImageCarousel/index.tsx";
 import LoadingDots from "../../UIComponents/Loader";
 import "./style.css";
 import ShareButtons from "../../UIComponents/ShareButtons/index.tsx";
+import { FaShareAlt } from "react-icons/fa";
 
 // חיבור Socket.IO לשרת
 const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com");
@@ -24,6 +25,7 @@ interface Images {
 const TripDetails = () => {
   const [viewMode, setViewMode] = useState("main");
   const [updateMode, setUpdateMode] = useState(false);
+  const [isShareClicked, setIsShareClicked] = useState(false);
   const { id } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
   const [trip, setTrip] = useState<ITrips | null>(null);
@@ -140,6 +142,22 @@ const TripDetails = () => {
     }
   };
 
+  const handleShareClick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Amazing trip to ${trip?.country}`,
+          text: `Join me on this journey to ${trip?.country}!`,
+          url: `https://travel-easily-app.netlify.app/searchTrip/trip/${trip?._id}`,
+        });
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
+    } else {
+      setIsShareClicked(!isShareClicked); // Toggle if share is clicked
+    }
+  };
+
   const handleCommentDeleted = async () => {
     loadTripFromServer();
   };
@@ -175,10 +193,16 @@ const TripDetails = () => {
                 {trip && <TripHeader trip={trip} />}
                 <section className="details-container flex-center-column">
                   <div className="trip-details-share-buttons">
-                    <ShareButtons
-                      url={`https://travel-easily-app.netlify.app/searchTrip/trip/${trip?._id}`}
-                      text={`Amazing trip to ${trip?.country}! Join me on this adventure!`}
+                    <FaShareAlt
+                      className="share-icon"
+                      onClick={handleShareClick}
                     />
+                    {isShareClicked && !navigator.share && (
+                      <ShareButtons
+                        url={`https://travel-easily-app.netlify.app/searchTrip/trip/${trip?._id}`}
+                        text={`Amazing trip to ${trip?.country}! Join me on this adventure!`}
+                      />
+                    )}
                   </div>
                   {loggedUserId === trip?.owner?._id && (
                     <button

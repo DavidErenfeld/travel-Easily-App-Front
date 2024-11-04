@@ -52,15 +52,27 @@ const TripCard = ({ trip }: TripCardProps) => {
     }
   };
 
-  const handleShareClick = () => {
-    if (isShareClicked) {
-      setIsExiting(true);
-      setTimeout(() => {
-        setIsShareClicked(false);
-        setIsExiting(false);
-      }, 1000);
+  const handleShareClick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Amazing trip to ${trip.country}`,
+          text: `Join me on this journey to ${trip.country}!`,
+          url: `https://travel-easily-app.netlify.app/searchTrip/trip/${trip._id}`,
+        });
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
     } else {
-      setIsShareClicked(true);
+      if (isShareClicked) {
+        setIsExiting(true);
+        setTimeout(() => {
+          setIsShareClicked(false);
+          setIsExiting(false);
+        }, 1000);
+      } else {
+        setIsShareClicked(true);
+      }
     }
   };
 
@@ -95,7 +107,7 @@ const TripCard = ({ trip }: TripCardProps) => {
         </div>
         <FaShareAlt className="share-icon" onClick={handleShareClick} />
       </div>
-      {isShareClicked && (
+      {isShareClicked && !navigator.share && (
         <div className="trip-card-share-buttons">
           <ShareButtons
             url={`https://travel-easily-app.netlify.app/searchTrip/trip/${trip._id}`}
