@@ -87,7 +87,7 @@ const TripCard = ({ trip }: TripCardProps) => {
           </div>
         )}
       </div>
-      <div className="details-coments-and-likes">
+      <div className="coments-and-likes-details">
         <p>{numOfComments} comments </p>
         <p>{numOfLikes} likes </p>
       </div>

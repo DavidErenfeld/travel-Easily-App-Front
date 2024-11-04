@@ -65,10 +65,18 @@
 
 @media (max-width: 30em) {
   .share-buttons {
-    background-color: #082f49;
+    background-color: #0d4e79;
   }
 
   .share-button:hover {
     background-color: #1b4458;
+  }
+
+  .show {
+    animation: fadeInLeft 1s forwards;
+    visibility: visible;
+    /* border: solid 1px #00a8ff; */
+    /* border-top: solid 1px #00a8ff; */
+    border-bottom: solid 1px #4bb543;
   }
 }
