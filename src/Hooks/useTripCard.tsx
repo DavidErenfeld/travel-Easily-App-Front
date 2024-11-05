@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import tripsService, { ITrips } from "../services/tripsService";
 import useSocket from "./useSocket";
 import { addFavoriteTrip, removeFavoriteTrip } from "../services/usersService";
-
+import { io } from "socket.io-client";
+const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
+  transports: ["websocket"],
+  auth: {
+    token: localStorage.getItem("accessToken"),
+  },
+});
 const useTripCard = (trip: ITrips) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
@@ -34,7 +40,7 @@ const useTripCard = (trip: ITrips) => {
     fetchStatus();
 
     // התחלת האזנה לאירוע commentAdded
-    const handleCommentAdded = async (updatedTrip) => {
+    const handleCommentAdded = async (updatedTrip: any) => {
       if (updatedTrip._id === trip._id) {
         try {
           console.log("Fetching updated trip data after comment added...");
