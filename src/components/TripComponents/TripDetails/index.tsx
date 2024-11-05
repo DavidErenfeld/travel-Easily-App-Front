@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import io from "socket.io-client";
+import { FaShareAlt } from "react-icons/fa";
 import tripsService, { ITrips } from "../../../services/tripsService.ts";
 import TripDescription from "../TripDescription/index.tsx";
 import UpdateTrip from "../UpdateTrip/index.tsx";
@@ -10,11 +11,9 @@ import TripHeader from "../TripHeader/index.tsx";
 import Header from "../../Header/index.tsx";
 import ImageCarousel from "../../UIComponents/ImageCarousel/index.tsx";
 import LoadingDots from "../../UIComponents/Loader";
-import "./style.css";
 import ShareButtons from "../../UIComponents/ShareButtons/index.tsx";
-import { FaShareAlt } from "react-icons/fa";
+import "./style.css";
 
-// חיבור Socket.IO לשרת
 const token = localStorage.getItem("accessToken");
 const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
   transports: ["websocket"],
@@ -136,6 +135,8 @@ const TripDetails = () => {
     try {
       await tripsService.addComment(trip?._id || "", commentToAdd);
 
+      const updatedTrip = await tripsService.getByTripId(trip?._id || "");
+      socket.emit("commentAdded", updatedTrip);
       loadTripFromServer();
 
       if (!stayInViewMode) {
