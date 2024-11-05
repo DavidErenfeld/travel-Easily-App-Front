@@ -8,7 +8,7 @@ import LoadingDots from "../../UIComponents/Loader";
 const Trips = () => {
   const { trips, refreshTrips } = useTrips();
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null); // ניהול שגיאות
+  const [error, setError] = useState<string | null>(null);
 
   const renderTrips = () => {
     return trips.map((trip) => (
@@ -45,7 +45,7 @@ const Trips = () => {
           </div>
         ) : error ? (
           <div className="main-loader-section">
-            <h1>{error}</h1> 
+            <h1>{error}</h1>
           </div>
         ) : trips.length === 0 ? (
           <div className="main-loader-section">

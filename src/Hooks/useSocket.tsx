@@ -2,7 +2,9 @@ import { useEffect, useCallback } from "react";
 import io from "socket.io-client";
 
 // חיבור Socket.IO
-const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com/");
+const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com/", {
+  transports: ["websocket"], // שימוש רק ב-WebSocket
+});
 
 const useSocket = (event?: string, onEvent?: (data: any) => void) => {
   // האזנה לאירועים

@@ -3,7 +3,9 @@ import apiClient, { CanceledError } from "./apiClient";
 import io from "socket.io-client";
 
 // חיבור Socket.IO לשרת
-const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com");
+const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com/", {
+  transports: ["websocket"], // שימוש רק ב-WebSocket
+});
 
 export { CanceledError };
 export interface ITrips {

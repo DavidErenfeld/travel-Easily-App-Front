@@ -17,7 +17,9 @@ interface TripContextType {
 const TripContext = createContext<TripContextType | undefined>(undefined);
 
 // יצירת חיבור Socket.IO
-const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com/");
+const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com/", {
+  transports: ["websocket"], // שימוש רק ב-WebSocket
+});
 
 export const TripProvider: React.FC<{ children: ReactNode }> = ({
   children,

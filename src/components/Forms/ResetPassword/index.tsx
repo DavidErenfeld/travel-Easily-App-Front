@@ -58,7 +58,7 @@ function ResetPassword() {
       setSuccessMessage("Your password has been reset successfully.");
 
       setTimeout(() => {
-        navigate("/login"); // העברת המשתמש לעמוד ההתחברות לאחר איפוס
+        navigate("/login");
       }, 3000);
     } catch (error) {
       console.error("Password reset error:", error);
