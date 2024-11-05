@@ -15,8 +15,9 @@ import ShareButtons from "../../UIComponents/ShareButtons/index.tsx";
 import { FaShareAlt } from "react-icons/fa";
 
 // חיבור Socket.IO לשרת
-const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com");
-
+const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com/", {
+  transports: ["websocket"], // שימוש רק ב-WebSocket
+});
 interface Images {
   src: string;
   alt: string;
