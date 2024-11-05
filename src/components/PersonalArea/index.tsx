@@ -6,9 +6,9 @@ import {
 } from "../../services/fileService";
 import CloseIcon from "../UIComponents/Icons/Close";
 import LoadingDots from "../UIComponents/Loader";
-import "./style.css";
 import { useNavigate } from "react-router-dom";
 import tripsService from "../../services/tripsService";
+import useSocket from "../../Hooks/useSocket";
 
 function PersonalArea() {
   const imgRef = useRef<HTMLInputElement>(null);
@@ -21,6 +21,7 @@ function PersonalArea() {
   const [isDeleting, setIsDeleting] = useState(false);
   const navigate = useNavigate();
   const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const { socket } = useSocket();
 
   let imgUrl = localStorage.getItem("imgUrl") || "";
 
@@ -56,12 +57,15 @@ function PersonalArea() {
       }
 
       await deleteUser(userId);
-      console.log("User deleted and logged out successfully");
-      navigate("/");
+
+      // שידור אירוע userDeleted לאחר מחיקה מוצלחת
+      socket.emit("userDeleted", userId);
+
+      // ניתוב לדף הבית או התחברות לאחר המחיקה
+      navigate("/login");
     } catch (error) {
       console.log("Error deleting user:", error);
     } finally {
-      await deleteUser(userId);
       setIsDeleting(false);
     }
   };
@@ -70,10 +74,6 @@ function PersonalArea() {
     try {
       setLoading(true);
       if (imgFile) {
-        // if (imgUrl) {
-        //   await deletePhotoFromCloudinary(imgUrl);
-        //   console.log(`Previous image ${imgUrl} deleted successfully.`);
-        // }
         imgUrl = (await handleUploadImage(imgFile)) || "";
       }
 

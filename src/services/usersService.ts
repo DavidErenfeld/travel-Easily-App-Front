@@ -1,3 +1,4 @@
+import useSocket from "../Hooks/useSocket";
 import apiClient from "./apiClient";
 
 export interface IUpdateUser {
@@ -33,7 +34,6 @@ export const addFavoriteTrip = (tripId: string) => {
   });
 };
 
-// פונקציה להסרת טיול מהמועדפים
 export const removeFavoriteTrip = (tripId: string) => {
   return new Promise<void>((resolve, reject) => {
     console.log("Removing trip from favorites...");
@@ -55,7 +55,6 @@ export const removeFavoriteTrip = (tripId: string) => {
   });
 };
 
-// פונקציה לעדכון משתמש
 export const updateUser = (userId: string, user: IUpdateUser) => {
   return new Promise<IUpdateUser>((resolve, reject) => {
     console.log("Update user....");
@@ -83,7 +82,6 @@ export const updateUser = (userId: string, user: IUpdateUser) => {
   });
 };
 
-// פונקציה לשליחת בקשת שחזור סיסמה
 export const requestPasswordReset = (email: string) => {
   return new Promise<void>((resolve, reject) => {
     console.log("Requesting password reset...");
@@ -101,9 +99,6 @@ export const requestPasswordReset = (email: string) => {
   });
 };
 
-// authService.ts
-
-// פונקציה לאיפוס סיסמה
 export const resetPassword = (token: string, newPassword: string) => {
   return new Promise<void>((resolve, reject) => {
     console.log("Resetting password...");
@@ -121,8 +116,9 @@ export const resetPassword = (token: string, newPassword: string) => {
   });
 };
 
-// פונקציה למחיקת משתמש
 export const deleteUser = (userId: string) => {
+  const { socket } = useSocket();
+
   return new Promise<void>(async (resolve, reject) => {
     console.log("Delete User...");
 
@@ -141,11 +137,17 @@ export const deleteUser = (userId: string) => {
       });
 
       console.log("User deleted successfully");
+
+      // שידור אירוע userDeleted לאחר מחיקה מוצלחת
+      socket.emit("userDeleted", userId);
+
+      // ניקוי ה־localStorage
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("loggedUserId");
       localStorage.removeItem("imgUrl");
       localStorage.removeItem("userName");
+
       resolve();
     } catch (error: any) {
       console.error(

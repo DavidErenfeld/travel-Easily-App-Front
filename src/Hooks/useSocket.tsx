@@ -13,7 +13,7 @@ const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
 console.log("Socket initialized"); // לוג בעת אתחול החיבור
 
 const useSocket = (event?: string, onEvent?: (data: any) => void) => {
-  // האזנה לאירועים
+  // האזנה לאירועים ספציפיים
   useEffect(() => {
     if (event && onEvent) {
       console.log(`Listening to event: ${event}`); // לוג בעת התחלת האזנה לאירוע ספציפי
@@ -29,13 +29,34 @@ const useSocket = (event?: string, onEvent?: (data: any) => void) => {
     }
   }, [event, onEvent]);
 
+  // האזנה כללית לאירוע מחיקת משתמש
+  useEffect(() => {
+    socket.on("userDeleted", () => {
+      console.log("User account was deleted - logging out"); // לוג למחיקת חשבון
+      logoutUser(); // קריאה לפונקציית ההתנתקות
+    });
+
+    return () => {
+      socket.off("userDeleted"); // הפסקת האזנה לאירוע בעת הסרת ה-hook
+    };
+  }, []);
+
   // פונקציה לשליחת אירועים
   const send = useCallback((event: string, data: any) => {
     console.log(`Sending event: ${event} with data:`, data); // לוג בעת שליחת אירוע עם הנתונים
     socket.emit(event, data);
   }, []);
 
-  return { send };
+  return { send, socket };
+};
+
+// פונקציה להתנתקות מלאה
+const logoutUser = () => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("isAuthenticated");
+  localStorage.removeItem("loggedUserId");
+  window.location.href = "/login";
 };
 
 export default useSocket;
