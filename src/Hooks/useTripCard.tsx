@@ -32,19 +32,33 @@ const useTripCard = (trip: ITrips) => {
     };
 
     fetchStatus();
-  }, [trip._id]);
+  }, [trip, trip._id]);
+
+  useSocket("likeAdded", (updatedTrip) => {
+    if (updatedTrip._id === trip._id) {
+      setNumOfLikes(updatedTrip.numOfLikes);
+    }
+  });
+
+  useSocket("commentAdded", (updatedTrip) => {
+    if (updatedTrip._id === trip._id) {
+      setNumOfComments(updatedTrip.numOfComments);
+    }
+  });
 
   const toggleLike = async () => {
     try {
       await tripsService.addLike(trip._id!);
       const updatedTrip = await tripsService.getByTripId(trip._id!);
       send("addLike", updatedTrip);
-      setIsLiked(
-        updatedTrip.likes?.some(
-          (like) => like.owner === localStorage.getItem("loggedUserId")
-        ) || false
-      );
-      setNumOfLikes(updatedTrip.numOfLikes);
+      const userId = localStorage.getItem("loggedUserId");
+      const liked =
+        updatedTrip.likes?.some((like) => like.owner === userId) || false;
+
+      setIsLiked(liked);
+      if (updatedTrip.likes) {
+        setNumOfLikes(updatedTrip.numOfLikes);
+      }
     } catch (error) {
       console.error("Failed to toggle like:", error);
     }
