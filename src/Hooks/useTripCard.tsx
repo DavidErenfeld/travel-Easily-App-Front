@@ -47,6 +47,7 @@ const useTripCard = (trip: ITrips) => {
         console.log("Fetching updated trip data after comment added...");
         const refreshedTrip = await tripsService.getByTripId(trip._id!); // קריאה ל-API לקבלת הנתונים המעודכנים
         setNumOfComments(refreshedTrip.numOfComments); // עדכון מספר התגובות
+        console.log("Updated numOfComments:", refreshedTrip.numOfComments); // לוג לבדיקה שהערך מתעדכן
       } catch (error) {
         console.error("Failed to fetch updated trip data:", error);
       }
