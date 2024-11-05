@@ -40,9 +40,16 @@ const useTripCard = (trip: ITrips) => {
     }
   });
 
-  useSocket("commentAdded", (updatedTrip) => {
+  // האזנה לאירוע commentAdded ועדכון ממספר התגובות דרך קריאה ל-API
+  useSocket("commentAdded", async (updatedTrip) => {
     if (updatedTrip._id === trip._id) {
-      setNumOfComments(updatedTrip.numOfComments);
+      try {
+        console.log("Fetching updated trip data after comment added...");
+        const refreshedTrip = await tripsService.getByTripId(trip._id!); // קריאה ל-API לקבלת הנתונים המעודכנים
+        setNumOfComments(refreshedTrip.numOfComments); // עדכון מספר התגובות
+      } catch (error) {
+        console.error("Failed to fetch updated trip data:", error);
+      }
     }
   });
 
