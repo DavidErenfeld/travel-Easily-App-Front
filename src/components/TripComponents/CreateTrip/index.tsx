@@ -66,7 +66,6 @@ const CreateTrip: React.FC = () => {
 
   // Handle trip submission
   const handleSubmit = async () => {
-    // Validate each day's description
     const errors: string[] = [];
     dayEdits.forEach((day, index) => {
       if (!day.description.trim()) {
