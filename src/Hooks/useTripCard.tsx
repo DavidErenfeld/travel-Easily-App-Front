@@ -2,13 +2,7 @@ import { useEffect, useState } from "react";
 import tripsService, { ITrips } from "../services/tripsService";
 import useSocket from "./useSocket";
 import { addFavoriteTrip, removeFavoriteTrip } from "../services/usersService";
-import { io } from "socket.io-client";
-const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
-  transports: ["websocket"],
-  auth: {
-    token: localStorage.getItem("accessToken"),
-  },
-});
+
 const useTripCard = (trip: ITrips) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
@@ -38,32 +32,24 @@ const useTripCard = (trip: ITrips) => {
     };
 
     fetchStatus();
-
-    // התחלת האזנה לאירוע commentAdded
-    const handleCommentAdded = async (updatedTrip: any) => {
-      if (updatedTrip._id === trip._id) {
-        try {
-          console.log("Fetching updated trip data after comment added...");
-          const refreshedTrip = await tripsService.getByTripId(trip._id!); // קריאה ל-API לקבלת הנתונים המעודכנים
-          setNumOfComments(refreshedTrip.numOfComments); // עדכון מספר התגובות
-          console.log("Updated numOfComments:", refreshedTrip.numOfComments);
-        } catch (error) {
-          console.error("Failed to fetch updated trip data:", error);
-        }
-      }
-    };
-
-    // רישום מאזינים לאירועים פעם אחת בלבד
-    socket.on("commentAdded", handleCommentAdded);
-
-    return () => {
-      socket.off("commentAdded", handleCommentAdded); // הסרת מאזין כשיוצאים מהמסך
-    };
-  }, []); // מריצים את useEffect פעם אחת בלבד
+  }, [trip, trip._id]);
 
   useSocket("likeAdded", (updatedTrip) => {
     if (updatedTrip._id === trip._id) {
       setNumOfLikes(updatedTrip.numOfLikes);
+    }
+  });
+
+  // האזנה לאירוע commentAdded ועדכון ממספר התגובות דרך קריאה ל-API
+  useSocket("commentAdded", async (updatedTrip) => {
+    if (updatedTrip._id === trip._id) {
+      try {
+        console.log("Fetching updated trip data after comment added...");
+        const refreshedTrip = await tripsService.getByTripId(trip._id!); // קריאה ל-API לקבלת הנתונים המעודכנים
+        setNumOfComments(refreshedTrip.numOfComments); // עדכון מספר התגובות
+      } catch (error) {
+        console.error("Failed to fetch updated trip data:", error);
+      }
     }
   });
 
