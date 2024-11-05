@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Profile from "./components/Forms/Profile";
 import Login from "./components/Forms/Login";
 import Register from "./components/Forms/Register";
@@ -17,27 +17,10 @@ import CreateTrip from "./components/TripComponents/CreateTrip";
 import ForgotPassword from "./components/Forms/ForgotPassword";
 import ResetPassword from "./components/Forms/ResetPassword";
 import FavoriteTrips from "./components/TripComponents/FavoriteTrips";
-import useSocket from "./Hooks/useSocket";
 import "./App.css";
 import "./index.css";
 
 function App() {
-  const { socket } = useSocket(); // שימוש ב־useSocket לקבלת ה־socket
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // האזנה לאירוע מחיקת משתמש
-    socket.on("userDeleted", () => {
-      console.log("User account was deleted - logging out");
-      logoutUser();
-      navigate("/login"); // ניתוב לדף ההתחברות
-    });
-
-    return () => {
-      socket.off("userDeleted"); // ביטול האזנה בעת הסרת הקומפוננטה
-    };
-  }, [socket, navigate]);
-
   return (
     <AuthProvider>
       <TripProvider>
@@ -68,13 +51,5 @@ function App() {
     </AuthProvider>
   );
 }
-
-// פונקציה להתנתקות מלאה וניקוי localStorage
-const logoutUser = () => {
-  localStorage.removeItem("accessToken");
-  localStorage.removeItem("refreshToken");
-  localStorage.removeItem("isAuthenticated");
-  localStorage.removeItem("loggedUserId");
-};
 
 export default App;
