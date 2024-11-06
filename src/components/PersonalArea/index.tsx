@@ -9,6 +9,7 @@ import LoadingDots from "../UIComponents/Loader";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import tripsService from "../../services/tripsService";
+import useSocket from "../../Hooks/useSocket";
 
 function PersonalArea() {
   const imgRef = useRef<HTMLInputElement>(null);
@@ -19,9 +20,8 @@ function PersonalArea() {
   const loggedUserId = localStorage.getItem("loggedUserId");
   const [loading, setLoading] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  const navigate = useNavigate();
   const [showDeletePopup, setShowDeletePopup] = useState(false);
-
+  const navigate = useNavigate();
   let imgUrl = localStorage.getItem("imgUrl") || "";
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,10 +70,6 @@ function PersonalArea() {
     try {
       setLoading(true);
       if (imgFile) {
-        // if (imgUrl) {
-        //   await deletePhotoFromCloudinary(imgUrl);
-        //   console.log(`Previous image ${imgUrl} deleted successfully.`);
-        // }
         imgUrl = (await handleUploadImage(imgFile)) || "";
       }
 

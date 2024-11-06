@@ -227,48 +227,6 @@ const getFavoriteTripIds = (userId: string) => {
   });
 };
 
-const logout = () => {
-  return new Promise<void>((resolve, reject) => {
-    console.log("log out...");
-    const refreshToken = localStorage.getItem("refreshToken");
-    const accessToken = localStorage.getItem("accessToken");
-    if (!localStorage.getItem("refreshToken")) {
-      console.log("refreshToken = " + refreshToken);
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("loggedUserId");
-      console.log("localStorage removt = tripService line 196----------------");
-      localStorage.removeItem("imgUrl");
-      localStorage.removeItem("userName");
-      reject(new Error("No refresh token available. Login required."));
-      return;
-    }
-    apiClient
-      .post(
-        `/auth/logout`,
-        {},
-        {
-          headers: {
-            Authorization: `JWT ${localStorage.getItem("refreshToken")}`,
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("loggedUserId");
-        localStorage.removeItem("imgUrl");
-        localStorage.removeItem("userName");
-        resolve();
-      })
-      .catch((error) => {
-        console.log(error);
-        reject(error);
-      });
-  });
-};
-
 const addComment = (tripId: string, comment: IComment) => {
   return new Promise<IComment>((resolve, reject) => {
     console.log("Add Comment...");
@@ -349,7 +307,6 @@ export default {
   addLike,
   deleteTrip,
   getFavoriteTrips,
-  logout,
   addComment,
   deleteComment,
 };

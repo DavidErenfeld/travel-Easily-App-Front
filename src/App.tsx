@@ -19,12 +19,14 @@ import ResetPassword from "./components/Forms/ResetPassword";
 import FavoriteTrips from "./components/TripComponents/FavoriteTrips";
 import "./App.css";
 import "./index.css";
+import SocketListener from "./components/SocketListener";
 
 function App() {
   return (
     <AuthProvider>
       <TripProvider>
         <BrowserRouter>
+          <SocketListener />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />

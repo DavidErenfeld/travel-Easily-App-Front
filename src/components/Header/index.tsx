@@ -25,6 +25,8 @@ const Header = () => {
       setProfileImg("/images/user.png");
       setIsSidebarOpen(false); // סוגר את התפריט לאחר התנתקות
     } catch (error) {
+      setProfileImg("/images/user.png");
+      setIsSidebarOpen(false); // סוגר את התפריט לאחר התנתקות
       console.log(error);
     }
   };
@@ -88,10 +90,6 @@ const Header = () => {
               </div>
             ) : (
               <div className="menu">
-                {/* <Link to="/">
-                  <h1 className="menu-item">Home</h1>
-                </Link> */}
-
                 <Link to="/login">
                   <h1 className="menu-item">Sign in</h1>
                 </Link>

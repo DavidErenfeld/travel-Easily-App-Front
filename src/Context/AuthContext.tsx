@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import tripsService from "../services/tripsService";
+import authService from "../services/authService";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -24,13 +25,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const logout = async () => {
     try {
-      await tripsService.logout();
+      await authService.logout();
       setIsAuthenticated(false);
       localStorage.removeItem("isAuthenticated");
     } catch (error) {
       console.error("Logout failed:", error);
       setIsAuthenticated(false);
       localStorage.removeItem("isAuthenticated");
+      localStorage.removeItem("loggedUserId");
     }
   };
 

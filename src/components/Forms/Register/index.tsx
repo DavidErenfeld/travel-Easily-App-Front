@@ -8,11 +8,11 @@ import z from "zod";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import AddImgsIcon from "../../UIComponents/Icons/AddImage";
 import { uploadPhoto } from "../../../services/fileService";
-import { googleSignin, registerUser } from "../../../services/registerService";
 import LoadingDots from "../../UIComponents/Loader";
 import { useAuth } from "../../../Context/AuthContext";
 import "./style.css";
 import "../formeStyle.css";
+import authService from "../../../services/authService";
 
 const defaultImage = "/images/user.png";
 
@@ -79,7 +79,7 @@ function Register() {
     }
     try {
       setLoading(true);
-      await registerUser({
+      await authService.registerUser({
         userName: data.userName,
         email: data.email,
         password: data.password,
@@ -104,7 +104,7 @@ function Register() {
   ) => {
     console.log(credentialResponse);
     try {
-      await googleSignin(credentialResponse);
+      await authService.googleSignin(credentialResponse);
       login();
       navigate("/");
       console.log("user is logt");

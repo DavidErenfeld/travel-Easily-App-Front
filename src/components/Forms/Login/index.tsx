@@ -5,11 +5,11 @@ import { useNavigate, Link } from "react-router-dom";
 import z from "zod";
 import axios from "axios";
 import CloseIcon from "../../UIComponents/Icons/Close";
-import { loginUser } from "../../../services/loginService";
 import LoadingDots from "../../UIComponents/Loader";
 import { useAuth } from "../../../Context/AuthContext";
 import "../formeStyle.css";
 import "./style.css";
+import authService from "../../../services/authService";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -36,7 +36,7 @@ function Login() {
     console.log("Submitting form with data:", data);
     try {
       setLoading(true);
-      const response = await loginUser({
+      const response = await authService.loginUser({
         email: data.email,
         password: data.password,
       });
