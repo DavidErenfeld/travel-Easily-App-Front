@@ -68,6 +68,8 @@ const SearchForm: React.FC<SearchFormProps> = ({ onResults }) => {
           type="number"
           value={radius}
           onChange={(e) => setRadius(Number(e.target.value))}
+          min={1}
+          max={10}
         />
       </label>
 

@@ -74,6 +74,10 @@ const Sidebar = ({
           <h1 className="sidebar-item">Add trip</h1>
         </Link>
 
+        <Link to="/tripForm">
+          <h1 className="sidebar-item">Explore Nearby</h1>
+        </Link>
+
         <Link to="/">
           <h1 className="sidebar-item">Home</h1>
         </Link>

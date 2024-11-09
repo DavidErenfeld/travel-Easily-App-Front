@@ -68,6 +68,9 @@ const Header = () => {
                 <Link to="/myTrips">
                   <h1 className="menu-item connectet-menu">My trips</h1>
                 </Link>
+                <Link to="/tripForm">
+                  <h1 className="menu-item connectet-menu">Explore Nearby</h1>
+                </Link>
                 {location.pathname.includes("/AddTrip") && (
                   <Link to="/searchTrip">
                     <h1 className="menu-item connectet-menu">Search trip</h1>

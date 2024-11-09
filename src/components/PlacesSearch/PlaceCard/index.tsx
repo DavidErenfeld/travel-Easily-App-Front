@@ -1,7 +1,9 @@
 import React from "react";
 import { Phone, MapPin, Star, ExternalLink, Car, Map } from "lucide-react";
 import { Place } from "../../../services/placesService";
+import WazeIcon from "../../UIComponents/Icons/WazeIcon";
 import "./style.css";
+import GoogleMapsIcon from "../../UIComponents/Icons/GoogleMapsIcon";
 
 interface PlaceCardProps {
   place: Place;
@@ -46,25 +48,29 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => (
         )}
         <Star className="icon-search" />
       </div>
+
+      <div className="detail-item nav-icons">
+        <span>Navigation</span>
+        <div className="flex-center-gap-s">
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="icon-search"
+          >
+            <GoogleMapsIcon />
+          </a>
+          <a
+            href={`https://waze.com/ul?ll=${place.lat},${place.lon}&navigate=yes`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="icon-search"
+          >
+            <WazeIcon />
+          </a>
+        </div>
+      </div>
     </div>
-    {/* <div className="place-navigation">
-      <a
-        href={`https://waze.com/ul?ll=${place.lat},${place.lon}&navigate=yes`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="icon-search"
-      >
-        <Car />
-      </a>
-      <a
-        href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="icon-search"
-      >
-        <Map />
-      </a>
-    </div> */}
   </div>
 );
 

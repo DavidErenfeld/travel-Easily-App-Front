@@ -12,7 +12,7 @@ const PlacesSearchPage: React.FC = () => {
     <>
       <Header />
       <section className="section places-search-page">
-        <h1>Search around me</h1>
+        <h1>Explore Nearby</h1>
         <div className="search-form-container">
           <SearchForm onResults={setPlaces} />
         </div>

@@ -3,7 +3,6 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 3rem;
-  padding: 0;
 }
 
 /* 784 */
@@ -15,6 +14,6 @@
     justify-content: center;
     gap: 2rem;
     list-style-type: none;
-    padding: 0;
+    padding: 1ren 4rem;
   }
 }

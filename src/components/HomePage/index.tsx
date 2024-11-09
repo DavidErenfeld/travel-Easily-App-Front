@@ -18,9 +18,6 @@ const HomePage = () => {
           <Link to="/searchTrip">
             <button className="btn-el">Search Trip</button>
           </Link>
-          <Link to="/tripForm">
-            <button className="btn-el">Find Nearby Attractions</button>
-          </Link>
         </div>
       </section>
     </>

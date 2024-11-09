@@ -38,6 +38,9 @@ button[type="button"].search-my-locaition-btn {
 
 /*640*/
 @media (max-width: 30em) {
+  .location-container > label {
+    width: 100%;
+  }
   .location-container.flex-space-between {
     flex-direction: column;
     gap: 1rem;

@@ -163,6 +163,18 @@ input:focus {
   stroke: #4bb543;
 }
 
+.waze-icon {
+  width: 3rem;
+  height: 3rem;
+  fill: #082f49;
+  cursor: pointer;
+}
+.Google-maps-icon {
+  width: 3rem;
+  height: 3rem;
+  cursor: pointer;
+}
+
 .overlay {
   position: fixed;
   top: 0;
