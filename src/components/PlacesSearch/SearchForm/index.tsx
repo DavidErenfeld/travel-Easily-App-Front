@@ -65,11 +65,15 @@ const SearchForm: React.FC<SearchFormProps> = ({ onResults }) => {
       <label className="label">
         Radius (in km):
         <input
-          type="number"
+          type="tel"
           value={radius}
-          onChange={(e) => setRadius(Number(e.target.value))}
-          min={1}
-          max={10}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+            if (value >= 1 && value <= 10) {
+              setRadius(value);
+            }
+          }}
+          placeholder="Enter radius (1-10)"
         />
       </label>
 
