@@ -8,21 +8,40 @@ import "./style.css";
 
 interface SearchFormProps {
   onResults: (places: Place[]) => void;
+  setLoading: (loading: boolean) => void;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ onResults }) => {
+const SearchForm: React.FC<SearchFormProps> = ({ onResults, setLoading }) => {
   const [location, setLocation] = useState("");
-  const [radius, setRadius] = useState(0);
+  const [radius, setRadius] = useState<number | "">("");
   const [type, setType] = useState("restaurant");
+  const [errors, setErrors] = useState({ location: "", radius: "" });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const newErrors = {
+      location: location ? "" : "Please share your location",
+      radius: radius ? "" : "Please enter a radius (1-10)",
+    };
+    setErrors(newErrors);
+
+    if (!location || !radius) return;
+
+    setLoading(true);
     try {
-      const searchParams: SearchParams = { location, radius, type };
+      const searchParams: SearchParams = {
+        location,
+        radius: Number(radius),
+        type,
+      };
       const places = await fetchPlaces(searchParams);
       onResults(places);
     } catch (error) {
       console.error("Failed to fetch places:", error);
+      onResults([]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -32,60 +51,78 @@ const SearchForm: React.FC<SearchFormProps> = ({ onResults }) => {
         (position) => {
           const { latitude, longitude } = position.coords;
           setLocation(`${latitude},${longitude}`);
+          setErrors({ ...errors, location: "" });
         },
         (error) => {
           console.error("Failed to get location:", error);
+          setErrors({ ...errors, location: "Failed to get location" });
         }
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
+      setErrors({
+        ...errors,
+        location: "Geolocation is not supported by this browser",
+      });
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="search-form">
       <div className="location-container flex-space-between">
-        <label>
-          Location:
-          <input
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
-        </label>
         <button
           type="button"
-          className="search-my-locaition-btn btn-l"
+          className="share-location-btn btn-l"
           onClick={handleShareLocation}
         >
           Share My Location
         </button>
+        {location && (
+          <p className="location-display">
+            <span className="location-text">Location: </span>
+            {location}
+          </p>
+        )}
+        {errors.location && (
+          <p className="text-danger error-message">{errors.location}</p>
+        )}
       </div>
 
-      <label className="label">
-        Radius (in km):
-        <input
-          type="tel"
-          value={radius}
-          onChange={(e) => {
-            const value = Number(e.target.value);
-            if (value >= 1 && value <= 10) {
-              setRadius(value);
-            }
-          }}
-          placeholder="Enter radius (1-10)"
-        />
-      </label>
+      <div className="form-group">
+        <label>
+          Radius (in km):
+          <input
+            type="tel"
+            value={radius}
+            onChange={(e) => {
+              const value = Number(e.target.value);
+              if (value >= 1 && value <= 10) {
+                setRadius(value);
+                setErrors({ ...errors, radius: "" });
+              } else {
+                setRadius("");
+              }
+            }}
+            placeholder="Enter radius (1-10)"
+          />
+        </label>
+        {errors.radius && (
+          <p className="text-danger error-message">{errors.radius}</p>
+        )}
+      </div>
 
-      <label>
-        Type:
-        <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="restaurant">Restaurant</option>
-          <option value="cafe">Cafe</option>
-          <option value="bar">Bar</option>
-          <option value="attraction">Attraction</option>
-        </select>
-      </label>
+      <div className="form-group">
+        <label>
+          Type:
+          <select value={type} onChange={(e) => setType(e.target.value)}>
+            <option value="restaurant">Restaurant</option>
+            <option value="cafe">Cafe</option>
+            <option value="bar">Bar</option>
+            <option value="attraction">Attraction</option>
+          </select>
+        </label>
+      </div>
+
       <button type="submit" className="submit-search-btn btn-l">
         Search
       </button>

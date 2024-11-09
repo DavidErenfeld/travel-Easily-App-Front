@@ -31,9 +31,22 @@ select:focus {
   align-self: center;
 }
 
-button[type="button"].search-my-locaition-btn {
+button[type="button"].share-location-btn {
   background-color: #66a80f;
-  /* background-color: #ffd700; */
+}
+
+.location-display {
+  margin-top: 0.5rem;
+  font-size: 1.6rem;
+  color: #ffffff;
+}
+
+.location-text {
+  color: #00aaff;
+}
+
+.form-group {
+  margin-bottom: 1rem;
 }
 
 /*640*/
@@ -41,12 +54,13 @@ button[type="button"].search-my-locaition-btn {
   .location-container > label {
     width: 100%;
   }
+
   .location-container.flex-space-between {
     flex-direction: column;
     gap: 1rem;
   }
 
-  .search-my-locaition-btn.btn-l {
+  .share-location-btn.btn-l {
     padding: 6px;
     width: 100%;
     border-radius: 6px;
