@@ -1,0 +1,80 @@
+.place-card {
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0px 4px 10px rgba(156, 182, 250, 0.3);
+  color: #ffffff;
+  width: 100%;
+  margin: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.place-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.place-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-top: 2rem;
+}
+
+.place-name {
+  font-size: 2.2rem;
+  color: #00a8ff;
+  margin-bottom: 1.4rem;
+}
+
+.place-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0rem 2rem;
+  margin-bottom: 2.4rem;
+  gap: 2rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.8rem;
+  width: 100%;
+}
+
+.icon-search {
+  color: #e0f2fe; /* צבע האייקונים */
+  margin-left: 0.5rem;
+  font-size: 1.8rem;
+  height: 3rem;
+  width: 3rem;
+  color: #66a80f;
+}
+
+.place-rating {
+  color: #ffd700; /* צבע כוכבים */
+}
+
+.star-icon {
+  margin-right: 0.5rem;
+  font-size: 2rem;
+}
+
+.place-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.8rem;
+  margin-top: 1rem;
+}
+
+.nav-icon {
+  color: #bae6fd; /* צבע כפתורי ניווט */
+  transition: color 0.3s ease;
+}
+
+.nav-icon:hover {
+  color: #f0f9ff;
+}

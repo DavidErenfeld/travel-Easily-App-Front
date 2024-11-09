@@ -13,10 +13,13 @@ const HomePage = () => {
         </div>
         <div className="main-buttons">
           <Link to="/AddTrip">
-            <button className="btn-el">add trip</button>
+            <button className="btn-el">Add Trip</button>
           </Link>
           <Link to="/searchTrip">
-            <button className="btn-el">search trip</button>
+            <button className="btn-el">Search Trip</button>
+          </Link>
+          <Link to="/tripForm">
+            <button className="btn-el">Find Nearby Attractions</button>
           </Link>
         </div>
       </section>

@@ -29,7 +29,10 @@ body {
   position: relative;
   margin: 0;
   height: 100vh;
+  background-color: #fff;
+  background-color: #bae6fd;
   background-color: #082f49;
+  color: #082f49;
   color: rgba(255, 255, 255, 0.87);
   overflow-x: hidden;
 }

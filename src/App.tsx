@@ -20,6 +20,7 @@ import FavoriteTrips from "./components/TripComponents/FavoriteTrips";
 import "./App.css";
 import "./index.css";
 import SocketListener from "./components/SocketListener";
+import TripFormPage from "./components/PlacesSearch/PlacesSearchPage";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
               <Route path="/myTrips" element={<MyTrips />} />
               <Route path="/favoriteTrips" element={<FavoriteTrips />} />
               <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
+              <Route path="/tripForm" element={<TripFormPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

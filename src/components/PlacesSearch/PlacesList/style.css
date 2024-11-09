@@ -1,0 +1,20 @@
+.places-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 3rem;
+  padding: 0;
+}
+
+/* 784 */
+@media (max-width: 49em) {
+  .places-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    list-style-type: none;
+    padding: 0;
+  }
+}
