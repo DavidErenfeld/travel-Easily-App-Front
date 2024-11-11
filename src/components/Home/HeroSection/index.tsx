@@ -1,15 +1,27 @@
 import React from "react";
+import { Compass, Globe } from "lucide-react";
 import "./style.css";
 
-const HeroSection: React.FC = () => {
+const HeroSection = () => {
   return (
     <section className="hero-section">
-      <h1>מקום להשראה לטיולים – נטול פרסומות וממוקד חוויות</h1>
-      <p>
-        Travel Easily נבנה כדי לספק חוויות טיול נטולות פרסומות וממוקדות השראה,
-        כך שתוכלו למצוא מסלולים מוכנים ולשתף את החוויות שלכם בצורה נקייה ופשוטה.
-      </p>
-      <button className="explore-button">התחל לחקור מסלולים</button>
+      <div className="description-container">
+        <h1>The new way to travel</h1>
+        <p>
+          Travel Easily offers ad-free, inspiration-focused travel plans,
+          letting you find itineraries and share your experiences simply and
+          clearly.
+        </p>
+      </div>
+      <div className="earth-container">
+        <img
+          src="/images/Earth.png"
+          alt="Planet Earth"
+          className="earth-image"
+        />
+      </div>
+
+      <button className="btn-cta-exl">Start Exploring Itineraries</button>
     </section>
   );
 };

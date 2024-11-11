@@ -18,7 +18,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => (
     <div className="place-details ">
       <div className="detaile-item flex-space-between">
         <a
-          href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
+          href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`}
           target="_blank"
           rel="noopener noreferrer"
           className="address"

@@ -15,6 +15,13 @@
   gap: 1rem;
 }
 
+.flex-center-gap-l {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+
 .flex-center-column {
   display: flex;
   align-items: center;
@@ -54,11 +61,11 @@
   gap: 1rem;
 }
 
-.btn-el {
+.btn-cta-exl,
+.btn-exl {
   font-size: 2rem;
-  padding: 10px 10px;
-  width: 20rem;
-  border-radius: 9px;
+  padding: 2rem 2rem;
+  border-radius: 7px;
   background-color: var(--button-secondary-bg);
   color: var(--button-secondary-text);
   border: none;
