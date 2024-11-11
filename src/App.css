@@ -80,7 +80,7 @@
   padding: 8px 8px;
   width: 20rem;
   border-radius: 9px;
-  background-color: var(--button-primary-text);
+  background-color: var(--button-primary-bg);
   color: var(--primary-text);
   border: none;
   cursor: pointer;

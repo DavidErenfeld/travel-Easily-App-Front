@@ -35,16 +35,19 @@
   --text-highlight: #023e8a; /* טקסט להדגשה - כחול-ירקרק */
 
   /* צבעים לכפתורים */
-  --button-cta-bg: #ea7317; /* רקע כפתור ראשי - כתום חם */
+  --button-cta-bg: #fa9419; /* רקע כפתור ראשי - כתום חם */
   --button-cta-bg-hover: #f1b688; /* רקע כפתור ראשי - כתום חם */
-  --button-primary-text: #ffffff; /* טקסט כפתור ראשי - לבן */
+  --button-cta-text: #414141; /* טקסט כפתור ראשי - לבן */
+  --button-primary-bg: #ffff; /* טקסט כפתור ראשי - לבן */
+  --button-primary-bg-hover: #ec8305; /* טקסט כפתור ראשי - לבן */
   --button-secondary-bg: #ffff; /* רקע כפתור משני - ירוק בינוני */
   --button-secondary-text: #001a27; /* טקסט כפתור משני - לבן */
   --button-hover-bg-primary: #e64a19; /* רקע כפתור ראשי בריחוף - כתום כהה */
   --button-hover-bg-secondary: #388e3c; /* רקע כפתור משני בריחוף - ירוק כהה */
 
   /* צבעים לתגים */
-  --tag-bg: #ea7317; /* רקע תג*/
+  --tag-bg: #ec8305; /* רקע תג*/
+  --tag-text: #353535; /* רקע תג*/
 
   /* צבעים לתפריטים */
   --navbar-bg: #008080; /* רקע תפריט ניווט */

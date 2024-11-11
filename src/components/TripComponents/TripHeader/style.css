@@ -8,17 +8,14 @@
   gap: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: #082f49;
-  background-color: var(--background-light-blu);
+  /* background-color: var(--card-background); */
 }
 
 .tag {
   font-size: 1.4rem;
   padding: 1rem 1rem;
-  background-color: #4bb543;
-  background-color: #5c940d;
   background-color: var(--tag-bg);
-  color: #fff;
+  color: var(tag-text);
   border-radius: 7px;
 }
 
