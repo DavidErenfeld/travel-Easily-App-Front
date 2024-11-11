@@ -1,7 +1,7 @@
-.add-img-icon {
-  bottom: 0;
-  right: -7.4rem;
+.icon-select-img .add-img-icon {
   position: absolute;
+  bottom: -23.9px;
+  right: -11.6rem;
   stroke: #fff;
   width: 2.5rem;
   height: 2.5rem;

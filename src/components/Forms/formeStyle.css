@@ -8,11 +8,11 @@
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  max-height: 50rem;
-  width: 35rem;
+  max-height: 55rem;
+  width: 40rem;
   border-radius: 8px;
   z-index: 15;
-  padding: 3rem 5rem 4rem 3rem;
+  padding: 7rem 3rem;
   box-shadow: var(--shadow-large);
   background-color: var(--card-background);
 }
