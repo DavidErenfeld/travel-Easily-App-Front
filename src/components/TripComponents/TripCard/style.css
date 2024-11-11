@@ -122,17 +122,12 @@
 /*480*/
 @media (max-width: 30em) {
   .trip-card {
-    margin-bottom: 12rem;
+    margin-bottom: 14rem;
   }
 
   .trip-card-profile {
     top: -5.6rem;
     left: -1.1rem;
-    /* background-color: #0d4e79; */
-  }
-
-  .icons {
-    /* background-color: #0d4e79; */
   }
 
   .trip-description {

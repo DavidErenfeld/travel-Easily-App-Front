@@ -223,7 +223,8 @@ input:focus {
 
 /*480*/
 @media (max-width: 30em) {
-  .btn-m,
+  .btn-cta-l,
+  .btn-cta-m .btn-m,
   .btn-l {
     width: 14rem;
     border-radius: 7px;

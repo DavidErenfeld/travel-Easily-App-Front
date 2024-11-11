@@ -51,11 +51,11 @@ const AddComment = ({ onSendComment, onClickCancel }: AddCommentProps) => {
         onChange={(e) => setComment(e.target.value)}
       />
       <div className="btn-container-gap-m">
-        <button className="btn-m" onClick={handleSend}>
-          send
-        </button>
         <button className="btn-m" onClick={onClickCancel}>
           cancel
+        </button>
+        <button className="btn-cta-m" onClick={handleSend}>
+          send
         </button>
       </div>
     </section>
