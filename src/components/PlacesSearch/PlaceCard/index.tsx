@@ -17,43 +17,79 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => (
 
     <div className="place-details ">
       <div className="detail-item flex-space-between">
-        <span>{place.address}</span>
-        <MapPin className="icon-search" />
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {place.address}
+        </a>
+        <a
+          href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <MapPin className="icon-search" />
+        </a>
       </div>
 
       <div className="detail-item flex-space-between">
-        <span>{place.phone || "Not available"}</span>
-        <Phone className="icon-search" />
+        <a href={`tel:${place.phone}`}>
+          <span>{place.phone || "Not available"}</span>
+        </a>
+        <a href={`tel:${place.phone}`}>
+          <Phone className="icon-search" />
+        </a>
       </div>
       <div className="detail-item">
         <span>
           {place.website === "Not available" ? (
-            "Not available"
+            "Website is not available"
           ) : (
             <a href={place.website} target="_blank" rel="noopener noreferrer">
               Website
             </a>
           )}
         </span>
-        <ExternalLink className="icon-search" />
+        {place.website === "Not available" ? (
+          <ExternalLink className="icon-search" />
+        ) : (
+          <a href={place.website} target="_blank" rel="noopener noreferrer">
+            <ExternalLink className="icon-search" />
+          </a>
+        )}
       </div>
 
       <div className="detail-item ">
         {place.rating ? (
-          <span>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {place.rating} / 5 ( {place.user_ratings_total} ratings )
-          </span>
+          </a>
         ) : (
           "Not rated yet"
         )}
-        <Star className="icon-search" />
+        {place.rating ? (
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Star className="icon-search" />
+          </a>
+        ) : (
+          <Star className="icon-search" />
+        )}
       </div>
 
       <div className="detail-item nav-icons">
         <span>Navigation</span>
         <div className="flex-center-gap-s">
           <a
-            href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`}
+            href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
             target="_blank"
             rel="noopener noreferrer"
             className="icon-search"
@@ -61,7 +97,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => (
             <GoogleMapsIcon />
           </a>
           <a
-            href={`https://waze.com/ul?ll=${place.lat},${place.lon}&navigate=yes`}
+            href={`https://waze.com/ul?ll=${place.name}&navigate=yes`}
             target="_blank"
             rel="noopener noreferrer"
             className="icon-search"

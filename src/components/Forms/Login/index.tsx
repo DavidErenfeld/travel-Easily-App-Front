@@ -102,12 +102,12 @@ function Login() {
         </div>
       ) : (
         <div className="buttons-box flex-center-column-gap">
-          <button type="submit" className="btn-l">
+          <button type="submit" className="btn-cta-l">
             Sign in
           </button>
           <p>or</p>
           <Link to="/register">
-            <button className="btn-l">Sign up</button>
+            <button className="btn-cta-l">Sign up</button>
           </Link>
         </div>
       )}

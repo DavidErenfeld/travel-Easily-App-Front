@@ -149,8 +149,8 @@ const Profile: React.FC = () => {
             </select>
           </div>
 
-          <button className="btn-l" onClick={onClickSend}>
-            SEND
+          <button className="btn-cta-l" onClick={onClickSend}>
+            Send
           </button>
         </div>
       </section>

@@ -11,6 +11,12 @@
 .text-area {
   position: relative;
 }
+
+.day-num {
+  color: var(--primary-text);
+  font-size: 1.8rem;
+  font-weight: 500;
+}
 .add-image-icon {
   position: absolute;
   top: 2.2rem;

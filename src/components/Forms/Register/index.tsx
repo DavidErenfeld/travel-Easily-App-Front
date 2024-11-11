@@ -108,7 +108,6 @@ function Register() {
       login();
       navigate("/");
       console.log("user is logt");
-      // onLogin(true);
     } catch (e) {
       console.log(e);
     }
@@ -186,7 +185,7 @@ function Register() {
           <LoadingDots />
         </div>
       ) : (
-        <button type="submit" className="btn-l">
+        <button type="submit" className="btn-cta-l">
           Submit
         </button>
       )}

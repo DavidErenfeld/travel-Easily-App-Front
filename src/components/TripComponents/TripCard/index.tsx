@@ -8,6 +8,8 @@ import useTripCard from "../../../Hooks/useTripCard";
 import TripDescription from "../TripDescription";
 import ShareButtons from "../../UIComponents/ShareButtons";
 import SuccessMessage from "../../UIComponents/SuccessMessage";
+import { Heart, ThumbsUp, Share, Send, Share2 } from "lucide-react";
+
 import "./style.css";
 
 interface TripCardProps {
@@ -28,8 +30,8 @@ const TripCard = ({ trip }: TripCardProps) => {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
-  const likeColor = isLiked ? "blue" : "white";
-  const favoriteColor = isFavorite ? "#00a8ff" : "white";
+  const likeColor = isLiked ? "true" : "false";
+  const favoriteColor = isFavorite ? "true" : "false";
 
   const handleLikeClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -94,18 +96,15 @@ const TripCard = ({ trip }: TripCardProps) => {
       </Link>
       <div className="icons">
         <div className="icons-area">
-          <FaThumbsUp
-            onClick={handleLikeClick}
-            className={`like-icon ${likeColor}`}
-          />
+          <ThumbsUp onClick={handleLikeClick} className={`icon ${likeColor}`} />
         </div>
         <div className="icons-area">
-          <FaHeart
+          <Heart
             onClick={handleFavoriteClick}
-            style={{ color: favoriteColor }}
+            className={`icon ${favoriteColor}`}
           />
         </div>
-        <FaShareAlt className="share-icon" onClick={handleShareClick} />
+        <Share2 className="icon share-icon" onClick={handleShareClick} />
       </div>
       {isShareClicked && !navigator.share && (
         <div className="trip-card-share-buttons">

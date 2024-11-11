@@ -13,6 +13,7 @@ import ImageCarousel from "../../UIComponents/ImageCarousel/index.tsx";
 import LoadingDots from "../../UIComponents/Loader";
 import ShareButtons from "../../UIComponents/ShareButtons/index.tsx";
 import "./style.css";
+import { Share2 } from "lucide-react";
 
 const token = localStorage.getItem("accessToken");
 const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
@@ -200,8 +201,8 @@ const TripDetails = () => {
                 {trip && <TripHeader trip={trip} />}
                 <section className="details-container flex-center-column">
                   <div className="trip-details-share-buttons">
-                    <FaShareAlt
-                      className="share-icon"
+                    <Share2
+                      className="icon share-icon"
                       onClick={handleShareClick}
                     />
                     {isShareClicked && !navigator.share && (
@@ -224,7 +225,7 @@ const TripDetails = () => {
                 {viewMode === "main" && (
                   <section className="btn-container-gap-m">
                     <button
-                      className="btn-l"
+                      className="btn-cta-l"
                       onClick={() => setViewMode("addComment")}
                     >
                       Add Comment

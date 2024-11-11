@@ -59,8 +59,8 @@
   padding: 10px 10px;
   width: 20rem;
   border-radius: 9px;
-  background: #00a8ff;
-  color: #fff;
+  background-color: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
   border: none;
   cursor: pointer;
   font-weight: 500;
@@ -68,34 +68,53 @@
 }
 
 .btn-el:hover {
-  background-color: #007bbf;
+  background-color: var(--hover-effect);
+  color: var(--button-hover-text-color);
 }
 
+.btn-cta-m,
 .btn-m,
+.btn-cta-l,
 .btn-l {
   font-size: 1.6rem;
   padding: 8px 8px;
   width: 20rem;
   border-radius: 9px;
-  background: #00a8ff;
-  color: #fff;
+  background-color: var(--button-primary-text);
+  color: var(--primary-text);
   border: none;
   cursor: pointer;
   font-weight: 500;
-  transition: all 0.3s;
+  transition: all 0.4s;
 }
 
+.btn-cta-m,
 .btn-m {
   padding: 6px;
   width: 10rem;
   border-radius: 6px;
   font-weight: 400;
 }
+
 .btn-m:hover,
 .btn-l:hover {
-  background: #bae6fd;
+  background: var(--hover-effect);
+  color: var(--button-secondary-text);
   transition: all 0.4s;
-  color: #232d59;
+}
+
+.btn-cta-exl,
+.btn-cta-l,
+.btn-cta-m {
+  background-color: var(--button-cta-bg);
+  color: var(--button-primary-text);
+}
+
+.btn-cta-exl:hover,
+.btn-cta-l:hover,
+.btn-cta-m:hover {
+  background-color: var(--button-cta-bg-hover);
+  color: var(--button-secondary-text);
 }
 
 .mode-btn {
@@ -121,12 +140,12 @@ input:focus {
 }
 
 .text-danger {
-  color: red;
+  color: var(--error-bg);
   text-align: start;
 }
 
 .error-message {
-  color: #ff5151;
+  color: var(--error-bg);
   font-size: 1.2rem;
   margin-top: 5px;
 }
@@ -142,11 +161,15 @@ input:focus {
   width: 1.8rem;
   height: 1.8rem;
 }
+.icon {
+  height: 3rem;
+  width: 3rem;
+  color: var(--tag-bg);
+  transition: all 0.4s;
+}
 
-.share-icon {
-  width: 2.8rem;
-  height: 2.8rem;
-  cursor: pointer;
+.icon:hover {
+  color: var(--button-cta-bg-hover);
 }
 
 .drop-list-icon {
@@ -155,12 +178,12 @@ input:focus {
 }
 
 .add-img-icon {
-  stroke: #fff;
+  stroke: var(--button-primary-text);
   transition: all 0.2s;
 }
 
 .add-img-icon:hover {
-  stroke: #4bb543;
+  stroke: var(--button-cta-bg-hover);
 }
 
 .waze-icon {

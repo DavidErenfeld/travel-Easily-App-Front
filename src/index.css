@@ -18,6 +18,58 @@
   height: 100%;
 }
 
+/* ///////////////////////////////////////////////////////// */
+
+:root {
+  /* צבעים ראשיים */
+  --primary-teal: #219ebc; /* כחול-ירקרק - כותרות וכפתורים ראשיים */
+  --accent-orange: #ff7043; /* כתום חם - קריאות לפעולה */
+  --secondary-green: #4caf50; /* ירוק בינוני - כפתורים משניים והדגשות */
+  --background-light-blu: #8ecae6; /* אפור בהיר מאוד - רקע כללי */
+  --card-background: #219ebc; /* לבן - רקע לכרטיסיות */
+
+  /* צבעים לטקסט */
+  --text-primary: #001a27; /* טקסט ראשי - כחול כהה */
+  --text-secondary: #ffffff; /* טקסט משני - אפור כהה */
+  --text-muted: #78909c; /* טקסט מופחת */
+  --text-highlight: #023e8a; /* טקסט להדגשה - כחול-ירקרק */
+
+  /* צבעים לכפתורים */
+  --button-cta-bg: #ea7317; /* רקע כפתור ראשי - כתום חם */
+  --button-cta-bg-hover: #f1b688; /* רקע כפתור ראשי - כתום חם */
+  --button-primary-text: #ffffff; /* טקסט כפתור ראשי - לבן */
+  --button-secondary-bg: #ffff; /* רקע כפתור משני - ירוק בינוני */
+  --button-secondary-text: #001a27; /* טקסט כפתור משני - לבן */
+  --button-hover-bg-primary: #e64a19; /* רקע כפתור ראשי בריחוף - כתום כהה */
+  --button-hover-bg-secondary: #388e3c; /* רקע כפתור משני בריחוף - ירוק כהה */
+
+  /* צבעים לתגים */
+  --tag-bg: #ea7317; /* רקע תג*/
+
+  /* צבעים לתפריטים */
+  --navbar-bg: #008080; /* רקע תפריט ניווט */
+  --navbar-text: #ffffff; /* טקסט תפריט ניווט */
+
+  /* צבעים לגבולות והפרדות */
+  --border-color: #e0e0e0; /* גבולות כלליים */
+  --card-border: #b0bec5; /* גבול כרטיסיות */
+
+  /* צבעים להודעות מערכת */
+  --success-bg: #4caf50; /* הודעות הצלחה */
+  --error-bg: #b8001f; /* הודעות שגיאה */
+  --warning-bg: #ffb300; /* הודעות אזהרה */
+  --info-bg: #0288d1; /* הודעות מידע */
+
+  /* ריחוף ואפקטים */
+  --hover-effect: rgba(255, 122, 13, 0.922); /* אפקט ריחוף כללי */
+  --shadow-small-or: 0 2px 4px rgba(236, 107, 8, 0.356); /* צל קטן */
+  --shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1); /* צל קטן */
+  --shadow-large: 0 4px 8px rgba(0, 0, 0, 0.2); /* צל גדול */
+  --shadow-ex-large: 0.4px 3.4px 6.8px rgba(0.9, 1.3, 1.3, 0.5); /*  צל גדול מאוד */
+}
+
+/* ////////////////////////////////////////////////////////// */
+
 html {
   font-size: 62.5%;
   overflow-x: hidden;
@@ -29,11 +81,9 @@ body {
   position: relative;
   margin: 0;
   height: 100vh;
-  background-color: #fff;
-  background-color: #bae6fd;
-  background-color: #082f49;
-  color: #082f49;
   color: rgba(255, 255, 255, 0.87);
+  background-color: var(--background-light-blu);
+  color: var(--text-primary);
   overflow-x: hidden;
 }
 
@@ -44,11 +94,6 @@ body {
 .section {
   padding-left: 3rem;
   padding-right: 3rem;
-}
-
-.day-name {
-  font-size: 2rem;
-  color: #e0f2fe;
 }
 
 a {
@@ -90,7 +135,7 @@ a {
   }
 
   body {
-    background-color: #0d4e79;
+    background-color: var(--background-light-blu);
     height: 90vh;
   }
 

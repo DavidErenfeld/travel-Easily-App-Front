@@ -13,7 +13,8 @@
   border-radius: 8px;
   z-index: 15;
   padding: 3rem 5rem 4rem 3rem;
-  box-shadow: 0.1px 2px 8px 0.1px #7dd3fc;
+  box-shadow: var(--shadow-large);
+  background-color: var(--card-background);
 }
 
 .form-image-profile {
@@ -36,7 +37,7 @@
 .form-title {
   font-size: 2rem;
   text-align: center;
-  color: #fff;
+  color: var(--text-secondary);
 }
 
 .icon-select-img > .icons-descripton-trip {
@@ -55,4 +56,8 @@
   font-size: 1.6rem;
   text-align: center;
   line-height: 1.4;
+}
+
+.forgot-password:hover {
+  color: var(--text-secondary);
 }

@@ -10,7 +10,7 @@
 
 .trip-day-title {
   font-size: 2rem;
-  color: #00a8ff;
+  color: var(--text-highlight);
 }
 
 /*480*/

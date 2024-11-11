@@ -205,7 +205,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
         )}
         <div className="update-trip-container">
           <div className="update-details">
-            <p className="day-name">Day {dayEdits[currentDayIndex].dayNum}</p>
+            <p className="day-num">Day {dayEdits[currentDayIndex].dayNum}</p>
             <button className="btn-l" onClick={onClickReadMode}>
               Read Mode
             </button>
@@ -250,12 +250,12 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
           <button className="btn-m" onClick={handleDeleteTripClick}>
             Delete Trip
           </button>
-          <button className="btn-m add-day-btn" onClick={addNewDay}>
+          <button className="btn-m" onClick={addNewDay}>
             Add Day
           </button>
         </div>
 
-        <button className="btn-l" onClick={handleSave}>
+        <button className="btn-cta-l" onClick={handleSave}>
           Save
         </button>
       </section>

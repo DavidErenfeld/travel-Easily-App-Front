@@ -8,12 +8,6 @@
   padding-top: 28rem;
 }
 
-.main-title {
-  font-size: 4.6rem;
-  letter-spacing: 1.2px;
-  color: #00a8ff;
-}
-
 .main-buttons {
   display: flex;
   justify-content: center;
@@ -29,6 +23,7 @@
   font-size: 4.6rem;
   letter-spacing: 1.2px;
   color: #00a8ff;
+  color: var(--primary-blue);
   white-space: nowrap;
   overflow: hidden;
   width: 0;

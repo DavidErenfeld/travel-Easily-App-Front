@@ -6,29 +6,29 @@
   align-items: flex-start;
   justify-content: center;
   gap: 2rem;
-  border: solid 1px #00a8ff;
+  box-shadow: var(--shadow-ex-large);
   padding: 2rem;
-  border-radius: 4px;
-  margin-bottom: 9.8rem;
+  border-radius: 7px;
+  margin-bottom: 12.8rem;
 }
 
 .trip-card-profile {
   position: absolute;
-  top: -4.5rem;
-  left: 1.7rem;
+  top: -5.5rem;
+  left: -1rem;
   display: flex;
   align-items: end;
   justify-content: center;
   gap: 0.5rem;
   z-index: 2;
   cursor: pointer;
-  background-color: #082f49;
+  background-color: var(--background-light-blu);
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
 .profile-name {
-  color: #d2dafa;
+  color: var(--text-primary);
   font-size: 1.4rem;
 }
 
@@ -36,7 +36,7 @@
   height: 5rem;
   width: 5rem;
   border-radius: 50%;
-  border: 2px solid #48527a;
+  box-shadow: var(--shadow-large);
   object-fit: cover;
   object-position: center;
 }
@@ -46,22 +46,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-}
-
-.photos-btn {
-  position: absolute;
-  bottom: -0.7rem;
-  right: 1.7rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  background-color: #082f49;
-}
-.photo-tag {
-  font-size: 1.4rem;
-  padding: 0.5rem 1rem;
-  background-color: #00a8ff;
-  border-radius: 7px;
-  cursor: pointer;
 }
 
 .trip-description {
@@ -82,49 +66,41 @@
 
 .icons {
   position: absolute;
-  bottom: -1.4rem;
-  left: 1.7rem;
+  bottom: -2.1rem;
+  left: 3.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  background-color: #082f49;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-.trip-card-share-buttons {
-  position: absolute;
-  top: -0.4rem;
-  left: 14.3rem;
-}
-
-.icons svg {
-  width: 2.8rem;
-  height: 2.8rem;
+  padding: 1rem 2rem;
+  border-radius: 7px;
+  background-color: var(--background-light-blu);
+  box-shadow: var(--shadow-large);
   cursor: pointer;
+  transition: all 0.4s;
 }
 
-.icons svg.share-icon {
-  width: 2.8rem;
-  height: 2.8rem;
+.icons:hover {
+  box-shadow: var(--shadow-small-or);
 }
 
-.icons-area {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-size: 1.6rem;
+.icons .icon {
+  height: 3rem;
+  width: 3rem;
+  color: var(--tag-bg);
+  transition: all 0.4s;
 }
 
-.like-icon.white {
-  /* background-color: #232d59; */
-  fill: #fff;
+.icons .icon:hover {
+  color: var(--button-cta-bg-hover);
 }
 
-.like-icon.blue {
-  fill: #00a8ff;
+.icon.false {
+  color: var(--button-primary-text);
+}
+
+.icon.true {
+  fill: var(--tag-bg);
 }
 
 .coments-and-likes-details {
@@ -132,7 +108,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.6rem;
-  color: #a7e2ff;
+  color: var(--text-primary);
   gap: 2rem;
   position: absolute;
   bottom: 1rem;

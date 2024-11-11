@@ -9,6 +9,7 @@
   padding-left: 1rem;
   padding-right: 1rem;
   background-color: #082f49;
+  background-color: var(--background-light-blu);
 }
 
 .tag {
@@ -16,7 +17,7 @@
   padding: 1rem 1rem;
   background-color: #4bb543;
   background-color: #5c940d;
-  background-color: #66a80f;
+  background-color: var(--tag-bg);
   color: #fff;
   border-radius: 7px;
 }

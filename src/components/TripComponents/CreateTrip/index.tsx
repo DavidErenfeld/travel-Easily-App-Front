@@ -129,7 +129,7 @@ const CreateTrip: React.FC = () => {
       >
         <div className="update-trip-container">
           <div className="update-details">
-            <p className="day-name">Day {dayEdits[currentDayIndex].dayNum}</p>
+            <p className="day-num">Day {dayEdits[currentDayIndex].dayNum}</p>
           </div>
           <textarea
             className="update-trip-description"
@@ -172,7 +172,7 @@ const CreateTrip: React.FC = () => {
         </div>
 
         {currentDayIndex === dayEdits.length - 1 && (
-          <button className="btn-l submit-trip-btn" onClick={handleSubmit}>
+          <button className="btn-cta-l submit-trip-btn" onClick={handleSubmit}>
             Submit
           </button>
         )}

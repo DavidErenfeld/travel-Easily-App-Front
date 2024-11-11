@@ -182,7 +182,7 @@ const TripForm: React.FC = () => {
             )}
           </div>
 
-          <button className="btn-l" onClick={goToCreateTripPage}>
+          <button className="btn-cta-l" onClick={goToCreateTripPage}>
             Next
           </button>
         </div>
