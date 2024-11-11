@@ -81,7 +81,7 @@
   width: 20rem;
   border-radius: 9px;
   background-color: var(--button-primary-bg);
-  color: var(--primary-text);
+  color: var(--text-primary);
   border: none;
   cursor: pointer;
   font-weight: 500;
@@ -107,7 +107,7 @@
 .btn-cta-l,
 .btn-cta-m {
   background-color: var(--button-cta-bg);
-  color: var(--button-primary-text);
+  color: var(--text-primary);
 }
 
 .btn-cta-exl:hover,
@@ -153,18 +153,12 @@ input:focus {
 /*************************
 # ICONS
 **************************/
-.icon {
-  cursor: pointer;
-}
 
-.icon {
-  width: 1.8rem;
-  height: 1.8rem;
-}
 .icon {
   height: 3rem;
   width: 3rem;
   color: var(--tag-bg);
+  cursor: pointer;
   transition: all 0.4s;
 }
 
@@ -178,7 +172,7 @@ input:focus {
 }
 
 .add-img-icon {
-  stroke: var(--button-primary-text);
+  stroke: var(--button-primary-bg);
   transition: all 0.2s;
 }
 

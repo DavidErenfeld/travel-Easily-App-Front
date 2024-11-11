@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import SearchForm from "../SearchForm";
 import { Place } from "../../../services/placesService";
-import "./style.css";
 import PlacesList from "../PlacesList";
 import Header from "../../Header";
 import LoadingDots from "../../UIComponents/Loader";
+import "./style.css";
 
 const PlacesSearchPage: React.FC = () => {
   const [places, setPlaces] = useState<Place[]>([]);
@@ -13,8 +13,8 @@ const PlacesSearchPage: React.FC = () => {
 
   const handleResults = (results: Place[]) => {
     setPlaces(results);
-    setLoading(false); // מסיים את הטעינה לאחר קבלת הנתונים
-    setNoResults(results.length === 0); // בודק אם יש תוצאות
+    setLoading(false);
+    setNoResults(results.length === 0);
   };
 
   return (
@@ -22,12 +22,11 @@ const PlacesSearchPage: React.FC = () => {
       <Header />
       <section className="section places-search-page">
         <h1>Explore Nearby</h1>
-        <div className="search-form-container">
-          <SearchForm onResults={handleResults} setLoading={setLoading} />
-        </div>
+
+        <SearchForm onResults={handleResults} setLoading={setLoading} />
 
         {loading ? (
-          <LoadingDots /> // מציג את הטעינה
+          <LoadingDots />
         ) : noResults ? (
           <p>No places found. Please try another search.</p>
         ) : (

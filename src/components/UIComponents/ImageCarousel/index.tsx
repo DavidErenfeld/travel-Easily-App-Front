@@ -36,7 +36,6 @@ const ImageCarousel = ({
     }
   };
 
-  // שימוש ב-useEffect לניהול מצב טעינה של התמונות
   useEffect(() => {
     const loadImages = async () => {
       const imageLoadPromises = images.map(
@@ -48,7 +47,7 @@ const ImageCarousel = ({
           })
       );
       await Promise.all(imageLoadPromises);
-      setLoading(false); // שינוי מצב טעינה לאחר שהתמונות נטענו
+      setLoading(false);
     };
 
     loadImages();
@@ -61,7 +60,7 @@ const ImageCarousel = ({
   };
   return (
     <>
-      {loading ? ( // הצגת רכיב טעינה בזמן שהקומפוננטה בטעינה
+      {loading ? (
         <div className="loading-container">
           <LoadingDots />
         </div>

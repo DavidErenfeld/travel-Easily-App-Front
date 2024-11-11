@@ -9,7 +9,7 @@
   box-shadow: var(--shadow-large);
   padding: 2rem;
   border-radius: 7px;
-  margin-bottom: 12.8rem;
+  margin-bottom: 14rem;
   background-color: var(--card-background);
 }
 
@@ -121,7 +121,7 @@
 /*480*/
 @media (max-width: 30em) {
   .trip-card {
-    margin-bottom: 14rem;
+    margin-bottom: 15rem;
   }
 
   .trip-card-profile {

@@ -174,7 +174,7 @@ const AdvancedSearch: React.FC = () => {
               />
             </div>
 
-            <button className="btn-l" onClick={handleSubmit}>
+            <button className="btn-cta-l" onClick={handleSubmit}>
               Search
             </button>
           </div>

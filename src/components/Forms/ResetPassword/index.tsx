@@ -98,7 +98,7 @@ function ResetPassword() {
           <LoadingDots />
         </div>
       ) : (
-        <button type="submit" className="btn-l">
+        <button type="submit" className="btn-cta-l">
           Reset Password
         </button>
       )}

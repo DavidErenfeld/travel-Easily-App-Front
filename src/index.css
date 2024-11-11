@@ -30,8 +30,8 @@
   --card-background: #219ebc; /* לבן - רקע לכרטיסיות */
 
   /* צבעים לטקסט */
-  --text-primary: #001a27; /* טקסט ראשי - כחול כהה */
-  --text-secondary: #ffffff; /* טקסט משני - אפור כהה */
+  --text-primary: #001a27;
+  --text-secondary: #ffffff;
   --text-muted: #78909c; /* טקסט מופחת */
   --text-highlight: #01295c; /* טקסט להדגשה - כחול-ירקרק */
 
@@ -101,6 +101,12 @@ body {
   padding-right: 3rem;
 }
 
+h1 {
+  font-size: 4rem;
+  margin-bottom: 3rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
 a {
   text-decoration: none;
   color: inherit;

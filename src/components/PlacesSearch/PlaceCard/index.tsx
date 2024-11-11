@@ -16,11 +16,12 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => (
     </div>
 
     <div className="place-details ">
-      <div className="detail-item flex-space-between">
+      <div className="detaile-item flex-space-between">
         <a
           href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
           target="_blank"
           rel="noopener noreferrer"
+          className="address"
         >
           {place.address}
         </a>
@@ -33,7 +34,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => (
         </a>
       </div>
 
-      <div className="detail-item flex-space-between">
+      <div className="detaile-item flex-space-between">
         <a href={`tel:${place.phone}`}>
           <span>{place.phone || "Not available"}</span>
         </a>
@@ -41,7 +42,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => (
           <Phone className="icon-search" />
         </a>
       </div>
-      <div className="detail-item">
+      <div className="detaile-item">
         <span>
           {place.website === "Not available" ? (
             "Website is not available"
@@ -60,7 +61,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => (
         )}
       </div>
 
-      <div className="detail-item ">
+      <div className="detaile-item ">
         {place.rating ? (
           <a
             href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
@@ -85,7 +86,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => (
         )}
       </div>
 
-      <div className="detail-item nav-icons">
+      <div className="detaile-item nav-icons">
         <span>Navigation</span>
         <div className="flex-center-gap-s">
           <a

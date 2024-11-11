@@ -68,21 +68,16 @@ const SearchForm: React.FC<SearchFormProps> = ({ onResults, setLoading }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="search-form">
+    <form onSubmit={handleSubmit} className="search-form-section">
       <div className="location-container flex-space-between">
         <button
           type="button"
-          className="share-location-btn btn-l"
+          className="btn-cta-l"
           onClick={handleShareLocation}
         >
           Share My Location
         </button>
-        {location && (
-          <p className="location-display">
-            <span className="location-text">Location: </span>
-            {location}
-          </p>
-        )}
+        {location && <p className="location-display">{location}</p>}
         {errors.location && (
           <p className="text-danger error-message">{errors.location}</p>
         )}
@@ -123,7 +118,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onResults, setLoading }) => {
         </label>
       </div>
 
-      <button type="submit" className="submit-search-btn btn-l">
+      <button type="submit" className="submit-search-btn btn-cta-l">
         Search
       </button>
     </form>

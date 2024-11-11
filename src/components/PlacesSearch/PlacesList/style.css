@@ -1,12 +1,12 @@
 .places-list {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 3rem;
 }
 
 /* 784 */
-@media (max-width: 49em) {
+@media (max-width: 40em) {
   .places-list {
     display: flex;
     flex-direction: column;

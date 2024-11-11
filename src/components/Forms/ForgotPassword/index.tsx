@@ -83,7 +83,7 @@ function ForgotPassword() {
           </button>
           <p>or</p>
           <Link to="/register">
-            <button className="btn-l">Sign up</button>
+            <button className="btn-cta-l">Sign up</button>
           </Link>
         </div>
       )}

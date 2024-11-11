@@ -11,10 +11,10 @@ const PopUp = ({ message, handleDeleteBtn, handleCancelBtn }: PopUpProps) => {
       <div className="pop-up">
         <p>{message}</p>
         <div className="pop-up-buttons">
-          <button className="btn-m" onClick={() => handleDeleteBtn()}>
+          <button className="btn-cta-m" onClick={() => handleDeleteBtn()}>
             delete
           </button>
-          <button className="btn-m" onClick={() => handleCancelBtn()}>
+          <button className="btn-cta-m" onClick={() => handleCancelBtn()}>
             cancel
           </button>
         </div>
