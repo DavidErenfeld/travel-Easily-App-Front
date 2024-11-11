@@ -23,10 +23,10 @@ const Header = () => {
     try {
       await logout();
       setProfileImg("/images/user.png");
-      setIsSidebarOpen(false); // סוגר את התפריט לאחר התנתקות
+      setIsSidebarOpen(false);
     } catch (error) {
       setProfileImg("/images/user.png");
-      setIsSidebarOpen(false); // סוגר את התפריט לאחר התנתקות
+      setIsSidebarOpen(false);
       console.log(error);
     }
   };
@@ -96,10 +96,6 @@ const Header = () => {
                 <Link to="/login">
                   <h1 className="menu-item">Sign in</h1>
                 </Link>
-
-                {/* <Link to="/register">
-                  <h1 className="menu-item">Register</h1>
-                </Link> */}
               </div>
             )}
           </div>

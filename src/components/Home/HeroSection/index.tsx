@@ -1,8 +1,10 @@
 import React from "react";
 import { Compass, Globe } from "lucide-react";
 import "./style.css";
+import { Link, useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <section className="hero-section">
       <div className="description-container">
@@ -21,7 +23,9 @@ const HeroSection = () => {
         />
       </div>
 
-      <button className="btn-cta-exl">Start Exploring Itineraries</button>
+      <button onClick={() => navigate("/searchTrip")} className="btn-cta-exl">
+        Start Exploring Itineraries
+      </button>
     </section>
   );
 };

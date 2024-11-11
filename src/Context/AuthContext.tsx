@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import tripsService from "../services/tripsService";
 import authService from "../services/authService";
 
 interface AuthContextType {
