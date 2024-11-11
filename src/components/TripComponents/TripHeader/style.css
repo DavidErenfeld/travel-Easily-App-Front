@@ -26,6 +26,7 @@
     top: -1.3rem;
     right: 1.1rem;
     gap: 0.5rem;
+    background-color: var(--tag-mobile-bg);
   }
 
   .tag {
@@ -44,13 +45,12 @@
     gap: 0.5rem;
     padding-left: 0;
     padding-right: 0;
-    /* background-color: #0d4e79; */
   }
 
   .tag {
     font-size: 1.4rem;
     padding: 0.9rem 0.6rem;
-    border-radius: 3px;
+    border-radius: 5px;
   }
 }
 

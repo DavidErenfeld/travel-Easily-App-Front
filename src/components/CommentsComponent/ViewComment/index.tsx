@@ -58,21 +58,17 @@ const ViewComment = ({
                 <div className="comment-details">
                   <p className="comment-owner">{comment.owner}</p>
                   <p className="comment-date">
-                    <p className="comment-date">
-                      <p className="comment-date">
-                        {new Date(comment.date).toLocaleDateString("en-US", {
-                          day: "2-digit",
-                          month: "2-digit",
-                          year: "numeric",
-                        })}
-                      </p>
-                    </p>
+                    {new Date(comment.date).toLocaleDateString("en-US", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "numeric",
+                    })}
                   </p>
                 </div>
                 {comment.ownerId === loggedUserId && (
                   <MdDelete
                     onClick={() => handleDeleteComment(comment._id!)}
-                    className="delete-comment-icon"
+                    className="icon delete-comment-icon"
                   />
                 )}
               </div>

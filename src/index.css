@@ -6,7 +6,8 @@
 
 #root {
   font-family: "Poppins", sans-serif;
-  font-weight: 400;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -32,7 +33,7 @@
   --text-primary: #001a27; /* טקסט ראשי - כחול כהה */
   --text-secondary: #ffffff; /* טקסט משני - אפור כהה */
   --text-muted: #78909c; /* טקסט מופחת */
-  --text-highlight: #023e8a; /* טקסט להדגשה - כחול-ירקרק */
+  --text-highlight: #01295c; /* טקסט להדגשה - כחול-ירקרק */
 
   /* צבעים לכפתורים */
   --button-cta-bg: #fa9419; /* רקע כפתור ראשי - כתום חם */
@@ -47,6 +48,7 @@
 
   /* צבעים לתגים */
   --tag-bg: #ec8305; /* רקע תג*/
+  --tag-mobile-bg: #ec8305; /* רקע תג*/
   --tag-text: #353535; /* רקע תג*/
 
   /* צבעים לתפריטים */

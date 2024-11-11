@@ -26,7 +26,7 @@
   align-items: end;
   justify-content: start;
   font-size: 1.4rem;
-  background-color: var(--primary-teal);
+  background-color: var(--button-primary-bg);
   color: var(--text-primary);
   border-radius: 4px;
   max-width: 70%;
@@ -53,21 +53,16 @@
   font-size: 1.2rem;
   gap: 1rem;
   color: var(--text-primary);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .delete-comment-icon {
-  color: #032233;
   font-size: 2.8rem;
   position: absolute;
   top: 0.5rem;
   right: 0.1rem;
   cursor: pointer;
   transition: all 0.2s;
-}
-
-.delete-comment-icon:hover {
-  color: #0d4e79;
 }
 
 .close-comments {
@@ -86,11 +81,5 @@
     top: 0.3rem;
     right: 0.3rem;
     cursor: pointer;
-  }
-}
-/*480*/
-@media (max-width: 30em) {
-  .delete-comment-btn {
-    background-color: #042d43;
   }
 }

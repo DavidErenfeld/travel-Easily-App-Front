@@ -4,9 +4,14 @@ import "./style.css";
 interface AddCommentProps {
   onSendComment: (comment: string) => void;
   onClickCancel: () => void;
+  isSubmitting: boolean; // הוספת isSubmitting כמאפיין
 }
 
-const AddComment = ({ onSendComment, onClickCancel }: AddCommentProps) => {
+const AddComment = ({
+  onSendComment,
+  onClickCancel,
+  isSubmitting,
+}: AddCommentProps) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [comment, setComment] = useState("");
 
@@ -34,7 +39,7 @@ const AddComment = ({ onSendComment, onClickCancel }: AddCommentProps) => {
   }, []);
 
   const handleSend = () => {
-    if (comment.trim() !== "") {
+    if (comment.trim() !== "" && !isSubmitting) {
       onSendComment(comment);
       setComment("");
     }
@@ -49,13 +54,22 @@ const AddComment = ({ onSendComment, onClickCancel }: AddCommentProps) => {
         rows={1}
         value={comment}
         onChange={(e) => setComment(e.target.value)}
+        disabled={isSubmitting}
       />
       <div className="btn-container-gap-m">
-        <button className="btn-m" onClick={onClickCancel}>
+        <button
+          className="btn-m"
+          onClick={onClickCancel}
+          disabled={isSubmitting}
+        >
           cancel
         </button>
-        <button className="btn-cta-m" onClick={handleSend}>
-          send
+        <button
+          className="btn-cta-m"
+          onClick={handleSend}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Sending..." : "Send"}{" "}
         </button>
       </div>
     </section>

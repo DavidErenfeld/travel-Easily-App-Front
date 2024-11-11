@@ -2,9 +2,6 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: #082f49;
-  background-color: #bae6fd;
-  background-color: #7cc6ed;
   background-color: var(--background-light-blu);
   display: flex;
   align-items: center;
@@ -13,6 +10,7 @@
   padding-bottom: 3rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  font-weight: 600;
   z-index: 1000;
 }
 

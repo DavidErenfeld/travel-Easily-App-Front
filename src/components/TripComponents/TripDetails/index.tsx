@@ -32,6 +32,8 @@ const TripDetails = () => {
   const [viewMode, setViewMode] = useState("main");
   const [updateMode, setUpdateMode] = useState(false);
   const [isShareClicked, setIsShareClicked] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { id } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
   const [trip, setTrip] = useState<ITrips | null>(null);
@@ -62,8 +64,12 @@ const TripDetails = () => {
       data.tripPhotos && data.tripPhotos?.length > 0
         ? setMMargin("")
         : setMMargin("m-margin");
+      setErrorMessage("");
     } catch (err) {
       console.error("Failed to load trip:", err);
+      setErrorMessage(
+        "An error occurred while loading the data. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -124,8 +130,6 @@ const TripDetails = () => {
     newCommentText: string,
     stayInViewMode: boolean = false
   ) => {
-    setLoading(true);
-
     const commentToAdd = {
       comment: newCommentText || "",
       owner: loggedUserName || "",
@@ -133,20 +137,22 @@ const TripDetails = () => {
       imgUrl: localStorage.getItem("imgUrl") || "",
     };
 
+    setIsSubmitting(true);
     try {
       await tripsService.addComment(trip?._id || "", commentToAdd);
-
       const updatedTrip = await tripsService.getByTripId(trip?._id || "");
       socket.emit("commentAdded", updatedTrip);
       loadTripFromServer();
+      setErrorMessage("");
 
       if (!stayInViewMode) {
         setViewMode("main");
       }
     } catch (err) {
       console.error("Failed to add comment:", err);
+      setErrorMessage("Failed to send the comment. Please try again.");
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -168,6 +174,11 @@ const TripDetails = () => {
 
   const handleCommentDeleted = async () => {
     loadTripFromServer();
+  };
+
+  const handleViewModeChange = (newMode: any) => {
+    setViewMode(newMode);
+    setErrorMessage("");
   };
 
   const imageObjects: Images[] =
@@ -222,17 +233,22 @@ const TripDetails = () => {
                   )}
                   {trip && <TripDescription trip={trip} />}
                 </section>
+                {/* הצגת הודעת שגיאה במקרה הצורך */}
+                {errorMessage && (
+                  <div className="error-message">{errorMessage}</div>
+                )}
+
                 {viewMode === "main" && (
                   <section className="btn-container-gap-m">
                     <button
                       className="btn-cta-l"
-                      onClick={() => setViewMode("addComment")}
+                      onClick={() => handleViewModeChange("addComment")}
                     >
                       Add Comment
                     </button>
                     <button
                       className="btn-l"
-                      onClick={() => setViewMode("viewComments")}
+                      onClick={() => handleViewModeChange("viewComments")}
                     >
                       View Comments
                     </button>
@@ -240,8 +256,9 @@ const TripDetails = () => {
                 )}
                 {viewMode === "addComment" && (
                   <AddComment
-                    onClickCancel={() => setViewMode("main")}
-                    onSendComment={onClickSend}
+                    onClickCancel={() => handleViewModeChange("main")}
+                    onSendComment={(text) => !isSubmitting && onClickSend(text)}
+                    isSubmitting={isSubmitting} // להעביר אינדיקציה לכפתור
                   />
                 )}
                 {viewMode === "viewComments" && trip && (
@@ -249,13 +266,14 @@ const TripDetails = () => {
                     {trip._id && trip.comments.length > 0 && (
                       <ViewComment
                         comments={trip.comments}
-                        closeComments={() => setViewMode("main")}
+                        closeComments={() => handleViewModeChange("main")}
                         tripId={trip._id}
                         onCommentDeleted={handleCommentDeleted}
                       />
                     )}
                     <AddComment
-                      onClickCancel={() => setViewMode("main")}
+                      isSubmitting={isSubmitting}
+                      onClickCancel={() => handleViewModeChange("main")}
                       onSendComment={(text) => onClickSend(text, true)}
                     />
                   </>
