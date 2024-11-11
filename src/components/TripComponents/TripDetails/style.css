@@ -100,7 +100,7 @@
     padding: 0.2rem;
     padding-top: 3rem;
     padding-bottom: 3rem;
-    background-color: #042d43;
+    /* background-color: #042d43; */
   }
 
   .main-card-section .tags {
@@ -108,7 +108,7 @@
   }
 
   .trip-details-share-buttons .share-buttons {
-    background-color: #0d4e79;
+    /* background-color: #0d4e79; */
     top: -5.4rem;
     right: -1.4rem;
   }

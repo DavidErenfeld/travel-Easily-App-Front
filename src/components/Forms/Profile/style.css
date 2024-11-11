@@ -73,7 +73,3 @@
 .form-row .form-group {
   flex-basis: 48%;
 }
-
-/*1024*/
-@media (max-width: 64em) {
-}

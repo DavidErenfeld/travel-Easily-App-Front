@@ -10,7 +10,7 @@
 
 .btn-m.delete-btn {
   font-size: 1.2rem;
-  background-color: #d70b0b;
+  background-color: var(--error-bg);
 }
 
 .delete-btn:hover {

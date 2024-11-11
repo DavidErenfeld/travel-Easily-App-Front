@@ -108,7 +108,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.6rem;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   gap: 2rem;
   position: absolute;
   bottom: 1rem;
@@ -125,11 +125,11 @@
   .trip-card-profile {
     top: -5.6rem;
     left: -1.1rem;
-    background-color: #0d4e79;
+    /* background-color: #0d4e79; */
   }
 
   .icons {
-    background-color: #0d4e79;
+    /* background-color: #0d4e79; */
   }
 
   .trip-description {
