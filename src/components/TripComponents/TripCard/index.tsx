@@ -94,30 +94,35 @@ const TripCard = ({ trip }: TripCardProps) => {
           <TripDescription trip={trip} />
         </div>
       </Link>
-      <div className="icons">
-        <div className="icons-area">
-          <ThumbsUp onClick={handleLikeClick} className={`icon ${likeColor}`} />
+      <div className="icons-details flex-space-between ">
+        <div className="icons">
+          <div className="icons-area">
+            <ThumbsUp
+              onClick={handleLikeClick}
+              className={`icon ${likeColor}`}
+            />
+          </div>
+          <div className="icons-area">
+            <Heart
+              onClick={handleFavoriteClick}
+              className={`icon ${favoriteColor}`}
+            />
+          </div>
+          <Share2 className="icon share-icon" onClick={handleShareClick} />
         </div>
-        <div className="icons-area">
-          <Heart
-            onClick={handleFavoriteClick}
-            className={`icon ${favoriteColor}`}
-          />
+        {isShareClicked && !navigator.share && (
+          <div className="trip-card-share-buttons">
+            <ShareButtons
+              url={`https://travel-easily-app.netlify.app/searchTrip/trip/${trip._id}`}
+              text={`Amazing trip to ${trip.country}! Join me on this adventure!`}
+              className={isExiting ? "hide" : "show"}
+            />
+          </div>
+        )}
+        <div className="coments-and-likes-details">
+          <p>{numOfComments} comments </p>
+          <p>{numOfLikes} likes </p>
         </div>
-        <Share2 className="icon share-icon" onClick={handleShareClick} />
-      </div>
-      {isShareClicked && !navigator.share && (
-        <div className="trip-card-share-buttons">
-          <ShareButtons
-            url={`https://travel-easily-app.netlify.app/searchTrip/trip/${trip._id}`}
-            text={`Amazing trip to ${trip.country}! Join me on this adventure!`}
-            className={isExiting ? "hide" : "show"}
-          />
-        </div>
-      )}
-      <div className="coments-and-likes-details">
-        <p>{numOfComments} comments </p>
-        <p>{numOfLikes} likes </p>
       </div>
 
       {successMessage && (
