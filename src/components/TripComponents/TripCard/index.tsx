@@ -8,8 +8,7 @@ import useTripCard from "../../../Hooks/useTripCard";
 import TripDescription from "../TripDescription";
 import ShareButtons from "../../UIComponents/ShareButtons";
 import SuccessMessage from "../../UIComponents/SuccessMessage";
-import { Heart, ThumbsUp, Share, Send, Share2 } from "lucide-react";
-
+import { Heart, ThumbsUp, Share2 } from "lucide-react";
 import "./style.css";
 
 interface TripCardProps {

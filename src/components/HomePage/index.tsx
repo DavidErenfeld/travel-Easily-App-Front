@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import "./style.css";
 import Header from "../Header";
 import HeroSection from "../Home/HeroSection";
+import FeaturesSection from "../Home/FeaturesSection";
 
 const HomePage = () => {
   return (
@@ -10,6 +11,7 @@ const HomePage = () => {
       <Header />
       <section className="main-page">
         <HeroSection />
+        <FeaturesSection />
       </section>
     </>
   );

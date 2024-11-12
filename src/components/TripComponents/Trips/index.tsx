@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import TripCard from "../TripCard";
 import "./style.css";
 import { useTrips } from "../../../Context/TripContext";
