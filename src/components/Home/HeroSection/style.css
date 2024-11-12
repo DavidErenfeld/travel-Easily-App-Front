@@ -74,8 +74,8 @@
 @media (max-width: 65em) {
   .hero-section {
     padding: 1rem 8rem;
-    margin-top: 9.6rem;
-    gap: 2rem;
+    /* margin-top: 9.6rem; */
+    gap: 1rem;
   }
 
   .description-container {
@@ -116,7 +116,7 @@
 @media (max-width: 48em) {
   .hero-section {
     padding: 1rem 6rem;
-    margin-top: 9.6rem;
+    /* margin-top: 9.6rem; */
     gap: 2rem;
   }
 
@@ -138,6 +138,9 @@
     height: 20rem;
     margin-top: 1rem;
   }
+  .hero-section .btn-cta-exl {
+    align-self: flex-start;
+  }
 }
 
 /*480*/
@@ -146,6 +149,7 @@
     position: relative;
     grid-template-columns: 1fr;
     padding: 1rem 3rem;
+    margin-top: 0rem;
   }
 
   .description-container {
@@ -179,7 +183,7 @@
 
   .hero-section .btn-cta-exl {
     justify-self: center;
-    align-self: flex-end;
+    align-self: flex-start;
     grid-row: 4;
     grid-column: 1/-1;
   }

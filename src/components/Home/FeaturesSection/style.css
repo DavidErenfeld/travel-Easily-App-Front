@@ -16,7 +16,7 @@
   font-size: 2.4rem;
   color: #5a5a5a;
   color: var(--text-primary);
-  margin-bottom: 11rem;
+  margin-bottom: 16rem;
   padding-bottom: 2rem;
   text-align: center;
   border-bottom: 5px solid #007777;
@@ -207,5 +207,18 @@
 
   .feature-list p {
     font-size: 1.4rem;
+  }
+}
+
+/*320*/
+@media (max-width: 20em) {
+  .features-section .tags {
+    top: -13.2px;
+    right: 2.2px;
+  }
+
+  .features-section .tag {
+    padding: 0.5rem 0.5rem;
+    border-radius: 4px;
   }
 }
