@@ -113,9 +113,13 @@
   align-items: center;
   justify-content: center;
   font-size: 1.6rem;
-  color: var(--text-secondary);
-  gap: 2rem;
+
+  gap: 1rem;
   cursor: pointer;
+}
+
+.coments-and-likes-details p {
+  color: var(--text-secondary);
 }
 
 /*480*/

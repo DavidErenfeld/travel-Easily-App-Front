@@ -14,7 +14,9 @@ const FeaturesSection = () => {
 
       <div className="feature-list">
         <div className="feature-item-1">
-          <TripCard trip={trips[0]} />
+          <div className="no-pointer-events">
+            <TripCard trip={trips[0]} />
+          </div>
         </div>
         <div className="feature-item-2">
           <h3>Personalized and Detailed Itineraries</h3>
@@ -36,11 +38,15 @@ const FeaturesSection = () => {
           </p>
         </div>
         <div className="feature-item-4">
-          <TripCard trip={trips[1]} />
+          <div className="no-pointer-events">
+            <TripCard trip={trips[1]} />
+          </div>
         </div>
 
         <div className="feature-item-5">
-          <TripCard trip={trips[2]} />
+          <div className="no-pointer-events">
+            <TripCard trip={trips[2]} />
+          </div>
         </div>
         <div className="feature-item-6">
           <h3>Favorite Trips & Easy Sharing</h3>
