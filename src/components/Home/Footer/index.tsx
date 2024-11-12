@@ -12,8 +12,7 @@ const Footer = () => {
     rights: "2024 All rights reserved to David Erenfeld",
   };
 
-  const { github, linkedin, email, whatsApp, phonNumber, rights } =
-    contactDetails;
+  const { linkedin, email, whatsApp, phonNumber, rights } = contactDetails;
   return (
     <footer className="footer-section">
       <div className="footer-icons">
