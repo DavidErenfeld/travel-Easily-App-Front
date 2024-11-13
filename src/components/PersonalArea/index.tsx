@@ -9,7 +9,6 @@ import LoadingDots from "../UIComponents/Loader";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import tripsService from "../../services/tripsService";
-import useSocket from "../../Hooks/useSocket";
 
 function PersonalArea() {
   const imgRef = useRef<HTMLInputElement>(null);
@@ -145,7 +144,7 @@ function PersonalArea() {
             </button>
 
             {isButtonClicked && (
-              <button onClick={onClickSave} className="btn-m">
+              <button onClick={onClickSave} className="btn-cta-m">
                 Save
               </button>
             )}

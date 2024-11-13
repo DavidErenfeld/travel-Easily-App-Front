@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Image } from "lucide-react";
 import { deletePhotoFromCloudinary } from "../../../services/fileService";
 import tripsService, { ITrips } from "../../../services/tripsService";
 import ImageCarousel from "../../UIComponents/ImageCarousel";
-import AddImgs from "../../UIComponents/Icons/AddImage";
 import LoadingDots from "../../UIComponents/Loader";
 import useImageUpload from "../../../Hooks/useImageUpload";
 import PopUp from "../../UIComponents/PopUp";
@@ -219,7 +219,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
             className="add-image-icon-update-component"
             onClick={() => imageRef.current?.click()}
           >
-            <AddImgs />
+            <Image className="icon" />
           </div>
           <input
             type="file"

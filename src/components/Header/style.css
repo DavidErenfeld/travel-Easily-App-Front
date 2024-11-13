@@ -19,8 +19,9 @@ h1.logo {
 }
 
 .user-main-page-img {
-  height: 4.2rem;
-  width: 4.2rem;
+  height: 4.4rem;
+  width: 4.4rem;
+  border: 2px solid var(--text-secondary);
   border-radius: 50%;
   cursor: pointer;
 }

@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* ///////////////////////////////////////////////////////// */
@@ -84,7 +85,6 @@ html {
 body {
   position: relative;
   margin: 0;
-  height: 100vh;
   color: var(--text-primary);
   background-color: var(--background-light-blu);
   color: var(--text-primary);

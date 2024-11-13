@@ -4,9 +4,9 @@
   width: 100%;
   margin: 1.5rem;
   text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
   box-shadow: var(--shadow-ex-large);
   color: var(--text-primary);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .place-card:hover {

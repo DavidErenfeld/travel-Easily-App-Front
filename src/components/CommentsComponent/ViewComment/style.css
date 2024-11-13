@@ -56,6 +56,13 @@
   font-weight: 600;
 }
 
+.comment-details p {
+  font-size: 1.2rem;
+  color: var(--text-secondery);
+  font-weight: 500;
+  letter-spacing: -0.2px;
+}
+
 .delete-comment-icon {
   font-size: 2.8rem;
   position: absolute;
@@ -81,5 +88,16 @@
     top: 0.3rem;
     right: 0.3rem;
     cursor: pointer;
+  }
+}
+
+/*320*/
+@media (max-width: 20em) {
+  .comment-content {
+    min-width: 25rem;
+  }
+
+  .comment-input {
+    width: 73%;
   }
 }

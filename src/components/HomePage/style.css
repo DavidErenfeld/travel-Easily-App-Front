@@ -1,10 +1,40 @@
 .main-page {
-  /* height: 100%; */
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  /* gap: 12.8rem; */
   background-color: var(--background-light-blu);
+}
+
+.icon.scroll-to-top-icon {
+  color: var(--text-secondary);
+  height: 2.2rem;
+  width: 2.2rem;
+}
+
+.icon.scroll-to-top-icon:hover {
+  color: var(--text-primary);
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 2.2rem;
+  right: 2.2rem;
+  border-radius: 50%;
+  background-color: var(--button-cta-bg);
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-large);
+  transition: opacity 0.3s ease;
+}
+
+.scroll-to-top:hover {
+  background-color: var(--button-cta-bg-hover);
+  color: var(--text-primary);
+}
+
+.scroll-to-top:focus {
+  outline: none;
 }

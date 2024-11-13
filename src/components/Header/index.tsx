@@ -2,8 +2,8 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { useEffect, useState } from "react";
-import "./style.css";
 import Sidebar from "../Sidebar";
+import "./style.css";
 
 const Header = () => {
   const { logout } = useAuth();
@@ -16,7 +16,7 @@ const Header = () => {
   const location = useLocation();
 
   const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen); // משנה את מצב התפריט
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   const handleLogout = async () => {
@@ -99,7 +99,6 @@ const Header = () => {
                     Advanced search
                   </p>
                 )}
-
                 <img
                   className="user-main-page-img"
                   src={profileImg}

@@ -179,13 +179,10 @@ input:focus {
   height: 1.8rem;
 }
 
-.add-img-icon {
-  stroke: var(--button-primary-bg);
-  transition: all 0.2s;
-}
-
-.add-img-icon:hover {
-  stroke: var(--button-cta-bg-hover);
+.add-image-icon {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
 }
 
 .waze-icon {

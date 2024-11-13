@@ -1,14 +1,15 @@
 import { useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import tripsService, { ITrips } from "../../../services/tripsService";
+import useSocket from "../../../Hooks/useSocket";
 import Header from "../../Header";
 import AddImgs from "../../UIComponents/Icons/AddImage";
 import ImageCarousel from "../../UIComponents/ImageCarousel";
 import LoadingDots from "../../UIComponents/Loader";
 import SuccessMessage from "../../UIComponents/SuccessMessage";
-import useSocket from "../../../Hooks/useSocket";
 import useImageUpload from "../../../Hooks/useImageUpload";
 import "./style.css";
+import { Image } from "lucide-react";
 
 interface TripDay {
   dayNum: number;
@@ -145,7 +146,7 @@ const CreateTrip: React.FC = () => {
             className="add-image-icon"
             onClick={() => imageRef.current?.click()}
           >
-            <AddImgs />
+            <Image className="icon" />
           </div>
           <input
             type="file"
