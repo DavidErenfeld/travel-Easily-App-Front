@@ -21,7 +21,6 @@ import "./App.css";
 import "./index.css";
 import SocketListener from "./components/SocketListener";
 import TripFormPage from "./components/PlacesSearch/PlacesSearchPage";
-import HomeLine from "./components/Home/HomeLine";
 
 function App() {
   return (
@@ -31,7 +30,6 @@ function App() {
           <SocketListener />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            {/* <Route path="/" element={<HomeLine />} /> */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgotPassword" element={<ForgotPassword />} />
