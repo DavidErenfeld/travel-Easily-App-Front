@@ -1,6 +1,7 @@
 .features-section {
   padding: 8rem;
   background-color: var(--background-light-blu);
+  padding-bottom: 0rem;
 }
 
 .section-title {
@@ -87,6 +88,7 @@
 @media (max-width: 56em) {
   .features-section {
     padding: 2rem;
+    padding-bottom: 0rem;
   }
 
   .features-section .tags {
@@ -114,9 +116,10 @@
 
   .features-section {
     padding: 4rem;
+    padding-bottom: 0rem;
   }
 
-  .section-title {
+  .features-section .section-title {
     font-size: 3.2rem;
     text-align: center;
   }
@@ -184,10 +187,12 @@
 @media (max-width: 30em) {
   .features-section {
     padding: 2rem;
+    padding-bottom: 0rem;
   }
 
-  .section-title {
+  .features-section .section-title {
     font-size: 3.2rem;
+    text-align: center;
   }
 
   .section-subtitle {

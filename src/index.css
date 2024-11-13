@@ -12,12 +12,14 @@
   --accent-orange: #ff7043; /* כתום חם - קריאות לפעולה */
   --secondary-green: #4caf50; /* ירוק בינוני - כפתורים משניים והדגשות */
   --background-light-blu: #8ecae6; /* אפור בהיר מאוד - רקע כללי */
-  --card-background: #219ebc; /* לבן - רקע לכרטיסיות */
+  --background-lightest: #eaf7fc;
+  --card-background: #219ebc;
+  --card-white-background: #fff;
 
   /* צבעים לטקסט */
   --text-primary: #001a27;
   --text-secondary: #ffffff;
-  --text-muted: #78909c; /* טקסט מופחת */
+  --text-muted: #53646c; /* טקסט מופחת */
   --text-highlight: #01295c; /* טקסט להדגשה - כחול-ירקרק */
 
   /* צבעים לכפתורים */
@@ -80,11 +82,10 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
   position: relative;
   margin: 0;
   height: 100vh;
-  color: rgba(255, 255, 255, 0.87);
+  color: var(--text-primary);
   background-color: var(--background-light-blu);
   color: var(--text-primary);
   overflow-x: hidden;
@@ -97,6 +98,13 @@ body {
 .section {
   padding-left: 3rem;
   padding-right: 3rem;
+}
+
+.section-title {
+  font-size: 4rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  text-align: start;
 }
 
 h1 {
@@ -161,11 +169,6 @@ a {
 @media (max-width: 30em) {
   html {
     font-size: 50%;
-  }
-
-  body {
-    background-color: var(--background-light-blu);
-    height: 90vh;
   }
 
   .section {

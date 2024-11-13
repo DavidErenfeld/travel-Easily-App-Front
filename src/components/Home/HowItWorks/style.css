@@ -1,0 +1,52 @@
+/* HowItWorksSection.css */
+.how-it-works-section {
+  padding: 9.6rem 2rem;
+  background-color: var(--background-lightest);
+  text-align: center;
+}
+
+.how-it-works-section h2 {
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.steps-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.step-card {
+  background-color: var(--card-white-background);
+  border-radius: 8px;
+  box-shadow: var(--shadow-large);
+  padding: 1.5rem;
+  max-width: 30rem;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.step-card:hover {
+  transform: scale(1.05);
+}
+
+.step-icon {
+  font-size: 2rem;
+  color: var(--accent-orange);
+}
+
+.step-title {
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 1rem 0;
+}
+
+.step-description {
+  font-size: 1.4rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
