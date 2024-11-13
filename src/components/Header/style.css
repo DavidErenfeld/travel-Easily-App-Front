@@ -2,20 +2,20 @@
   position: fixed;
   top: 0;
   width: 100%;
-  background-color: var(--background-light-blu);
+  background-color: var(--navbar-bg);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 3rem;
-  padding-bottom: 1rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  flex-wrap: wrap;
+  padding: 3rem 2rem;
   font-weight: 600;
   z-index: 1000;
 }
 
-.logo {
+h1.logo {
   font-size: 3.6rem;
+  margin: 0;
+  color: var(--text-secondary);
 }
 
 .user-main-page-img {
@@ -34,36 +34,13 @@
 
 .menu-item {
   font-size: 1.8rem;
-  color: #fff;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.4s ease;
 }
 
 .menu-item:hover {
-  color: #00a8ff;
-  color: var(--text-highlight);
-}
-
-.menu-item.search-item {
-  color: #00a8ff;
-  color: var(--text-highlight);
-}
-
-.menu-item.search-item:hover {
-  color: #fff;
-  color: var(--text-primary);
-}
-
-.search-btn {
-  font-size: 1.4rem;
-  background-color: #fff;
-  color: #00a8ff;
-  background-color: var(--button-primary-bg);
-  color: var(--button-primary-text);
-  padding: 1rem;
-  width: 10rem;
-  transition: background-color 0.3s ease;
+  color: var(--accent-orange);
 }
 
 /*880*/
@@ -71,28 +48,25 @@
   .menu-item.connectet-menu {
     display: none;
   }
+  h1.logo {
+    font-size: 3.2rem;
+  }
 }
 
 /*480*/
 @media (max-width: 30em) {
-  /* .main-page-header {
-    background-color: #0d4e79;
-  } */
-
-  .logo {
-    font-size: 2rem;
+  h1.logo {
+    font-size: 2.2rem;
   }
 }
 
 /*344*/
 @media (max-width: 21.5em) {
   .main-page-header {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  .logo {
-    font-size: 2.2rem;
+  h1.logo {
+    font-size: 2rem;
   }
 }

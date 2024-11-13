@@ -58,30 +58,46 @@ const Header = () => {
           <h1 className="logo">TRAVEL easily</h1>
         </Link>
         {!isSidebarOpen && (
-          <div className="menu">
+          <>
             {localStorage.getItem("loggedUserId") ? (
               <div className="menu ">
-                <Link to="/">
-                  <h1 className="menu-item connectet-menu">Home</h1>
-                </Link>
+                <p
+                  onClick={() => navigate("/")}
+                  className="menu-item connectet-menu"
+                >
+                  Home
+                </p>
 
-                <Link to="/myTrips">
-                  <h1 className="menu-item connectet-menu">My trips</h1>
-                </Link>
-                <Link to="/tripForm">
-                  <h1 className="menu-item connectet-menu">Explore Nearby</h1>
-                </Link>
+                <p
+                  onClick={() => navigate("/myTrips")}
+                  className="menu-item connectet-menu"
+                >
+                  My trips
+                </p>
+
+                <p
+                  onClick={() => navigate("/tripForm")}
+                  className="menu-item connectet-menu"
+                >
+                  Explore Nearby
+                </p>
+
                 {location.pathname.includes("/AddTrip") && (
-                  <Link to="/searchTrip">
-                    <h1 className="menu-item connectet-menu">Search trip</h1>
-                  </Link>
+                  <p
+                    onClick={() => navigate("/searchTrip")}
+                    className="menu-item connectet-menu"
+                  >
+                    Search trip
+                  </p>
                 )}
+
                 {location.pathname.includes("/searchTrip") && (
-                  <Link to="/searchTrip/advancedSearch">
-                    <h1 className="menu-item search-item connectet-menu">
-                      Advanced search
-                    </h1>
-                  </Link>
+                  <p
+                    onClick={() => navigate("/searchTrip/advancedSearch")}
+                    className="menu-item search-item connectet-menu"
+                  >
+                    Advanced search
+                  </p>
                 )}
 
                 <img
@@ -93,12 +109,12 @@ const Header = () => {
               </div>
             ) : (
               <div className="menu">
-                <Link to="/login">
-                  <h1 className="menu-item">Sign in</h1>
-                </Link>
+                <p onClick={() => navigate("/login")} className="menu-item">
+                  Sign in
+                </p>
               </div>
             )}
-          </div>
+          </>
         )}
       </header>
     </>

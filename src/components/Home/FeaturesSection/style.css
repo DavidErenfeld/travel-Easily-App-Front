@@ -1,14 +1,16 @@
 .features-section {
   padding: 8rem;
   background-color: var(--background-light-blu);
+  background-color: var(--background-lightest);
   padding-bottom: 0rem;
 }
 
-.section-title {
+.features-section .section-title {
   font-size: 4rem;
   color: var(--text-primary);
+  padding-top: 9.6rem;
   margin-bottom: 2rem;
-  text-align: start;
+  text-align: center;
 }
 
 .section-subtitle {
@@ -16,8 +18,7 @@
   color: #5a5a5a;
   color: var(--text-primary);
   margin-bottom: 9.6rem;
-  text-align: start;
-  padding-right: 38%;
+  text-align: center;
   line-height: 1.4;
 }
 
@@ -82,6 +83,10 @@
 
 .no-pointer-events {
   pointer-events: none;
+}
+
+.feature-list .trip-card-profile {
+  background-color: var(--background-lightest);
 }
 
 /*896*/

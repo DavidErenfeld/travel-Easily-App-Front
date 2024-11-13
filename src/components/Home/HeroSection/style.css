@@ -3,7 +3,7 @@
   height: 100vh;
   width: 100%;
   text-align: center;
-  padding: 4rem 12.8rem;
+  padding: 6rem 12.8rem;
   background-color: var(--background-light-blu);
   display: grid;
   grid-template-columns: 1.7fr 1fr;
@@ -74,12 +74,11 @@
 @media (max-width: 65em) {
   .hero-section {
     padding: 1rem 8rem;
-    /* margin-top: 9.6rem; */
     gap: 1rem;
   }
 
   .description-container {
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 
   .hero-section h1 {
@@ -116,7 +115,7 @@
 @media (max-width: 48em) {
   .hero-section {
     padding: 1rem 6rem;
-    /* margin-top: 9.6rem; */
+    margin-top: 3rem;
     gap: 2rem;
   }
 
@@ -149,7 +148,7 @@
     position: relative;
     grid-template-columns: 1fr;
     padding: 1rem 3rem;
-    margin-top: 0rem;
+    margin-top: 4rem;
   }
 
   .description-container {
