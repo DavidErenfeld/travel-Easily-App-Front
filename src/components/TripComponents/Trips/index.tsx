@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import TripCard from "../TripCard";
-import "./style.css";
 import { useTrips } from "../../../Context/TripContext";
 import Header from "../../Header";
 import LoadingDots from "../../UIComponents/Loader";
+import "./style.css";
 
 const Trips = () => {
+  const navigate = useNavigate();
   const { trips, refreshTrips } = useTrips();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -18,12 +20,16 @@ const Trips = () => {
     ));
   };
 
+  const handleCreateTrip = () => {
+    navigate("/AddTrip");
+  };
+
   useEffect(() => {
-    const loadTrips = async () => {
+    const loadTrips = () => {
       setIsLoading(true);
       setError(null);
       try {
-        await refreshTrips();
+        refreshTrips();
       } catch (err) {
         setError("Failed to load trips. Please try again later."); // הגדרת שגיאה במידה ונכשל
         console.error("Error loading trips:", err);
@@ -48,8 +54,13 @@ const Trips = () => {
             <h1>{error}</h1>
           </div>
         ) : trips.length === 0 ? (
-          <div className="main-loader-section">
-            <h1>No trips have been added to the system yet</h1>
+          <div className="no-trips-container">
+            <p className="no-trips-message">
+              No trips have been added to the system yet
+            </p>
+            <button className="btn-cta-exl" onClick={handleCreateTrip}>
+              Create Your First Trip
+            </button>
           </div>
         ) : (
           renderTrips()

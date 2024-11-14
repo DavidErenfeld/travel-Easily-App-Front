@@ -5,32 +5,17 @@
   justify-content: center;
   padding: 4rem 2rem;
   text-align: center;
-  background-color: #f9fafb;
+  background-color: var(--background-lightest);
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-large);
   margin: 24rem auto;
   max-width: 60rem;
 }
 
 .no-trips-message {
   font-size: 1.8rem;
-  color: #4b5563;
+  color: var(--text-muted);
   margin-bottom: 2rem;
-}
-
-.create-trip-button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1.6rem;
-  color: #fff;
-  background-color: #3b82f6;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.create-trip-button:hover {
-  background-color: #2563eb;
 }
 
 /*480*/

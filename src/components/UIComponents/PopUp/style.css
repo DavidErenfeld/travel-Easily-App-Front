@@ -1,12 +1,17 @@
 .pop-up {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 35rem;
   height: 15rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  background: #fff;
+  background-color: var(--background-lightest);
   border-radius: 9px;
   padding: 2rem 2rem 0.5rem 2rem;
+  z-index: 1000;
 }
 
 .popup-overlay {
@@ -35,4 +40,9 @@
   justify-self: center;
   display: flex;
   gap: 3rem;
+}
+
+.pop-up .btn-m,
+.pop-up .btn-cta-m {
+  box-shadow: var(--shadow-large);
 }

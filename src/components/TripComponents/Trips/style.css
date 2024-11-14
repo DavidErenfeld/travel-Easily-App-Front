@@ -13,6 +13,10 @@
   transform: translate(-50%, -50%);
 }
 
+.main-loader-section p {
+  font-size: 1.8rem;
+}
+
 /* 768 */
 @media (max-width: 48em) {
   .trips-section {

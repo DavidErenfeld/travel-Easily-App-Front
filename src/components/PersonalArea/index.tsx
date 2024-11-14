@@ -6,9 +6,10 @@ import {
 } from "../../services/fileService";
 import CloseIcon from "../UIComponents/Icons/Close";
 import LoadingDots from "../UIComponents/Loader";
-import "./style.css";
 import { useNavigate } from "react-router-dom";
 import tripsService from "../../services/tripsService";
+import PopUp from "../UIComponents/PopUp";
+import "./style.css";
 
 function PersonalArea() {
   const imgRef = useRef<HTMLInputElement>(null);
@@ -33,6 +34,10 @@ function PersonalArea() {
 
   const confirmDeleteUser = () => {
     setShowDeletePopup(true);
+  };
+
+  const handleCancelBtn = () => {
+    setShowDeletePopup(false);
   };
 
   const handleDeleteUser = async () => {
@@ -163,22 +168,11 @@ function PersonalArea() {
       </section>
 
       {showDeletePopup && !isDeleting && (
-        <div className="popup-overlay">
-          <div className="pop-up">
-            <p>Are you sure you want to delete your account?</p>
-            <div className="pop-up-buttons">
-              <button className="btn-m" onClick={handleDeleteUser}>
-                Delete
-              </button>
-              <button
-                className="btn-m"
-                onClick={() => setShowDeletePopup(false)}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
+        <PopUp
+          handleCancelBtn={handleCancelBtn}
+          handleDeleteBtn={handleDeleteUser}
+          message="Are you sure you want to delete your account?"
+        />
       )}
     </>
   );

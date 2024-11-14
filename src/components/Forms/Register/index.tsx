@@ -83,7 +83,7 @@ function Register() {
         userName: data.userName,
         email: data.email,
         password: data.password,
-        imgUrl: imgUrl,
+        imgUrl: imgUrl || defaultImage,
       });
       setLoading(false);
       navigate("/login");

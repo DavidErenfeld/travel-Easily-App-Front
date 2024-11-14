@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import TripCard from "../TripCard";
-import "./style.css";
-import LoadingDots from "../../UIComponents/Loader";
-import tripsService, { ITrips } from "../../../services/tripsService";
-import Header from "../../Header";
 import { useNavigate } from "react-router-dom";
+import tripsService, { ITrips } from "../../../services/tripsService";
 import useSocket from "../../../Hooks/useSocket";
+import TripCard from "../TripCard";
+import Header from "../../Header";
+import LoadingDots from "../../UIComponents/Loader";
+import "./style.css";
 
 const MyTrips = () => {
   const [trips, setTrips] = useState<ITrips[]>([]);
@@ -62,7 +62,7 @@ const MyTrips = () => {
         ) : trips.length === 0 ? (
           <div className="no-trips-container">
             <p className="no-trips-message">You have no trips yet.</p>
-            <button className="create-trip-button" onClick={handleCreateTrip}>
+            <button className="btn-cta-exl" onClick={handleCreateTrip}>
               Create Your First Trip
             </button>
           </div>

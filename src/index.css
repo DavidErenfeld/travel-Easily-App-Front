@@ -5,75 +5,55 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ///////////////////////////////////////////////////////// */
-
 :root {
-  /* צבעים ראשיים */
-  --primary-teal: #219ebc; /* כחול-ירקרק - כותרות וכפתורים ראשיים */
-  --accent-orange: #ff7043; /* כתום חם - קריאות לפעולה */
-  --secondary-green: #4caf50; /* ירוק בינוני - כפתורים משניים והדגשות */
-  --background-light-blu: #8ecae6; /* אפור בהיר מאוד - רקע כללי */
+  /*  */
+  --primary-teal: #219ebc;
+  --accent-orange: #ff7043;
+  --background-light-blu: #8ecae6;
   --background-lightest: #eaf7fc;
   --card-background: #219ebc;
   --card-white-background: #fff;
 
-  /* צבעים לטקסט */
+  /*  */
   --text-primary: #001a27;
   --text-secondary: #ffffff;
-  --text-muted: #53646c; /* טקסט מופחת */
-  --text-highlight: #01295c; /* טקסט להדגשה - כחול-ירקרק */
+  --text-muted: #53646c;
 
-  /* צבעים לכפתורים */
-  --button-cta-bg: #fa9419; /* רקע כפתור ראשי - כתום חם */
-  --button-cta-bg-hover: #f1b688; /* רקע כפתור ראשי - כתום חם */
-  --button-cta-text: #414141; /* טקסט כפתור ראשי - לבן */
-  --button-primary-bg: #ffff; /* טקסט כפתור ראשי - לבן */
-  --button-primary-bg-hover: #ec8305; /* טקסט כפתור ראשי - לבן */
-  --button-secondary-bg: #ffff; /* רקע כפתור משני - ירוק בינוני */
-  --button-secondary-text: #001a27; /* טקסט כפתור משני - לבן */
-  --button-hover-bg-primary: #e64a19; /* רקע כפתור ראשי בריחוף - כתום כהה */
-  --button-hover-bg-secondary: #388e3c; /* רקע כפתור משני בריחוף - ירוק כהה */
+  /*  */
+  --button-cta-bg: #fa9419;
+  --button-cta-bg-hover: #f1b688;
+  --button-cta-text: #414141;
+  --button-primary-bg: #ffff;
+  --button-primary-bg-hover: #ec8305;
+  --button-secondary-bg: #ffff;
+  --button-secondary-text: #001a27;
+  --button-hover-bg-primary: #e64a19;
 
-  /* צבעים לתגים */
-  --tag-bg: #ec8305; /* רקע תג*/
-  --tag-mobile-bg: #ec8305; /* רקע תג*/
-  --tag-text: #353535; /* רקע תג*/
+  /*  */
+  --tag-bg: #ec8305;
+  --tag-mobile-bg: #ec8305;
+  --tag-text: #353535;
 
-  /* צבעים לתפריטים */
-  --navbar-bg: #008080; /* רקע תפריט ניווט */
-  --navbar-text: #ffffff; /* טקסט תפריט ניווט */
+  /* */
+  --navbar-bg: #008080;
+  --navbar-text: #ffffff;
 
-  /* צבעים לגבולות והפרדות */
-  --border-color: #e0e0e0; /* גבולות כלליים */
-  --card-border: #b0bec5; /* גבול כרטיסיות */
+  /* */
+  --hover-effect: rgba(255, 122, 13, 0.922);
+  --shadow-small-or: 0 2px 4px rgba(236, 107, 8, 0.356);
+  --shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-large: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-ex-large: 0.4px 3.4px 6.8px rgba(0.9, 1.3, 1.3, 0.5);
 
-  /* צבעים להודעות מערכת */
-  --success-bg: #4caf50; /* הודעות הצלחה */
-  --error-bg: #b8001f; /* הודעות שגיאה */
-  --warning-bg: #ffb300; /* הודעות אזהרה */
-  --info-bg: #0288d1; /* הודעות מידע */
-
-  /* ריחוף ואפקטים */
-  --hover-effect: rgba(255, 122, 13, 0.922); /* אפקט ריחוף כללי */
-  --shadow-small-or: 0 2px 4px rgba(236, 107, 8, 0.356); /* צל קטן */
-  --shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1); /* צל קטן */
-  --shadow-large: 0 4px 8px rgba(0, 0, 0, 0.2); /* צל גדול */
-  --shadow-ex-large: 0.4px 3.4px 6.8px rgba(0.9, 1.3, 1.3, 0.5); /*  צל גדול מאוד */
-
-  font-family: "Poppins", sans-serif;
   font-family: "Raleway", sans-serif;
   font-weight: 500;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* General settings and base colors */
   line-height: 1;
   overflow-x: hidden;
 }
-
-/* ////////////////////////////////////////////////////////// */
 
 html {
   font-size: 62.5%;

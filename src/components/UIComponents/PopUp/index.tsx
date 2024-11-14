@@ -7,19 +7,19 @@ interface PopUpProps {
 }
 const PopUp = ({ message, handleDeleteBtn, handleCancelBtn }: PopUpProps) => {
   return (
-    <>
+    <div className="popup-overlay">
       <div className="pop-up">
         <p>{message}</p>
         <div className="pop-up-buttons">
           <button className="btn-cta-m" onClick={() => handleDeleteBtn()}>
             delete
           </button>
-          <button className="btn-cta-m" onClick={() => handleCancelBtn()}>
+          <button className="btn-m" onClick={() => handleCancelBtn()}>
             cancel
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

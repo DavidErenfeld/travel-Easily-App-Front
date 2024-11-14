@@ -13,7 +13,7 @@ const SuccessMessage: React.FC<SuccessMessageProps> = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       onAnimationEnd();
-    }, 3000); // משך האנימציה במילישניות
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [onAnimationEnd]);
@@ -23,7 +23,7 @@ const SuccessMessage: React.FC<SuccessMessageProps> = ({
       <div className="success-icon">
         {/* ניתן להשתמש ב-SVG או באייקון מ' react-icons' */}
         <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-          <circle cx="32" cy="32" r="32" fill="#4BB543" />
+          <circle cx="32" cy="32" r="32" fill="#ec8305" />
           <path
             d="M18 34L28 44L46 26"
             stroke="white"
