@@ -25,13 +25,13 @@ const Trips = () => {
   };
 
   useEffect(() => {
-    const loadTrips = () => {
+    const loadTrips = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        refreshTrips();
+        await refreshTrips();
       } catch (err) {
-        setError("Failed to load trips. Please try again later."); // הגדרת שגיאה במידה ונכשל
+        setError("Failed to load trips. Please try again later.");
         console.error("Error loading trips:", err);
       } finally {
         setIsLoading(false);
@@ -46,9 +46,7 @@ const Trips = () => {
       <Header />
       <section className="trips-section">
         {isLoading ? (
-          <div className="trips-loader main-loader-section">
-            <LoadingDots />
-          </div>
+          <LoadingDots />
         ) : error ? (
           <div className="main-loader-section">
             <h1>{error}</h1>

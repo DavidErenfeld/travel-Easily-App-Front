@@ -6,11 +6,11 @@
 }
 
 .trips-loader.main-loader-section {
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  padding-top: 20rem;
   transform: translate(-50%, -50%);
+  padding-top: 20rem; */
 }
 
 .main-loader-section p {
