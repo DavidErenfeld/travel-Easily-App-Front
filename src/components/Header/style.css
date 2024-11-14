@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding: 3rem 2rem;
+  padding: 2rem 2rem;
   font-weight: 600;
   z-index: 1000;
 }
@@ -16,6 +16,19 @@ h1.logo {
   font-size: 3.6rem;
   margin: 0;
   color: var(--text-secondary);
+}
+
+.sidbar.menu-item {
+  display: none;
+  position: absolute;
+  top: 51%;
+  right: 10rem;
+  transform: translatey(-50%);
+}
+
+.sidebar.logo {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .user-main-page-img {
@@ -52,12 +65,19 @@ h1.logo {
   h1.logo {
     font-size: 3.2rem;
   }
+  .sidbar.menu-item {
+    display: inline-block;
+  }
 }
 
 /*480*/
 @media (max-width: 30em) {
   h1.logo {
     font-size: 2.2rem;
+  }
+  .sidbar.menu-item {
+    top: 52%;
+    right: 9rem;
   }
 }
 
@@ -69,5 +89,9 @@ h1.logo {
   }
   h1.logo {
     font-size: 2rem;
+  }
+  .sidbar.menu-item {
+    top: 52%;
+    right: 6.8rem;
   }
 }

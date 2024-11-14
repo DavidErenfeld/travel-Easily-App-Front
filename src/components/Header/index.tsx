@@ -4,6 +4,7 @@ import { useAuth } from "../../Context/AuthContext";
 import { useEffect, useState } from "react";
 import Sidebar from "../Sidebar";
 import "./style.css";
+import { Plus } from "lucide-react";
 
 const Header = () => {
   const { logout } = useAuth();
@@ -54,9 +55,15 @@ const Header = () => {
           toggleSidebar={toggleSidebar}
           handleLogout={handleLogout}
         />
+
         <Link to="/">
-          <h1 className="logo">TRAVEL easily</h1>
+          <h1 className="sidebar logo">TRAVEL easily</h1>
         </Link>
+
+        <p onClick={() => navigate("/addTrip")} className="sidbar menu-item">
+          Add trip
+        </p>
+
         {!isSidebarOpen && (
           <>
             {localStorage.getItem("loggedUserId") ? (
@@ -69,10 +76,10 @@ const Header = () => {
                 </p>
 
                 <p
-                  onClick={() => navigate("/myTrips")}
+                  onClick={() => navigate("/addTrip")}
                   className="menu-item connectet-menu"
                 >
-                  My trips
+                  Add trip
                 </p>
 
                 <p

@@ -97,10 +97,22 @@
 
 .btn-cta-m,
 .btn-m {
-  padding: 6px;
+  padding: 0.6rem;
   width: 10rem;
   border-radius: 6px;
   font-weight: 400;
+}
+
+.btn-cta-s {
+  font-size: 1.6rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 5px;
+  background-color: var(--button-primary-bg);
+  color: var(--text-secondary);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.4s;
 }
 
 .btn-m:hover,
@@ -112,14 +124,16 @@
 
 .btn-cta-exl,
 .btn-cta-l,
-.btn-cta-m {
+.btn-cta-m,
+.btn-cta-s {
   background-color: var(--button-cta-bg);
   color: var(--text-primary);
 }
 
 .btn-cta-exl:hover,
 .btn-cta-l:hover,
-.btn-cta-m:hover {
+.btn-cta-m:hover,
+.btn-cta-s:hover {
   background-color: var(--button-cta-bg-hover);
   color: var(--button-secondary-text);
 }

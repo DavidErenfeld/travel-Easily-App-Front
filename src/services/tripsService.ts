@@ -272,6 +272,7 @@ const deleteComment = (tripId: string, commentId: string) => {
       });
   });
 };
+
 const addLike = (tripId: string) => {
   return new Promise<ITrips>((resolve, reject) => {
     console.log("addLick...");
@@ -295,6 +296,30 @@ const addLike = (tripId: string) => {
       });
   });
 };
+
+const getLikesDetails = (tripId: string) => {
+  return new Promise<{
+    totalLikes: number;
+    likesDetails: Array<{ userName: string; imgUrl: string }>;
+  }>((resolve, reject) => {
+    console.log("Fetching likes details for trip...");
+    apiClient
+      .get(`/trips/${tripId}/likes/details`, {
+        headers: {
+          Authorization: `jwt ${localStorage.getItem("accessToken")}`,
+        },
+      })
+      .then((response) => {
+        console.log("Likes details:", response.data);
+        resolve(response.data); // מחזיר את נתוני הלייקים כולל שם משתמש ותמונת פרופיל
+      })
+      .catch((error) => {
+        console.error("Error fetching likes details:", error);
+        reject(error);
+      });
+  });
+};
+
 export default {
   getAllTrips,
   getByOwnerId,
@@ -308,4 +333,5 @@ export default {
   getFavoriteTrips,
   addComment,
   deleteComment,
+  getLikesDetails,
 };

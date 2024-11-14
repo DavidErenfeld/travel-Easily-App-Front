@@ -1,5 +1,8 @@
 import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./Context/AuthContext";
+import { TripProvider } from "./Context/TripContext";
+import SocketListener from "./components/SocketListener";
 import Profile from "./components/Forms/Profile";
 import Login from "./components/Forms/Login";
 import Register from "./components/Forms/Register";
@@ -7,8 +10,6 @@ import HomePage from "./components/HomePage";
 import Trips from "./components/TripComponents/Trips";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TripDetails from "./components/TripComponents/TripDetails";
-import { AuthProvider } from "./Context/AuthContext";
-import { TripProvider } from "./Context/TripContext";
 import MyTrips from "./components/TripComponents/myTrips";
 import AdvancedSearch from "./components/AdvancedSearch";
 import PersonalArea from "./components/PersonalArea";
@@ -17,10 +18,9 @@ import CreateTrip from "./components/TripComponents/CreateTrip";
 import ForgotPassword from "./components/Forms/ForgotPassword";
 import ResetPassword from "./components/Forms/ResetPassword";
 import FavoriteTrips from "./components/TripComponents/FavoriteTrips";
+import TripFormPage from "./components/PlacesSearch/PlacesSearchPage";
 import "./App.css";
 import "./index.css";
-import SocketListener from "./components/SocketListener";
-import TripFormPage from "./components/PlacesSearch/PlacesSearchPage";
 
 function App() {
   return (

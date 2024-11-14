@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import io from "socket.io-client";
-import { FaShareAlt } from "react-icons/fa";
+import { Share2 } from "lucide-react";
 import tripsService, { ITrips } from "../../../services/tripsService.ts";
 import TripDescription from "../TripDescription/index.tsx";
 import UpdateTrip from "../UpdateTrip/index.tsx";
@@ -13,7 +13,6 @@ import ImageCarousel from "../../UIComponents/ImageCarousel/index.tsx";
 import LoadingDots from "../../UIComponents/Loader";
 import ShareButtons from "../../UIComponents/ShareButtons/index.tsx";
 import "./style.css";
-import { Share2 } from "lucide-react";
 
 const token = localStorage.getItem("accessToken");
 const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
@@ -168,7 +167,7 @@ const TripDetails = () => {
         console.error("Error sharing:", error);
       }
     } else {
-      setIsShareClicked(!isShareClicked); // Toggle if share is clicked
+      setIsShareClicked(!isShareClicked);
     }
   };
 
@@ -233,7 +232,7 @@ const TripDetails = () => {
                   )}
                   {trip && <TripDescription trip={trip} />}
                 </section>
-                {/* הצגת הודעת שגיאה במקרה הצורך */}
+
                 {errorMessage && (
                   <div className="error-message">{errorMessage}</div>
                 )}
@@ -258,7 +257,7 @@ const TripDetails = () => {
                   <AddComment
                     onClickCancel={() => handleViewModeChange("main")}
                     onSendComment={(text) => !isSubmitting && onClickSend(text)}
-                    isSubmitting={isSubmitting} // להעביר אינדיקציה לכפתור
+                    isSubmitting={isSubmitting}
                   />
                 )}
                 {viewMode === "viewComments" && trip && (

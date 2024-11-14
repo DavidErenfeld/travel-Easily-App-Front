@@ -48,8 +48,8 @@ const Sidebar = ({
           <img className="user-sidebar-img" src={profileImg} alt="Profile" />
         </div>
 
-        <Link to="/profile">
-          <h1 className="sidebar-item">Profile</h1>
+        <Link to="/AddTrip">
+          <h1 className="sidebar-item">Add trip</h1>
         </Link>
 
         <Link to="/myTrips">
@@ -69,10 +69,6 @@ const Sidebar = ({
             <h1 className="sidebar-item">Advanced search</h1>
           </Link>
         )}
-
-        <Link to="/AddTrip">
-          <h1 className="sidebar-item">Add trip</h1>
-        </Link>
 
         <Link to="/tripForm">
           <h1 className="sidebar-item">Explore Nearby</h1>
