@@ -1,7 +1,5 @@
-import React from "react";
-import { Compass, Globe } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
-import { Link, useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -17,7 +15,7 @@ const HeroSection = () => {
       </div>
       <div className="earth-container">
         <img
-          src="/images/Earth.png"
+          src="/images/Earth.webp"
           alt="Planet Earth"
           className="earth-image"
         />
