@@ -3,15 +3,18 @@ import tripsService, { ITrips } from "../services/tripsService";
 import useSocket from "./useSocket";
 import { addFavoriteTrip, removeFavoriteTrip } from "../services/usersService";
 
-const useTripCard = (trip: ITrips) => {
+const useTripCard = (trip: ITrips | null) => {
+  // Initialize with default values if trip is null
   const [isFavorite, setIsFavorite] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  const [numOfLikes, setNumOfLikes] = useState(trip.numOfLikes);
-  const [numOfComments, setNumOfComments] = useState(trip.numOfComments);
+  const [numOfLikes, setNumOfLikes] = useState(trip?.numOfLikes || 0);
+  const [numOfComments, setNumOfComments] = useState(trip?.numOfComments || 0);
 
   const { send } = useSocket();
 
   useEffect(() => {
+    if (!trip) return; // Exit if trip is null
+
     const fetchStatus = async () => {
       const userId = localStorage.getItem("loggedUserId");
       if (!userId) return;
@@ -32,21 +35,19 @@ const useTripCard = (trip: ITrips) => {
     };
 
     fetchStatus();
-  }, [trip, trip._id]);
+  }, [trip, trip?._id]);
 
   useSocket("likeAdded", (updatedTrip) => {
-    if (updatedTrip._id === trip._id) {
+    if (updatedTrip._id === trip?._id) {
       setNumOfLikes(updatedTrip.numOfLikes);
     }
   });
 
-  // האזנה לאירוע commentAdded ועדכון ממספר התגובות דרך קריאה ל-API
   useSocket("commentAdded", async (updatedTrip) => {
-    if (updatedTrip._id === trip._id) {
+    if (updatedTrip._id === trip?._id) {
       try {
-        console.log("Fetching updated trip data after comment added...");
-        const refreshedTrip = await tripsService.getByTripId(trip._id!); // קריאה ל-API לקבלת הנתונים המעודכנים
-        setNumOfComments(refreshedTrip.numOfComments); // עדכון מספר התגובות
+        const refreshedTrip = await tripsService.getByTripId(trip?._id!);
+        setNumOfComments(refreshedTrip.numOfComments);
       } catch (error) {
         console.error("Failed to fetch updated trip data:", error);
       }
@@ -54,6 +55,8 @@ const useTripCard = (trip: ITrips) => {
   });
 
   const toggleLike = async () => {
+    if (!trip) return; // Exit if trip is null
+
     try {
       await tripsService.addLike(trip._id!);
       const updatedTrip = await tripsService.getByTripId(trip._id!);
@@ -63,15 +66,15 @@ const useTripCard = (trip: ITrips) => {
         updatedTrip.likes?.some((like) => like.owner === userId) || false;
 
       setIsLiked(liked);
-      if (updatedTrip.likes) {
-        setNumOfLikes(updatedTrip.numOfLikes);
-      }
+      setNumOfLikes(updatedTrip.numOfLikes);
     } catch (error) {
       console.error("Failed to toggle like:", error);
     }
   };
 
   const toggleFavorite = async () => {
+    if (!trip) return; // Exit if trip is null
+
     try {
       if (isFavorite) {
         await removeFavoriteTrip(trip._id!);

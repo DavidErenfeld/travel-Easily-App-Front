@@ -13,6 +13,8 @@ import ImageCarousel from "../../UIComponents/ImageCarousel/index.tsx";
 import LoadingDots from "../../UIComponents/Loader";
 import ShareButtons from "../../UIComponents/ShareButtons/index.tsx";
 import "./style.css";
+import useTripInteractions from "../../../Hooks/useTripInteractions.tsx";
+import TripCardIcons from "../TripCardIcons/index.tsx";
 
 const token = localStorage.getItem("accessToken");
 const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
@@ -30,7 +32,7 @@ interface Images {
 const TripDetails = () => {
   const [viewMode, setViewMode] = useState("main");
   const [updateMode, setUpdateMode] = useState(false);
-  const [isShareClicked, setIsShareClicked] = useState(false);
+  // const [isShareClicked, setIsShareClicked] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { id } = useParams<{ id: string }>();
@@ -42,7 +44,23 @@ const TripDetails = () => {
   const isThisTheOwner = loggedUserId !== trip?.owner?._id ? false : true;
 
   const [mMargin, setMMargin] = useState("");
-
+  const {
+    isLiked,
+    numOfLikes,
+    isFavorite,
+    isShareClicked,
+    isExiting,
+    successMessage,
+    likesDetails,
+    showLikesDetails,
+    modalRef,
+    handleLikeClick,
+    handleFavoriteClick,
+    handleShareClick,
+    handleLikesClick,
+    setShowLikesDetails,
+    setSuccessMessage,
+  } = useTripInteractions(trip);
   useEffect(() => {
     if (searchParams.get("viewMode") === "viewComments") {
       setViewMode("viewComments");
@@ -155,21 +173,21 @@ const TripDetails = () => {
     }
   };
 
-  const handleShareClick = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `Amazing trip to ${trip?.country}`,
-          text: `Join me on this journey to ${trip?.country}!`,
-          url: `https://travel-easily-app.netlify.app/searchTrip/trip/${trip?._id}`,
-        });
-      } catch (error) {
-        console.error("Error sharing:", error);
-      }
-    } else {
-      setIsShareClicked(!isShareClicked);
-    }
-  };
+  // const handleShareClick = async () => {
+  //   if (navigator.share) {
+  //     try {
+  //       await navigator.share({
+  //         title: `Amazing trip to ${trip?.country}`,
+  //         text: `Join me on this journey to ${trip?.country}!`,
+  //         url: `https://travel-easily-app.netlify.app/searchTrip/trip/${trip?._id}`,
+  //       });
+  //     } catch (error) {
+  //       console.error("Error sharing:", error);
+  //     }
+  //   } else {
+  //     setIsShareClicked(!isShareClicked);
+  //   }
+  // };
 
   const handleCommentDeleted = async () => {
     loadTripFromServer();
@@ -185,6 +203,25 @@ const TripDetails = () => {
       src: photoUrl,
       alt: "Trip Photo",
     })) || [];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        setShowLikesDetails(false);
+      }
+    };
+
+    if (showLikesDetails) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showLikesDetails, modalRef]);
 
   return (
     <>
@@ -203,7 +240,7 @@ const TripDetails = () => {
               />
             </div>
           )}
-          <section className="flex-center-column-large-gap section">
+          <section className="flex-center-column-large-gap section main-card">
             {!updateMode ? (
               <div
                 className={`${mMargin} main-card-section flex-center-column-large-gap`}
@@ -252,6 +289,26 @@ const TripDetails = () => {
                       View Comments
                     </button>
                   </section>
+                )}
+                {trip && (
+                  <TripCardIcons
+                    tripId={trip._id || ""}
+                    country={trip.country}
+                    numOfComments={trip.numOfComments}
+                    numOfLikes={trip.likes?.length || 0}
+                    isLiked={isLiked}
+                    isFavorite={isFavorite}
+                    isShareClicked={isShareClicked}
+                    isExiting={isExiting}
+                    likesDetails={likesDetails}
+                    showLikesDetails={showLikesDetails}
+                    handleLikeClick={handleLikeClick}
+                    handleFavoriteClick={handleFavoriteClick}
+                    handleShareClick={handleShareClick}
+                    handleLikesClick={handleLikesClick}
+                    setShowLikesDetails={setShowLikesDetails}
+                    modalRef={modalRef}
+                  />
                 )}
                 {viewMode === "addComment" && (
                   <AddComment

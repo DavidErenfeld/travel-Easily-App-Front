@@ -52,8 +52,16 @@ const FavoriteTrips = () => {
             <LoadingDots />
           </div>
         ) : trips.length === 0 ? (
-          <div className="main-loader-section">
-            <h1>You don't have any favorite trips yet</h1>
+          <div className="no-trips-container">
+            <p className="no-trips-message">
+              You don't have any favorite trips yet
+            </p>
+            <button
+              onClick={() => navigate("/searchTrip")}
+              className="btn-cta-exl"
+            >
+              Start Exploring Itineraries
+            </button>
           </div>
         ) : (
           renderFavoriteTrips()
