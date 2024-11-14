@@ -23,6 +23,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await logout();
+      setIsUserConect(false);
       setProfileImg("/images/user.png");
       setIsSidebarOpen(false);
     } catch (error) {
@@ -60,9 +61,11 @@ const Header = () => {
           <h1 className="sidebar logo">TRAVEL easily</h1>
         </Link>
 
-        <p onClick={() => navigate("/addTrip")} className="sidbar menu-item">
-          Add trip
-        </p>
+        {isUserConect && (
+          <p onClick={() => navigate("/addTrip")} className="sidbar menu-item">
+            Add trip
+          </p>
+        )}
 
         {!isSidebarOpen && (
           <>
