@@ -1,20 +1,20 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
-import tripsService from "../services/tripsService";
-import useTripCard from "../Hooks/useTripCard"; // using the original hook
+import useTripCard from "./useTripCard"; // שימוש בהוק useTripCard
+import tripsService, { ITrips } from "../services/tripsService";
 
-const useTripInteractions = (trip: any) => {
+const useTripInteractions = (trip: ITrips | null) => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
 
-  // Using useTripCard to manage likes, favorites, and comments
+  // שימוש בהוק useTripCard לניהול לייקים ומועדפים
   const {
     isLiked,
     numOfLikes,
     numOfComments,
-    toggleLike,
     isFavorite,
+    toggleLike,
     toggleFavorite,
   } = useTripCard(trip);
 
@@ -28,12 +28,12 @@ const useTripInteractions = (trip: any) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   // Handle like click
-  const handleLikeClick = (e: React.MouseEvent) => {
+  const handleLikeClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (!isAuthenticated) {
       navigate("/login");
     } else {
-      toggleLike(); // Using function from useTripCard
+      await toggleLike(); // קריאה לפונקציה מתוך useTripCard
     }
   };
 
@@ -43,47 +43,38 @@ const useTripInteractions = (trip: any) => {
     if (!isAuthenticated) {
       navigate("/login");
     } else {
-      toggleFavorite(); // Using function from useTripCard
+      toggleFavorite(); // קריאה לפונקציה מתוך useTripCard
       setSuccessMessage(
         isFavorite ? "Trip removed from favorites!" : "Trip added to favorites!"
       );
     }
   };
 
-  // Handle share (does not require server communication)
+  // Handle likes click to show details in modal
+  const handleLikesClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      const data = await tripsService.getLikesDetails(trip?._id || "");
+      setLikesDetails(data.likesDetails);
+      setShowLikesDetails(true);
+    } catch (error) {
+      console.error("Failed to fetch likes details:", error);
+    }
+  };
+
   const handleShareClick = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `Amazing trip to ${trip.country}`,
-          text: `Join me on this journey to ${trip.country}!`,
-          url: `https://travel-easily-app.netlify.app/searchTrip/trip/${trip._id}`,
+          title: `Amazing trip to ${trip?.country}`,
+          text: `Join me on this journey to ${trip?.country}`!,
+          url: `https://travel-easily-app.netlify.app/searchTrip/trip/${trip?._id}`,
         });
       } catch (error) {
         console.error("Error sharing:", error);
       }
     } else {
-      if (isShareClicked) {
-        setIsExiting(true);
-        setTimeout(() => {
-          setIsShareClicked(false);
-          setIsExiting(false);
-        }, 1000);
-      } else {
-        setIsShareClicked(true);
-      }
-    }
-  };
-
-  // Handle showing likes details
-  const handleLikesClick = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    try {
-      const data = await tripsService.getLikesDetails(trip._id || "");
-      setLikesDetails(data.likesDetails);
-      setShowLikesDetails(true);
-    } catch (error) {
-      console.error("Failed to fetch likes details:", error);
+      setIsShareClicked(!isShareClicked);
     }
   };
 
@@ -101,7 +92,7 @@ const useTripInteractions = (trip: any) => {
     handleLikeClick,
     handleFavoriteClick,
     handleShareClick,
-    handleLikesClick,
+    handleLikesClick, // כאן הוספנו את הפונקציה
     setShowLikesDetails,
     setSuccessMessage,
   };

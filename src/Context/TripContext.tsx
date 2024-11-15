@@ -21,10 +21,9 @@ const token = localStorage.getItem("accessToken");
 const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
   transports: ["websocket"],
   auth: {
-    token, 
+    token,
   },
 });
-
 
 export const TripProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -32,38 +31,12 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
   const [trips, setTrips] = useState<ITrips[]>([]);
 
   useEffect(() => {
-    // האזנה לאירועים של טיולים חדשים מהשרת
     socket.on("tripPosted", (newTrip: ITrips) => {
       setTrips((prevTrips) => [...prevTrips, newTrip]);
     });
 
-    // האזנה לאירוע likeRemoved כדי לעדכן את מספר הלייקים בטיול ספציפי
-    socket.on("likeRemoved", (updatedTrip) => {
-      setTrips((prevTrips) =>
-        prevTrips.map((trip) =>
-          trip._id === updatedTrip.tripId
-            ? { ...trip, numOfLikes: updatedTrip.numOfLikes }
-            : trip
-        )
-      );
-    });
-
-    // האזנה לאירוע likeAdded כדי לעדכן את מספר הלייקים בטיול ספציפי
-    socket.on("likeAdded", (updatedTrip) => {
-      setTrips((prevTrips) =>
-        prevTrips.map((trip) =>
-          trip._id === updatedTrip.tripId
-            ? { ...trip, numOfLikes: updatedTrip.numOfLikes }
-            : trip
-        )
-      );
-    });
-
     return () => {
-      // ניקוי כל ההאזנות בעת פריקת הקומפוננטה
       socket.off("tripPosted");
-      socket.off("likeRemoved");
-      socket.off("likeAdded");
     };
   }, []);
 

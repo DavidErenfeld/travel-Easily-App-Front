@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useSocket from "../../../Hooks/useSocket";
 import TripCard from "../TripCard";
 import tripsService, { ITrips } from "../../../services/tripsService";
 import LoadingDots from "../../UIComponents/Loader";
 import Header from "../../Header";
-import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 const FavoriteTrips = () => {

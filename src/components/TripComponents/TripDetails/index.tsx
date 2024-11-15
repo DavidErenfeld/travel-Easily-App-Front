@@ -15,6 +15,8 @@ import ShareButtons from "../../UIComponents/ShareButtons/index.tsx";
 import "./style.css";
 import useTripInteractions from "../../../Hooks/useTripInteractions.tsx";
 import TripCardIcons from "../TripCardIcons/index.tsx";
+import useSocket from "../../../Hooks/useSocket.tsx";
+import SuccessMessage from "../../UIComponents/SuccessMessage/index.tsx";
 
 const token = localStorage.getItem("accessToken");
 const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
@@ -47,6 +49,7 @@ const TripDetails = () => {
   const {
     isLiked,
     numOfLikes,
+    numOfComments,
     isFavorite,
     isShareClicked,
     isExiting,
@@ -66,7 +69,7 @@ const TripDetails = () => {
       setViewMode("viewComments");
     }
   }, [searchParams]);
-
+  useSocket("likeAdded");
   const loadTripFromServer = async () => {
     try {
       const data = await tripsService.getByTripId(id!);
@@ -173,22 +176,6 @@ const TripDetails = () => {
     }
   };
 
-  // const handleShareClick = async () => {
-  //   if (navigator.share) {
-  //     try {
-  //       await navigator.share({
-  //         title: `Amazing trip to ${trip?.country}`,
-  //         text: `Join me on this journey to ${trip?.country}!`,
-  //         url: `https://travel-easily-app.netlify.app/searchTrip/trip/${trip?._id}`,
-  //       });
-  //     } catch (error) {
-  //       console.error("Error sharing:", error);
-  //     }
-  //   } else {
-  //     setIsShareClicked(!isShareClicked);
-  //   }
-  // };
-
   const handleCommentDeleted = async () => {
     loadTripFromServer();
   };
@@ -294,8 +281,8 @@ const TripDetails = () => {
                   <TripCardIcons
                     tripId={trip._id || ""}
                     country={trip.country}
-                    numOfComments={trip.numOfComments}
-                    numOfLikes={trip.likes?.length || 0}
+                    numOfComments={numOfComments}
+                    numOfLikes={numOfLikes}
                     isLiked={isLiked}
                     isFavorite={isFavorite}
                     isShareClicked={isShareClicked}
@@ -308,6 +295,12 @@ const TripDetails = () => {
                     handleLikesClick={handleLikesClick}
                     setShowLikesDetails={setShowLikesDetails}
                     modalRef={modalRef}
+                  />
+                )}
+                {successMessage && (
+                  <SuccessMessage
+                    message={successMessage}
+                    onAnimationEnd={() => setSuccessMessage(null)}
                   />
                 )}
                 {viewMode === "addComment" && (

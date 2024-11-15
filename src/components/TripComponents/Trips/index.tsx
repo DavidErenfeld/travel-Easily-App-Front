@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import TripCard from "../TripCard";
 import { useTrips } from "../../../Context/TripContext";
+import TripCard from "../TripCard";
 import Header from "../../Header";
 import LoadingDots from "../../UIComponents/Loader";
 import "./style.css";

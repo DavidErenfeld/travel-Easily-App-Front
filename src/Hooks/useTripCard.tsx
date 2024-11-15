@@ -40,19 +40,24 @@ const useTripCard = (trip: ITrips | null) => {
   useSocket("likeAdded", (updatedTrip) => {
     if (updatedTrip._id === trip?._id) {
       setNumOfLikes(updatedTrip.numOfLikes);
+
+      const userId = localStorage.getItem("loggedUserId");
+      const liked =
+        updatedTrip.likes?.some((like: any) => like.owner === userId) || false;
+      setIsLiked(liked);
     }
   });
 
-  useSocket("commentAdded", async (updatedTrip) => {
-    if (updatedTrip._id === trip?._id) {
-      try {
-        const refreshedTrip = await tripsService.getByTripId(trip?._id!);
-        setNumOfComments(refreshedTrip.numOfComments);
-      } catch (error) {
-        console.error("Failed to fetch updated trip data:", error);
-      }
-    }
-  });
+  // useSocket("commentAdded", async (updatedTrip) => {
+  //   if (updatedTrip._id === trip?._id) {
+  //     try {
+  //       const refreshedTrip = await tripsService.getByTripId(trip?._id!);
+  //       setNumOfComments(refreshedTrip.numOfComments);
+  //     } catch (error) {
+  //       console.error("Failed to fetch updated trip data:", error);
+  //     }
+  //   }
+  // });
 
   const toggleLike = async () => {
     if (!trip) return; // Exit if trip is null
@@ -73,7 +78,7 @@ const useTripCard = (trip: ITrips | null) => {
   };
 
   const toggleFavorite = async () => {
-    if (!trip) return; // Exit if trip is null
+    if (!trip) return;
 
     try {
       if (isFavorite) {

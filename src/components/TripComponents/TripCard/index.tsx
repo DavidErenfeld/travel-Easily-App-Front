@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ITrips } from "../../../services/tripsService";
 import TripHeader from "../TripHeader";
@@ -16,6 +16,7 @@ const TripCard = ({ trip }: TripCardProps) => {
   const {
     isLiked,
     numOfLikes,
+    numOfComments,
     isFavorite,
     isShareClicked,
     isExiting,
@@ -71,7 +72,7 @@ const TripCard = ({ trip }: TripCardProps) => {
       <TripCardIcons
         tripId={trip._id || ""}
         country={trip.country}
-        numOfComments={trip.numOfComments}
+        numOfComments={numOfComments}
         numOfLikes={numOfLikes}
         isLiked={isLiked}
         isFavorite={isFavorite}

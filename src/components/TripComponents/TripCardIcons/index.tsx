@@ -75,10 +75,7 @@ const TripCardIcons: React.FC<TripCardIconsProps> = ({
         </p>
         <p onClick={handleLikesClick}>{numOfLikes} likes</p>
         {showLikesDetails && likesDetails.length > 0 && (
-          <div
-            ref={modalRef}
-            className={`likes-details-modal ${showLikesDetails ? "show" : ""}`}
-          >
+          <div ref={modalRef} className={`likes-details-modal`}>
             <X onClick={() => setShowLikesDetails(false)} className="icon" />
             {likesDetails.map((like, index) => (
               <ul key={index}>

@@ -8,7 +8,7 @@ interface TripDescriptionProps {
 const TripDescription: React.FC<TripDescriptionProps> = ({ trip }) => {
   return (
     <section className="trip-description-section ">
-      {trip.tripDescription.map((description, index) => (
+      {trip?.tripDescription?.map((description, index) => (
         <div className="trip-day-details" key={index}>
           <h2 className="trip-day-title">Day {index + 1}</h2>
           <p className="trip-day-description">{description}</p>
