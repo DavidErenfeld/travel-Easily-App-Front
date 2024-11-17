@@ -1,9 +1,9 @@
 // TripDetails.tsx
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-
 import { Share2 } from "lucide-react";
 import tripsService, { ITrips } from "../../../services/tripsService.ts";
+import { useTrips } from "../../../Context/TripContext";
 import TripDescription from "../TripDescription/index.tsx";
 import UpdateTrip from "../UpdateTrip/index.tsx";
 import AddComment from "../../CommentsComponent/AddComment/index.tsx";
@@ -15,10 +15,9 @@ import LoadingDots from "../../UIComponents/Loader";
 import ShareButtons from "../../UIComponents/ShareButtons/index.tsx";
 import TripCardIcons from "../TripCardIcons/index.tsx";
 import SuccessMessage from "../../UIComponents/SuccessMessage/index.tsx";
-import "./style.css";
 import useTripActions from "../../../Hooks/useTripActions.tsx";
 import socket from "../../../Hooks/socketInstance.tsx";
-import { useTrips } from "../../../Context/TripContext";
+import "./style.css";
 
 interface Images {
   src: string;
@@ -137,13 +136,17 @@ const TripDetails = () => {
       owner: loggedUserName || "",
       date: new Date().toISOString(),
       imgUrl: localStorage.getItem("imgUrl") || "",
-      userId: loggedUserId, // Ensure the comment has userId
+      userId: loggedUserId,
     };
 
     setIsSubmitting(true);
     try {
       await tripsService.addComment(trip?._id || "", commentToAdd);
       setErrorMessage("");
+      socket.emit("commentAdded", {
+        tripId: trip?._id,
+        newComment: commentToAdd,
+      });
 
       if (!stayInViewMode) {
         setViewMode("main");
@@ -214,18 +217,6 @@ const TripDetails = () => {
               >
                 {trip && <TripHeader trip={trip} />}
                 <section className="details-container flex-center-column">
-                  <div className="trip-details-share-buttons">
-                    <Share2
-                      className="icon share-icon"
-                      onClick={handleShareClick}
-                    />
-                    {isShareClicked && !navigator.share && (
-                      <ShareButtons
-                        url={`https://travel-easily-app.netlify.app/searchTrip/trip/${trip?._id}`}
-                        text={`Amazing trip to ${trip?.country}! Join me on this adventure!`}
-                      />
-                    )}
-                  </div>
                   {loggedUserId === trip?.owner?._id && (
                     <button
                       className="btn-l mode-btn"

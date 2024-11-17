@@ -6,16 +6,16 @@ import tripsService, { ITrips } from "../services/tripsService";
 import { useTrips } from "../Context/TripContext";
 import { addFavoriteTrip, removeFavoriteTrip } from "../services/usersService";
 import socket from "./socketInstance";
+import TripCard from "../components/TripComponents/TripCard";
+import TripDetails from "../components/TripComponents/TripDetails";
 
 const useTripActions = (trip: ITrips | null) => {
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
   const { trips, setTrips } = useTrips();
 
-  // מציאת הטיול הנוכחי מהסטייט הגלובלי
   const currentTrip = trips.find((t) => t._id === trip?._id);
 
-  // שימוש בסטייט מקומי
   const [isLiked, setIsLiked] = useState(
     currentTrip?.isLikedByCurrentUser || false
   );
@@ -47,6 +47,9 @@ const useTripActions = (trip: ITrips | null) => {
     currentTrip?.numOfLikes,
     currentTrip?.isFavoritedByCurrentUser,
     currentTrip?.numOfComments,
+    trip,
+    TripCard,
+    TripDetails,
   ]);
 
   // טיפול בלחיצה על לייק
@@ -141,7 +144,6 @@ const useTripActions = (trip: ITrips | null) => {
     }
   };
 
-  // טיפול בלחיצה על כפתור הלייקים להצגת הפרטים במודל (נשאר ללא שינוי)
   const handleLikesClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {

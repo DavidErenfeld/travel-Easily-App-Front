@@ -249,7 +249,7 @@ const addComment = (tripId: string, comment: IComment) => {
       )
       .then((response) => {
         console.log(response);
-        socket.emit("addComment", { tripId, comment: response.data }); // שליחת אירוע סוקט
+        // socket.emit("addComment", { tripId, comment: response.data }); // שליחת אירוע סוקט
         resolve(response.data);
       })
       .catch((error) => {

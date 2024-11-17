@@ -3,6 +3,9 @@ import { useEffect } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { useTrips } from "../Context/TripContext";
 import socket from "../Hooks/socketInstance";
+import trips from "../LocalData";
+import TripCard from "./TripComponents/TripCard";
+import TripDetails from "./TripComponents/TripDetails";
 
 interface LikeEventData {
   tripId: string;
@@ -31,7 +34,6 @@ function SocketListener() {
   useEffect(() => {
     console.log("SocketListener mounted");
 
-    // מאזין לאירוע התנתקות משתמש
     const handleDisconnect = () => {
       console.log("Received disconnectUser event");
       logout();
@@ -41,7 +43,6 @@ function SocketListener() {
       socket.on("disconnectUser", handleDisconnect);
     }
 
-    // מאזין לאירועים של לייקים
     const handleLikeAdded = ({ tripId, userId }: LikeEventData) => {
       console.log("handleLikeAdded");
       setTrips((prevTrips) =>
@@ -74,7 +75,6 @@ function SocketListener() {
       );
     };
 
-    // מאזין לאירועים של מועדפים
     const handleFavoriteAdded = ({ tripId, userId }: FavoriteEventData) => {
       console.log("handleFavoriteAdded");
       setTrips((prevTrips) =>
@@ -108,20 +108,17 @@ function SocketListener() {
     const handleCommentAdded = ({ tripId, newComment }: CommentEventData) => {
       console.log("Received commentAdded event", { tripId, newComment });
 
-      // אם newComment.userId לא תואם את המשתמש הנוכחי, הוסף את התגובה
-      if (newComment.userId === user?._id) {
-        setTrips((prevTrips) =>
-          prevTrips.map((trip) =>
-            trip._id === tripId
-              ? {
-                  ...trip,
-                  comments: [...trip.comments, newComment],
-                  numOfComments: trip.numOfComments + 1,
-                }
-              : trip
-          )
-        );
-      }
+      setTrips((prevTrips) =>
+        prevTrips.map((trip) =>
+          trip._id === tripId
+            ? {
+                ...trip,
+                comments: [...trip.comments, newComment],
+                numOfComments: trip.numOfComments + 1,
+              }
+            : trip
+        )
+      );
     };
 
     const handleCommentDeleted = ({
@@ -152,7 +149,7 @@ function SocketListener() {
 
     return () => {
       console.log("SocketListener unmounted");
-      // הסרת המאזינים
+
       socket.off("disconnectUser", handleDisconnect);
       socket.off("likeAdded", handleLikeAdded);
       socket.off("likeRemoved", handleLikeRemoved);
@@ -161,7 +158,7 @@ function SocketListener() {
       socket.off("commentAdded", handleCommentAdded);
       socket.off("commentDeleted", handleCommentDeleted);
     };
-  }, [logout, setTrips, user?._id]);
+  }, [logout, setTrips, user?._id, trips, TripCard, TripDetails]);
 
   return null;
 }
