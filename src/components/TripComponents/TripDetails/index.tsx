@@ -1,6 +1,7 @@
+// TripDetails.tsx
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import io from "socket.io-client";
+
 import { Share2 } from "lucide-react";
 import tripsService, { ITrips } from "../../../services/tripsService.ts";
 import TripDescription from "../TripDescription/index.tsx";
@@ -12,19 +13,12 @@ import Header from "../../Header/index.tsx";
 import ImageCarousel from "../../UIComponents/ImageCarousel/index.tsx";
 import LoadingDots from "../../UIComponents/Loader";
 import ShareButtons from "../../UIComponents/ShareButtons/index.tsx";
-import "./style.css";
-import useTripInteractions from "../../../Hooks/useTripInteractions.tsx";
 import TripCardIcons from "../TripCardIcons/index.tsx";
-import useSocket from "../../../Hooks/useSocket.tsx";
 import SuccessMessage from "../../UIComponents/SuccessMessage/index.tsx";
-
-const token = localStorage.getItem("accessToken");
-const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
-  transports: ["websocket"],
-  auth: {
-    token,
-  },
-});
+import "./style.css";
+import useTripActions from "../../../Hooks/useTripActions.tsx";
+import socket from "../../../Hooks/socketInstance.tsx";
+import { useTrips } from "../../../Context/TripContext";
 
 interface Images {
   src: string;
@@ -34,16 +28,16 @@ interface Images {
 const TripDetails = () => {
   const [viewMode, setViewMode] = useState("main");
   const [updateMode, setUpdateMode] = useState(false);
-  // const [isShareClicked, setIsShareClicked] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { id } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
-  const [trip, setTrip] = useState<ITrips | null>(null);
+  const { trips, setTrips } = useTrips(); // Access TripContext
+  const trip = trips.find((t) => t._id === id) || null;
   const [loading, setLoading] = useState(true);
   const loggedUserName = localStorage.getItem("userName") || "";
   const loggedUserId = localStorage.getItem("loggedUserId") || "";
-  const isThisTheOwner = loggedUserId !== trip?.owner?._id ? false : true;
+  const isThisTheOwner = loggedUserId === trip?.owner?._id;
 
   const [mMargin, setMMargin] = useState("");
   const {
@@ -61,29 +55,32 @@ const TripDetails = () => {
     handleFavoriteClick,
     handleShareClick,
     handleLikesClick,
+    handleModalClose,
     setShowLikesDetails,
     setSuccessMessage,
-  } = useTripInteractions(trip);
+  } = useTripActions(trip);
+
   useEffect(() => {
     if (searchParams.get("viewMode") === "viewComments") {
       setViewMode("viewComments");
     }
   }, [searchParams]);
-  useSocket("likeAdded");
+
   const loadTripFromServer = async () => {
     try {
       const data = await tripsService.getByTripId(id!);
-      setTrip(data);
+      setTrips((prevTrips) => {
+        const existingTrip = prevTrips.find((t) => t._id === id);
+        if (existingTrip) {
+          return prevTrips.map((t) => (t._id === id ? data : t));
+        } else {
+          return [...prevTrips, data];
+        }
+      });
 
-      const updatedTrips = [
-        ...JSON.parse(localStorage.getItem("trips") || "[]"),
-        data,
-      ];
-      localStorage.setItem("trips", JSON.stringify(updatedTrips));
-
-      data.tripPhotos && data.tripPhotos?.length > 0
-        ? setMMargin("")
-        : setMMargin("m-margin");
+      setMMargin(
+        data.tripPhotos && data.tripPhotos.length > 0 ? "" : "m-margin"
+      );
       setErrorMessage("");
     } catch (err) {
       console.error("Failed to load trip:", err);
@@ -103,7 +100,14 @@ const TripDetails = () => {
       const trips: ITrips[] = JSON.parse(savedTrips);
       const foundTrip = trips.find((t) => t._id === id);
       if (foundTrip) {
-        setTrip(foundTrip);
+        setTrips((prevTrips) => {
+          const existingTrip = prevTrips.find((t) => t._id === id);
+          if (existingTrip) {
+            return prevTrips.map((t) => (t._id === id ? foundTrip : t));
+          } else {
+            return [...prevTrips, foundTrip];
+          }
+        });
         setMMargin(
           foundTrip.tripPhotos && foundTrip.tripPhotos.length > 0
             ? ""
@@ -117,29 +121,7 @@ const TripDetails = () => {
 
   useEffect(() => {
     loadTrip();
-
-    socket.on("commentAdded", (commentData) => {
-      console.log("New comment received:", commentData);
-      if (commentData.tripId === id) {
-        setTrip((prevTrip) => ({
-          ...prevTrip!,
-          comments: [...prevTrip!.comments, commentData.newComment],
-          numOfComments: prevTrip!.numOfComments + 1,
-        }));
-      }
-    });
-
-    socket.on("commentDeleted", (commentData) => {
-      console.log("Received commentDeleted event:", commentData);
-      if (commentData.tripId === id) {
-        loadTripFromServer();
-      }
-    });
-
-    return () => {
-      socket.off("commentAdded");
-      socket.off("commentDeleted");
-    };
+    return () => {};
   }, [id, updateMode]);
 
   const onClickUpdateMode = () => {
@@ -155,14 +137,12 @@ const TripDetails = () => {
       owner: loggedUserName || "",
       date: new Date().toISOString(),
       imgUrl: localStorage.getItem("imgUrl") || "",
+      userId: loggedUserId, // Ensure the comment has userId
     };
 
     setIsSubmitting(true);
     try {
       await tripsService.addComment(trip?._id || "", commentToAdd);
-      const updatedTrip = await tripsService.getByTripId(trip?._id || "");
-      socket.emit("commentAdded", updatedTrip);
-      loadTripFromServer();
       setErrorMessage("");
 
       if (!stayInViewMode) {
@@ -208,7 +188,7 @@ const TripDetails = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [showLikesDetails, modalRef]);
+  }, [showLikesDetails, modalRef, setShowLikesDetails]);
 
   return (
     <>
@@ -312,11 +292,11 @@ const TripDetails = () => {
                 )}
                 {viewMode === "viewComments" && trip && (
                   <>
-                    {trip._id && trip.comments.length > 0 && (
+                    {trip.comments.length > 0 && (
                       <ViewComment
                         comments={trip.comments}
                         closeComments={() => handleViewModeChange("main")}
-                        tripId={trip._id}
+                        tripId={trip._id || ""}
                         onCommentDeleted={handleCommentDeleted}
                       />
                     )}

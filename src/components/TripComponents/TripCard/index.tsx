@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { ITrips } from "../../../services/tripsService";
 import TripHeader from "../TripHeader";
 import TripDescription from "../TripDescription";
-import useTripInteractions from "../../../Hooks/useTripInteractions";
 import TripCardIcons from "../TripCardIcons";
 import SuccessMessage from "../../UIComponents/SuccessMessage";
 import "./style.css";
+import useTripActions from "../../../Hooks/useTripActions";
 
 interface TripCardProps {
   trip: ITrips;
@@ -30,7 +30,7 @@ const TripCard = ({ trip }: TripCardProps) => {
     handleLikesClick,
     setShowLikesDetails,
     setSuccessMessage,
-  } = useTripInteractions(trip);
+  } = useTripActions(trip);
 
   // Updated event listener to close likes details modal when clicking outside
   useEffect(() => {
@@ -68,7 +68,7 @@ const TripCard = ({ trip }: TripCardProps) => {
           <TripDescription trip={trip} />
         </div>
       </Link>
-
+      
       <TripCardIcons
         tripId={trip._id || ""}
         country={trip.country}

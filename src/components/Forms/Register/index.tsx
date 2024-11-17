@@ -104,8 +104,8 @@ function Register() {
   ) => {
     console.log(credentialResponse);
     try {
-      await authService.googleSignin(credentialResponse);
-      login();
+      const response = await authService.googleSignin(credentialResponse);
+      login(response);
       navigate("/");
       console.log("user is logt");
     } catch (e) {

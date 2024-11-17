@@ -42,7 +42,7 @@ function Login() {
       });
       console.log("Login successful:", response);
       setLoading(false);
-      login();
+      login(response);
       navigate("/");
     } catch (error) {
       console.error("Login error:", error);

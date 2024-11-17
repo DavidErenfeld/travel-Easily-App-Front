@@ -1,9 +1,11 @@
+// AuthContext.tsx
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import authService from "../services/authService";
+import authService, { IUser } from "../services/authService";
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: () => void;
+  user: IUser | null;
+  login: (userData: IUser) => void;
   logout: () => void;
 }
 
@@ -17,26 +19,43 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     return savedAuthState === "true";
   });
 
-  const login = () => {
+  const [user, setUser] = useState<IUser | null>(() => {
+    const savedUserId = localStorage.getItem("loggedUserId");
+    const userName = localStorage.getItem("userName") || undefined;
+    const imgUrl = localStorage.getItem("imgUrl") || undefined;
+    return savedUserId ? { _id: savedUserId, userName, imgUrl } : null;
+  });
+
+  const login = (userData: IUser) => {
     setIsAuthenticated(true);
+    setUser(userData);
     localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem("loggedUserId", userData._id! || "");
+    localStorage.setItem("userName", userData.userName || "");
+    localStorage.setItem("imgUrl", userData.imgUrl || "");
   };
 
   const logout = async () => {
     try {
       await authService.logout();
-      setIsAuthenticated(false);
-      localStorage.removeItem("isAuthenticated");
     } catch (error) {
       console.error("Logout failed:", error);
+    } finally {
       setIsAuthenticated(false);
+      setUser(null);
       localStorage.removeItem("isAuthenticated");
       localStorage.removeItem("loggedUserId");
+      localStorage.removeItem("userName");
+      localStorage.removeItem("imgUrl");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      // נתק את ה-socket אם צריך
+      // socket.disconnect();
     }
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -5,25 +5,16 @@ import React, {
   ReactNode,
   useEffect,
 } from "react";
-import io from "socket.io-client";
 import tripsService, { ITrips } from "../services/tripsService";
+import socket from "../Hooks/socketInstance";
 
 interface TripContextType {
   trips: ITrips[];
   setTrips: React.Dispatch<React.SetStateAction<ITrips[]>>;
-  refreshTrips: () => void;
+  refreshTrips: () => Promise<void>;
 }
 
 const TripContext = createContext<TripContextType | undefined>(undefined);
-
-// יצירת חיבור Socket.IO
-const token = localStorage.getItem("accessToken");
-const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
-  transports: ["websocket"],
-  auth: {
-    token,
-  },
-});
 
 export const TripProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -31,11 +22,17 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
   const [trips, setTrips] = useState<ITrips[]>([]);
 
   useEffect(() => {
+    // האזנה לאירועים של טיולים חדשים מהשרת
     socket.on("tripPosted", (newTrip: ITrips) => {
-      setTrips((prevTrips) => [...prevTrips, newTrip]);
+      setTrips((prevTrips) =>
+        prevTrips.some((trip) => trip._id === newTrip._id)
+          ? prevTrips
+          : [...prevTrips, newTrip]
+      );
     });
 
     return () => {
+      // ניקוי כל ההאזנות בעת פריקת הקומפוננטה
       socket.off("tripPosted");
     };
   }, []);
@@ -51,6 +48,7 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   useEffect(() => {
+    // טעינת הנתונים הראשונית
     refreshTrips();
   }, []);
 

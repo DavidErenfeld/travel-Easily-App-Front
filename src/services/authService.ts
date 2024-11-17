@@ -1,12 +1,13 @@
 // authService.ts
-import { socket } from "../Hooks/useSocket";
+
 import apiClient from "./apiClient";
 import { CredentialResponse } from "@react-oauth/google";
 import { AxiosResponse } from "axios";
+import socket from "../Hooks/socketInstance";
 
 export interface IUser {
   userName?: string;
-  email: string;
+  email?: string; // הפכנו לאופציונלי
   password?: string;
   imgUrl?: string;
   _id?: string;
@@ -21,7 +22,7 @@ export const loginUser = (user: IUser): Promise<IUser> => {
     apiClient
       .post("/auth/login", user)
       .then((response: any) => {
-        // Store tokens and user info in localStorage
+        // שמירת הטוקנים ומידע המשתמש ב-localStorage
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         localStorage.setItem("loggedUserId", response.data._id);
@@ -30,17 +31,18 @@ export const loginUser = (user: IUser): Promise<IUser> => {
         console.log("accessToken = " + localStorage.getItem("accessToken"));
         console.log("refreshToken = " + localStorage.getItem("refreshToken"));
 
-        // Update token in socket and reconnect
+        // עדכון הטוקן ב-socket והתחברות
         const token = response.data.accessToken;
-        socket.auth.token = token;
-        socket.connect();
 
-        // Emit join event
-        const userId = response.data._id;
-        socket.emit("join", { userId });
-        console.log(`Socket emitted join event with userId: ${userId}`);
+        // הגדרת הטוקן ב-socket.auth
+        socket.auth = { token };
 
-        resolve(response.data);
+        // התחברות ל-socket אם לא מחובר
+        if (!socket.connected) {
+          socket.connect();
+        }
+
+        resolve(response.data); // מחזיר את נתוני המשתמש
       })
       .catch((error: any) => {
         console.log(error);
@@ -48,7 +50,6 @@ export const loginUser = (user: IUser): Promise<IUser> => {
       });
   });
 };
-
 export const registerUser = (user: IUser): Promise<IUser> => {
   return new Promise<IUser>((resolve, reject) => {
     console.log("Registering...");
@@ -82,15 +83,16 @@ export const googleSignin = (
         localStorage.setItem("userName", response.data.userName);
         console.log(response);
 
-        // Update token in socket and reconnect
+        // עדכון הטוקן ב-socket והתחברות
         const token = response.data.accessToken;
-        socket.auth.token = token;
-        socket.connect();
 
-        // Emit join event
-        const userId = response.data._id;
-        socket.emit("join", { userId });
-        console.log(`Socket emitted join event with userId: ${userId}`);
+        // הגדרת הטוקן ב-socket.auth
+        socket.auth = { token };
+
+        // התחברות ל-socket אם לא מחובר
+        if (!socket.connected) {
+          socket.connect();
+        }
 
         resolve(response.data);
       })
@@ -106,10 +108,14 @@ export const logout = (): Promise<void> => {
     console.log("Logging out...");
     const refreshToken = localStorage.getItem("refreshToken");
 
+    localStorage.clear();
+
+    // נתק את ה-socket אם הוא מחובר
+    if (socket.connected) {
+      socket.disconnect();
+    }
     if (!refreshToken) {
       console.log("No refresh token found.");
-      localStorage.clear();
-      socket.disconnect(); // Disconnect the socket
       reject(new Error("No refresh token available. Login required."));
       return;
     }
@@ -126,14 +132,10 @@ export const logout = (): Promise<void> => {
       )
       .then((response) => {
         console.log(response);
-        localStorage.clear();
-        socket.disconnect(); // Disconnect the socket
         resolve();
       })
       .catch((error) => {
         console.log(error);
-        localStorage.clear();
-        socket.disconnect(); // Disconnect the socket
         reject(error);
       });
   });

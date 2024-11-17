@@ -12,18 +12,6 @@ const Trips = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const renderTrips = () => {
-    return trips.map((trip) => (
-      <article className="trip-list-item" key={trip._id}>
-        <TripCard trip={trip} />
-      </article>
-    ));
-  };
-
-  const handleCreateTrip = () => {
-    navigate("/AddTrip");
-  };
-
   useEffect(() => {
     const loadTrips = async () => {
       setIsLoading(true);
@@ -40,6 +28,18 @@ const Trips = () => {
 
     loadTrips();
   }, []);
+
+  const renderTrips = () => {
+    return trips.map((trip) => (
+      <article className="trip-list-item" key={trip._id}>
+        <TripCard trip={trip} />
+      </article>
+    ));
+  };
+
+  const handleCreateTrip = () => {
+    navigate("/AddTrip");
+  };
 
   return (
     <>

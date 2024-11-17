@@ -25,6 +25,8 @@ export interface ITrips {
   numOfLikes: number;
   tripPhotos?: string[];
 
+  isLikedByCurrentUser?: boolean;
+  isFavoritedByCurrentUser?: boolean;
   comments: IComment[];
 
   likes?: Array<{
@@ -56,9 +58,15 @@ const refreshToken = localStorage.getItem("refreshToken");
 
 const getAllTrips = () => {
   const abortController = new AbortController();
+  const token = localStorage.getItem("accessToken");
+
+  const headers = token ? { Authorization: `jwt ${token}` } : {};
+
   const req = apiClient.get<ITrips[]>("trips", {
     signal: abortController.signal,
+    headers,
   });
+
   console.log("getAllTrips");
   return { req, abort: () => abortController.abort() };
 };

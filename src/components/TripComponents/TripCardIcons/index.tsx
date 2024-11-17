@@ -42,7 +42,7 @@ const TripCardIcons: React.FC<TripCardIconsProps> = ({
   modalRef,
 }) => {
   const navigate = useNavigate();
-
+  
   return (
     <div className="icons-details flex-space-between">
       <div className="icons">
@@ -55,7 +55,7 @@ const TripCardIcons: React.FC<TripCardIconsProps> = ({
         <div className="icons-area">
           <Heart
             onClick={handleFavoriteClick}
-            className={`icon ${isFavorite ? "true" : "false"}`}
+            className={`icon ${isFavorite ? "true" : "false"}`} // מתעדכן לפי הסטייט
           />
         </div>
         <Share2 className="icon share-icon" onClick={handleShareClick} />

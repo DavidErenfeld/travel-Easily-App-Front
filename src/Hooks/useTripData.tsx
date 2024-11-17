@@ -1,42 +1,29 @@
-// useTripData.tsx
-import { useState, useEffect } from "react";
-import tripsService, { ITrips } from "../services/tripsService";
-import io from "socket.io-client";
+// // socketInstance.ts
+// import { io, Socket } from "socket.io-client";
 
-const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com");
+// const token = localStorage.getItem("accessToken"); // או מאיפה שאתה שומר את הטוקן
 
-const useTripData = (tripId: string) => {
-  const [trip, setTrip] = useState<ITrips | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+// const socket: Socket = io("https://your-server-url", {
+//   transports: ["websocket"],
+//   autoConnect: false,
+//   auth: {
+//     token: token,
+//   },
+// });
 
-  const loadTrip = async () => {
-    setLoading(true);
-    try {
-      const data = await tripsService.getByTripId(tripId);
-      setTrip(data);
-    } catch (error) {
-      console.error("Failed to load trip:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+// // מאזין לאירוע connect
+// socket.on("connect", () => {
+//   console.log("Socket connected:", socket.id);
+//   const loggedUserId = localStorage.getItem("loggedUserId");
+//   if (loggedUserId) {
+//     socket.emit("join", { userId: loggedUserId });
+//     console.log(`Joined room with userId: ${loggedUserId}`);
+//   }
+// });
 
-  useEffect(() => {
-    loadTrip();
+// // מאזין לשגיאות התחברות
+// socket.on("connect_error", (err) => {
+//   console.error("Socket connection error:", err.message);
+// });
 
-    // Listen for real-time updates
-    socket.on("tripUpdated", (updatedTrip: ITrips) => {
-      if (updatedTrip._id === tripId) {
-        setTrip(updatedTrip);
-      }
-    });
-
-    return () => {
-      socket.off("tripUpdated");
-    };
-  }, [tripId]);
-
-  return { trip, loading, refreshTrip: loadTrip };
-};
-
-export default useTripData;
+// export default socket;

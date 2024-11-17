@@ -59,14 +59,7 @@ const useTripActions = (trip: ITrips | null) => {
 
       try {
         await tripsService.addLike(trip?._id!);
-
-        // שליחת אירוע לשרת דרך Socket.IO
-        socket.emit(newIsLiked ? "addLike" : "removeLike", {
-          tripId: trip?._id,
-          userId: user?._id,
-        });
       } catch (error) {
-        // החזרת הסטייט למצב הקודם במקרה של שגיאה
         setIsLiked(!newIsLiked);
         setNumOfLikes(newIsLiked ? numOfLikes - 1 : numOfLikes + 1);
 

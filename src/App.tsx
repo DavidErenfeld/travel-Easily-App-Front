@@ -21,8 +21,19 @@ import FavoriteTrips from "./components/TripComponents/FavoriteTrips";
 import TripFormPage from "./components/PlacesSearch/PlacesSearchPage";
 import "./App.css";
 import "./index.css";
+import { useEffect } from "react";
+import socket from "./Hooks/socketInstance";
 
 function App() {
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      socket.auth = { token };
+      if (!socket.connected) {
+        socket.connect();
+      }
+    }
+  }, []);
   return (
     <AuthProvider>
       <TripProvider>
@@ -40,13 +51,13 @@ function App() {
               element={<AdvancedSearch />}
             />
             <Route element={<ProtectedRoute />}>
+              <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/personal-area" element={<PersonalArea />} />
               <Route path="/AddTrip" element={<TripForm />} />
               <Route path="/create-trip" element={<CreateTrip />} />
               <Route path="/myTrips" element={<MyTrips />} />
               <Route path="/favoriteTrips" element={<FavoriteTrips />} />
-              <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
               <Route path="/tripForm" element={<TripFormPage />} />
             </Route>
           </Routes>
