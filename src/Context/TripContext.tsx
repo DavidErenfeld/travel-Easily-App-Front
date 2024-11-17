@@ -6,7 +6,6 @@ import React, {
   useEffect,
 } from "react";
 import tripsService, { ITrips } from "../services/tripsService";
-import socket from "../Hooks/socketInstance";
 
 interface TripContextType {
   trips: ITrips[];
@@ -20,22 +19,6 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [trips, setTrips] = useState<ITrips[]>([]);
-
-  useEffect(() => {
-    // האזנה לאירועים של טיולים חדשים מהשרת
-    socket.on("tripPosted", (newTrip: ITrips) => {
-      setTrips((prevTrips) =>
-        prevTrips.some((trip) => trip._id === newTrip._id)
-          ? prevTrips
-          : [...prevTrips, newTrip]
-      );
-    });
-
-    return () => {
-      // ניקוי כל ההאזנות בעת פריקת הקומפוננטה
-      socket.off("tripPosted");
-    };
-  }, []);
 
   const refreshTrips = async () => {
     try {

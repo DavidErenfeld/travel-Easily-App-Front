@@ -6,7 +6,7 @@
 }
 
 /* 784 */
-@media (max-width: 40em) {
+@media (max-width: 49em) {
   .places-list {
     display: flex;
     flex-direction: column;
@@ -14,6 +14,20 @@
     justify-content: center;
     gap: 2rem;
     list-style-type: none;
-    padding: 1ren 4rem;
+    padding: 1rem 6rem;
+  }
+}
+
+/* 480 */
+@media (max-width: 30em) {
+  .places-list {
+    padding: 1rem 2.2rem;
+  }
+}
+
+/* 320 */
+@media (max-width: 20em) {
+  .places-list {
+    padding: 1rem 1.8rem;
   }
 }

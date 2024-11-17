@@ -6,6 +6,7 @@ import socket from "../Hooks/socketInstance";
 import trips from "../LocalData";
 import TripCard from "./TripComponents/TripCard";
 import TripDetails from "./TripComponents/TripDetails";
+import { ITrips } from "../services/tripsService";
 
 interface LikeEventData {
   tripId: string;
@@ -42,7 +43,13 @@ function SocketListener() {
     if (!socket.hasListeners("disconnectUser")) {
       socket.on("disconnectUser", handleDisconnect);
     }
-
+    const handleTripPosted = (newTrip: ITrips) => {
+      setTrips((prevTrips) =>
+        prevTrips.some((trip) => trip._id === newTrip._id)
+          ? prevTrips
+          : [...prevTrips, newTrip]
+      );
+    };
     const handleLikeAdded = ({ tripId, userId }: LikeEventData) => {
       console.log("handleLikeAdded");
       setTrips((prevTrips) =>
@@ -140,6 +147,7 @@ function SocketListener() {
     };
 
     // רישום המאזינים
+    socket.on("tripPosted", handleTripPosted);
     socket.on("likeAdded", handleLikeAdded);
     socket.on("likeRemoved", handleLikeRemoved);
     socket.on("addFavorite", handleFavoriteAdded);
@@ -151,6 +159,7 @@ function SocketListener() {
       console.log("SocketListener unmounted");
 
       socket.off("disconnectUser", handleDisconnect);
+      socket.off("tripPosted", handleTripPosted);
       socket.off("likeAdded", handleLikeAdded);
       socket.off("likeRemoved", handleLikeRemoved);
       socket.off("favoriteAdded", handleFavoriteAdded);
