@@ -7,10 +7,10 @@ import axios from "axios";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import LoadingDots from "../../UIComponents/Loader";
 import { useAuth } from "../../../Context/AuthContext";
-import "../formeStyle.css";
-import "./style.css";
 import authService from "../../../services/authService";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import "../formeStyle.css";
+import "./style.css";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -121,7 +121,7 @@ function Login() {
         </div>
       ) : (
         <div className="buttons-box flex-center-column-gap">
-          <button type="submit" className="btn-l">
+          <button type="submit" className="btn-login btn-l">
             Sign in
           </button>
           <p>or</p>

@@ -17,6 +17,7 @@ const Sidebar = ({
 }: SidebarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const isAuthenticated = localStorage.getItem("isAuthenticated  ");
 
   const handleProfileClick = () => {
     navigate("/personal-area");
@@ -48,39 +49,41 @@ const Sidebar = ({
           <img className="user-sidebar-img" src={profileImg} alt="Profile" />
         </div>
 
-        <Link to="/AddTrip">
-          <h1 className="sidebar-item">Add trip</h1>
-        </Link>
-
-        <Link to="/myTrips">
-          <h1 className="sidebar-item">My trips</h1>
-        </Link>
-
-        <Link to="/favoriteTrips">
-          <h1 className="sidebar-item">Favorite trips</h1>
-        </Link>
-
-        <Link to="/searchTrip">
-          <h1 className="sidebar-item">Search trip</h1>
-        </Link>
-
-        {location.pathname.includes("/searchTrip") && (
-          <Link to="/searchTrip/advancedSearch">
-            <h1 className="sidebar-item">Advanced search</h1>
+        {isAuthenticated && (
+          <Link to="/personalArea">
+            <h1 className="sidebar-item">Edit profile</h1>
           </Link>
         )}
 
-        <Link to="/tripForm">
-          <h1 className="sidebar-item">Explore Nearby</h1>
+        {!isAuthenticated && (
+          <Link to="/login">
+            <h1 className="sidebar-item">Sign In</h1>
+          </Link>
+        )}
+
+        {!isAuthenticated && (
+          <Link to="/register">
+            <h1 className="sidebar-item">Sign Up</h1>
+          </Link>
+        )}
+
+        <Link to="/HowItWorks">
+          <h1 className="sidebar-item">HowItWorks</h1>
+        </Link>
+
+        <Link to="/ContactUs">
+          <h1 className="sidebar-item">Contact us</h1>
         </Link>
 
         <Link to="/">
           <h1 className="sidebar-item">Home</h1>
         </Link>
 
-        <h1 className="sidebar-item" onClick={handleLogout}>
-          Logout
-        </h1>
+        {isAuthenticated && (
+          <h1 className="sidebar-item" onClick={handleLogout}>
+            Logout
+          </h1>
+        )}
 
         <div className="close-sidebar">
           <CloseIcon color="#000" onClose={toggleSidebar} />

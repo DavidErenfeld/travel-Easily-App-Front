@@ -88,6 +88,9 @@ const AdvancedSearch: React.FC = () => {
             <p className="no-trips-message">
               No trips found for the specified criteria.
             </p>
+            <button className="btn-cta-l" onClick={resetSearch}>
+              Try again
+            </button>
           </div>
         )}
       </>

@@ -19,7 +19,9 @@ const TripsList = () => {
       <section className="trips-section section">
         {filteredTrips.length === 0 ? (
           <div className="no-trips-container">
-            <p className="no-trips-message">You have no trips yet.</p>
+            <p className="no-trips-message">
+              No trips found for your search criteria.
+            </p>
             <button
               className="btn-cta-exl"
               onClick={() => navigate(`/secontHomPage`)}

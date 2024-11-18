@@ -26,6 +26,12 @@
   color: var(--text-prymary);
 }
 
+@media (max-width: 30em) {
+  .btn-login.btn-l {
+    width: 100%;
+  }
+}
+
 /* 320 */
 @media (max-width: 20em) {
   .google-login-section {

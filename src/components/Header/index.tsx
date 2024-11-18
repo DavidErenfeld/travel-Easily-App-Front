@@ -12,6 +12,7 @@ const Header = () => {
     localStorage.getItem("imgUrl") || "/images/user.png"
   );
   const [isUserConect, setIsUserConect] = useState(false);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // state לניהול מצב התפריט
   const navigate = useNavigate();
   const location = useLocation();
@@ -101,9 +102,12 @@ const Header = () => {
               </div>
             ) : (
               <div className="menu">
-                <p onClick={() => navigate("/login")} className="menu-item">
-                  Sign in
-                </p>
+                <img
+                  className="user-main-page-img"
+                  src={profileImg}
+                  alt="Profile"
+                  onClick={toggleSidebar}
+                />
               </div>
             )}
 

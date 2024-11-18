@@ -7,7 +7,6 @@
   position: absolute;
   top: 16rem;
   right: 10rem;
-  z-index: 20000;
 }
 
 .loading-container {
@@ -20,7 +19,6 @@
     position: absolute;
     top: 16.7rem;
     right: 2rem;
-    z-index: 20000;
   }
 }
 
