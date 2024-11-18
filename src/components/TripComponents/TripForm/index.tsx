@@ -4,6 +4,7 @@ import axios from "axios";
 import Header from "../../Header";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import "./style.css";
+import MenuBar from "../../Menus/MenuBar";
 
 const TripForm: React.FC = () => {
   const [selectedGroupType, setSelectedGroupType] = useState<string>("");
@@ -83,6 +84,7 @@ const TripForm: React.FC = () => {
   return (
     <>
       <Header />
+      <MenuBar />
       <section className="main-section ">
         <div className="profile-container">
           <div className="form-close-icon">

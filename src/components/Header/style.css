@@ -39,6 +39,10 @@ h1.logo {
   cursor: pointer;
 }
 
+.mobile-menu {
+  display: none;
+}
+
 .menu {
   display: flex;
   align-items: center;
@@ -59,9 +63,22 @@ h1.logo {
 
 /*880*/
 @media (max-width: 55em) {
-  .menu-item.connectet-menu {
+  .menu {
     display: none;
   }
+  /* .menu-item.connectet-menu {
+    display: none;
+  } */
+  .mobile-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  .mobile-menu-icon.icon {
+    color: var(--text-secondary);
+  }
+
   h1.logo {
     font-size: 3.2rem;
   }

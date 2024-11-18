@@ -5,17 +5,20 @@ import Header from "../Header";
 import tripsService, { ITrips } from "../../services/tripsService";
 import TripCard from "../TripComponents/TripCard";
 import CloseIcon from "../UIComponents/Icons/Close";
+import MenuBar from "../Menus/MenuBar";
+import LoadingDots from "../UIComponents/Loader";
 
 const AdvancedSearch: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [selectedGroupType, setSelectedGroupType] = useState<string>("");
   const [selectedTripType, setSelectedTripType] = useState<string>("");
   const [numberOfDays, setNumberOfDays] = useState<string>("");
-
-  const [countries, setCountries] = useState<string[]>([]);
-  const [searchResults, setSearchResults] = useState<ITrips[]>([]); // מצב לתוצאות חיפוש
+  const [searchResults, setSearchResults] = useState<ITrips[]>([]);
   const [isSearchSelected, setIsSearchSelected] = useState(false);
+  const [countries, setCountries] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false); // מצב טעינה
 
+  // קריאה לרשימת מדינות
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -28,15 +31,15 @@ const AdvancedSearch: React.FC = () => {
         console.error("Error fetching countries:", error);
       }
     };
-
     fetchCountries();
   }, []);
 
   const handleSubmit = async () => {
     try {
+      setIsLoading(true);
       setIsSearchSelected(true);
-      const queryParams: Record<string, string | number> = {};
 
+      const queryParams: Record<string, string | number> = {};
       if (selectedCountry) queryParams.country = selectedCountry;
       if (selectedGroupType) queryParams.typeTraveler = selectedGroupType;
       if (selectedTripType) queryParams.typeTrip = selectedTripType;
@@ -44,68 +47,64 @@ const AdvancedSearch: React.FC = () => {
 
       const results = await tripsService.searchTripsByParams(queryParams);
       setSearchResults(results);
-
-      // איפוס השדות לאחר שליחת הנתונים
-      setSelectedCountry("");
-      setSelectedGroupType("");
-      setSelectedTripType("");
-      setNumberOfDays("");
     } catch (error) {
       console.error("Error during search:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // פונקציה שמחזירה את השדות למצב הראשוני אחרי לחיצה על Try Again
   const resetSearch = () => {
     setIsSearchSelected(false);
     setSelectedCountry("");
     setSelectedGroupType("");
     setSelectedTripType("");
     setNumberOfDays("");
+    setSearchResults([]);
   };
 
   const renderSearchResults = () => {
-    return searchResults.length > 0 ? (
-      searchResults.map((trip) => (
-        <section className="trip-list-item" key={trip._id}>
-          <TripCard trip={trip} />
-        </section>
-      ))
-    ) : (
-      <p>No trips found for the specified criteria.</p>
+    if (isLoading) {
+      return (
+        <div className="loading-container">
+          <LoadingDots />
+        </div>
+      );
+    }
+
+    return (
+      <>
+        <button className="btn-m try-again" onClick={resetSearch}>
+          Try again
+        </button>
+        {searchResults.length > 0 ? (
+          <section className="trips-section">
+            {searchResults.map((trip) => (
+              <TripCard key={trip._id} trip={trip} />
+            ))}
+          </section>
+        ) : (
+          <div className="no-trips-container">
+            <p className="no-trips-message">
+              No trips found for the specified criteria.
+            </p>
+          </div>
+        )}
+      </>
     );
   };
 
   return (
     <>
+      <Header />
+      <MenuBar />
       {isSearchSelected ? (
-        <section className="trips-section">
-          {searchResults.length === 0 ? (
-            <div className="no-trips-container">
-              <p className="no-trips-message">No trips found.</p>
-              <button className="btn-m" onClick={resetSearch}>
-                Try again
-              </button>
-            </div>
-          ) : (
-            <section className="trips-section section">
-              {/* <button className="btn-m try-again" onClick={resetSearch}>
-                  Try again
-                </button> */}
-              {renderSearchResults()}
-            </section>
-          )}
-        </section>
+        <div className="search-results-container">{renderSearchResults()}</div>
       ) : (
         <div className="profile-container advanced-search-section">
-          <div className="form-close-icon">
-            <CloseIcon color="#fff" />
-          </div>
           <div className="form-header">
             <h2 className="form-title">Advanced Search</h2>
           </div>
-
-          {/* שדות החיפוש */}
           <div className="form-group">
             <label htmlFor="country">Country</label>
             <input
@@ -122,7 +121,6 @@ const AdvancedSearch: React.FC = () => {
               ))}
             </datalist>
           </div>
-
           <div className="form-group">
             <label htmlFor="groupType">Group Type</label>
             <select
@@ -140,7 +138,6 @@ const AdvancedSearch: React.FC = () => {
               <option value="groups">Groups</option>
             </select>
           </div>
-
           <div className="form-group">
             <label htmlFor="tripType">Trip Type</label>
             <select
@@ -158,7 +155,6 @@ const AdvancedSearch: React.FC = () => {
               <option value="integrated">Integrated</option>
             </select>
           </div>
-
           <div className="form-group">
             <label htmlFor="days">Number of Days</label>
             <input
@@ -171,7 +167,6 @@ const AdvancedSearch: React.FC = () => {
               min="1"
             />
           </div>
-
           <button className="btn-cta-l" onClick={handleSubmit}>
             Search
           </button>

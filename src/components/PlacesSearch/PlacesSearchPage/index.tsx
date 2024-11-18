@@ -5,6 +5,7 @@ import PlacesList from "../PlacesList";
 import Header from "../../Header";
 import LoadingDots from "../../UIComponents/Loader";
 import "./style.css";
+import MenuBar from "../../Menus/MenuBar";
 
 const PlacesSearchPage: React.FC = () => {
   const [places, setPlaces] = useState<Place[]>([]);
@@ -20,6 +21,7 @@ const PlacesSearchPage: React.FC = () => {
   return (
     <>
       <Header />
+      <MenuBar />
       <section className="section places-search-page">
         <h1>Explore Nearby</h1>
 

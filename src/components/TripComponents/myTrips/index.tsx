@@ -6,6 +6,7 @@ import TripCard from "../TripCard";
 import Header from "../../Header";
 import LoadingDots from "../../UIComponents/Loader";
 import "./style.css";
+import MenuBar from "../../Menus/MenuBar";
 
 const MyTrips = () => {
   const [trips, setTrips] = useState<ITrips[]>([]);
@@ -54,6 +55,7 @@ const MyTrips = () => {
   return (
     <>
       <Header />
+      <MenuBar />
       <section className="trips-section section">
         {loading ? (
           <div className="trips-loader main-loader-section">

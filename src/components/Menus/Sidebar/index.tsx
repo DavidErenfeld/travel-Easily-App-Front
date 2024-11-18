@@ -1,6 +1,6 @@
 import "./style.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import CloseIcon from "../UIComponents/Icons/Close";
+import CloseIcon from "../../UIComponents/Icons/Close";
 
 interface SidebarProps {
   profileImg: string;

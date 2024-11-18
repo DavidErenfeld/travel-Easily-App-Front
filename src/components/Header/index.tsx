@@ -2,9 +2,9 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { useEffect, useState } from "react";
-import Sidebar from "../Sidebar";
+import { CirclePlus, Plus, Search } from "lucide-react";
+import Sidebar from "../Menus/Sidebar";
 import "./style.css";
-import { Plus } from "lucide-react";
 
 const Header = () => {
   const { logout } = useAuth();
@@ -61,11 +61,11 @@ const Header = () => {
           <h1 className="sidebar logo">TRAVEL easily</h1>
         </Link>
 
-        {isUserConect && (
+        {/* {isUserConect && (
           <p onClick={() => navigate("/addTrip")} className="sidbar menu-item">
             Add trip
           </p>
-        )}
+        )} */}
 
         {!isSidebarOpen && (
           <>
@@ -92,23 +92,6 @@ const Header = () => {
                   Explore Nearby
                 </p>
 
-                {location.pathname.includes("/AddTrip") && (
-                  <p
-                    onClick={() => navigate("/searchTrip")}
-                    className="menu-item connectet-menu"
-                  >
-                    Search trip
-                  </p>
-                )}
-
-                {location.pathname.includes("/searchTrip") && (
-                  <p
-                    onClick={() => navigate("/searchTrip/advancedSearch")}
-                    className="menu-item search-item connectet-menu"
-                  >
-                    Advanced search
-                  </p>
-                )}
                 <img
                   className="user-main-page-img"
                   src={profileImg}
@@ -123,6 +106,23 @@ const Header = () => {
                 </p>
               </div>
             )}
+
+            <section className="mobile-menu">
+              <CirclePlus
+                className="mobile-menu-icon icon"
+                onClick={() => navigate("/addTrip")}
+              />
+              <Search
+                className="mobile-menu-icon icon"
+                onClick={() => navigate("/searchTrip/advancedSearch")}
+              />
+              <img
+                className="user-main-page-img"
+                src={profileImg}
+                alt="Profile"
+                onClick={toggleSidebar}
+              />
+            </section>
           </>
         )}
       </header>

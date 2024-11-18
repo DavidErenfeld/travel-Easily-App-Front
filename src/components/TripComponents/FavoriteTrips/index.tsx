@@ -6,6 +6,7 @@ import tripsService, { ITrips } from "../../../services/tripsService";
 import LoadingDots from "../../UIComponents/Loader";
 import Header from "../../Header";
 import "./style.css";
+import MenuBar from "../../Menus/MenuBar";
 
 const FavoriteTrips = () => {
   const [trips, setTrips] = useState<ITrips[]>([]);
@@ -46,6 +47,7 @@ const FavoriteTrips = () => {
   return (
     <>
       <Header />
+      <MenuBar />
       <section className="trips-section section">
         {loading ? (
           <div className="trips-loader main-loader-section">

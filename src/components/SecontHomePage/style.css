@@ -6,6 +6,7 @@
   padding: 0rem 4rem;
   /* margin-top: 9rem; */
   background-color: var(--background-light-blu);
+  position: relative;
 }
 
 .destinations-grid > h1 {
@@ -74,7 +75,6 @@
   .destinations-grid > h1 {
     grid-row: 1;
     grid-column: 1/-1;
-    /* padding-top: 1rem; */
     margin-bottom: 0rem;
   }
 }
@@ -89,72 +89,5 @@
     /* padding: 4rem; */
     /* margin-top: 9rem; */
     background-color: var(--background-light-blu);
-  }
-}
-
-/* ................................... */
-.menu-bar {
-  margin: 1rem auto;
-  margin-top: 10.8rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  padding: 0rem 2rem;
-  background-color: var(--background-light-blu);
-  width: 70%;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.menu-sub-item {
-  flex: 0 0 auto; /* מאפשר לכל פריט להיות בגודל האוטומטי שלו */
-  padding: 0.8rem 1.5rem;
-  border-radius: 5px;
-  background-color: #cacaca;
-  background-color: var(--button-cta-bg-hover);
-  color: var(--text-primary);
-  font-size: 1.6rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-align: center;
-  transition: all 0.4s;
-}
-
-.menu-sub-item:hover {
-  background-color: var(--button-primary-bg);
-  transform: scale(1.05);
-}
-
-/* גלילה נסתרת כאשר אין צורך */
-.menu-bar::-webkit-scrollbar {
-  height: 6px;
-}
-
-.menu-bar::-webkit-scrollbar-thumb {
-  background-color: var(--button-primary-bg-hover);
-  border-radius: 10px;
-}
-
-.menu-bar::-webkit-scrollbar-track {
-  background: var(--background-light-blu);
-}
-
-@media (max-width: 50em) {
-  .menu-bar {
-    margin: 1rem 0rem;
-    margin-top: 10.8rem;
-    width: 100%;
-  }
-
-  .menu-item {
-    font-size: 1.6rem;
-    padding: 0.6rem 1.2rem;
-  }
-}
-@media (max-width: 30em) {
-  .menu-bar {
-    margin-top: 10rem;
-    justify-content: flex-start;
   }
 }

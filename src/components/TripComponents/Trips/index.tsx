@@ -5,6 +5,7 @@ import TripCard from "../TripCard";
 import Header from "../../Header";
 import LoadingDots from "../../UIComponents/Loader";
 import "./style.css";
+import MenuBar from "../../Menus/MenuBar";
 
 const Trips = () => {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ const Trips = () => {
   return (
     <>
       <Header />
+      <MenuBar />
       <section className="trips-section">
         {isLoading ? (
           <LoadingDots />
