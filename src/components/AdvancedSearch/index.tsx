@@ -78,108 +78,105 @@ const AdvancedSearch: React.FC = () => {
 
   return (
     <>
-      <Header />
-      <>
-        {isSearchSelected ? (
-          <section className="trips-section">
-            {searchResults.length === 0 ? (
-              <div className="no-trips-container">
-                <p className="no-trips-message">No trips found.</p>
-                <button className="btn-m" onClick={resetSearch}>
-                  Try again
-                </button>
-              </div>
-            ) : (
-              <section className="trips-section section">
-                {/* <button className="btn-m try-again" onClick={resetSearch}>
+      {isSearchSelected ? (
+        <section className="trips-section">
+          {searchResults.length === 0 ? (
+            <div className="no-trips-container">
+              <p className="no-trips-message">No trips found.</p>
+              <button className="btn-m" onClick={resetSearch}>
+                Try again
+              </button>
+            </div>
+          ) : (
+            <section className="trips-section section">
+              {/* <button className="btn-m try-again" onClick={resetSearch}>
                   Try again
                 </button> */}
-                {renderSearchResults()}
-              </section>
-            )}
-          </section>
-        ) : (
-          <div className="profile-container advanced-search-section">
-            <div className="form-close-icon">
-              <CloseIcon color="#fff" />
-            </div>
-            <div className="form-header">
-              <h2 className="form-title">Advanced Search</h2>
-            </div>
-
-            {/* שדות החיפוש */}
-            <div className="form-group">
-              <label htmlFor="country">Country</label>
-              <input
-                list="countries"
-                id="country"
-                value={selectedCountry}
-                onChange={(e) => setSelectedCountry(e.target.value)}
-                className="form-control"
-                placeholder="Start typing to search..."
-              />
-              <datalist id="countries">
-                {countries.map((country) => (
-                  <option key={country} value={country} />
-                ))}
-              </datalist>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="groupType">Group Type</label>
-              <select
-                id="groupType"
-                value={selectedGroupType}
-                onChange={(e) => setSelectedGroupType(e.target.value)}
-                className="form-control"
-              >
-                <option value="">Select Group Type</option>
-                <option value="romantic couple">Romantic Couple</option>
-                <option value="happy family">Happy Family</option>
-                <option value="friends">Friends</option>
-                <option value="seniors">Seniors</option>
-                <option value="single">Single</option>
-                <option value="groups">Groups</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="tripType">Trip Type</label>
-              <select
-                id="tripType"
-                value={selectedTripType}
-                onChange={(e) => setSelectedTripType(e.target.value)}
-                className="form-control"
-              >
-                <option value="">Select Trip Type</option>
-                <option value="attractions">Attractions</option>
-                <option value="romantic">Romantic</option>
-                <option value="nature">Nature</option>
-                <option value="parties">Parties</option>
-                <option value="food">Food</option>
-                <option value="integrated">Integrated</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="days">Number of Days</label>
-              <input
-                type="number"
-                id="days"
-                value={numberOfDays}
-                onChange={(e) => setNumberOfDays(e.target.value)}
-                className="form-control"
-                placeholder="Enter number of days..."
-                min="1"
-              />
-            </div>
-
-            <button className="btn-cta-l" onClick={handleSubmit}>
-              Search
-            </button>
+              {renderSearchResults()}
+            </section>
+          )}
+        </section>
+      ) : (
+        <div className="profile-container advanced-search-section">
+          <div className="form-close-icon">
+            <CloseIcon color="#fff" />
           </div>
-        )}
-      </>
+          <div className="form-header">
+            <h2 className="form-title">Advanced Search</h2>
+          </div>
+
+          {/* שדות החיפוש */}
+          <div className="form-group">
+            <label htmlFor="country">Country</label>
+            <input
+              list="countries"
+              id="country"
+              value={selectedCountry}
+              onChange={(e) => setSelectedCountry(e.target.value)}
+              className="form-control"
+              placeholder="Start typing to search..."
+            />
+            <datalist id="countries">
+              {countries.map((country) => (
+                <option key={country} value={country} />
+              ))}
+            </datalist>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="groupType">Group Type</label>
+            <select
+              id="groupType"
+              value={selectedGroupType}
+              onChange={(e) => setSelectedGroupType(e.target.value)}
+              className="form-control"
+            >
+              <option value="">Select Group Type</option>
+              <option value="romantic couple">Romantic Couple</option>
+              <option value="happy family">Happy Family</option>
+              <option value="friends">Friends</option>
+              <option value="seniors">Seniors</option>
+              <option value="single">Single</option>
+              <option value="groups">Groups</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="tripType">Trip Type</label>
+            <select
+              id="tripType"
+              value={selectedTripType}
+              onChange={(e) => setSelectedTripType(e.target.value)}
+              className="form-control"
+            >
+              <option value="">Select Trip Type</option>
+              <option value="attractions">Attractions</option>
+              <option value="romantic">Romantic</option>
+              <option value="nature">Nature</option>
+              <option value="parties">Parties</option>
+              <option value="food">Food</option>
+              <option value="integrated">Integrated</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="days">Number of Days</label>
+            <input
+              type="number"
+              id="days"
+              value={numberOfDays}
+              onChange={(e) => setNumberOfDays(e.target.value)}
+              className="form-control"
+              placeholder="Enter number of days..."
+              min="1"
+            />
+          </div>
+
+          <button className="btn-cta-l" onClick={handleSubmit}>
+            Search
+          </button>
+        </div>
+      )}
     </>
   );
 };

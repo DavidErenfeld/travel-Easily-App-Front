@@ -21,7 +21,10 @@ const HeroSection = () => {
         />
       </div>
 
-      <button onClick={() => navigate("/searchTrip")} className="btn-cta-exl">
+      <button
+        onClick={() => navigate("/secontHomPage")}
+        className="btn-cta-exl"
+      >
         Start Exploring Itineraries
       </button>
     </section>

@@ -61,3 +61,10 @@
 .forgot-password:hover {
   color: var(--text-secondary);
 }
+
+/* 320 */
+@media (max-width: 20em) {
+  .form-container {
+    width: 30rem;
+  }
+}

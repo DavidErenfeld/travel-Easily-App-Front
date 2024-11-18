@@ -10,6 +10,7 @@ import { useAuth } from "../../../Context/AuthContext";
 import "../formeStyle.css";
 import "./style.css";
 import authService from "../../../services/authService";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -57,6 +58,24 @@ function Login() {
     }
   };
 
+  const onGoogleLoginSuccess = async (
+    credentialResponse: CredentialResponse
+  ) => {
+    console.log(credentialResponse);
+    try {
+      const response = await authService.googleSignin(credentialResponse);
+      login(response);
+      navigate("/");
+      console.log("user is logt");
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const onGoogleLoginFailure = () => {
+    console.log("Google login failed");
+  };
+
   return (
     <form
       className="form-container flex-center-column-large-gap"
@@ -102,10 +121,16 @@ function Login() {
         </div>
       ) : (
         <div className="buttons-box flex-center-column-gap">
-          <button type="submit" className="btn-cta-l">
+          <button type="submit" className="btn-l">
             Sign in
           </button>
           <p>or</p>
+          <GoogleLogin
+            onSuccess={onGoogleLoginSuccess}
+            onError={onGoogleLoginFailure}
+          />
+
+          <div className="google-login-section"> </div>
           <Link to="/register">
             <button className="btn-cta-l">Sign up</button>
           </Link>

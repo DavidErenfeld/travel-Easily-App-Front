@@ -19,10 +19,11 @@ import ForgotPassword from "./components/Forms/ForgotPassword";
 import ResetPassword from "./components/Forms/ResetPassword";
 import FavoriteTrips from "./components/TripComponents/FavoriteTrips";
 import TripFormPage from "./components/PlacesSearch/PlacesSearchPage";
-import "./App.css";
-import "./index.css";
 import { useEffect } from "react";
 import socket from "./Hooks/socketInstance";
+import SecontHomePage from "./components/SecontHomePage";
+import "./App.css";
+import "./index.css";
 
 function App() {
   useEffect(() => {
@@ -41,6 +42,7 @@ function App() {
           <SocketListener />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/secontHomPage" element={<SecontHomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgotPassword" element={<ForgotPassword />} />

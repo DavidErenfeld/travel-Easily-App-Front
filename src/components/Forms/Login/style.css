@@ -1,5 +1,15 @@
 .buttons-box p {
   font-size: 1.6rem;
+  color: var(--text-secondary);
+}
+
+.google-login-section {
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--text-secondary);
+  height: 2px;
+  width: 150%;
 }
 
 .forgot-password {
@@ -8,5 +18,17 @@
   left: 1rem;
   font-size: 1.4rem;
   cursor: pointer;
+  color: var(--text-secondary);
   transition: all 0.3s;
+}
+
+.forgot-password:hover {
+  color: var(--text-prymary);
+}
+
+/* 320 */
+@media (max-width: 20em) {
+  .google-login-section {
+    width: 110%;
+  }
 }

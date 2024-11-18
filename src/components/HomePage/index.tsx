@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
 import Header from "../Header";
