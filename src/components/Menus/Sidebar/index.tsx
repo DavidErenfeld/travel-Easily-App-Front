@@ -17,7 +17,7 @@ const Sidebar = ({
 }: SidebarProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isAuthenticated = localStorage.getItem("isAuthenticated  ");
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
 
   const handleProfileClick = () => {
     navigate("/personal-area");
