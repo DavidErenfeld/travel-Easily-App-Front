@@ -1,0 +1,19 @@
+.trips-section {
+  margin-top: 10rem;
+  padding-bottom: 1rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
+}
+
+.main-loader-section p {
+  font-size: 1.8rem;
+}
+
+/* 768 */
+@media (max-width: 48em) {
+  .trips-section {
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
