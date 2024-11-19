@@ -39,7 +39,7 @@ const useTripActions = (trip: ITrips | null) => {
   // עדכון הסטייט המקומי כאשר הסטייט הגלובלי משתנה
   useEffect(() => {
     setIsLiked(currentTrip?.isLikedByCurrentUser || false);
-    setNumOfLikes(currentTrip?.likes?.length || 0);
+    setNumOfLikes(currentTrip?.numOfLikes || 0);
     setIsFavorite(currentTrip?.isFavoritedByCurrentUser || false);
     setNumOfComments(currentTrip?.numOfComments || 0);
   }, [
