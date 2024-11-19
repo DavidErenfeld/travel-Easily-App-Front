@@ -67,6 +67,7 @@ function PersonalArea() {
     } finally {
       await deleteUser(userId);
       setIsDeleting(false);
+      setLoading(false);
     }
   };
 

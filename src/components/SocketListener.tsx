@@ -166,7 +166,7 @@ function SocketListener() {
 
       setTrips((prevTrips) =>
         prevTrips
-          .filter((trip) => !deletedTripIds.includes(trip._id || "")) // ודא ש-_id אינו undefined
+          .filter((trip) => !deletedTripIds.includes(trip._id || ""))
           .map((trip) => ({
             ...trip,
             comments:
@@ -179,11 +179,11 @@ function SocketListener() {
               ).length || 0,
             likes:
               trip.likes?.filter(
-                (like) => !deletedLikeIds.includes(like.owner || "")
+                (like) => !deletedLikeIds.includes(like._id || "")
               ) || [],
             numOfLikes:
               trip.likes?.filter(
-                (like) => !deletedLikeIds.includes(like.owner || "")
+                (like) => !deletedLikeIds.includes(like._id || "")
               ).length || 0,
           }))
       );

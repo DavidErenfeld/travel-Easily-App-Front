@@ -1,14 +1,6 @@
 // import { IComment } from "../components/searchTrip/SelectedTrip";
+import socket from "../Hooks/socketInstance";
 import apiClient, { CanceledError } from "./apiClient";
-import io from "socket.io-client";
-
-const token = localStorage.getItem("accessToken");
-const socket = io("https://evening-bayou-77034-176dc93fb1e1.herokuapp.com", {
-  transports: ["websocket"],
-  auth: {
-    token,
-  },
-});
 
 export { CanceledError };
 export interface ITrips {
@@ -31,7 +23,8 @@ export interface ITrips {
 
   likes?: Array<{
     owner: string;
-    date: Date;
+    _id?: string;
+    date?: Date;
   }>;
 }
 
@@ -51,6 +44,11 @@ export interface IComment {
   owner?: string;
   comment: string;
   date: string;
+}
+
+export interface Ilike {
+  _id?: string;
+  owner?: string;
 }
 
 const accessToken = localStorage.getItem("accessToken");
