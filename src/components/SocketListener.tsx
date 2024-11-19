@@ -146,6 +146,49 @@ function SocketListener() {
       );
     };
 
+    const handleUserDeleted = ({
+      userId,
+      deletedTripIds,
+      deletedCommentIds,
+      deletedLikeIds,
+    }: {
+      userId: string;
+      deletedTripIds: string[];
+      deletedCommentIds: string[];
+      deletedLikeIds: string[];
+    }) => {
+      console.log("Received userDeleted event", {
+        userId,
+        deletedTripIds,
+        deletedCommentIds,
+        deletedLikeIds,
+      });
+
+      setTrips((prevTrips) =>
+        prevTrips
+          .filter((trip) => !deletedTripIds.includes(trip._id || "")) // ודא ש-_id אינו undefined
+          .map((trip) => ({
+            ...trip,
+            comments:
+              trip.comments?.filter(
+                (comment) => !deletedCommentIds.includes(comment._id || "")
+              ) || [],
+            numOfComments:
+              trip.comments?.filter(
+                (comment) => !deletedCommentIds.includes(comment._id || "")
+              ).length || 0,
+            likes:
+              trip.likes?.filter(
+                (like) => !deletedLikeIds.includes(like.owner || "")
+              ) || [],
+            numOfLikes:
+              trip.likes?.filter(
+                (like) => !deletedLikeIds.includes(like.owner || "")
+              ).length || 0,
+          }))
+      );
+    };
+
     // רישום המאזינים
     socket.on("tripPosted", handleTripPosted);
     socket.on("likeAdded", handleLikeAdded);
@@ -154,6 +197,7 @@ function SocketListener() {
     socket.on("removeFavorite", handleFavoriteRemoved);
     socket.on("commentAdded", handleCommentAdded);
     socket.on("commentDeleted", handleCommentDeleted);
+    socket.on("userDeleted", handleUserDeleted);
 
     return () => {
       console.log("SocketListener unmounted");
@@ -166,6 +210,7 @@ function SocketListener() {
       socket.off("favoriteRemoved", handleFavoriteRemoved);
       socket.off("commentAdded", handleCommentAdded);
       socket.off("commentDeleted", handleCommentDeleted);
+      socket.off("userDeleted", handleUserDeleted);
     };
   }, [logout, setTrips, user?._id, trips, TripCard, TripDetails]);
 

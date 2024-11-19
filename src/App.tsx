@@ -50,18 +50,14 @@ function App() {
             <Route path="/forgotPassword" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/searchTrip" element={<AllTrips />} />
-            <Route path="/tripsList" element={<TripsList />} />
-
-            {/* ///////// */}
-            {/* <Route path="/destinations" element={<SecontHomePage />} /> */}
             <Route path="/trips/:country" element={<TripsList />} />
             <Route path="/trip/:id" element={<TripDetails />} />
+            <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
             <Route
               path="/searchTrip/advancedSearch"
               element={<AdvancedSearch />}
             />
             <Route element={<ProtectedRoute />}>
-              <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/personal-area" element={<PersonalArea />} />
               <Route path="/AddTrip" element={<TripForm />} />
