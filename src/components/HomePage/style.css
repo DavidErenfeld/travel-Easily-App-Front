@@ -38,3 +38,7 @@
 .scroll-to-top:focus {
   outline: none;
 }
+
+#contact-section {
+  width: 100%;
+}

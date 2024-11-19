@@ -27,10 +27,18 @@ const HomePage = () => {
     <>
       <Header />
       <section className="main-page">
-        <HeroSection />
-        <FeaturesSection />
-        <HowItWorksSection />
-        <Footer />
+        <section id="hero-section" className="main-page">
+          <HeroSection />
+        </section>
+        <section id="features-section">
+          <FeaturesSection />
+        </section>
+        <section id="how-it-works-section">
+          <HowItWorksSection />
+        </section>
+        <section id="contact-section">
+          <Footer />
+        </section>
       </section>
 
       {showScrollToTop && (

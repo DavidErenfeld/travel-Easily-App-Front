@@ -1,6 +1,7 @@
-import "./style.css";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CloseIcon from "../../UIComponents/Icons/Close";
+import { scroller } from "react-scroll";
+import "./style.css";
 
 interface SidebarProps {
   profileImg: string;
@@ -15,16 +16,23 @@ const Sidebar = ({
   toggleSidebar,
   handleLogout,
 }: SidebarProps) => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const isAuthenticated = localStorage.getItem("isAuthenticated");
-
-  const handleProfileClick = () => {
-    navigate("/personal-area");
-  };
+  const navigate = useNavigate();
 
   const sidebarClick = (event: React.MouseEvent) => {
     event.stopPropagation();
+  };
+
+  const handleScrollToSection = (section: string) => {
+    navigate("/");
+
+    setTimeout(() => {
+      scroller.scrollTo(section, {
+        smooth: true,
+        duration: 500,
+        offset: -50,
+      });
+    }, 100);
   };
 
   return (
@@ -42,7 +50,7 @@ const Sidebar = ({
         className={`sidebar-section ${isOpen ? "open" : ""}`}
         onClick={sidebarClick}
       >
-        <div className="user-sidebar-container" onClick={handleProfileClick}>
+        <div className="user-sidebar-container">
           <div className="sidebar-user-name">
             <p>{localStorage.getItem("userName")}</p>
           </div>
@@ -50,44 +58,79 @@ const Sidebar = ({
         </div>
 
         {isAuthenticated && (
-          <Link to="/personalArea">
-            <h1 className="sidebar-item">Edit profile</h1>
-          </Link>
+          <p
+            className="sidebar-item"
+            onClick={() => {
+              navigate("/personal-area");
+            }}
+          >
+            Edit profile
+          </p>
         )}
-
         {!isAuthenticated && (
-          <Link to="/login">
-            <h1 className="sidebar-item">Sign In</h1>
-          </Link>
+          <p
+            className="sidebar-item"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            Sign in
+          </p>
         )}
-
         {!isAuthenticated && (
-          <Link to="/register">
-            <h1 className="sidebar-item">Sign Up</h1>
-          </Link>
+          <p
+            className="sidebar-item"
+            onClick={() => {
+              navigate("/register");
+            }}
+          >
+            Sign up
+          </p>
         )}
+        <p
+          className="sidebar-item"
+          onClick={() => {
+            toggleSidebar();
+            handleScrollToSection("features-section");
+          }}
+        >
+          Features
+        </p>
+        <p
+          className="sidebar-item"
+          onClick={() => {
+            toggleSidebar();
+            handleScrollToSection("how-it-works-section");
+          }}
+        >
+          How It Works
+        </p>
 
-        <Link to="/HowItWorks">
-          <h1 className="sidebar-item">HowItWorks</h1>
-        </Link>
+        <p
+          className="sidebar-item"
+          onClick={() => {
+            toggleSidebar();
+            handleScrollToSection("contact-section");
+          }}
+        >
+          Contact Us
+        </p>
 
-        <Link to="/ContactUs">
-          <h1 className="sidebar-item">Contact us</h1>
-        </Link>
-
-        <Link to="/">
-          <h1 className="sidebar-item">Home</h1>
-        </Link>
+        <p
+          className="sidebar-item"
+          onClick={() => {
+            toggleSidebar();
+            handleScrollToSection("hero-section");
+          }}
+        >
+          Home
+        </p>
 
         {isAuthenticated && (
-          <h1 className="sidebar-item" onClick={handleLogout}>
+          <p className="sidebar-item" onClick={handleLogout}>
             Logout
-          </h1>
+          </p>
         )}
-
-        <div className="close-sidebar">
-          <CloseIcon color="#000" onClose={toggleSidebar} />
-        </div>
       </section>
     </>
   );
