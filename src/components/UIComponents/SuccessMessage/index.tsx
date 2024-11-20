@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import "./style.css";
 
 interface SuccessMessageProps {
-  message: string;
+  messageKey: string;
   onAnimationEnd: () => void;
 }
 
 const SuccessMessage: React.FC<SuccessMessageProps> = ({
-  message,
+  messageKey,
   onAnimationEnd,
 }) => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     const timer = setTimeout(() => {
       onAnimationEnd();
@@ -21,7 +24,7 @@ const SuccessMessage: React.FC<SuccessMessageProps> = ({
   return (
     <div className="success-message">
       <div className="success-icon">
-        {/* ניתן להשתמש ב-SVG או באייקון מ' react-icons' */}
+        {/* SVG icon */}
         <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
           <circle cx="32" cy="32" r="32" fill="#ec8305" />
           <path
@@ -33,7 +36,7 @@ const SuccessMessage: React.FC<SuccessMessageProps> = ({
           />
         </svg>
       </div>
-      <p>{message}</p>
+      <p>{t(messageKey)}</p>
     </div>
   );
 };

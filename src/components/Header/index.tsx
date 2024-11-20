@@ -1,21 +1,21 @@
-// Header.tsx
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { useEffect, useState } from "react";
-import { CirclePlus, Plus, Search } from "lucide-react";
+import { CirclePlus, Search } from "lucide-react";
+
 import Sidebar from "../Menus/Sidebar";
+import { useTranslation } from "react-i18next";
 import "./style.css";
+import LanguageSwitcher from "../UIComponents/LanguageSwitcher";
 
 const Header = () => {
   const { logout } = useAuth();
   const [profileImg, setProfileImg] = useState(
     localStorage.getItem("imgUrl") || "/images/user.png"
   );
-  const [isUserConect, setIsUserConect] = useState(false);
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // state לניהול מצב התפריט
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
+  const { t, i18n } = useTranslation();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -24,12 +24,9 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await logout();
-      setIsUserConect(false);
       setProfileImg("/images/user.png");
       setIsSidebarOpen(false);
     } catch (error) {
-      setProfileImg("/images/user.png");
-      setIsSidebarOpen(false);
       console.log(error);
     }
   };
@@ -41,96 +38,87 @@ const Header = () => {
 
     window.addEventListener("storage", handleStorageChange);
 
-    if (localStorage.getItem("loggedUserId")) setIsUserConect(true);
-
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
 
   return (
-    <>
-      <header className="main-page-header">
-        <Sidebar
-          profileImg={profileImg}
-          isOpen={isSidebarOpen}
-          toggleSidebar={toggleSidebar}
-          handleLogout={handleLogout}
-        />
+    <header className="main-page-header">
+      <Sidebar
+        profileImg={profileImg}
+        isOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
+        handleLogout={handleLogout}
+      />
 
-        <Link to="/">
-          <h1 className="sidebar logo">TRAVEL easily</h1>
-        </Link>
+      <Link to="/">
+        <h1 className="sidebar logo">{t("appName")}</h1>
+      </Link>
 
-        {/* {isUserConect && (
-          <p onClick={() => navigate("/addTrip")} className="sidbar menu-item">
-            Add trip
-          </p>
-        )} */}
+      {!isSidebarOpen && (
+        <>
+          {localStorage.getItem("loggedUserId") ? (
+            <div className="menu">
+              <p
+                onClick={() => navigate("/")}
+                className="menu-item connectet-menu"
+              >
+                {t("home")}
+              </p>
 
-        {!isSidebarOpen && (
-          <>
-            {localStorage.getItem("loggedUserId") ? (
-              <div className="menu ">
-                <p
-                  onClick={() => navigate("/")}
-                  className="menu-item connectet-menu"
-                >
-                  Home
-                </p>
-
-                <p
-                  onClick={() => navigate("/addTrip")}
-                  className="menu-item connectet-menu"
-                >
-                  Add trip
-                </p>
-
-                <p
-                  onClick={() => navigate("/tripForm")}
-                  className="menu-item connectet-menu"
-                >
-                  Explore Nearby
-                </p>
-
-                <img
-                  className="user-main-page-img"
-                  src={profileImg}
-                  alt="Profile"
-                  onClick={toggleSidebar}
-                />
-              </div>
-            ) : (
-              <div className="menu">
-                <img
-                  className="user-main-page-img"
-                  src={profileImg}
-                  alt="Profile"
-                  onClick={toggleSidebar}
-                />
-              </div>
-            )}
-
-            <section className="mobile-menu">
-              <CirclePlus
-                className="mobile-menu-icon icon"
+              <p
                 onClick={() => navigate("/addTrip")}
-              />
-              <Search
-                className="mobile-menu-icon icon"
-                onClick={() => navigate("/searchTrip/advancedSearch")}
-              />
+                className="menu-item connectet-menu"
+              >
+                {t("addTrip")}
+              </p>
+
+              <p
+                onClick={() => navigate("/tripForm")}
+                className="menu-item connectet-menu"
+              >
+                {t("exploreNearby")}
+              </p>
+              <LanguageSwitcher />
               <img
                 className="user-main-page-img"
                 src={profileImg}
-                alt="Profile"
+                alt={t("profile")}
                 onClick={toggleSidebar}
               />
-            </section>
-          </>
-        )}
-      </header>
-    </>
+            </div>
+          ) : (
+            <div className="menu">
+              <img
+                className="user-main-page-img"
+                src={profileImg}
+                alt={t("profile")}
+                onClick={toggleSidebar}
+              />
+            </div>
+          )}
+
+          <section className="mobile-menu">
+            <CirclePlus
+              className="mobile-menu-icon icon"
+              onClick={() => navigate("/addTrip")}
+            />
+            <Search
+              className="mobile-menu-icon icon"
+              onClick={() => navigate("/searchTrip/advancedSearch")}
+            />
+            <LanguageSwitcher />
+            <img
+              className="user-main-page-img"
+              src={profileImg}
+              alt={t("profile")}
+              onClick={toggleSidebar}
+            />
+          </section>
+        </>
+      )}
+    </header>
   );
 };
 

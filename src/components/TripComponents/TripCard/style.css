@@ -26,6 +26,7 @@
   background-color: var(--background-light-blu);
   padding-left: 1rem;
   padding-right: 1rem;
+  direction: ltr;
 }
 
 .profile-name {

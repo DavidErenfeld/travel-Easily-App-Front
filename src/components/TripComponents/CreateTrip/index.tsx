@@ -1,9 +1,9 @@
 import { useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import tripsService, { ITrips } from "../../../services/tripsService";
 import useSocket from "../../../Hooks/useSocket";
 import Header from "../../Header";
-import AddImgs from "../../UIComponents/Icons/AddImage";
 import ImageCarousel from "../../UIComponents/ImageCarousel";
 import LoadingDots from "../../UIComponents/Loader";
 import SuccessMessage from "../../UIComponents/SuccessMessage";
@@ -17,11 +17,11 @@ interface TripDay {
 }
 
 const CreateTrip: React.FC = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const { numberOfDays, selectedGroupType, selectedTripType, selectedCountry } =
     location.state || {};
 
-  // State variables
   const [currentDayIndex, setCurrentDayIndex] = useState(0);
   const [dayEdits, setDayEdits] = useState<TripDay[]>(
     Array.from({ length: numberOfDays }, (_, index) => ({
@@ -41,14 +41,10 @@ const CreateTrip: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  // Refs and Navigation
   const imageRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-
-  // useSocket Hook for sending new trip event
   const { send } = useSocket();
 
-  // Function to handle description change for each day
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
@@ -59,20 +55,18 @@ const CreateTrip: React.FC = () => {
     );
     setDayEdits(updatedDays);
 
-    // Clear error for the current day if there's an input
     const updatedErrors = [...errorMessages];
     updatedErrors[currentDayIndex] = "";
     setErrorMessages(updatedErrors);
   };
 
-  // Handle trip submission
   const handleSubmit = async () => {
     const errors: string[] = [];
     dayEdits.forEach((day, index) => {
       if (!day.description.trim()) {
-        errors[
-          index
-        ] = `Day ${day.dayNum} is empty. Please fill in the description.`;
+        errors[index] = t("createTrip.errors.emptyDay", {
+          day: day.dayNum,
+        });
       }
     });
 
@@ -83,7 +77,6 @@ const CreateTrip: React.FC = () => {
 
     setIsSubmitting(true);
 
-    // Prepare trip data
     const tripData = dayEdits.map((day) => day.description);
     const tripPhotos = await uploadImages();
 
@@ -102,10 +95,10 @@ const CreateTrip: React.FC = () => {
 
     try {
       const savedTrip = await tripsService.postTrip(trip);
-      send("newTrip", savedTrip); // Sending new trip event to server
+      send("newTrip", savedTrip);
       setShowSuccessMessage(true);
     } catch (error) {
-      console.error("Failed to save the trip:", error);
+      console.error(t("createTrip.errors.submitFailed"), error);
     } finally {
       setIsSubmitting(false);
     }
@@ -116,7 +109,7 @@ const CreateTrip: React.FC = () => {
       <Header />
       {showSuccessMessage && (
         <SuccessMessage
-          message="Trip saved successfully!"
+          messageKey="createTrip.successMessage"
           onAnimationEnd={() => {
             setShowSuccessMessage(false);
             navigate("/");
@@ -130,13 +123,17 @@ const CreateTrip: React.FC = () => {
       >
         <div className="update-trip-container">
           <div className="update-details">
-            <p className="day-num">Day {dayEdits[currentDayIndex].dayNum}</p>
+            <p className="day-num">
+              {t("createTrip.day", { day: dayEdits[currentDayIndex].dayNum })}
+            </p>
           </div>
           <textarea
             className="update-trip-description"
             value={dayEdits[currentDayIndex].description}
             onChange={handleDescriptionChange}
-            placeholder={`Share with us what you did on day ${dayEdits[currentDayIndex].dayNum}`}
+            placeholder={t("createTrip.placeholders.dayDescription", {
+              day: dayEdits[currentDayIndex].dayNum,
+            })}
           />
           {errorMessages[currentDayIndex] && (
             <p className="error-message">{errorMessages[currentDayIndex]}</p>
@@ -174,7 +171,7 @@ const CreateTrip: React.FC = () => {
 
         {currentDayIndex === dayEdits.length - 1 && (
           <button className="btn-cta-l submit-trip-btn" onClick={handleSubmit}>
-            Submit
+            {t("createTrip.submitButton")}
           </button>
         )}
 

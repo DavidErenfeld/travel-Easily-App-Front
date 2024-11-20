@@ -10,6 +10,7 @@
   padding: 2rem 2rem;
   font-weight: 600;
   z-index: 1000;
+  direction: ltr;
 }
 
 h1.logo {

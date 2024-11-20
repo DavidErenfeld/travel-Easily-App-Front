@@ -1,18 +1,20 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { ITrips } from "../../../services/tripsService";
 import TripHeader from "../TripHeader";
 import TripDescription from "../TripDescription";
 import TripCardIcons from "../TripCardIcons";
 import SuccessMessage from "../../UIComponents/SuccessMessage";
-import "./style.css";
 import useTripActions from "../../../Hooks/useTripActions";
+import "./style.css";
 
 interface TripCardProps {
   trip: ITrips;
 }
 
 const TripCard = ({ trip }: TripCardProps) => {
+  const { t } = useTranslation();
   const {
     isLiked,
     numOfLikes,
@@ -32,7 +34,6 @@ const TripCard = ({ trip }: TripCardProps) => {
     setSuccessMessage,
   } = useTripActions(trip);
 
-  // Updated event listener to close likes details modal when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -58,7 +59,7 @@ const TripCard = ({ trip }: TripCardProps) => {
         <img
           className="user-profile"
           src={trip.owner?.imgUrl || "/images/user.png"}
-          alt="Profile"
+          alt={t("tripCard.altProfile")}
         />
         <p className="profile-name">{trip.userName}</p>
       </div>
@@ -68,7 +69,7 @@ const TripCard = ({ trip }: TripCardProps) => {
           <TripDescription trip={trip} />
         </div>
       </Link>
-      
+
       <TripCardIcons
         tripId={trip._id || ""}
         country={trip.country}
@@ -90,7 +91,11 @@ const TripCard = ({ trip }: TripCardProps) => {
 
       {successMessage && (
         <SuccessMessage
-          message={successMessage}
+          messageKey={
+            isFavorite
+              ? "successMessages.fivoriteAdded"
+              : "successMessages.fivoriteRemoved"
+          }
           onAnimationEnd={() => setSuccessMessage(null)}
         />
       )}

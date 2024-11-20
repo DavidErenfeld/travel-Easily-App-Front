@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next"; // ייבוא התרגום
 import CloseIcon from "../../UIComponents/Icons/Close";
 import { scroller } from "react-scroll";
 import "./style.css";
@@ -16,6 +17,7 @@ const Sidebar = ({
   toggleSidebar,
   handleLogout,
 }: SidebarProps) => {
+  const { t } = useTranslation(); // שימוש ב-Hook לתרגום
   const isAuthenticated = localStorage.getItem("isAuthenticated");
   const navigate = useNavigate();
 
@@ -50,11 +52,20 @@ const Sidebar = ({
         className={`sidebar-section ${isOpen ? "open" : ""}`}
         onClick={sidebarClick}
       >
-        <div className="user-sidebar-container">
+        <div
+          className="user-sidebar-container"
+          onClick={() => {
+            navigate("/personal-area");
+          }}
+        >
           <div className="sidebar-user-name">
             <p>{localStorage.getItem("userName")}</p>
           </div>
-          <img className="user-sidebar-img" src={profileImg} alt="Profile" />
+          <img
+            className="user-sidebar-img"
+            src={profileImg}
+            alt={t("sidebar.profileAlt")}
+          />
         </div>
 
         {isAuthenticated && (
@@ -64,7 +75,7 @@ const Sidebar = ({
               navigate("/personal-area");
             }}
           >
-            Edit profile
+            {t("sidebar.editProfile")}
           </p>
         )}
         {!isAuthenticated && (
@@ -74,7 +85,7 @@ const Sidebar = ({
               navigate("/login");
             }}
           >
-            Sign in
+            {t("sidebar.signIn")}
           </p>
         )}
         {!isAuthenticated && (
@@ -84,7 +95,7 @@ const Sidebar = ({
               navigate("/register");
             }}
           >
-            Sign up
+            {t("sidebar.signUp")}
           </p>
         )}
         <p
@@ -94,7 +105,7 @@ const Sidebar = ({
             handleScrollToSection("features-section");
           }}
         >
-          Features
+          {t("sidebar.features")}
         </p>
         <p
           className="sidebar-item"
@@ -103,9 +114,8 @@ const Sidebar = ({
             handleScrollToSection("how-it-works-section");
           }}
         >
-          How It Works
+          {t("sidebar.howItWorks")}
         </p>
-
         <p
           className="sidebar-item"
           onClick={() => {
@@ -113,22 +123,20 @@ const Sidebar = ({
             handleScrollToSection("contact-section");
           }}
         >
-          Contact Us
+          {t("sidebar.contactUs")}
         </p>
-
         <p
           className="sidebar-item"
           onClick={() => {
-            toggleSidebar();
-            handleScrollToSection("hero-section");
+            navigate("./secontHomPage");
           }}
         >
-          Home
+          {t("sidebar.home")}
         </p>
 
         {isAuthenticated && (
           <p className="sidebar-item" onClick={handleLogout}>
-            Logout
+            {t("sidebar.logout")}
           </p>
         )}
       </section>

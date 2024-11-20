@@ -1,0 +1,407 @@
+{
+  "appName": "TRAVEL easily",
+  "home": "Home",
+  "addTrip": "Add Trip",
+  "exploreNearby": "Explore Nearby",
+  "profile": "Profile",
+  "logout": "Logout",
+  "heroTitle": "The new way to travel",
+  "heroDescription": "Travel Easily offers ad-free, inspiration-focused travel plans, letting you find itineraries and share your experiences simply and clearly.",
+  "heroAltImage": "Planet Earth",
+  "heroCTA": "Start Exploring Itineraries",
+  "howItWorks": {
+    "title": "How It Works",
+    "createPost": {
+      "title": "Create a Post",
+      "description": "Share the details of your travel, day-by-day, including descriptions, activities, and photos."
+    },
+    "saveFavorites": {
+      "title": "Save to Favorites",
+      "description": "Save trips you love to easily access them later and get inspired for your next journey."
+    },
+    "shareItinerary": {
+      "title": "Share Your Itinerary",
+      "description": "Share itineraries easily via social media or email with a single click."
+    },
+    "exploreNearby": {
+      "title": "Explore Nearby Attractions",
+      "description": "Find nearby attractions using our location-based feature to enhance your journey."
+    },
+    "updateEdit": {
+      "title": "Update & Edit Posts",
+      "description": "Make updates to your itineraries anytime. Add new days, upload more photos, or edit details."
+    },
+    "interactOthers": {
+      "title": "Interact with Others",
+      "description": "Engage with other travelers by leaving comments, giving likes, or saving posts to favorites."
+    },
+    "cta": "Get Started Now"
+  },
+  "features": {
+    "title": "What Makes Us Unique?",
+    "subtitle": "Discover the authentic travel experiences our platform offers through detailed, user-driven itineraries.",
+    "item1": {
+      "title": "Personalized and Detailed Itineraries",
+      "description": "Every itinerary on our platform is crafted from a traveler's unique perspective, emphasizing daily activities and key experiences. We encourage travelers to share insights and recommendations for each stop, allowing readers to fully immerse themselves in the journey."
+    },
+    "item2": {
+      "title": "Why This Matters?",
+      "description": "Our platform is designed to deliver authentic, non-commercial travel content. These personal journey descriptions help build a community where users share genuine inspiration and explore destinations through the eyes of other travelers."
+    },
+    "item3": {
+      "title": "Favorite Trips & Easy Sharing",
+      "description": "Easily save and share your favorite itineraries with a single click. This feature enables users to share unique trips with friends and family, helping others to plan memorable journeys full of insights."
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved to David Erenfeld"
+  },
+  "advancedSearch": {
+    "title": "Advanced Search",
+    "countryLabel": "Country",
+    "countryPlaceholder": "Start typing to search...",
+    "groupTypeLabel": "Group Type",
+    "groupTypePlaceholder": "Select Group Type",
+    "groupType": {
+      "romanticCouple": "Romantic Couple",
+      "happyFamily": "Happy Family",
+      "friends": "Friends",
+      "seniors": "Seniors",
+      "single": "Single",
+      "groups": "Groups"
+    },
+    "tripTypeLabel": "Trip Type",
+    "tripTypePlaceholder": "Select Trip Type",
+    "tripType": {
+      "attractions": "Attractions",
+      "romantic": "Romantic",
+      "nature": "Nature",
+      "parties": "Parties",
+      "food": "Food",
+      "integrated": "Integrated"
+    },
+    "daysLabel": "Number of Days",
+    "daysPlaceholder": "Enter number of days...",
+    "searchButton": "Search",
+    "tryAgain": "Try again",
+    "noResults": "No trips found for the specified criteria."
+  },
+  "addComment": {
+    "placeholder": "Write your comment",
+    "cancel": "Cancel",
+    "send": "Send",
+    "sending": "Sending..."
+  },
+  "viewComment": {
+    "deleteConfirmation": "Are you sure you want to delete this comment?",
+    "deleteSuccess": "Comment with ID: {{id}} deleted successfully.",
+    "deleteError": "Failed to delete the comment.",
+    "profileAlt": "Profile picture",
+    "locale": "en-US"
+  },
+  "forgotPassword": {
+    "title": "Forgot Password",
+    "profileAlt": "Profile image",
+    "emailPlaceholder": "UserName@gmail.com",
+    "invalidEmail": "Please enter a valid email address",
+    "sendButton": "Send Reset Link",
+    "successMessage": "A password reset link has been sent to your email.",
+    "errorMessage": "An error occurred. Please try again.",
+    "orText": "or",
+    "signUpButton": "Sign up"
+  },
+  "login": {
+    "title": "Sign in",
+    "profileAlt": "Profile image",
+    "emailPlaceholder": "UserName@gmail.com",
+    "passwordPlaceholder": "Password",
+    "invalidEmail": "Please enter a valid email address",
+    "invalidPassword": "Password must be at least 4 characters long",
+    "signInButton": "Sign in",
+    "signUpButton": "Sign up",
+    "forgotPassword": "Forgot password",
+    "orText": "or",
+    "errorMessage": "{{message}} Please try again.",
+    "unexpectedError": "An unexpected error occurred. Please try again.",
+    "googleLoginFailed": "Google login failed"
+  },
+  "register": {
+    "title": "Sign up",
+    "imageAlt": "Profile image",
+    "userName": {
+      "placeholder": "User Name",
+      "min": "Name must be longer than 2 characters",
+      "max": "Name must be less than 15 characters"
+    },
+    "email": {
+      "placeholder": "UserName@gmail.com",
+      "invalid": "Please enter a valid email address"
+    },
+    "password": {
+      "placeholder": "Password",
+      "min": "Password must be at least 4 characters long",
+      "regex": "Password must include a lowercase letter"
+    },
+    "uploadError": "Failed to upload image.",
+    "submitButton": "Submit",
+    "errorMessage": "{{message}} Please try again.",
+    "unexpectedError": "An unexpected error occurred. Please try again.",
+    "googleLoginFailed": "Google login failed"
+  },
+  "resetPassword": {
+    "title": "Reset Password",
+    "placeholder": "Enter new password",
+    "password": {
+      "min": "Password must be at least 6 characters long"
+    },
+    "submitButton": "Reset Password",
+    "successMessage": "Your password has been reset successfully.",
+    "error": {
+      "missingToken": "Invalid or missing token",
+      "invalidToken": "Token is missing or invalid.",
+      "generic": "An error occurred. Please try again."
+    }
+  },
+  "homePage": {
+    "scrollToTop": "Scroll to top"
+  },
+  "menuBar": {
+    "advancedSearch": "Advanced search",
+    "allTrips": "All Trips",
+    "myTrips": "My Trips",
+    "favoriteTrips": "Favorite Trips",
+    "addTrip": "Add Trip",
+    "exploreNearby": "Explore Nearby",
+    "selectedDestinations": "Selected Destinations"
+  },
+  "sidebar": {
+    "profileAlt": "Profile image",
+    "editProfile": "Edit profile",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "features": "Features",
+    "howItWorks": "How It Works",
+    "contactUs": "Contact Us",
+    "home": "Home",
+    "logout": "Logout"
+  },
+  "personalArea": {
+    "title": "Personal Area",
+    "imgAlt": "Profile image",
+    "edit": "Edit",
+    "save": "Save",
+    "deleteAccount": "Delete account",
+    "deleteConfirmation": "Are you sure you want to delete your account?",
+    "uploadError": "Failed to upload image."
+  },
+  "placeCard": {
+    "notAvailable": "Not available",
+    "websiteNotAvailable": "Website is not available",
+    "website": "Website",
+    "notRated": "Not rated yet",
+    "rating": "{{rating}} / 5 ({{totalRatings}} ratings)",
+    "navigation": "Navigation"
+  },
+  "placesSearchPage": {
+    "title": "Explore Nearby",
+    "noResults": "No places found. Please try another search."
+  },
+  "searchForm": {
+    "shareLocation": "Share my location",
+    "radius": "Radius (in km)",
+    "radiusPlaceholder": "Enter radius (1-10)",
+    "type": "Type",
+    "types": {
+      "restaurant": "Restaurant",
+      "cafe": "Cafe",
+      "bar": "Bar",
+      "attraction": "Attraction"
+    },
+    "searchButton": "Search",
+    "errors": {
+      "location": "Please share your location",
+      "radius": "Please enter a radius (1-10)",
+      "fetchFailed": "An error occurred while fetching the information.",
+      "locationFailed": "Failed to retrieve the location.",
+      "geolocationUnsupported": "This browser does not support geolocation."
+    }
+  },
+  "secontHomePage": {
+    "title": "Explore Popular Destinations",
+    "exploreButton": "Explore",
+    "exploreAllButton": "Explore All Countries",
+    "destinations": {
+      "dubai": {
+        "name": "Dubai",
+        "description": "The perfect luxury getaway."
+      },
+      "greece": {
+        "name": "Greece",
+        "description": "Discover ancient ruins and stunning islands."
+      },
+      "hungary": {
+        "name": "Hungary",
+        "description": "Experience the charm of Budapest."
+      },
+      "bulgaria": {
+        "name": "Bulgaria",
+        "description": "Explore Rila Monastery and scenic mountain views."
+      },
+      "netherlands": {
+        "name": "Netherlands",
+        "description": "Stroll through tulip fields and iconic windmills."
+      },
+      "montenegro": {
+        "name": "Montenegro",
+        "description": "Discover the stunning Bay of Kotor."
+      }
+    }
+  },
+  "allTrips": {
+    "error": "Failed to load trips. Please try again later.",
+    "errorConsole": "Error loading trips:",
+    "noTrips": "No trips have been added to the system yet",
+    "createTripButton": "Create Your First Trip"
+  },
+  "createTrip": {
+    "day": "Day {{day}}",
+    "placeholders": {
+      "dayDescription": "Share with us what you did on day {{day}}"
+    },
+    "errors": {
+      "emptyDay": "Day {{day}} is empty. Please fill in the description.",
+      "submitFailed": "Failed to save the trip."
+    },
+    "successMessage": "Trip saved successfully!",
+    "submitButton": "Submit"
+  },
+  "favoriteTrips": {
+    "errorLoading": "Failed to load favorite trips:",
+    "noTrips": "You don't have any favorite trips yet",
+    "exploreButton": "Start Exploring Itineraries"
+  },
+  "myTrips": {
+    "errorLoading": "Failed to load your trips.",
+    "noTrips": "You have no trips yet.",
+    "createTripButton": "Create Your First Trip"
+  },
+  "tripCard": {
+    "altProfile": "Profile picture"
+  },
+  "tripCardIcons": {
+    "like": "Like",
+    "favorite": "Favorite",
+    "share": "Share",
+    "comments": "comments",
+    "likes": "likes",
+    "close": "Close",
+    "altUserProfile": "User profile picture",
+    "shareText": "Amazing trip to {{country}}! Join me on this adventure!"
+  },
+  "tripDescription": {
+    "day": "Day {{day}}"
+  },
+  "tripDetails": {
+    "errorLoading": "An error occurred while loading the data. Please try again.",
+    "errorSendingComment": "Failed to send the comment. Please try again.",
+    "addComment": "Add Comment",
+    "viewComments": "View Comments",
+    "editingMode": "Editing Mode",
+    "imageAlt": "Trip Photo"
+  },
+  "tripForm": {
+    "title": "Trip Details",
+    "labels": {
+      "groupType": "We are",
+      "tripType": "Trip Type",
+      "days": "Number of Days",
+      "country": "Country"
+    },
+    "placeholders": {
+      "groupType": "Select Group Type",
+      "tripType": "Select Trip Type",
+      "days": "Enter number of days...",
+      "country": "Start typing to search..."
+    },
+    "groupTypes": {
+      "romanticCouple": "Romantic Couple",
+      "happyFamily": "Happy Family",
+      "friends": "Friends",
+      "seniors": "Seniors",
+      "single": "Single",
+      "groups": "Groups"
+    },
+    "tripTypes": {
+      "attractions": "Attractions",
+      "romantic": "Romantic",
+      "nature": "Nature",
+      "parties": "Parties",
+      "food": "Food",
+      "integrated": "Integrated"
+    },
+    "errors": {
+      "groupType": "Please select a group type.",
+      "tripType": "Please select a trip type.",
+      "days": "Please enter the number of days.",
+      "country": "Please select a country.",
+      "fetchCountries": "Failed to fetch countries."
+    },
+    "nextButton": "Next"
+  },
+  "tripHeader": {
+    "typeTraveler": {
+      "RomanticCouple": "Romantic Couple",
+      "HappyFamily": "Happy Family",
+      "Friends": "Friends",
+      "Seniors": "Seniors",
+      "Single": "Single",
+      "Groups": "Groups"
+    },
+    "typeTrip": {
+      "Attractions": "Attractions",
+      "Romantic": "Romantic",
+      "Nature": "Nature",
+      "Parties": "Parties",
+      "Food": "Food",
+      "Integrated": "Integrated"
+    },
+    "days": "{{count}} days"
+  },
+  "tripsList": {
+    "noTripsMessage": "No trips found for your search criteria.",
+    "backToDestinations": "Back to Destinations"
+  },
+  "updateTrip": {
+    "dayLabel": "Day",
+    "readModeButton": "Read Mode",
+    "deleteDayButton": "Delete Day",
+    "deleteTripButton": "Delete Trip",
+    "addDayButton": "Add Day",
+    "saveButton": "Save",
+    "confirmDeleteDay": "Are you sure you want to delete day number {{day}}?",
+    "confirmDeleteTrip": "Are you sure you want to delete the entire trip?",
+    "alertAddContent": "Please add content to the current day before adding a new one.",
+    "alertCannotDeleteLastDay": "Cannot delete the last remaining day.",
+    "successDayDelete": "Day deleted successfully.",
+    "errorDayDelete": "Failed to delete day.",
+    "successTripDelete": "Trip deleted successfully.",
+    "errorTripDelete": "Failed to delete trip.",
+    "successTripUpdate": "Trip updated successfully.",
+    "errorTripUpdate": "Failed to update trip.",
+    "imageAlt": "Trip Photo"
+  },
+  "imageCarousel": {
+    "confirmDelete": "Are you sure you want to delete this image?",
+    "loadingMessage": "Loading images..."
+  },
+  "popUp": {
+    "delete": "Delete",
+    "cancel": "Cancel"
+  },
+  "successMessages": {
+    "tripUpdated": "Trip updated successfully!",
+    "tripDeleted": "Trip deleted successfully!",
+    "fivoriteAdded": "The trip has been added to your favorites list!",
+    "fivoriteRemoved": "The trip has been removed from your favorites list!"
+  }
+}

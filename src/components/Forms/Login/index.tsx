@@ -1,25 +1,27 @@
+import z from "zod";
+import axios from "axios";
+import { useTranslation } from "react-i18next";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate, Link } from "react-router-dom";
-import z from "zod";
-import axios from "axios";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import LoadingDots from "../../UIComponents/Loader";
 import { useAuth } from "../../../Context/AuthContext";
 import authService from "../../../services/authService";
-import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import "../formeStyle.css";
 import "./style.css";
 
 const loginSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
-  password: z.string().min(4, "Password must be at least 4 characters long"),
+  email: z.string().email(),
+  password: z.string().min(4),
 });
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
 function Login() {
+  const { t } = useTranslation();
   const [imgSrc, setImgSrc] = useState("/images/user.png");
   const [loginError, setLoginError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -34,46 +36,39 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (data: LoginFormData) => {
-    console.log("Submitting form with data:", data);
     try {
       setLoading(true);
       const response = await authService.loginUser({
         email: data.email,
         password: data.password,
       });
-      console.log("Login successful:", response);
-      setLoading(false);
       login(response);
       navigate("/");
     } catch (error) {
-      console.error("Login error:", error);
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data;
-        setLoginError(errorMessage + " Please try again");
-        setLoading(false);
+        setLoginError(t("login.errorMessage", { message: errorMessage }));
       } else {
-        setLoginError("An unexpected error occurred. Please try again.");
-        setLoading(false);
+        setLoginError(t("login.unexpectedError"));
       }
+      setLoading(false);
     }
   };
 
   const onGoogleLoginSuccess = async (
     credentialResponse: CredentialResponse
   ) => {
-    console.log(credentialResponse);
     try {
       const response = await authService.googleSignin(credentialResponse);
       login(response);
       navigate("/");
-      console.log("user is logt");
     } catch (e) {
       console.log(e);
     }
   };
 
   const onGoogleLoginFailure = () => {
-    console.log("Google login failed");
+    console.log(t("login.googleLoginFailed"));
   };
 
   return (
@@ -85,10 +80,16 @@ function Login() {
       <div className="form-close-icon">
         <CloseIcon color="#fff" />
       </div>
-      <p className="form-title">Sign in</p>
+      <p className="form-title">{t("login.title")}</p>
 
       <div className="form-image-profile">
-        {imgSrc && <img src={imgSrc} alt="Preview" className="register-img" />}
+        {imgSrc && (
+          <img
+            src={imgSrc}
+            alt={t("login.profileAlt")}
+            className="register-img"
+          />
+        )}
       </div>
 
       <div className="form-input-box">
@@ -96,23 +97,25 @@ function Login() {
           {...register("email")}
           type="email"
           id="email"
-          placeholder="UserName@gmail.com"
+          placeholder={t("login.emailPlaceholder")}
           className="email"
           autoComplete="email"
         />
-        {errors.email && <p className="text-danger">{errors.email.message}</p>}
+        {errors.email && (
+          <p className="text-danger">{t("login.invalidEmail")}</p>
+        )}
       </div>
       <div className="form-input-box">
         <input
           {...register("password")}
           type="password"
           id="password"
-          placeholder="Password"
+          placeholder={t("login.passwordPlaceholder")}
           className="password"
           autoComplete="current-password"
         />
         {errors.password && (
-          <p className="text-danger">{errors.password.message}</p>
+          <p className="text-danger">{t("login.invalidPassword")}</p>
         )}
       </div>
       {loading ? (
@@ -122,22 +125,21 @@ function Login() {
       ) : (
         <div className="buttons-box flex-center-column-gap">
           <button type="submit" className="btn-login btn-l">
-            Sign in
+            {t("login.signInButton")}
           </button>
-          <p>or</p>
+          <p>{t("login.orText")}</p>
           <GoogleLogin
             onSuccess={onGoogleLoginSuccess}
             onError={onGoogleLoginFailure}
           />
 
-          <div className="google-login-section"> </div>
           <Link to="/register">
-            <button className="btn-cta-l">Sign up</button>
+            <button className="btn-cta-l">{t("login.signUpButton")}</button>
           </Link>
         </div>
       )}
       <Link to={`/forgotPassword`}>
-        <p className="forgot-password">Forgot password</p>
+        <p className="forgot-password">{t("login.forgotPassword")}</p>
       </Link>
     </form>
   );

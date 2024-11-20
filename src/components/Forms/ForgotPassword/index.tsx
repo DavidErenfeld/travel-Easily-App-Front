@@ -1,26 +1,28 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { requestPasswordReset } from "../../../services/usersService";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import LoadingDots from "../../UIComponents/Loader";
 import "../formeStyle.css";
 import "./style.css";
-import { Link } from "react-router-dom";
-import { requestPasswordReset } from "../../../services/usersService";
 
 const forgotPasswordSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
+  email: z.string().email(),
 });
 
 type ForgotPasswordData = z.infer<typeof forgotPasswordSchema>;
 
 function ForgotPassword() {
+  const { t } = useTranslation();
   const [resetError, setResetError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const profileImage = "/images/user.png";
+
   const {
     register,
     handleSubmit,
@@ -30,15 +32,14 @@ function ForgotPassword() {
   });
 
   const onSubmit = async (data: ForgotPasswordData) => {
-    console.log("Submitting forgot password form with data:", data);
     try {
       setLoading(true);
       await requestPasswordReset(data.email);
       setLoading(false);
-      setSuccessMessage("A password reset link has been sent to your email.");
+      setSuccessMessage(t("forgotPassword.successMessage"));
     } catch (error) {
       console.error("Password reset error:", error);
-      setResetError("An error occurred. Please try again.");
+      setResetError(t("forgotPassword.errorMessage"));
       setLoading(false);
     }
   };
@@ -51,10 +52,14 @@ function ForgotPassword() {
       <div className="form-close-icon">
         <CloseIcon color="#fff" />
       </div>
-      <p className="form-title">Forgot Password</p>
+      <p className="form-title">{t("forgotPassword.title")}</p>
 
       <div className="form-image-profile">
-        <img src={profileImage} alt="Profile image" className="register-img" />
+        <img
+          src={profileImage}
+          alt={t("forgotPassword.profileAlt")}
+          className="register-img"
+        />
       </div>
 
       {resetError && <div className="text-danger">{resetError}</div>}
@@ -65,11 +70,13 @@ function ForgotPassword() {
           {...register("email")}
           type="email"
           id="email"
-          placeholder="UserName@gmail.com"
+          placeholder={t("forgotPassword.emailPlaceholder")}
           className="email"
           autoComplete="email"
         />
-        {errors.email && <p className="text-danger">{errors.email.message}</p>}
+        {errors.email && (
+          <p className="text-danger">{t("forgotPassword.invalidEmail")}</p>
+        )}
       </div>
 
       {loading ? (
@@ -79,11 +86,13 @@ function ForgotPassword() {
       ) : (
         <div className="buttons-box flex-center-column-gap">
           <button type="submit" className="btn-l">
-            Send Reset Link
+            {t("forgotPassword.sendButton")}
           </button>
-          <p>or</p>
+          <p>{t("forgotPassword.orText")}</p>
           <Link to="/register">
-            <button className="btn-cta-l">Sign up</button>
+            <button className="btn-cta-l">
+              {t("forgotPassword.signUpButton")}
+            </button>
           </Link>
         </div>
       )}

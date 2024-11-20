@@ -82,6 +82,9 @@
   color: #fff;
 }
 
+.update-trip-buttons {
+  direction: ltr;
+}
 /*1024*/
 @media (max-width: 64em) {
   .update-trip-section {

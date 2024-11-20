@@ -1,4 +1,5 @@
 import { ITrips } from "../../../services/tripsService";
+import { useTranslation } from "react-i18next";
 import "./style.css";
 
 interface TripHeaderProps {
@@ -6,13 +7,34 @@ interface TripHeaderProps {
 }
 
 const TripHeader = ({ trip }: TripHeaderProps) => {
+  const { t } = useTranslation();
+
+  // Convert typeTraveler to match translation keys (remove spaces, capitalize first letters)
+  const formatKey = (key: string) =>
+    key
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join("");
+
+  const formattedTypeTravelerKey = formatKey(trip.typeTraveler);
+
   return (
     <>
       <div className="tags">
-        <span className="tag">{trip.typeTraveler}</span>
-        <span className="tag">{trip.typeTrip}</span>
+        <span className="tag">
+          {t(`tripHeader.typeTraveler.${formattedTypeTravelerKey}`, {
+            defaultValue: trip.typeTraveler,
+          })}
+        </span>
+        <span className="tag">
+          {t(`tripHeader.typeTrip.${trip.typeTrip}`, {
+            defaultValue: trip.typeTrip,
+          })}
+        </span>
         <span className="tag">{trip.country}</span>
-        <span className="tag">{trip?.tripDescription.length} days</span>
+        <span className="tag">
+          {t("tripHeader.days", { count: trip.tripDescription.length })}
+        </span>
       </div>
     </>
   );

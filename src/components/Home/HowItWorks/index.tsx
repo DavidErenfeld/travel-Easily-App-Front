@@ -1,8 +1,4 @@
-// HowItWorksSection.jsx
 import {
-  ArrowRight,
-  ChevronRight,
-  Edit,
   Edit3,
   Heart,
   MapPin,
@@ -12,52 +8,48 @@ import {
 } from "lucide-react";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
-
-const steps = [
-  {
-    icon: <Plus />,
-    title: "Create a Post",
-    description:
-      "Share the details of your travel, day-by-day, including descriptions, activities, and photos.",
-  },
-  {
-    icon: <Heart />,
-    title: "Save to Favorites",
-    description:
-      "Save trips you love to easily access them later and get inspired for your next journey.",
-  },
-  {
-    icon: <Share2 />,
-    title: "Share Your Itinerary",
-    description:
-      "Share itineraries easily via social media or email with a single click.",
-  },
-  {
-    icon: <MapPin />,
-    title: "Explore Nearby Attractions",
-    description:
-      "Find nearby attractions using our location-based feature to enhance your journey.",
-  },
-  {
-    icon: <Edit3 />,
-    title: "Update & Edit Posts",
-    description:
-      "Make updates to your itineraries anytime. Add new days, upload more photos, or edit details.",
-  },
-  {
-    icon: <MessageCircle />,
-    title: "Interact with Others",
-    description:
-      "Engage with other travelers by leaving comments, giving likes, or saving posts to favorites.",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const HowItWorksSection = () => {
+  const { t } = useTranslation(); // Translation hook
   const navigate = useNavigate();
+
+  const steps = [
+    {
+      icon: <Plus />,
+      title: t("howItWorks.createPost.title"),
+      description: t("howItWorks.createPost.description"),
+    },
+    {
+      icon: <Heart />,
+      title: t("howItWorks.saveFavorites.title"),
+      description: t("howItWorks.saveFavorites.description"),
+    },
+    {
+      icon: <Share2 />,
+      title: t("howItWorks.shareItinerary.title"),
+      description: t("howItWorks.shareItinerary.description"),
+    },
+    {
+      icon: <MapPin />,
+      title: t("howItWorks.exploreNearby.title"),
+      description: t("howItWorks.exploreNearby.description"),
+    },
+    {
+      icon: <Edit3 />,
+      title: t("howItWorks.updateEdit.title"),
+      description: t("howItWorks.updateEdit.description"),
+    },
+    {
+      icon: <MessageCircle />,
+      title: t("howItWorks.interactOthers.title"),
+      description: t("howItWorks.interactOthers.description"),
+    },
+  ];
 
   return (
     <section className="how-it-works-section">
-      <h2 className="section-title">How It Works</h2>
+      <h2 className="section-title">{t("howItWorks.title")}</h2>
       <div className="steps-container">
         {steps.map((step, index) => (
           <div key={index} className="step-card">
@@ -68,7 +60,7 @@ const HowItWorksSection = () => {
         ))}
       </div>
       <button onClick={() => navigate("/addTrip")} className="btn-cta-exl">
-        Get Started Now
+        {t("howItWorks.cta")}
       </button>
     </section>
   );

@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useTranslation } from "react-i18next"; 
 import Header from "../../Header";
 import CloseIcon from "../../UIComponents/Icons/Close";
-import "./style.css";
 import MenuBar from "../../Menus/MenuBar";
+import "./style.css";
 
 const TripForm: React.FC = () => {
+  const { t } = useTranslation();
   const [selectedGroupType, setSelectedGroupType] = useState<string>("");
   const [selectedTripType, setSelectedTripType] = useState<string>("");
   const [numberOfDays, setNumberOfDays] = useState<string>("");
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [countries, setCountries] = useState<string[]>([]);
-
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const navigate = useNavigate();
@@ -26,12 +27,12 @@ const TripForm: React.FC = () => {
         );
         setCountries(countryNames);
       } catch (error) {
-        console.error("Error fetching countries:", error);
+        console.error(t("tripForm.errors.fetchCountries"), error);
       }
     };
 
     fetchCountries();
-  }, []);
+  }, [t]);
 
   const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCountry(event.target.value);
@@ -48,19 +49,19 @@ const TripForm: React.FC = () => {
     const newErrors: { [key: string]: string } = {};
 
     if (!selectedGroupType) {
-      newErrors.selectedGroupType = "Please select a group type.";
+      newErrors.selectedGroupType = t("tripForm.errors.groupType");
       valid = false;
     }
     if (!selectedTripType) {
-      newErrors.selectedTripType = "Please select a trip type.";
+      newErrors.selectedTripType = t("tripForm.errors.tripType");
       valid = false;
     }
     if (!numberOfDays) {
-      newErrors.numberOfDays = "Please enter the number of days.";
+      newErrors.numberOfDays = t("tripForm.errors.days");
       valid = false;
     }
     if (!selectedCountry) {
-      newErrors.selectedCountry = "Please select a country.";
+      newErrors.selectedCountry = t("tripForm.errors.country");
       valid = false;
     }
 
@@ -91,11 +92,11 @@ const TripForm: React.FC = () => {
             <CloseIcon color="#fff" />
           </div>
           <div className="form-header">
-            <h2 className="form-title">Trip Details</h2>
+            <h2 className="form-title">{t("tripForm.title")}</h2>
           </div>
 
           <div className="form-group">
-            <label htmlFor="groupType">We are</label>
+            <label htmlFor="groupType">{t("tripForm.labels.groupType")}</label>
             <select
               id="groupType"
               value={selectedGroupType}
@@ -108,13 +109,21 @@ const TripForm: React.FC = () => {
               }}
               className="form-control"
             >
-              <option value="">Select Group Type</option>
-              <option value="romantic couple">Romantic Couple</option>
-              <option value="happy family">Happy Family</option>
-              <option value="friends">Friends</option>
-              <option value="seniors">Seniors</option>
-              <option value="single">Single</option>
-              <option value="groups">Groups</option>
+              <option value="">{t("tripForm.placeholders.groupType")}</option>
+              <option value="romantic couple">
+                {t("tripForm.groupTypes.romanticCouple")}
+              </option>
+              <option value="happy family">
+                {t("tripForm.groupTypes.happyFamily")}
+              </option>
+              <option value="friends">
+                {t("tripForm.groupTypes.friends")}
+              </option>
+              <option value="seniors">
+                {t("tripForm.groupTypes.seniors")}
+              </option>
+              <option value="single">{t("tripForm.groupTypes.single")}</option>
+              <option value="groups">{t("tripForm.groupTypes.groups")}</option>
             </select>
             {errors.selectedGroupType && (
               <p className="error-message">{errors.selectedGroupType}</p>
@@ -122,7 +131,7 @@ const TripForm: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="tripType">Trip Type</label>
+            <label htmlFor="tripType">{t("tripForm.labels.tripType")}</label>
             <select
               id="tripType"
               value={selectedTripType}
@@ -135,13 +144,19 @@ const TripForm: React.FC = () => {
               }}
               className="form-control"
             >
-              <option value="">Select Trip Type</option>
-              <option value="attractions">Attractions</option>
-              <option value="romantic">Romantic</option>
-              <option value="nature">Nature</option>
-              <option value="parties">Parties</option>
-              <option value="food">Food</option>
-              <option value="integrated">Integrated</option>
+              <option value="">{t("tripForm.placeholders.tripType")}</option>
+              <option value="attractions">
+                {t("tripForm.tripTypes.attractions")}
+              </option>
+              <option value="romantic">
+                {t("tripForm.tripTypes.romantic")}
+              </option>
+              <option value="nature">{t("tripForm.tripTypes.nature")}</option>
+              <option value="parties">{t("tripForm.tripTypes.parties")}</option>
+              <option value="food">{t("tripForm.tripTypes.food")}</option>
+              <option value="integrated">
+                {t("tripForm.tripTypes.integrated")}
+              </option>
             </select>
             {errors.selectedTripType && (
               <p className="error-message">{errors.selectedTripType}</p>
@@ -149,14 +164,14 @@ const TripForm: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="days">Number of Days</label>
+            <label htmlFor="days">{t("tripForm.labels.days")}</label>
             <input
               type="number"
               id="days"
               value={numberOfDays}
               onChange={handleDaysChange}
               className="form-control"
-              placeholder="Enter number of days..."
+              placeholder={t("tripForm.placeholders.days")}
               min="1"
             />
             {errors.numberOfDays && (
@@ -165,14 +180,14 @@ const TripForm: React.FC = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="country">Country</label>
+            <label htmlFor="country">{t("tripForm.labels.country")}</label>
             <input
               list="countries"
               id="country"
               value={selectedCountry}
               onChange={handleCountryChange}
               className="form-control"
-              placeholder="Start typing to search..."
+              placeholder={t("tripForm.placeholders.country")}
             />
             <datalist id="countries">
               {countries.map((country) => (
@@ -185,7 +200,7 @@ const TripForm: React.FC = () => {
           </div>
 
           <button className="btn-cta-l" onClick={goToCreateTripPage}>
-            Next
+            {t("tripForm.nextButton")}
           </button>
         </div>
       </section>

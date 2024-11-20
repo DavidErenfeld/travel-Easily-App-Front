@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import tripsService, { ITrips } from "../../../services/tripsService";
 import useSocket from "../../../Hooks/useSocket";
 import TripCard from "../TripCard";
 import Header from "../../Header";
 import LoadingDots from "../../UIComponents/Loader";
-import "./style.css";
 import MenuBar from "../../Menus/MenuBar";
+import "./style.css";
 
 const MyTrips = () => {
+  const { t } = useTranslation();
   const [trips, setTrips] = useState<ITrips[]>([]);
   const [loading, setLoading] = useState(true);
   const loggedUserId = localStorage.getItem("loggedUserId");
@@ -23,7 +25,7 @@ const MyTrips = () => {
         )) as ITrips[];
         setTrips(data);
       } catch (error) {
-        console.error("Failed to load trips:", error);
+        console.error(t("myTrips.errorLoading"), error);
       } finally {
         setLoading(false);
       }
@@ -32,7 +34,7 @@ const MyTrips = () => {
     if (loggedUserId) {
       loadMyTrips();
     }
-  }, [loggedUserId]);
+  }, [loggedUserId, t]);
 
   useSocket("likeAdded", (newTrip) => {
     setTrips((prevTrips) =>
@@ -63,9 +65,9 @@ const MyTrips = () => {
           </div>
         ) : trips.length === 0 ? (
           <div className="no-trips-container">
-            <p className="no-trips-message">You have no trips yet.</p>
+            <p className="no-trips-message">{t("myTrips.noTrips")}</p>
             <button className="btn-cta-exl" onClick={handleCreateTrip}>
-              Create Your First Trip
+              {t("myTrips.createTripButton")}
             </button>
           </div>
         ) : (

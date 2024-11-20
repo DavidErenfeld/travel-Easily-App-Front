@@ -1,22 +1,17 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { ArrowUp } from "lucide-react";
 import Header from "../Header";
 import Footer from "../Home/Footer";
 import "./style.css";
 import MenuBar from "../Menus/MenuBar";
-import TripCard from "../TripComponents/TripCard";
-import LoadingDots from "../UIComponents/Loader";
-import { ITrips } from "../../services/tripsService";
-import { useTrips } from "../../Context/TripContext";
 import { useNavigate } from "react-router-dom";
-import Trips from "../TripComponents/Trips";
-import TripsList from "../TripComponents/Trips";
 
 const SecontHomePage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [showScrollToTop, setShowScrollToTop] = useState(false);
-  const [showTrips, setShowTrips] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,84 +31,70 @@ const SecontHomePage = () => {
     navigate(`/trips/${country}`);
   };
 
+  const destinations = [
+    {
+      name: "Dubai",
+      displayName: t("secontHomePage.destinations.dubai.name"),
+      image: "/images/citys/Dubai.jpg",
+      description: t("secontHomePage.destinations.dubai.description"),
+    },
+    {
+      name: "Greece",
+      displayName: t("secontHomePage.destinations.greece.name"),
+      image: "/images/citys/Greece.jpg",
+      description: t("secontHomePage.destinations.greece.description"),
+    },
+    {
+      name: "Hungary",
+      displayName: t("secontHomePage.destinations.hungary.name"),
+      image: "/images/citys/Hungarian.jpg",
+      description: t("secontHomePage.destinations.hungary.description"),
+    },
+    {
+      name: "Bulgaria",
+      displayName: t("secontHomePage.destinations.bulgaria.name"),
+      image: "/images/citys/Bulgaria.jpg",
+      description: t("secontHomePage.destinations.bulgaria.description"),
+    },
+    {
+      name: "Netherlands",
+      displayName: t("secontHomePage.destinations.netherlands.name"),
+      image: "/images/citys/Netherlands.jpg",
+      description: t("secontHomePage.destinations.netherlands.description"),
+    },
+    {
+      name: "Montenegro",
+      displayName: t("secontHomePage.destinations.montenegro.name"),
+      image: "/images/citys/Montenegro.jpg",
+      description: t("secontHomePage.destinations.montenegro.description"),
+    },
+  ];
+
   return (
     <>
       <Header />
       <MenuBar />
 
       <section className="destinations-grid">
-        <h1>Explore Popular Destinations</h1>
-        <div className="destination-card">
-          <img src="/images/citys/Dubai.jpg" alt="Dubai" />
-          <h3>Dubai</h3>
-          <p>The perfect luxury getaway.</p>
-          <button
-            className="btn-cta-m"
-            onClick={() => searchByCountry("Dubai")}
-          >
-            Explore
-          </button>
-        </div>
-        <div className="destination-card">
-          <img src="/images/citys/Greece.jpg" alt="Greece" />
-          <h3>Greece</h3>
-          <p>Discover ancient ruins and stunning islands.</p>
-          <button
-            className="btn-cta-m"
-            onClick={() => searchByCountry("Greece")}
-          >
-            Explore
-          </button>
-        </div>
-        <div className="destination-card">
-          <img src="/images/citys/Hungarian.jpg" alt="Hungary" />
-          <h3>Hungary</h3>
-          <p>Experience the charm of Budapest.</p>
-          <button
-            className="btn-cta-m"
-            onClick={() => searchByCountry("Hungary")}
-          >
-            Explore
-          </button>
-        </div>
-        <div className="destination-card">
-          <img src="/images/citys/Bulgaria.jpg" alt="Bulgaria" />
-          <h3>Bulgaria</h3>
-          <p>Explore Rila Monastery and scenic mountain views.</p>
-          <button
-            className="btn-cta-m"
-            onClick={() => searchByCountry("Bulgaria")}
-          >
-            Explore
-          </button>
-        </div>
-        <div className="destination-card">
-          <img src="/images/citys/Netherlands.jpg" alt="Netherlands" />
-          <h3>Netherlands</h3>
-          <p>Stroll through tulip fields and iconic windmills.</p>
-          <button
-            className="btn-cta-m"
-            onClick={() => searchByCountry("Netherlands")}
-          >
-            Explore
-          </button>
-        </div>
-        <div className="destination-card">
-          <img src="/images/citys/Montenegro.jpg" alt="Montenegro" />
-          <h3>Montenegro</h3>
-          <p>Discover the stunning Bay of Kotor.</p>
-          <button
-            className="btn-cta-m"
-            onClick={() => searchByCountry("Montenegro")}
-          >
-            Explore
-          </button>
-        </div>
+        <h1>{t("secontHomePage.title")}</h1>
+        {destinations.map((destination) => (
+          <div key={destination.name} className="destination-card">
+            <img src={destination.image} alt={destination.displayName} />
+            <h3>{destination.displayName}</h3>
+            <p>{destination.description}</p>
+            <button
+              className="btn-cta-m"
+              onClick={() => searchByCountry(destination.name)}
+            >
+              {t("secontHomePage.exploreButton")}
+            </button>
+          </div>
+        ))}
         <button
           className="main-search-btn btn-cta-exl"
           onClick={() => navigate("/searchTrip")}
         >
-          Explore All Countries
+          {t("secontHomePage.exploreAllButton")}
         </button>
       </section>
       <Footer />

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   fetchPlaces,
   Place,
@@ -11,18 +12,26 @@ interface SearchFormProps {
   setLoading: (loading: boolean) => void;
 }
 
-const SearchForm: React.FC<SearchFormProps> = ({ onResults, setLoading }) => {
+const SearchForm = ({ onResults, setLoading }: SearchFormProps) => {
+  const { t } = useTranslation();
   const [location, setLocation] = useState("");
   const [radius, setRadius] = useState<number | "">("");
-  const [type, setType] = useState("restaurant");
+  const [type, setType] = useState("restaurant"); // הערך שנשלח לשרת נשאר באנגלית
   const [errors, setErrors] = useState({ location: "", radius: "" });
+
+  const typeOptions = [
+    { value: "restaurant", label: t("searchForm.types.restaurant") },
+    { value: "cafe", label: t("searchForm.types.cafe") },
+    { value: "bar", label: t("searchForm.types.bar") },
+    { value: "attraction", label: t("searchForm.types.attraction") },
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const newErrors = {
-      location: location ? "" : "Please share your location",
-      radius: radius ? "" : "Please enter a radius (1-10)",
+      location: location ? "" : t("searchForm.errors.location"),
+      radius: radius ? "" : t("searchForm.errors.radius"),
     };
     setErrors(newErrors);
 
@@ -33,12 +42,12 @@ const SearchForm: React.FC<SearchFormProps> = ({ onResults, setLoading }) => {
       const searchParams: SearchParams = {
         location,
         radius: Number(radius),
-        type,
+        type, // הערך שנשלח לשרת
       };
       const places = await fetchPlaces(searchParams);
       onResults(places);
     } catch (error) {
-      console.error("Failed to fetch places:", error);
+      console.error(t("searchForm.errors.fetchFailed"), error);
       onResults([]);
     } finally {
       setLoading(false);
@@ -54,15 +63,18 @@ const SearchForm: React.FC<SearchFormProps> = ({ onResults, setLoading }) => {
           setErrors({ ...errors, location: "" });
         },
         (error) => {
-          console.error("Failed to get location:", error);
-          setErrors({ ...errors, location: "Failed to get location" });
+          console.error(t("searchForm.errors.locationFailed"), error);
+          setErrors({
+            ...errors,
+            location: t("searchForm.errors.locationFailed"),
+          });
         }
       );
     } else {
-      console.error("Geolocation is not supported by this browser.");
+      console.error(t("searchForm.errors.geolocationUnsupported"));
       setErrors({
         ...errors,
-        location: "Geolocation is not supported by this browser",
+        location: t("searchForm.errors.geolocationUnsupported"),
       });
     }
   };
@@ -75,7 +87,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onResults, setLoading }) => {
           className="btn-cta-l"
           onClick={handleShareLocation}
         >
-          Share My Location
+          {t("searchForm.shareLocation")}
         </button>
         {location && <p className="location-display">{location}</p>}
         {errors.location && (
@@ -85,7 +97,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onResults, setLoading }) => {
 
       <div className="form-group">
         <label>
-          Radius (in km):
+          {t("searchForm.radius")}:
           <input
             type="tel"
             value={radius}
@@ -98,7 +110,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ onResults, setLoading }) => {
                 setRadius("");
               }
             }}
-            placeholder="Enter radius (1-10)"
+            placeholder={t("searchForm.radiusPlaceholder")}
           />
         </label>
         {errors.radius && (
@@ -108,18 +120,19 @@ const SearchForm: React.FC<SearchFormProps> = ({ onResults, setLoading }) => {
 
       <div className="form-group">
         <label>
-          Type:
+          {t("searchForm.type")}:
           <select value={type} onChange={(e) => setType(e.target.value)}>
-            <option value="restaurant">Restaurant</option>
-            <option value="cafe">Cafe</option>
-            <option value="bar">Bar</option>
-            <option value="attraction">Attraction</option>
+            {typeOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
           </select>
         </label>
       </div>
 
       <button type="submit" className="submit-search-btn btn-cta-l">
-        Search
+        {t("searchForm.searchButton")}
       </button>
     </form>
   );

@@ -1,16 +1,15 @@
-import React from "react";
 import TripCard from "../../TripComponents/TripCard";
-import "./style.css";
 import trips from "../../../LocalData";
+import { useTranslation } from "react-i18next";
+import "./style.css";
 
 const FeaturesSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="features-section">
-      <h2 className="section-title">What Makes Us Unique?</h2>
-      <p className="section-subtitle">
-        Discover the authentic travel experiences our platform offers through
-        detailed, user-driven itineraries.
-      </p>
+      <h2 className="section-title">{t("features.title")}</h2>
+      <p className="section-subtitle">{t("features.subtitle")}</p>
 
       <div className="feature-list">
         <div className="feature-item-1">
@@ -19,22 +18,16 @@ const FeaturesSection = () => {
           </div>
         </div>
         <div className="feature-item-2">
-          <h3>Personalized and Detailed Itineraries</h3>
+          <h3>{t("features.item1.title")}</h3>
           <p className="feature-description">
-            Every itinerary on our platform is crafted from a traveler's unique
-            perspective, emphasizing daily activities and key experiences. We
-            encourage travelers to share insights and recommendations for each
-            stop, allowing readers to fully immerse themselves in the journey.
+            {t("features.item1.description")}
           </p>
         </div>
 
         <div className="feature-item-3">
-          <h3>Why This Matters?</h3>
+          <h3>{t("features.item2.title")}</h3>
           <p className="feature-description">
-            Our platform is designed to deliver authentic, non-commercial travel
-            content. These personal journey descriptions help build a community
-            where users share genuine inspiration and explore destinations
-            through the eyes of other travelers.
+            {t("features.item2.description")}
           </p>
         </div>
         <div className="feature-item-4">
@@ -49,11 +42,9 @@ const FeaturesSection = () => {
           </div>
         </div>
         <div className="feature-item-6">
-          <h3>Favorite Trips & Easy Sharing</h3>
+          <h3>{t("features.item3.title")}</h3>
           <p className="feature-description">
-            Easily save and share your favorite itineraries with a single click.
-            This feature enables users to share unique trips with friends and
-            family, helping others to plan memorable journeys full of insights.
+            {t("features.item3.description")}
           </p>
         </div>
       </div>

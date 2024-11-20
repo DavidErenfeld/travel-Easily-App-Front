@@ -34,7 +34,7 @@
 }
 
 .carousel-image:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
   border-radius: 9px;
 }
 
@@ -53,6 +53,7 @@
   color: var(--text-secondary);
   background-color: rgba(0, 0, 0, 0.5);
   border: none;
+  direction: ltr;
 }
 
 .scroll-button.left {

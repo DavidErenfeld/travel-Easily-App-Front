@@ -9,9 +9,11 @@ import LoadingDots from "../UIComponents/Loader";
 import { useNavigate } from "react-router-dom";
 import tripsService from "../../services/tripsService";
 import PopUp from "../UIComponents/PopUp";
+import { useTranslation } from "react-i18next";
 import "./style.css";
 
 function PersonalArea() {
+  const { t } = useTranslation();
   const imgRef = useRef<HTMLInputElement>(null);
   const userName = localStorage.getItem("userName") || "";
   const [imgFile, setImgFile] = useState<File | null>(null);
@@ -98,7 +100,7 @@ function PersonalArea() {
       return uploadedUrl;
     } catch (error) {
       console.error("Upload failed:", error);
-      alert("Failed to upload image.");
+      alert(t("personalArea.uploadError"));
       return null;
     } finally {
       setLoading(false);
@@ -132,10 +134,14 @@ function PersonalArea() {
         <div className="form-close-icon">
           <CloseIcon color="#fff" />
         </div>
-        <p className="form-title">Personal Area</p>
+        <p className="form-title">{t("personalArea.title")}</p>
 
         {imgSrc && (
-          <img className="register-img " src={imgSrc} alt="img profile" />
+          <img
+            className="register-img "
+            src={imgSrc}
+            alt={t("personalArea.imgAlt")}
+          />
         )}
         <h1 className="profile-name">{userName}</h1>
 
@@ -146,12 +152,12 @@ function PersonalArea() {
         ) : (
           <div className="btn-container-gap-m ">
             <button onClick={() => imgRef.current?.click()} className="btn-m">
-              Edit
+              {t("personalArea.edit")}
             </button>
 
             {isButtonClicked && (
               <button onClick={onClickSave} className="btn-cta-m">
-                Save
+                {t("personalArea.save")}
               </button>
             )}
           </div>
@@ -163,7 +169,7 @@ function PersonalArea() {
           </div>
         ) : (
           <button className="btn-m delete-btn" onClick={confirmDeleteUser}>
-            Delete account
+            {t("personalArea.deleteAccount")}
           </button>
         )}
       </section>
@@ -172,7 +178,7 @@ function PersonalArea() {
         <PopUp
           handleCancelBtn={handleCancelBtn}
           handleDeleteBtn={handleDeleteUser}
-          message="Are you sure you want to delete your account?"
+          message={t("personalArea.deleteConfirmation")}
         />
       )}
     </>

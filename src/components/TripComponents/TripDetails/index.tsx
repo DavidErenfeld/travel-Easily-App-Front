@@ -1,7 +1,7 @@
-// TripDetails.tsx
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { Share2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import tripsService, { ITrips } from "../../../services/tripsService.ts";
 import { useTrips } from "../../../Context/TripContext";
 import TripDescription from "../TripDescription/index.tsx";
@@ -19,19 +19,15 @@ import useTripActions from "../../../Hooks/useTripActions.tsx";
 import socket from "../../../Hooks/socketInstance.tsx";
 import "./style.css";
 
-interface Images {
-  src: string;
-  alt: string;
-}
-
 const TripDetails = () => {
+  const { t } = useTranslation();
   const [viewMode, setViewMode] = useState("main");
   const [updateMode, setUpdateMode] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { id } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
-  const { trips, setTrips } = useTrips(); // Access TripContext
+  const { trips, setTrips } = useTrips();
   const trip = trips.find((t) => t._id === id) || null;
   const [loading, setLoading] = useState(true);
   const loggedUserName = localStorage.getItem("userName") || "";
@@ -83,9 +79,7 @@ const TripDetails = () => {
       setErrorMessage("");
     } catch (err) {
       console.error("Failed to load trip:", err);
-      setErrorMessage(
-        "An error occurred while loading the data. Please try again."
-      );
+      setErrorMessage(t("tripDetails.errorLoading"));
     } finally {
       setLoading(false);
     }
@@ -153,7 +147,7 @@ const TripDetails = () => {
       }
     } catch (err) {
       console.error("Failed to add comment:", err);
-      setErrorMessage("Failed to send the comment. Please try again.");
+      setErrorMessage(t("tripDetails.errorSendingComment"));
     } finally {
       setIsSubmitting(false);
     }
@@ -168,10 +162,10 @@ const TripDetails = () => {
     setErrorMessage("");
   };
 
-  const imageObjects: Images[] =
+  const imageObjects =
     trip?.tripPhotos?.map((photoUrl) => ({
       src: photoUrl,
-      alt: "Trip Photo",
+      alt: t("tripDetails.imageAlt"),
     })) || [];
 
   useEffect(() => {
@@ -222,7 +216,7 @@ const TripDetails = () => {
                       className="btn-l mode-btn"
                       onClick={onClickUpdateMode}
                     >
-                      Editing Mode
+                      {t("tripDetails.editingMode")}
                     </button>
                   )}
                   {trip && <TripDescription trip={trip} />}
@@ -238,13 +232,13 @@ const TripDetails = () => {
                       className="btn-cta-l"
                       onClick={() => handleViewModeChange("addComment")}
                     >
-                      Add Comment
+                      {t("tripDetails.addComment")}
                     </button>
                     <button
                       className="btn-l"
                       onClick={() => handleViewModeChange("viewComments")}
                     >
-                      View Comments
+                      {t("tripDetails.viewComments")}
                     </button>
                   </section>
                 )}
@@ -270,7 +264,11 @@ const TripDetails = () => {
                 )}
                 {successMessage && (
                   <SuccessMessage
-                    message={successMessage}
+                    messageKey={
+                      isFavorite
+                        ? "successMessages.fivoriteAdded"
+                        : "successMessages.fivoriteRemoved"
+                    }
                     onAnimationEnd={() => setSuccessMessage(null)}
                   />
                 )}

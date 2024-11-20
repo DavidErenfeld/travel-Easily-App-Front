@@ -1,16 +1,17 @@
-import React from "react";
-import "./style.css";
 import { Place } from "../../../services/placesService";
 import PlaceCard from "../PlaceCard";
+import "./style.css";
 
 interface PlacesListProps {
   places: Place[];
 }
 
-const PlacesList: React.FC<PlacesListProps> = ({ places }) => (
+const PlacesList = ({ places }: PlacesListProps) => (
   <ul className="places-list">
     {places.map((place) => (
-      <PlaceCard place={place} />
+      <li key={place.id} className="places-list-item">
+        <PlaceCard place={place} />
+      </li>
     ))}
   </ul>
 );

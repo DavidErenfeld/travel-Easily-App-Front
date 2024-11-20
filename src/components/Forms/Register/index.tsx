@@ -10,6 +10,7 @@ import AddImgsIcon from "../../UIComponents/Icons/AddImage";
 import { uploadPhoto } from "../../../services/fileService";
 import LoadingDots from "../../UIComponents/Loader";
 import { useAuth } from "../../../Context/AuthContext";
+import { useTranslation } from "react-i18next";
 import "./style.css";
 import "../formeStyle.css";
 import authService from "../../../services/authService";
@@ -19,13 +20,13 @@ const defaultImage = "/images/user.png";
 const schema = z.object({
   userName: z
     .string()
-    .min(2, "Name must be longer than 2 characters")
-    .max(15, "Name must be less than 15 characters"),
-  email: z.string().email("Please enter a valid email address"),
+    .min(2, "register.userName.min")
+    .max(15, "register.userName.max"),
+  email: z.string().email("register.email.invalid"),
   password: z
     .string()
-    .min(4, "Password must be at least 4 characters long")
-    .regex(/[a-z]/, "Password must include a lowercase letter"),
+    .min(4, "register.password.min")
+    .regex(/[a-z]/, "register.password.regex"),
 });
 
 type FormData = z.infer<typeof schema> & {
@@ -34,6 +35,7 @@ type FormData = z.infer<typeof schema> & {
 };
 
 function Register() {
+  const { t } = useTranslation();
   const { login } = useAuth();
   const [imgFile, setImgFile] = useState<File | null>(null);
   const [imgSrc, setImgSrc] = useState(defaultImage);
@@ -63,11 +65,10 @@ function Register() {
   const handleUploadImage = async (imgFile: File) => {
     try {
       const uploadedUrl = await uploadPhoto(imgFile);
-      console.log(`Image uploaded successfully: ${uploadedUrl}`);
       return uploadedUrl;
     } catch (error) {
       console.error("Upload failed:", error);
-      alert("Failed to upload image.");
+      alert(t("register.uploadError"));
       return null;
     }
   };
@@ -90,31 +91,28 @@ function Register() {
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const errorMessage = error.response.data;
-        setLoading(false);
-        setRegisterError(errorMessage + " Please try again");
+        setRegisterError(t("register.errorMessage", { message: errorMessage }));
       } else {
-        setLoading(false);
-        setRegisterError("An unexpected error occurred. Please try again.");
+        setRegisterError(t("register.unexpectedError"));
       }
+      setLoading(false);
     }
   };
 
   const onGoogleLoginSuccess = async (
     credentialResponse: CredentialResponse
   ) => {
-    console.log(credentialResponse);
     try {
       const response = await authService.googleSignin(credentialResponse);
       login(response);
       navigate("/");
-      console.log("user is logt");
     } catch (e) {
       console.log(e);
     }
   };
 
   const onGoogleLoginFailure = () => {
-    console.log("Google login failed");
+    console.log(t("register.googleLoginFailed"));
   };
 
   return (
@@ -126,7 +124,7 @@ function Register() {
       <div className="form-close-icon">
         <CloseIcon color="#fff" />
       </div>
-      <p className="form-title">Sign up</p>
+      <p className="form-title">{t("register.title")}</p>
 
       <div className="form-image-profile">
         <div
@@ -143,18 +141,26 @@ function Register() {
           style={{ display: "none" }}
           onChange={handleChange}
         />
-        {imgSrc && <img src={imgSrc} alt="Preview" className="register-img" />}
+        {imgSrc && (
+          <img
+            src={imgSrc}
+            alt={t("register.imageAlt")}
+            className="register-img"
+          />
+        )}
       </div>
       <div className="form-input-box">
         <input
           {...register("userName")}
           type="text"
           id="userName"
-          placeholder="User Name"
+          placeholder={t("register.userName.placeholder")}
           className="user-name"
         />
         {errors.userName && (
-          <p className="text-danger">{errors.userName.message}</p>
+          <p className="text-danger">
+            {t(errors.userName.message || "default.message")}
+          </p>
         )}
       </div>
       <div className="form-input-box">
@@ -162,21 +168,27 @@ function Register() {
           {...register("email")}
           type="email"
           id="email"
-          placeholder="UserName@gmail.com"
+          placeholder={t("register.email.placeholder")}
           className="email"
         />
-        {errors.email && <p className="text-danger">{errors.email.message}</p>}
+        {errors.email && (
+          <p className="text-danger">
+            {t(errors.email.message || "default.message")}
+          </p>
+        )}
       </div>
       <div className="form-input-box">
         <input
           {...register("password")}
           type="password"
           id="password"
-          placeholder="Password"
+          placeholder={t("register.password.placeholder")}
           className="password"
         />
         {errors.password && (
-          <p className="text-danger">{errors.password.message}</p>
+          <p className="text-danger">
+            {t(errors.password.message || "default.message")}
+          </p>
         )}
       </div>
 
@@ -186,7 +198,7 @@ function Register() {
         </div>
       ) : (
         <button type="submit" className="btn-cta-l">
-          Submit
+          {t("register.submitButton")}
         </button>
       )}
 

@@ -1,10 +1,11 @@
 import { useRef, useState, useEffect } from "react";
 import "./style.css";
+import { useTranslation } from "react-i18next";
 
 interface AddCommentProps {
   onSendComment: (comment: string) => void;
   onClickCancel: () => void;
-  isSubmitting: boolean; // הוספת isSubmitting כמאפיין
+  isSubmitting: boolean;
 }
 
 const AddComment = ({
@@ -12,6 +13,7 @@ const AddComment = ({
   onClickCancel,
   isSubmitting,
 }: AddCommentProps) => {
+  const { t } = useTranslation();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [comment, setComment] = useState("");
 
@@ -48,7 +50,7 @@ const AddComment = ({
   return (
     <section className="add-comment-section flex-center-column-large-gap">
       <textarea
-        placeholder="Write your comment"
+        placeholder={t("addComment.placeholder")}
         ref={textareaRef}
         className="comment-input"
         rows={1}
@@ -62,14 +64,14 @@ const AddComment = ({
           onClick={onClickCancel}
           disabled={isSubmitting}
         >
-          cancel
+          {t("addComment.cancel")}
         </button>
         <button
           className="btn-cta-m"
           onClick={handleSend}
           disabled={isSubmitting}
         >
-          {isSubmitting ? "Sending..." : "Send"}{" "}
+          {isSubmitting ? t("addComment.sending") : t("addComment.send")}
         </button>
       </div>
     </section>

@@ -1,0 +1,407 @@
+{
+  "appName": "TRAVEL easily",
+  "home": "דף הבית",
+  "addTrip": "הוסף טיול",
+  "exploreNearby": "אטרקציות בסביבתך",
+  "profile": "פרופיל",
+  "logout": "התנתקות",
+  "heroTitle": "הדרך החדשה לטייל",
+  "heroDescription": "Travel Easily מציעה תוכניות טיול ללא פרסומות, עם מיקוד בהשראה, שמאפשרות למצוא מסלולים ולשתף חוויות בצורה פשוטה וברורה.",
+  "heroAltImage": "כדור הארץ",
+  "heroCTA": "התחל לחקור מסלולים",
+  "howItWorks": {
+    "title": "איך זה עובד",
+    "createPost": {
+      "title": "צור פוסט",
+      "description": "שתף את פרטי הטיול שלך יום-אחרי-יום, כולל תיאורים, פעילויות ותמונות."
+    },
+    "saveFavorites": {
+      "title": "שמור למועדפים",
+      "description": "שמור טיולים שאהבת כדי לגשת אליהם בקלות מאוחר יותר ולהתמלא בהשראה לטיול הבא שלך."
+    },
+    "shareItinerary": {
+      "title": "שתף את המסלול שלך",
+      "description": "שתף מסלולים בקלות דרך רשתות חברתיות או דוא\"ל בלחיצה אחת."
+    },
+    "exploreNearby": {
+      "title": "חקור אטרקציות בסביבה",
+      "description": "מצא אטרקציות בסביבה באמצעות הכלי מבוסס המיקום שלנו כדי לשדרג את הטיול שלך."
+    },
+    "updateEdit": {
+      "title": "עדכן וערוך פוסטים",
+      "description": "עדכן את המסלולים שלך בכל זמן. הוסף ימים חדשים, העלה תמונות נוספות, או ערוך פרטים."
+    },
+    "interactOthers": {
+      "title": "התחבר עם אחרים",
+      "description": "צור אינטראקציה עם מטיילים אחרים על ידי השארת תגובות, מתן לייקים או שמירת פוסטים למועדפים."
+    },
+    "cta": "התחל עכשיו"
+  },
+  "features": {
+    "title": "מה הופך אותנו לייחודיים?",
+    "subtitle": "גלו את חוויות הטיול האותנטיות שהפלטפורמה שלנו מציעה דרך מסלולים מפורטים המבוססים על חוויות משתמש.",
+    "item1": {
+      "title": "מסלולים מותאמים ומפורטים",
+      "description": "כל מסלול בפלטפורמה שלנו נבנה מנקודת מבט ייחודית של מטייל, עם דגש על פעילויות יומיות וחוויות מפתח. אנו מעודדים מטיילים לשתף תובנות והמלצות לכל עצירה, ומאפשרים לקוראים להיטמע במסע."
+    },
+    "item2": {
+      "title": "למה זה חשוב?",
+      "description": "הפלטפורמה שלנו נועדה לספק תוכן טיולים אותנטי, ללא פרסומות. תיאורי המסע האישיים האלה מסייעים בבניית קהילה שבה משתמשים משתפים השראה אמיתית וחוקרים יעדים דרך עיניהם של מטיילים אחרים."
+    },
+    "item3": {
+      "title": "טיולים מועדפים ושיתוף קל",
+      "description": "שמרו ושיתפו בקלות את המסלולים המועדפים עליכם בלחיצה אחת. תכונה זו מאפשרת למשתמשים לשתף טיולים ייחודיים עם חברים ובני משפחה, ולעזור להם לתכנן מסעות בלתי נשכחים מלאי תובנות."
+    }
+  },
+  "footer": {
+    "rights": "כל הזכויות שמורות לדוד ארנפלד"
+  },
+  "advancedSearch": {
+    "title": "חיפוש מתקדם",
+    "countryLabel": "מדינה",
+    "countryPlaceholder": "התחל להקליד לחיפוש...",
+    "groupTypeLabel": "סוג קבוצה",
+    "groupTypePlaceholder": "בחר סוג קבוצה",
+    "groupType": {
+      "romanticCouple": "זוג רומנטי",
+      "happyFamily": "משפחה שמחה",
+      "friends": "חברים",
+      "seniors": "גמלאים",
+      "single": "יחיד",
+      "groups": "קבוצות"
+    },
+    "tripTypeLabel": "סוג טיול",
+    "tripTypePlaceholder": "בחר סוג טיול",
+    "tripType": {
+      "attractions": "אטרקציות",
+      "romantic": "רומנטי",
+      "nature": "טבע",
+      "parties": "מסיבות",
+      "food": "אוכל",
+      "integrated": "משולב"
+    },
+    "daysLabel": "מספר ימים",
+    "daysPlaceholder": "הכנס מספר ימים...",
+    "searchButton": "חפש",
+    "tryAgain": "נסה שוב",
+    "noResults": "לא נמצאו טיולים התואמים לקריטריונים."
+  },
+  "addComment": {
+    "placeholder": " כתוב את התגובה שלך כאן",
+    "cancel": "ביטול",
+    "send": "שלח",
+    "sending": "שולח..."
+  },
+  "viewComment": {
+    "deleteConfirmation": "האם אתה בטוח שברצונך למחוק את התגובה הזו?",
+    "deleteSuccess": "תגובה עם מזהה: {{id}} נמחקה בהצלחה.",
+    "deleteError": "אירעה שגיאה במחיקת התגובה.",
+    "profileAlt": "תמונת פרופיל",
+    "locale": "he-IL"
+  },
+  "forgotPassword": {
+    "title": "שחזור סיסמה",
+    "profileAlt": "תמונת פרופיל",
+    "emailPlaceholder": "UserName@gmail.com",
+    "invalidEmail": "אנא הכנס כתובת דוא\"ל תקינה",
+    "sendButton": "שלח קישור לשחזור",
+    "successMessage": "קישור לשחזור סיסמה נשלח לכתובת הדוא\"ל שלך.",
+    "errorMessage": "אירעה שגיאה. אנא נסה שוב.",
+    "orText": "או",
+    "signUpButton": "הירשם"
+  },
+  "login": {
+    "title": "התחבר",
+    "profileAlt": "תמונת פרופיל",
+    "emailPlaceholder": "UserName@gmail.com",
+    "passwordPlaceholder": "סיסמה",
+    "invalidEmail": "אנא הכנס כתובת דוא\"ל תקינה",
+    "invalidPassword": "הסיסמה חייבת להכיל לפחות 4 תווים",
+    "signInButton": "התחבר",
+    "signUpButton": "הירשם",
+    "forgotPassword": "שכחת סיסמה",
+    "orText": "או",
+    "errorMessage": "{{message}} אנא נסה שוב.",
+    "unexpectedError": "אירעה שגיאה בלתי צפויה. אנא נסה שוב.",
+    "googleLoginFailed": "התחברות עם Google נכשלה"
+  },
+  "register": {
+    "title": "הירשם",
+    "imageAlt": "תמונת פרופיל",
+    "userName": {
+      "placeholder": "שם משתמש",
+      "min": "השם חייב להיות ארוך מ-2 תווים",
+      "max": "השם חייב להיות קצר מ-15 תווים"
+    },
+    "email": {
+      "placeholder": "UserName@gmail.com",
+      "invalid": "אנא הכנס כתובת דוא\"ל תקינה"
+    },
+    "password": {
+      "placeholder": "סיסמה",
+      "min": "הסיסמה חייבת להכיל לפחות 4 תווים",
+      "regex": "הסיסמה חייבת לכלול אות קטנה אחת"
+    },
+    "uploadError": "העלאת התמונה נכשלה.",
+    "submitButton": "שלח",
+    "errorMessage": "{{message}} אנא נסה שוב.",
+    "unexpectedError": "אירעה שגיאה בלתי צפויה. אנא נסה שוב.",
+    "googleLoginFailed": "התחברות עם Google נכשלה"
+  },
+  "resetPassword": {
+    "title": "איפוס סיסמה",
+    "placeholder": "הכנס סיסמה חדשה",
+    "password": {
+      "min": "הסיסמה חייבת להיות באורך של לפחות 6 תווים"
+    },
+    "submitButton": "אפס סיסמה",
+    "successMessage": "הסיסמה שלך אופסה בהצלחה.",
+    "error": {
+      "missingToken": "אסימון חסר או שגוי",
+      "invalidToken": "האסימון חסר או לא תקין.",
+      "generic": "אירעה שגיאה. אנא נסה שוב."
+    }
+  },
+  "homePage": {
+    "scrollToTop": "גלול לראש הדף"
+  },
+  "menuBar": {
+    "advancedSearch": "חיפוש מתקדם",
+    "allTrips": "כל הטיולים",
+    "myTrips": "הטיולים שלי",
+    "favoriteTrips": "טיולים מועדפים",
+    "addTrip": "הוסף טיול",
+    "exploreNearby": "חקור אטרקציות בסביבה",
+    "selectedDestinations": "יעדים נבחרים"
+  },
+  "sidebar": {
+    "profileAlt": "תמונת פרופיל",
+    "editProfile": "ערוך פרופיל",
+    "signIn": "התחבר",
+    "signUp": "הירשם",
+    "features": "תכונות",
+    "howItWorks": "איך זה עובד",
+    "contactUs": "צור קשר",
+    "home": "דף הבית",
+    "logout": "התנתקות"
+  },
+  "personalArea": {
+    "title": "אזור אישי",
+    "imgAlt": "תמונת פרופיל",
+    "edit": "ערוך",
+    "save": "שמור",
+    "deleteAccount": "מחק חשבון",
+    "deleteConfirmation": "האם אתה בטוח שברצונך למחוק את החשבון שלך?",
+    "uploadError": "העלאת התמונה נכשלה."
+  },
+  "placeCard": {
+    "notAvailable": "לא זמין",
+    "websiteNotAvailable": "האתר אינו זמין",
+    "website": "נווט לאתר האינטרנט",
+    "notRated": "לא דורג עדיין",
+    "rating": "{{rating}} מתוך 5 ({{totalRatings}} דירוגים)",
+    "navigation": "ניווט"
+  },
+  "placesSearchPage": {
+    "title": "חקור אטרקציות בסביבה",
+    "noResults": "לא נמצאו מקומות. נסה חיפוש אחר."
+  },
+  "searchForm": {
+    "shareLocation": "שתף את המיקום שלי",
+    "radius": "רדיוס (בק\"מ)",
+    "radiusPlaceholder": "הכנס רדיוס (1-10)",
+    "type": "סוג",
+    "types": {
+      "restaurant": "מסעדה",
+      "cafe": "בית קפה",
+      "bar": "בר",
+      "attraction": "אטרקציה"
+    },
+    "searchButton": "חפש",
+    "errors": {
+      "location": "אנא שתף את המיקום שלך",
+      "radius": "אנא הכנס רדיוס (1-10)",
+      "fetchFailed": "אירעה שגיאה בעת הבאת המידע.",
+      "locationFailed": "נכשל בקבלת המיקום.",
+      "geolocationUnsupported": "דפדפן זה אינו תומך בגיאולוקציה"
+    }
+  },
+  "secontHomePage": {
+    "title": "חקור יעדים פופולריים",
+    "exploreButton": "חפש",
+    "exploreAllButton": " חפש בכל המדינות",
+    "destinations": {
+      "dubai": {
+        "name": "דובאי",
+        "description": "החופשה המפוארת המושלמת."
+      },
+      "greece": {
+        "name": "יוון",
+        "description": "גלו חורבות עתיקות ואיים מדהימים."
+      },
+      "hungary": {
+        "name": "הונגריה",
+        "description": "חוו את הקסם של בודפשט."
+      },
+      "bulgaria": {
+        "name": "בולגריה",
+        "description": "גלו את מנזר רילה ונופי ההרים המרהיבים."
+      },
+      "netherlands": {
+        "name": "הולנד",
+        "description": "טיילו בשדות טוליפים וטחנות רוח אייקוניות."
+      },
+      "montenegro": {
+        "name": "מונטנגרו",
+        "description": "גלו את מפרץ קוטור המרהיב."
+      }
+    }
+  },
+  "allTrips": {
+    "error": "טעינת הטיולים נכשלה. אנא נסה שוב מאוחר יותר.",
+    "errorConsole": "שגיאה בטעינת הטיולים:",
+    "noTrips": "לא נוספו טיולים למערכת עדיין",
+    "createTripButton": "צור את הטיול הראשון שלך"
+  },
+  "createTrip": {
+    "day": "יום {{day}}",
+    "placeholders": {
+      "dayDescription": "שתף אותנו במה עשית ביום {{day}}"
+    },
+    "errors": {
+      "emptyDay": "יום {{day}} ריק. אנא מלא את התיאור.",
+      "submitFailed": "שמירת הטיול נכשלה."
+    },
+    "successMessage": "הטיול נשמר בהצלחה!",
+    "submitButton": "שלח"
+  },
+  "favoriteTrips": {
+    "errorLoading": "שגיאה בטעינת הטיולים המועדפים:",
+    "noTrips": "עדיין אין לך טיולים מועדפים",
+    "exploreButton": "התחל לחקור מסלולים"
+  },
+  "myTrips": {
+    "errorLoading": "טעינת הטיולים שלך נכשלה.",
+    "noTrips": "אין לך טיולים עדיין.",
+    "createTripButton": "צור את הטיול הראשון שלך"
+  },
+  "tripCard": {
+    "altProfile": "תמונת פרופיל"
+  },
+  "tripCardIcons": {
+    "like": "אהבתי",
+    "favorite": "מועדפים",
+    "share": "שתף",
+    "comments": "תגובות",
+    "likes": "לייקים",
+    "close": "סגור",
+    "altUserProfile": "תמונת פרופיל משתמש",
+    "shareText": "טיול מדהים ל{{country}}! הצטרפו אליי להרפתקה זו!"
+  },
+  "tripDescription": {
+    "day": "יום {{day}}"
+  },
+  "tripDetails": {
+    "errorLoading": "אירעה שגיאה בטעינת הנתונים. אנא נסה שוב.",
+    "errorSendingComment": "שליחת התגובה נכשלה. אנא נסה שוב.",
+    "addComment": "הוסף תגובה",
+    "viewComments": "הצג תגובות",
+    "editingMode": "מצב עריכה",
+    "imageAlt": "תמונת טיול"
+  },
+  "tripForm": {
+    "title": "פרטי הטיול",
+    "labels": {
+      "groupType": "אנחנו",
+      "tripType": "סוג הטיול",
+      "days": "מספר ימים",
+      "country": "מדינה"
+    },
+    "placeholders": {
+      "groupType": "בחר סוג קבוצה",
+      "tripType": "בחר סוג טיול",
+      "days": "הכנס מספר ימים...",
+      "country": "התחל להקליד לחיפוש..."
+    },
+    "groupTypes": {
+      "romanticCouple": "זוג רומנטי",
+      "happyFamily": "משפחה שמחה",
+      "friends": "חברים",
+      "seniors": "גמלאים",
+      "single": "יחיד",
+      "groups": "קבוצות"
+    },
+    "tripTypes": {
+      "attractions": "אטרקציות",
+      "romantic": "רומנטי",
+      "nature": "טבע",
+      "parties": "מסיבות",
+      "food": "אוכל",
+      "integrated": "משולב"
+    },
+    "errors": {
+      "groupType": "אנא בחר סוג קבוצה.",
+      "tripType": "אנא בחר סוג טיול.",
+      "days": "אנא הכנס מספר ימים.",
+      "country": "אנא בחר מדינה.",
+      "fetchCountries": "נכשל בקבלת רשימת מדינות."
+    },
+    "nextButton": "הבא"
+  },
+  "tripHeader": {
+    "typeTraveler": {
+      "RomanticCouple": "זוג רומנטי",
+      "HappyFamily": "משפחה שמחה",
+      "Friends": "חברים",
+      "Seniors": "גמלאים",
+      "Single": "יחיד",
+      "Groups": "קבוצות"
+    },
+    "typeTrip": {
+      "attractions": "אטרקציות",
+      "romantic": "רומנטי",
+      "nature": "טבע",
+      "parties": "מסיבות",
+      "food": "אוכל",
+      "integrated": "משולב"
+    },
+    "days": "{{count}} ימים"
+  },
+  "tripsList": {
+    "noTripsMessage": "לא נמצאו טיולים התואמים לקריטריונים שלך.",
+    "backToDestinations": "חזרה ליעדים"
+  },
+  "updateTrip": {
+    "dayLabel": "יום",
+    "readModeButton": "מצב קריאה",
+    "deleteDayButton": "מחק יום",
+    "deleteTripButton": "מחק טיול",
+    "addDayButton": "הוסף יום",
+    "saveButton": "שמור",
+    "confirmDeleteDay": "האם אתה בטוח שברצונך למחוק את יום מספר {{day}}?",
+    "confirmDeleteTrip": "האם אתה בטוח שברצונך למחוק את הטיול כולו?",
+    "alertAddContent": "אנא הוסף תוכן ליום הנוכחי לפני הוספת יום חדש.",
+    "alertCannotDeleteLastDay": "לא ניתן למחוק את היום האחרון.",
+    "successDayDelete": "היום נמחק בהצלחה.",
+    "errorDayDelete": "שגיאה במחיקת היום.",
+    "successTripDelete": "הטיול נמחק בהצלחה.",
+    "errorTripDelete": "שגיאה במחיקת הטיול.",
+    "successTripUpdate": "הטיול עודכן בהצלחה.",
+    "errorTripUpdate": "שגיאה בעדכון הטיול.",
+    "imageAlt": "תמונת טיול"
+  },
+  "imageCarousel": {
+    "confirmDelete": "האם אתה בטוח שברצונך למחוק את התמונה הזו?",
+    "loadingMessage": "טוען תמונות..."
+  },
+  "popUp": {
+    "delete": "מחק",
+    "cancel": "ביטול"
+  },
+  "successMessages": {
+    "tripUpdated": "הטיול עודכן בהצלחה!",
+    "tripDeleted": "הטיול נמחק בהצלחה!",
+    "fivoriteAdded": "הטיול נוסף לרשימת המועדפים שלך",
+    "fivoriteRemoved": "הטיול הוסר מרשימת המועדפים שלך"
+  }
+}

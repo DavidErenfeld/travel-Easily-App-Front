@@ -1,4 +1,6 @@
+import React from "react";
 import { ITrips } from "../../../services/tripsService";
+import { useTranslation } from "react-i18next"; // שימוש בתרגום
 import "./style.css";
 
 interface TripDescriptionProps {
@@ -6,11 +8,15 @@ interface TripDescriptionProps {
 }
 
 const TripDescription: React.FC<TripDescriptionProps> = ({ trip }) => {
+  const { t } = useTranslation();
+
   return (
-    <section className="trip-description-section ">
+    <section className="trip-description-section">
       {trip?.tripDescription?.map((description, index) => (
         <div className="trip-day-details" key={index}>
-          <h2 className="trip-day-title">Day {index + 1}</h2>
+          <h2 className="trip-day-title">
+            {t("tripDescription.day", { day: index + 1 })}
+          </h2>
           <p className="trip-day-description">{description}</p>
         </div>
       ))}

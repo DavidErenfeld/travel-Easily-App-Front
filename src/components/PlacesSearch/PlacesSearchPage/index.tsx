@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import SearchForm from "../SearchForm";
 import { Place } from "../../../services/placesService";
 import PlacesList from "../PlacesList";
@@ -7,10 +8,11 @@ import LoadingDots from "../../UIComponents/Loader";
 import "./style.css";
 import MenuBar from "../../Menus/MenuBar";
 
-const PlacesSearchPage: React.FC = () => {
+const PlacesSearchPage = () => {
+  const { t } = useTranslation();
   const [places, setPlaces] = useState<Place[]>([]);
-  const [loading, setLoading] = useState(false); // מצב טעינה
-  const [noResults, setNoResults] = useState(false); // מצב לחוסר תוצאות
+  const [loading, setLoading] = useState(false);
+  const [noResults, setNoResults] = useState(false);
 
   const handleResults = (results: Place[]) => {
     setPlaces(results);
@@ -23,14 +25,14 @@ const PlacesSearchPage: React.FC = () => {
       <Header />
       <MenuBar />
       <section className="section places-search-page">
-        <h1>Explore Nearby</h1>
+        <h1>{t("placesSearchPage.title")}</h1>
 
         <SearchForm onResults={handleResults} setLoading={setLoading} />
 
         {loading ? (
           <LoadingDots />
         ) : noResults ? (
-          <p>No places found. Please try another search.</p>
+          <p>{t("placesSearchPage.noResults")}</p>
         ) : (
           <PlacesList places={places} />
         )}

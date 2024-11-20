@@ -1,8 +1,9 @@
 import { useRef, useState, useEffect } from "react";
 import { MdDelete } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 import LoadingDots from "../../UIComponents/Loader";
-import "./style.css";
 import PopUp from "../PopUp";
+import "./style.css";
 
 export interface Images {
   src: string;
@@ -21,9 +22,10 @@ const ImageCarousel = ({
   deleteImage,
   showDeleteButton,
 }: ImageCarouselProps) => {
+  const { t } = useTranslation();
   const carouselRef = useRef<HTMLDivElement>(null);
   const [imageToDelete, setImageToDelete] = useState<Images>();
-  const [loading, setLoading] = useState(true); // מצב טעינה
+  const [loading, setLoading] = useState(true);
 
   const scroll = (direction: "left" | "right") => {
     if (carouselRef.current) {
@@ -58,6 +60,7 @@ const ImageCarousel = ({
     alt: "",
     isFromServer: false,
   };
+
   return (
     <>
       {loading ? (
@@ -75,13 +78,13 @@ const ImageCarousel = ({
               >
                 <img
                   src={image.src}
-                  alt={image.alt}
+                  alt={t(image.alt)}
                   className="carousel-image"
                 />
                 {showDeleteButton && deleteImage && (
                   <MdDelete
                     onClick={() => {
-                      deleteImage(image);
+                      setImageToDelete(image);
                     }}
                     className="delete-icon"
                   />
@@ -101,17 +104,17 @@ const ImageCarousel = ({
         </div>
       )}
 
-      {imageToDelete?.src === "" && (
+      {imageToDelete && (
         <div className="popup-overlay">
           <PopUp
-            message="Are you sure you want to delete this image?"
+            message={t("imageCarousel.confirmDelete")}
             handleDeleteBtn={() => {
               if (deleteImage) {
                 deleteImage(imageToDelete);
               }
-              setImageToDelete(emptyImage);
+              setImageToDelete(undefined);
             }}
-            handleCancelBtn={() => setImageToDelete(emptyImage)}
+            handleCancelBtn={() => setImageToDelete(undefined)}
           />
         </div>
       )}

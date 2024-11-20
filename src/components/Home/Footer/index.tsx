@@ -1,7 +1,10 @@
 import { FaLinkedin, FaEnvelope, FaWhatsapp, FaPhone } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import "./style.css";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   const contactDetails = {
     github: "https://github.com/DavidErenfeld",
     linkedin:
@@ -9,10 +12,10 @@ const Footer = () => {
     email: "1020dudu@gmail.com",
     whatsApp: "972503781079",
     phonNumber: "+972503781079",
-    rights: "2024 All rights reserved to David Erenfeld",
   };
 
-  const { linkedin, email, whatsApp, phonNumber, rights } = contactDetails;
+  const { linkedin, email, whatsApp, phonNumber } = contactDetails;
+
   return (
     <footer className="footer-section">
       <div className="footer-icons">
@@ -33,7 +36,9 @@ const Footer = () => {
           <FaPhone className="footer-icon" />
         </a>
       </div>
-      <p className="footer-text">© {rights}</p>
+      <p className="footer-text">
+        © {new Date().getFullYear()} {t("footer.rights")}
+      </p>
     </footer>
   );
 };

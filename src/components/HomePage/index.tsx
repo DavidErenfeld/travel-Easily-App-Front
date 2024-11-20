@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ArrowUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import Header from "../Header";
 import HeroSection from "../Home/HeroSection";
 import FeaturesSection from "../Home/FeaturesSection";
@@ -8,6 +9,7 @@ import HowItWorksSection from "../Home/HowItWorks";
 import "./style.css";
 
 const HomePage = () => {
+  const { t } = useTranslation(); // Hook לתרגום
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
   useEffect(() => {
@@ -42,7 +44,11 @@ const HomePage = () => {
       </section>
 
       {showScrollToTop && (
-        <div className="scroll-to-top" onClick={scrollToTop}>
+        <div
+          className="scroll-to-top"
+          onClick={scrollToTop}
+          aria-label={t("homePage.scrollToTop")}
+        >
           <ArrowUp className="icon scroll-to-top-icon" />
         </div>
       )}

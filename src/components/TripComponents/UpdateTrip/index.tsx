@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Image } from "lucide-react";
 import { deletePhotoFromCloudinary } from "../../../services/fileService";
 import tripsService, { ITrips } from "../../../services/tripsService";
@@ -21,10 +22,11 @@ interface UpdateTripProps {
 }
 
 const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
+  const { t } = useTranslation();
   const initialImages =
     trip.tripPhotos?.map((url) => ({
       src: url,
-      alt: "Trip Photo",
+      alt: t("updateTrip.imageAlt"),
       isFromServer: true,
     })) || [];
 
@@ -93,7 +95,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
 
   const addNewDay = () => {
     if (dayEdits[currentDayIndex].description.trim() === "") {
-      alert("Please add content to the current day before adding a new one.");
+      alert(t("updateTrip.alertAddContent"));
       return;
     }
 
@@ -123,12 +125,12 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
           tripDescription: renumberedDays.map((day) => day.description),
         };
         await tripsService.updateTrip(updatedTrip);
-        console.log("Day deleted and trip updated successfully.");
+        console.log(t("updateTrip.successDayDelete"));
       } catch (error) {
-        console.error("Failed to update trip after deleting day:", error);
+        console.error(t("updateTrip.errorDayDelete"), error);
       }
     } else {
-      alert("Cannot delete the last remaining day.");
+      alert(t("updateTrip.alertCannotDeleteLastDay"));
     }
     setDeleteAction(null);
   };
@@ -141,10 +143,10 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
       }
 
       await tripsService.deleteTrip(trip._id!);
-      console.log("Trip and all its images deleted successfully.");
+      console.log(t("updateTrip.successTripDelete"));
       navigate(-1);
     } catch (error) {
-      console.error("Failed to delete trip or its images:", error);
+      console.error(t("updateTrip.errorTripDelete"), error);
     } finally {
       setIsSubmitting(false);
     }
@@ -180,10 +182,10 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
         tripPhotos: updatedTripPhotos,
       };
       await tripsService.updateTrip(updatedTrip);
-      console.log("Trip updated successfully.");
+      console.log(t("updateTrip.successTripUpdate"));
       onClickReadMode();
     } catch (error) {
-      console.error("Failed to update trip:", error);
+      console.error(t("updateTrip.errorTripUpdate"), error);
     } finally {
       setIsSubmitting(false);
     }
@@ -205,9 +207,11 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
         )}
         <div className="update-trip-container">
           <div className="update-details">
-            <p className="day-num">Day {dayEdits[currentDayIndex].dayNum}</p>
+            <p className="day-num">
+              {t("updateTrip.dayLabel")} {dayEdits[currentDayIndex].dayNum}
+            </p>
             <button className="btn-l" onClick={onClickReadMode}>
-              Read Mode
+              {t("updateTrip.readModeButton")}
             </button>
           </div>
           <textarea
@@ -243,20 +247,20 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
             ›
           </button>
         </div>
-        <div className="day-navigation flex-center-gap-s">
+        <div className="update-trip-buttons day-navigation flex-center-gap-s">
           <button className="btn-m" onClick={handleDeleteDayClick}>
-            Delete Day
+            {t("updateTrip.deleteDayButton")}
           </button>
           <button className="btn-m" onClick={handleDeleteTripClick}>
-            Delete Trip
+            {t("updateTrip.deleteTripButton")}
           </button>
           <button className="btn-m" onClick={addNewDay}>
-            Add Day
+            {t("updateTrip.addDayButton")}
           </button>
         </div>
 
         <button className="btn-cta-l" onClick={handleSave}>
-          Save
+          {t("updateTrip.saveButton")}
         </button>
       </section>
 
@@ -271,8 +275,10 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
           <PopUp
             message={
               deleteAction === "day"
-                ? `Are you sure you want to delete day number ${dayEdits[currentDayIndex].dayNum}?`
-                : "Are you sure you want to delete the entire trip?"
+                ? t("updateTrip.confirmDeleteDay", {
+                    day: dayEdits[currentDayIndex].dayNum,
+                  })
+                : t("updateTrip.confirmDeleteTrip")
             }
             handleCancelBtn={handleCancelDelete}
             handleDeleteBtn={

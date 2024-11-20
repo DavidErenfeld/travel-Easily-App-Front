@@ -1,21 +1,22 @@
-// ResetPassword.tsx
+import z from "zod";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useLocation } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import z from "zod";
+import { useTranslation } from "react-i18next";
 import LoadingDots from "../../UIComponents/Loader";
 import { resetPassword } from "../../../services/usersService";
 import "./style.css";
 import "../formeStyle.css";
 
 const resetPasswordSchema = z.object({
-  newPassword: z.string().min(6, "Password must be at least 6 characters long"),
+  newPassword: z.string().min(6, "resetPassword.password.min"),
 });
 
 type ResetPasswordData = z.infer<typeof resetPasswordSchema>;
 
 function ResetPassword() {
+  const { t } = useTranslation();
   const [resetError, setResetError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -28,26 +29,23 @@ function ResetPassword() {
   });
 
   const location = useLocation();
-  const navigate = useNavigate(); // שימוש ב-useNavigate במקום useHistory
+  const navigate = useNavigate();
 
-  // הוצאת הטוקן מה-URL
   const getTokenFromUrl = () => {
     const params = new URLSearchParams(location.search);
     return params.get("token");
   };
 
   useEffect(() => {
-    console.log("ResetPassword component loaded");
-
     if (!getTokenFromUrl()) {
-      setResetError("Invalid or missing token");
+      setResetError(t("resetPassword.error.missingToken"));
     }
-  }, []);
+  }, [t]);
 
   const onSubmit = async (data: ResetPasswordData) => {
     const token = getTokenFromUrl();
     if (!token) {
-      setResetError("Token is missing or invalid.");
+      setResetError(t("resetPassword.error.invalidToken"));
       return;
     }
 
@@ -55,14 +53,14 @@ function ResetPassword() {
       setLoading(true);
       await resetPassword(token, data.newPassword);
       setLoading(false);
-      setSuccessMessage("Your password has been reset successfully.");
+      setSuccessMessage(t("resetPassword.successMessage"));
 
       setTimeout(() => {
         navigate("/login");
       }, 3000);
     } catch (error) {
       console.error("Password reset error:", error);
-      setResetError("An error occurred. Please try again.");
+      setResetError(t("resetPassword.error.generic"));
       setLoading(false);
     }
   };
@@ -72,7 +70,7 @@ function ResetPassword() {
       className="form-container flex-center-column-large-gap"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <p className="form-title">Reset Password</p>
+      <p className="form-title">{t("resetPassword.title")}</p>
 
       {resetError && <div className="text-danger">{resetError}</div>}
       {successMessage && <div className="text-success">{successMessage}</div>}
@@ -83,12 +81,14 @@ function ResetPassword() {
             {...register("newPassword")}
             type="password"
             id="newPassword"
-            placeholder="Enter new password"
+            placeholder={t("resetPassword.placeholder")}
             className="password-input"
             autoComplete="new-password"
           />
           {errors.newPassword && (
-            <p className="text-danger">{errors.newPassword.message}</p>
+            <p className="text-danger">
+              {t(errors.newPassword.message || "default.message")}
+            </p>
           )}
         </div>
       )}
@@ -99,7 +99,7 @@ function ResetPassword() {
         </div>
       ) : (
         <button type="submit" className="btn-cta-l">
-          Reset Password
+          {t("resetPassword.submitButton")}
         </button>
       )}
     </form>

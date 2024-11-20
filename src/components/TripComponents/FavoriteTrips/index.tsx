@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import useSocket from "../../../Hooks/useSocket";
 import TripCard from "../TripCard";
 import tripsService, { ITrips } from "../../../services/tripsService";
 import LoadingDots from "../../UIComponents/Loader";
 import Header from "../../Header";
-import "./style.css";
 import MenuBar from "../../Menus/MenuBar";
+import "./style.css";
 
 const FavoriteTrips = () => {
+  const { t } = useTranslation();
   const [trips, setTrips] = useState<ITrips[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -21,14 +23,14 @@ const FavoriteTrips = () => {
         const data = await tripsService.getFavoriteTrips(userID);
         setTrips(data);
       } catch (error) {
-        console.error("Failed to load favorite trips:", error);
+        console.error(t("favoriteTrips.errorLoading"), error);
       } finally {
         setLoading(false);
       }
     };
 
     loadFavoriteTrips();
-  }, []);
+  }, [t]);
 
   useSocket("likeAdded", (newTrip) => {
     setTrips((prevTrips) =>
@@ -55,14 +57,12 @@ const FavoriteTrips = () => {
           </div>
         ) : trips.length === 0 ? (
           <div className="no-trips-container">
-            <p className="no-trips-message">
-              You don't have any favorite trips yet
-            </p>
+            <p className="no-trips-message">{t("favoriteTrips.noTrips")}</p>
             <button
               onClick={() => navigate("/searchTrip")}
               className="btn-cta-exl"
             >
-              Start Exploring Itineraries
+              {t("favoriteTrips.exploreButton")}
             </button>
           </div>
         ) : (

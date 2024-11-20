@@ -4,11 +4,12 @@ import axios from "axios";
 import Header from "../Header";
 import tripsService, { ITrips } from "../../services/tripsService";
 import TripCard from "../TripComponents/TripCard";
-import CloseIcon from "../UIComponents/Icons/Close";
 import MenuBar from "../Menus/MenuBar";
 import LoadingDots from "../UIComponents/Loader";
+import { useTranslation } from "react-i18next";
 
 const AdvancedSearch: React.FC = () => {
+  const { t } = useTranslation();
   const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [selectedGroupType, setSelectedGroupType] = useState<string>("");
   const [selectedTripType, setSelectedTripType] = useState<string>("");
@@ -16,9 +17,8 @@ const AdvancedSearch: React.FC = () => {
   const [searchResults, setSearchResults] = useState<ITrips[]>([]);
   const [isSearchSelected, setIsSearchSelected] = useState(false);
   const [countries, setCountries] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false); // מצב טעינה
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // קריאה לרשימת מדינות
   useEffect(() => {
     const fetchCountries = async () => {
       try {
@@ -75,7 +75,7 @@ const AdvancedSearch: React.FC = () => {
     return (
       <>
         <button className="btn-m try-again" onClick={resetSearch}>
-          Try again
+          {t("advancedSearch.tryAgain")}
         </button>
         {searchResults.length > 0 ? (
           <section className="trips-section">
@@ -85,11 +85,9 @@ const AdvancedSearch: React.FC = () => {
           </section>
         ) : (
           <div className="no-trips-container">
-            <p className="no-trips-message">
-              No trips found for the specified criteria.
-            </p>
+            <p className="no-trips-message">{t("advancedSearch.noResults")}</p>
             <button className="btn-cta-l" onClick={resetSearch}>
-              Try again
+              {t("advancedSearch.tryAgain")}
             </button>
           </div>
         )}
@@ -106,17 +104,17 @@ const AdvancedSearch: React.FC = () => {
       ) : (
         <div className="profile-container advanced-search-section">
           <div className="form-header">
-            <h2 className="form-title">Advanced Search</h2>
+            <h2 className="form-title">{t("advancedSearch.title")}</h2>
           </div>
           <div className="form-group">
-            <label htmlFor="country">Country</label>
+            <label htmlFor="country">{t("advancedSearch.countryLabel")}</label>
             <input
               list="countries"
               id="country"
               value={selectedCountry}
               onChange={(e) => setSelectedCountry(e.target.value)}
               className="form-control"
-              placeholder="Start typing to search..."
+              placeholder={t("advancedSearch.countryPlaceholder")}
             />
             <datalist id="countries">
               {countries.map((country) => (
@@ -125,53 +123,83 @@ const AdvancedSearch: React.FC = () => {
             </datalist>
           </div>
           <div className="form-group">
-            <label htmlFor="groupType">Group Type</label>
+            <label htmlFor="groupType">
+              {t("advancedSearch.groupTypeLabel")}
+            </label>
             <select
               id="groupType"
               value={selectedGroupType}
               onChange={(e) => setSelectedGroupType(e.target.value)}
               className="form-control"
             >
-              <option value="">Select Group Type</option>
-              <option value="romantic couple">Romantic Couple</option>
-              <option value="happy family">Happy Family</option>
-              <option value="friends">Friends</option>
-              <option value="seniors">Seniors</option>
-              <option value="single">Single</option>
-              <option value="groups">Groups</option>
+              <option value="">
+                {t("advancedSearch.groupTypePlaceholder")}
+              </option>
+              <option value="romantic couple">
+                {t("advancedSearch.groupType.romanticCouple")}
+              </option>
+              <option value="happy family">
+                {t("advancedSearch.groupType.happyFamily")}
+              </option>
+              <option value="friends">
+                {t("advancedSearch.groupType.friends")}
+              </option>
+              <option value="seniors">
+                {t("advancedSearch.groupType.seniors")}
+              </option>
+              <option value="single">
+                {t("advancedSearch.groupType.single")}
+              </option>
+              <option value="groups">
+                {t("advancedSearch.groupType.groups")}
+              </option>
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="tripType">Trip Type</label>
+            <label htmlFor="tripType">
+              {t("advancedSearch.tripTypeLabel")}
+            </label>
             <select
               id="tripType"
               value={selectedTripType}
               onChange={(e) => setSelectedTripType(e.target.value)}
               className="form-control"
             >
-              <option value="">Select Trip Type</option>
-              <option value="attractions">Attractions</option>
-              <option value="romantic">Romantic</option>
-              <option value="nature">Nature</option>
-              <option value="parties">Parties</option>
-              <option value="food">Food</option>
-              <option value="integrated">Integrated</option>
+              <option value="">
+                {t("advancedSearch.tripTypePlaceholder")}
+              </option>
+              <option value="attractions">
+                {t("advancedSearch.tripType.attractions")}
+              </option>
+              <option value="romantic">
+                {t("advancedSearch.tripType.romantic")}
+              </option>
+              <option value="nature">
+                {t("advancedSearch.tripType.nature")}
+              </option>
+              <option value="parties">
+                {t("advancedSearch.tripType.parties")}
+              </option>
+              <option value="food">{t("advancedSearch.tripType.food")}</option>
+              <option value="integrated">
+                {t("advancedSearch.tripType.integrated")}
+              </option>
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="days">Number of Days</label>
+            <label htmlFor="days">{t("advancedSearch.daysLabel")}</label>
             <input
               type="number"
               id="days"
               value={numberOfDays}
               onChange={(e) => setNumberOfDays(e.target.value)}
               className="form-control"
-              placeholder="Enter number of days..."
+              placeholder={t("advancedSearch.daysPlaceholder")}
               min="1"
             />
           </div>
           <button className="btn-cta-l" onClick={handleSubmit}>
-            Search
+            {t("advancedSearch.searchButton")}
           </button>
         </div>
       )}

@@ -1,6 +1,7 @@
+import { MdDelete } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import tripsService from "../../../services/tripsService";
-import { MdDelete } from "react-icons/md";
 import "./style.css";
 
 interface Comment {
@@ -25,16 +26,17 @@ const ViewComment = ({
   tripId,
   onCommentDeleted,
 }: ViewCommentProps) => {
+  const { t } = useTranslation();
   const loggedUserId = localStorage.getItem("loggedUserId");
 
   const handleDeleteComment = async (commentId: string) => {
-    if (window.confirm("Are you sure you want to delete this comment?")) {
+    if (window.confirm(t("viewComment.deleteConfirmation"))) {
       try {
         await tripsService.deleteComment(tripId, commentId);
-        console.log(`Comment with ID: ${commentId} deleted successfully.`);
+        console.log(t("viewComment.deleteSuccess", { id: commentId }));
         onCommentDeleted();
       } catch (error) {
-        console.error("Failed to delete comment:", error);
+        console.error(t("viewComment.deleteError"), error);
       }
     }
   };
@@ -46,19 +48,19 @@ const ViewComment = ({
       </div>
       {comments.map(
         (comment, index) =>
-          comment ? ( // לוודא שהתגובה לא ריקה
+          comment && (
             <div key={index} className="comment-container">
               <img
                 className="user-comment-img"
                 src={comment.imgUrl || "/images/user.png"}
-                alt="Profile"
+                alt={t("viewComment.profileAlt")}
               />
               <div className="comment-content">
                 <p>{comment.comment}</p>
                 <div className="comment-details">
                   <p className="comment-owner">{comment.owner}</p>
                   <p className="comment-date">
-                    {new Date(comment.date).toLocaleDateString("en-US", {
+                    {new Date(comment.date).toLocaleDateString(t("locale"), {
                       day: "2-digit",
                       month: "2-digit",
                       year: "numeric",
@@ -73,7 +75,7 @@ const ViewComment = ({
                 )}
               </div>
             </div>
-          ) : null // במידה והתגובה ריקה, לא להציג אותה
+          )
       )}
     </section>
   );

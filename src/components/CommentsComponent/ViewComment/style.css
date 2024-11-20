@@ -9,6 +9,7 @@
   border-radius: 6px;
   padding: 3rem 1rem;
   background-color: var(--background-light-blu);
+  direction: ltr;
 }
 
 .comment-container {

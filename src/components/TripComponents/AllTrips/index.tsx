@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useTrips } from "../../../Context/TripContext";
 import TripCard from "../TripCard";
 import Header from "../../Header";
@@ -8,6 +9,7 @@ import MenuBar from "../../Menus/MenuBar";
 import "./style.css";
 
 const AllTrips = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { trips, refreshTrips } = useTrips();
   const [isLoading, setIsLoading] = useState(true);
@@ -20,15 +22,15 @@ const AllTrips = () => {
       try {
         await refreshTrips();
       } catch (err) {
-        setError("Failed to load trips. Please try again later.");
-        console.error("Error loading trips:", err);
+        setError(t("allTrips.error"));
+        console.error(t("allTrips.errorConsole"), err);
       } finally {
         setIsLoading(false);
       }
     };
 
     loadTrips();
-  }, []);
+  }, [t]);
 
   const renderTrips = () => {
     return trips.map((trip) => (
@@ -55,11 +57,9 @@ const AllTrips = () => {
           </div>
         ) : trips.length === 0 ? (
           <div className="no-trips-container">
-            <p className="no-trips-message">
-              No trips have been added to the system yet
-            </p>
+            <p className="no-trips-message">{t("allTrips.noTrips")}</p>
             <button className="btn-cta-exl" onClick={handleCreateTrip}>
-              Create Your First Trip
+              {t("allTrips.createTripButton")}
             </button>
           </div>
         ) : (
