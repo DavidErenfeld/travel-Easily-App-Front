@@ -21,7 +21,6 @@ const AdvancedSearch: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Load countries from translation file
   const countries = Object.entries(t("countries", { returnObjects: true })) as [
     string,
     string

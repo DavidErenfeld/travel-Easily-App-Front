@@ -1,13 +1,14 @@
 .profile-container {
   padding: 2rem;
   border-radius: 10px;
-  width: 350px;
+  width: 35rem;
   margin: 0 auto;
   position: relative;
   text-align: center;
   padding: 3rem;
   box-shadow: var(--shadow-large);
   background-color: var(--card-background);
+  /* margin-bottom: 2rem; */
 }
 
 .form-header {
@@ -19,7 +20,7 @@
 }
 
 .form-title {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: bold;
   color: var(--text-secondary);
 }
@@ -62,7 +63,8 @@
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  font-size: 1.2rem;
+  font-size: 1.6rem;
+  font-weight: 500;
 }
 
 .form-row {
@@ -72,4 +74,8 @@
 
 .form-row .form-group {
   flex-basis: 48%;
+}
+
+/*344*/
+@media (max-width: 21.5em) {
 }

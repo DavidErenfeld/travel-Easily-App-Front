@@ -71,6 +71,10 @@
   border-radius: 6px;
   padding: 1rem;
   z-index: 10;
+  direction: ltr;
+}
+.likes-details-modal.change-position {
+  right: -4.1rem;
 }
 
 .likes-details-modal::-webkit-scrollbar {

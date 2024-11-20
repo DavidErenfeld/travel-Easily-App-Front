@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next"; // ייבוא התרגום
-import CloseIcon from "../../UIComponents/Icons/Close";
+import { useTranslation } from "react-i18next";
 import { scroller } from "react-scroll";
 import "./style.css";
 
@@ -17,7 +16,7 @@ const Sidebar = ({
   toggleSidebar,
   handleLogout,
 }: SidebarProps) => {
-  const { t } = useTranslation(); // שימוש ב-Hook לתרגום
+  const { t } = useTranslation();
   const isAuthenticated = localStorage.getItem("isAuthenticated");
   const navigate = useNavigate();
 
@@ -105,7 +104,7 @@ const Sidebar = ({
             handleScrollToSection("features-section");
           }}
         >
-          {t("sidebar.features")}
+          {t("sidebar.aboutUs")}
         </p>
         <p
           className="sidebar-item"

@@ -218,9 +218,7 @@ const TripForm = () => {
                     }}
                     className={`dropdown-item ${
                       selectedCountry === key ? "selected" : ""
-                    } ${
-                      i18n.language === "he" ? "dropdown-rtl" : "dropdown-ltr"
-                    }`}
+                    } `}
                   >
                     {name}
                   </li>

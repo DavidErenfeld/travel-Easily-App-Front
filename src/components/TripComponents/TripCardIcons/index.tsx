@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ThumbsUp, Heart, Share2, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import ShareButtons from "../../UIComponents/ShareButtons";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+import i18n from "../../../i18n";
 
 interface TripCardIconsProps {
   tripId: string;
@@ -44,6 +45,13 @@ const TripCardIcons: React.FC<TripCardIconsProps> = ({
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [changePosition, setChangePosition] = useState("");
+
+  useEffect(() => {
+    i18n.language === "he"
+      ? setChangePosition("change-position")
+      : setChangePosition("");
+  }, [t]);
 
   return (
     <div className="icons-details flex-space-between">
@@ -87,7 +95,10 @@ const TripCardIcons: React.FC<TripCardIconsProps> = ({
           {numOfLikes} {t("tripCardIcons.likes")}
         </p>
         {showLikesDetails && likesDetails.length > 0 && (
-          <div ref={modalRef} className={`likes-details-modal`}>
+          <div
+            ref={modalRef}
+            className={`likes-details-modal ${changePosition}`}
+          >
             <X
               onClick={() => setShowLikesDetails(false)}
               className="icon"
