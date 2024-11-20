@@ -118,7 +118,7 @@
     "invalidEmail": "Please enter a valid email address",
     "invalidPassword": "Password must be at least 4 characters long",
     "signInButton": "Sign in",
-    "signUpButton": "Sign up",
+    "signUp": "Sign up",
     "forgotPassword": "Forgot password",
     "orText": "or",
     "errorMessage": "{{message}} Please try again.",
@@ -143,7 +143,7 @@
       "regex": "Password must include a lowercase letter"
     },
     "uploadError": "Failed to upload image.",
-    "submitButton": "Submit",
+    "submitButton": "Sine up",
     "errorMessage": "{{message}} Please try again.",
     "unexpectedError": "An unexpected error occurred. Please try again.",
     "googleLoginFailed": "Google login failed"
@@ -229,7 +229,8 @@
   "secontHomePage": {
     "title": "Explore Popular Destinations",
     "exploreButton": "Explore",
-    "exploreAllButton": "Explore All Countries",
+    "exploreAllButton": "Show all Trips",
+    "advancedSearchButton": "Advanced Search ",
     "destinations": {
       "dubai": {
         "name": "Dubai",

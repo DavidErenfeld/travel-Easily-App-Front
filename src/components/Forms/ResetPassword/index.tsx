@@ -8,6 +8,7 @@ import LoadingDots from "../../UIComponents/Loader";
 import { resetPassword } from "../../../services/usersService";
 import "./style.css";
 import "../formeStyle.css";
+import Header from "../../Header";
 
 const resetPasswordSchema = z.object({
   newPassword: z.string().min(6, "resetPassword.password.min"),
@@ -66,43 +67,47 @@ function ResetPassword() {
   };
 
   return (
-    <form
-      className="form-container flex-center-column-large-gap"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <p className="form-title">{t("resetPassword.title")}</p>
+    <>
+      <Header />
 
-      {resetError && <div className="text-danger">{resetError}</div>}
-      {successMessage && <div className="text-success">{successMessage}</div>}
+      <form
+        className="form-container flex-center-column-large-gap"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <p className="form-title">{t("resetPassword.title")}</p>
 
-      {!successMessage && (
-        <div className="form-input-box">
-          <input
-            {...register("newPassword")}
-            type="password"
-            id="newPassword"
-            placeholder={t("resetPassword.placeholder")}
-            className="password-input"
-            autoComplete="new-password"
-          />
-          {errors.newPassword && (
-            <p className="text-danger">
-              {t(errors.newPassword.message || "default.message")}
-            </p>
-          )}
-        </div>
-      )}
+        {resetError && <div className="text-danger">{resetError}</div>}
+        {successMessage && <div className="text-success">{successMessage}</div>}
 
-      {loading ? (
-        <div className="main-loader-section">
-          <LoadingDots />
-        </div>
-      ) : (
-        <button type="submit" className="btn-cta-l">
-          {t("resetPassword.submitButton")}
-        </button>
-      )}
-    </form>
+        {!successMessage && (
+          <div className="form-input-box">
+            <input
+              {...register("newPassword")}
+              type="password"
+              id="newPassword"
+              placeholder={t("resetPassword.placeholder")}
+              className="password-input"
+              autoComplete="new-password"
+            />
+            {errors.newPassword && (
+              <p className="text-danger">
+                {t(errors.newPassword.message || "default.message")}
+              </p>
+            )}
+          </div>
+        )}
+
+        {loading ? (
+          <div className="main-loader-section">
+            <LoadingDots />
+          </div>
+        ) : (
+          <button type="submit" className="btn-cta-l">
+            {t("resetPassword.submitButton")}
+          </button>
+        )}
+      </form>
+    </>
   );
 }
 

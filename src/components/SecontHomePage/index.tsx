@@ -90,12 +90,20 @@ const SecontHomePage = () => {
             </button>
           </div>
         ))}
-        <button
-          className="main-search-btn btn-cta-exl"
-          onClick={() => navigate("/searchTrip")}
-        >
-          {t("secontHomePage.exploreAllButton")}
-        </button>
+        <div className="search-buttons flex-center-gap-s ">
+          <button
+            className="main-search-btn btn-cta-exl"
+            onClick={() => navigate("/searchTrip")}
+          >
+            {t("secontHomePage.exploreAllButton")}
+          </button>
+          <button
+            className="main-search-btn btn-cta-exl"
+            onClick={() => navigate("/searchTrip/advancedSearch")}
+          >
+            {t("secontHomePage.advancedSearchButton")}
+          </button>
+        </div>
       </section>
       <Footer />
       {showScrollToTop && (

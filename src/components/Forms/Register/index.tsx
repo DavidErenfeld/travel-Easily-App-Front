@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import "./style.css";
 import "../formeStyle.css";
 import authService from "../../../services/authService";
+import Header from "../../Header";
 
 const defaultImage = "/images/user.png";
 
@@ -116,97 +117,101 @@ function Register() {
   };
 
   return (
-    <form
-      className="form-container flex-center-column-large-gap"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      {registerError && <div className="text-danger">{registerError}</div>}
-      <div className="form-close-icon">
-        <CloseIcon color="#fff" />
-      </div>
-      <p className="form-title">{t("register.title")}</p>
+    <>
+      <Header />
 
-      <div className="form-image-profile">
-        <div
-          className="icon-select-img"
-          onClick={() => imageRef.current?.click()}
-        >
-          <AddImgsIcon />
+      <form
+        className="form-container flex-center-column-large-gap"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        {registerError && <div className="text-danger">{registerError}</div>}
+        <div className="form-close-icon">
+          <CloseIcon color="#fff" />
         </div>
-        <input
-          {...register("image", { required: true })}
-          type="file"
-          name="image"
-          ref={imageRef}
-          style={{ display: "none" }}
-          onChange={handleChange}
-        />
-        {imgSrc && (
-          <img
-            src={imgSrc}
-            alt={t("register.imageAlt")}
-            className="register-img"
+        {/* <p className="form-title">{t("register.title")}</p> */}
+
+        <div className="form-image-profile">
+          <div
+            className="icon-select-img"
+            onClick={() => imageRef.current?.click()}
+          >
+            <AddImgsIcon />
+          </div>
+          <input
+            {...register("image", { required: true })}
+            type="file"
+            name="image"
+            ref={imageRef}
+            style={{ display: "none" }}
+            onChange={handleChange}
           />
-        )}
-      </div>
-      <div className="form-input-box">
-        <input
-          {...register("userName")}
-          type="text"
-          id="userName"
-          placeholder={t("register.userName.placeholder")}
-          className="user-name"
-        />
-        {errors.userName && (
-          <p className="text-danger">
-            {t(errors.userName.message || "default.message")}
-          </p>
-        )}
-      </div>
-      <div className="form-input-box">
-        <input
-          {...register("email")}
-          type="email"
-          id="email"
-          placeholder={t("register.email.placeholder")}
-          className="email"
-        />
-        {errors.email && (
-          <p className="text-danger">
-            {t(errors.email.message || "default.message")}
-          </p>
-        )}
-      </div>
-      <div className="form-input-box">
-        <input
-          {...register("password")}
-          type="password"
-          id="password"
-          placeholder={t("register.password.placeholder")}
-          className="password"
-        />
-        {errors.password && (
-          <p className="text-danger">
-            {t(errors.password.message || "default.message")}
-          </p>
-        )}
-      </div>
-
-      {loading ? (
-        <div className="loader-section">
-          <LoadingDots />
+          {imgSrc && (
+            <img
+              src={imgSrc}
+              alt={t("register.imageAlt")}
+              className="register-img"
+            />
+          )}
         </div>
-      ) : (
-        <button type="submit" className="btn-cta-l">
-          {t("register.submitButton")}
-        </button>
-      )}
+        <div className="form-input-box">
+          <input
+            {...register("userName")}
+            type="text"
+            id="userName"
+            placeholder={t("register.userName.placeholder")}
+            className="user-name"
+          />
+          {errors.userName && (
+            <p className="text-danger">
+              {t(errors.userName.message || "default.message")}
+            </p>
+          )}
+        </div>
+        <div className="form-input-box">
+          <input
+            {...register("email")}
+            type="email"
+            id="email"
+            placeholder={t("register.email.placeholder")}
+            className="email"
+          />
+          {errors.email && (
+            <p className="text-danger">
+              {t(errors.email.message || "default.message")}
+            </p>
+          )}
+        </div>
+        <div className="form-input-box">
+          <input
+            {...register("password")}
+            type="password"
+            id="password"
+            placeholder={t("register.password.placeholder")}
+            className="password"
+          />
+          {errors.password && (
+            <p className="text-danger">
+              {t(errors.password.message || "default.message")}
+            </p>
+          )}
+        </div>
 
-      <GoogleLogin
-        onSuccess={onGoogleLoginSuccess}
-        onError={onGoogleLoginFailure}
-      />
-    </form>
+        {loading ? (
+          <div className="loader-section">
+            <LoadingDots />
+          </div>
+        ) : (
+          <button type="submit" className="btn-cta-l">
+            {t("register.submitButton")}
+          </button>
+        )}
+
+        <GoogleLogin
+          onSuccess={onGoogleLoginSuccess}
+          onError={onGoogleLoginFailure}
+        />
+      </form>
+    </>
   );
 }
 

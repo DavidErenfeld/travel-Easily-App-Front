@@ -116,9 +116,9 @@ const AdvancedSearch: React.FC = () => {
         <div className="search-results-container">{renderSearchResults()}</div>
       ) : (
         <div className="profile-container advanced-search-section">
-          <div className="form-header">
+          {/* <div className="form-header">
             <h2 className="form-title">{t("advancedSearch.title")}</h2>
-          </div>
+          </div> */}
 
           {/* Group Type */}
           <div className="form-group">

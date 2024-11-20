@@ -90,6 +90,7 @@ const Header = () => {
             </div>
           ) : (
             <div className="menu">
+              <LanguageSwitcher />
               <img
                 className="user-main-page-img"
                 src={profileImg}

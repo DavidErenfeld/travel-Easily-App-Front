@@ -12,6 +12,7 @@ import { useAuth } from "../../../Context/AuthContext";
 import authService from "../../../services/authService";
 import "../formeStyle.css";
 import "./style.css";
+import Header from "../../Header";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -72,76 +73,68 @@ function Login() {
   };
 
   return (
-    <form
-      className="form-container flex-center-column-large-gap"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      {loginError && <div className="text-danger">{loginError}</div>}
-      <div className="form-close-icon">
-        <CloseIcon color="#fff" />
-      </div>
-      <p className="form-title">{t("login.title")}</p>
+    <>
+      <Header />
+      <section className="login-section section">
+        <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+          {loginError && <div className="text-danger">{loginError}</div>}
+          <div className="form-close-icon">
+            <CloseIcon color="#fff" />
+          </div>
+          <h1 className="login-title">{t("login.title")}</h1>
+          <div className="form-input-box">
+            <input
+              {...register("email")}
+              type="email"
+              id="email"
+              placeholder={t("login.emailPlaceholder")}
+              className="email"
+              autoComplete="email"
+            />
+            {errors.email && (
+              <p className="text-danger">{t("login.invalidEmail")}</p>
+            )}
+          </div>
+          <div className="form-input-box">
+            <input
+              {...register("password")}
+              type="password"
+              id="password"
+              placeholder={t("login.passwordPlaceholder")}
+              className="password"
+              autoComplete="current-password"
+            />
+            {errors.password && (
+              <p className="text-danger">{t("login.invalidPassword")}</p>
+            )}
+          </div>
+          {loading ? (
+            <div className="main-loader-section">
+              <LoadingDots />
+            </div>
+          ) : (
+            <div className="buttons-box flex-center-column-gap">
+              <button type="submit" className="btn-login btn-cta-l">
+                {t("login.signInButton")}
+              </button>
+              <p>{t("login.orText")}</p>
 
-      <div className="form-image-profile">
-        {imgSrc && (
-          <img
-            src={imgSrc}
-            alt={t("login.profileAlt")}
-            className="register-img"
-          />
-        )}
-      </div>
+              <GoogleLogin
+                onSuccess={onGoogleLoginSuccess}
+                onError={onGoogleLoginFailure}
+              />
 
-      <div className="form-input-box">
-        <input
-          {...register("email")}
-          type="email"
-          id="email"
-          placeholder={t("login.emailPlaceholder")}
-          className="email"
-          autoComplete="email"
-        />
-        {errors.email && (
-          <p className="text-danger">{t("login.invalidEmail")}</p>
-        )}
-      </div>
-      <div className="form-input-box">
-        <input
-          {...register("password")}
-          type="password"
-          id="password"
-          placeholder={t("login.passwordPlaceholder")}
-          className="password"
-          autoComplete="current-password"
-        />
-        {errors.password && (
-          <p className="text-danger">{t("login.invalidPassword")}</p>
-        )}
-      </div>
-      {loading ? (
-        <div className="main-loader-section">
-          <LoadingDots />
-        </div>
-      ) : (
-        <div className="buttons-box flex-center-column-gap">
-          <button type="submit" className="btn-login btn-l">
-            {t("login.signInButton")}
-          </button>
-          <p>{t("login.orText")}</p>
-          <GoogleLogin
-            onSuccess={onGoogleLoginSuccess}
-            onError={onGoogleLoginFailure}
-          />
-
-          <Link to="/register">
-            <button className="btn-cta-l">{t("login.signUpButton")}</button>
-          </Link>
-        </div>
-      )}
-      <Link to={`/forgotPassword`}>
-        <p className="forgot-password">{t("login.forgotPassword")}</p>
-      </Link>
-    </form>
+              <Link to={`/register`}>
+                <p className="sign-up">{t("login.signUp")}</p>
+              </Link>
+              <Link to={`/forgotPassword`}>
+                <p className="forgot-password">{t("login.forgotPassword")}</p>
+              </Link>
+            </div>
+          )}
+        </form>
+      </section>
+    </>
   );
 }
 

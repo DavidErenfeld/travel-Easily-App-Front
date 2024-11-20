@@ -9,6 +9,7 @@ import CloseIcon from "../../UIComponents/Icons/Close";
 import LoadingDots from "../../UIComponents/Loader";
 import "../formeStyle.css";
 import "./style.css";
+import Header from "../../Header";
 
 const forgotPasswordSchema = z.object({
   email: z.string().email(),
@@ -45,58 +46,62 @@ function ForgotPassword() {
   };
 
   return (
-    <form
-      className="form-container flex-center-column-large-gap"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <div className="form-close-icon">
-        <CloseIcon color="#fff" />
-      </div>
-      <p className="form-title">{t("forgotPassword.title")}</p>
+    <>
+      <Header />
 
-      <div className="form-image-profile">
-        <img
-          src={profileImage}
-          alt={t("forgotPassword.profileAlt")}
-          className="register-img"
-        />
-      </div>
-
-      {resetError && <div className="text-danger">{resetError}</div>}
-      {successMessage && <div className="text-success">{successMessage}</div>}
-
-      <div className="form-input-box">
-        <input
-          {...register("email")}
-          type="email"
-          id="email"
-          placeholder={t("forgotPassword.emailPlaceholder")}
-          className="email"
-          autoComplete="email"
-        />
-        {errors.email && (
-          <p className="text-danger">{t("forgotPassword.invalidEmail")}</p>
-        )}
-      </div>
-
-      {loading ? (
-        <div className="main-loader-section">
-          <LoadingDots />
+      <form
+        className="form-container flex-center-column-large-gap"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="form-close-icon">
+          <CloseIcon color="#fff" />
         </div>
-      ) : (
-        <div className="buttons-box flex-center-column-gap">
-          <button type="submit" className="btn-l">
-            {t("forgotPassword.sendButton")}
-          </button>
-          <p>{t("forgotPassword.orText")}</p>
-          <Link to="/register">
-            <button className="btn-cta-l">
-              {t("forgotPassword.signUpButton")}
+        <p className="form-title">{t("forgotPassword.title")}</p>
+
+        <div className="form-image-profile">
+          <img
+            src={profileImage}
+            alt={t("forgotPassword.profileAlt")}
+            className="register-img"
+          />
+        </div>
+
+        {resetError && <div className="text-danger">{resetError}</div>}
+        {successMessage && <div className="text-success">{successMessage}</div>}
+
+        <div className="form-input-box">
+          <input
+            {...register("email")}
+            type="email"
+            id="email"
+            placeholder={t("forgotPassword.emailPlaceholder")}
+            className="email"
+            autoComplete="email"
+          />
+          {errors.email && (
+            <p className="text-danger">{t("forgotPassword.invalidEmail")}</p>
+          )}
+        </div>
+
+        {loading ? (
+          <div className="main-loader-section">
+            <LoadingDots />
+          </div>
+        ) : (
+          <div className="buttons-box flex-center-column-gap">
+            <button type="submit" className="btn-cta-l">
+              {t("forgotPassword.sendButton")}
             </button>
-          </Link>
-        </div>
-      )}
-    </form>
+            <p>{t("forgotPassword.orText")}</p>
+            <Link to="/register">
+              <button className="btn-l">
+                {t("forgotPassword.signUpButton")}
+              </button>
+            </Link>
+          </div>
+        )}
+      </form>
+    </>
   );
 }
 

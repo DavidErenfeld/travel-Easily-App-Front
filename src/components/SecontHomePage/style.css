@@ -4,7 +4,6 @@
   gap: 4rem;
   margin: 2rem 0;
   padding: 0rem 4rem;
-  /* margin-top: 9rem; */
   background-color: var(--background-light-blu);
   position: relative;
 }
@@ -58,11 +57,15 @@
   transition: all 0.3s;
 }
 
-.main-search-btn.btn-cta-exl {
+.destinations-grid .search-buttons {
   grid-column: 1 / -1;
   justify-self: center;
 }
 
+.main-search-btn.btn-cta-exl {
+  font-size: 1.8rem;
+  padding: 1.2rem 2rem;
+}
 .main-search-btn.btn-cta-exl:hover {
   transform: scale(1.03);
 }
@@ -86,8 +89,17 @@
     grid-template-columns: repeat(1, 1fr);
     gap: 4rem;
     margin: 2rem 0;
-    /* padding: 4rem; */
-    /* margin-top: 9rem; */
+    background-color: var(--background-light-blu);
+  }
+}
+
+/*320*/
+@media (max-width: 20em) {
+  .destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 4rem;
+    margin: 2rem 0;
     background-color: var(--background-light-blu);
   }
 }

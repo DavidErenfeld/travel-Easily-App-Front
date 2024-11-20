@@ -8,6 +8,7 @@
   padding: 3rem;
   box-shadow: var(--shadow-large);
   background-color: var(--card-background);
+  direction: ltr;
   /* margin-bottom: 2rem; */
 }
 
@@ -60,10 +61,11 @@
 
 .form-control {
   width: 100%;
-  padding: 0.5rem;
+  padding: 1rem 0.5rem;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 1.6rem;
+  /* direction: ltr; */
 }
 
 .form-row {

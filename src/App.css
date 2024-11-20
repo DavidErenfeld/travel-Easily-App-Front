@@ -160,15 +160,16 @@ input:focus {
   outline: none;
 }
 
+.error-message,
 .text-danger {
-  color: var(--error-bg);
+  color: #b72727;
   text-align: start;
   font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
 }
 
 .error-message {
-  color: var(--error-bg);
-  font-size: 1.4rem;
   margin-top: 5px;
 }
 

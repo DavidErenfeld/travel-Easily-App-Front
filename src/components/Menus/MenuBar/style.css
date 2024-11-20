@@ -7,13 +7,13 @@
   gap: 1rem;
   padding: 0rem 2rem;
   background-color: var(--background-light-blu);
-  width: 70%;
+  /* width: 70%; */
   overflow-x: auto;
   white-space: nowrap;
 }
 
 .menu-sub-item {
-  flex: 0 0 auto; /* מאפשר לכל פריט להיות בגודל האוטומטי שלו */
+  flex: 0 0 auto;
   padding: 0.8rem 1.5rem;
   border-radius: 5px;
   background-color: #cacaca;
@@ -31,7 +31,6 @@
   transform: scale(1.05);
 }
 
-/* גלילה נסתרת כאשר אין צורך */
 .menu-bar::-webkit-scrollbar {
   height: 6px;
 }

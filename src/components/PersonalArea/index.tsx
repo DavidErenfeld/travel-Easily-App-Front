@@ -11,6 +11,7 @@ import tripsService from "../../services/tripsService";
 import PopUp from "../UIComponents/PopUp";
 import { useTranslation } from "react-i18next";
 import "./style.css";
+import Header from "../Header";
 
 function PersonalArea() {
   const { t } = useTranslation();
@@ -123,6 +124,7 @@ function PersonalArea() {
 
   return (
     <>
+      <Header />
       <section className="personal-area-section form-container flex-center-column-large-gap">
         <input
           type="file"
