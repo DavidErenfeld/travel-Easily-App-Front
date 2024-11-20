@@ -38,3 +38,10 @@
     width: 35rem;
   }
 }
+
+option:hover {
+  background-color: brown !important;
+}
+/* select:hover {
+  background-color: brown;
+} */

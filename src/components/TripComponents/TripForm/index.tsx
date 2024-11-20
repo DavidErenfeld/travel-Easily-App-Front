@@ -1,48 +1,33 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useTranslation } from "react-i18next"; 
+import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import Header from "../../Header";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import MenuBar from "../../Menus/MenuBar";
 import "./style.css";
+import { useNavigate } from "react-router-dom";
+import i18n from "../../../i18n";
 
-const TripForm: React.FC = () => {
+const TripForm = () => {
   const { t } = useTranslation();
   const [selectedGroupType, setSelectedGroupType] = useState<string>("");
   const [selectedTripType, setSelectedTripType] = useState<string>("");
-  const [numberOfDays, setNumberOfDays] = useState<string>("");
+  const [numberOfDays, setNumberOfDays] = useState<string>("1");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [showCountrysList, setShowCountrysList] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState<string>("");
-  const [countries, setCountries] = useState<string[]>([]);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await axios.get("https://restcountries.com/v3.1/all");
-        const countryNames = response.data.map(
-          (country: any) => country.name.common
-        );
-        setCountries(countryNames);
-      } catch (error) {
-        console.error(t("tripForm.errors.fetchCountries"), error);
-      }
-    };
+  const dropdownRef = useRef<HTMLDivElement>(null); // יצירת רפרנס לתפריט
 
-    fetchCountries();
-  }, [t]);
+  const countries = Object.entries(t("countries", { returnObjects: true })) as [
+    string,
+    string
+  ][];
 
-  const handleCountryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedCountry(event.target.value);
-    setErrors((prevErrors) => ({ ...prevErrors, selectedCountry: "" }));
-  };
-
-  const handleDaysChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNumberOfDays(event.target.value);
-    setErrors((prevErrors) => ({ ...prevErrors, numberOfDays: "" }));
-  };
+  const filteredCountries = countries.filter(([key, name]) =>
+    name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const validateForm = () => {
     let valid = true;
@@ -69,24 +54,41 @@ const TripForm: React.FC = () => {
     return valid;
   };
 
-  const goToCreateTripPage = () => {
+  const handleSubmit = () => {
     if (validateForm()) {
       navigate("/create-trip", {
         state: {
           selectedGroupType,
           selectedTripType,
-          numberOfDays: parseInt(numberOfDays, 10),
+          numberOfDays,
           selectedCountry,
         },
       });
     }
   };
 
+  // סגירת הרשימה בלחיצה מחוץ לרכיב
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowCountrysList(false); // סגור את התפריט
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <Header />
       <MenuBar />
-      <section className="main-section ">
+      <section className="main-section">
         <div className="profile-container">
           <div className="form-close-icon">
             <CloseIcon color="#fff" />
@@ -95,6 +97,7 @@ const TripForm: React.FC = () => {
             <h2 className="form-title">{t("tripForm.title")}</h2>
           </div>
 
+          {/* Group Type */}
           <div className="form-group">
             <label htmlFor="groupType">{t("tripForm.labels.groupType")}</label>
             <select
@@ -130,6 +133,7 @@ const TripForm: React.FC = () => {
             )}
           </div>
 
+          {/* Trip Type */}
           <div className="form-group">
             <label htmlFor="tripType">{t("tripForm.labels.tripType")}</label>
             <select
@@ -163,13 +167,14 @@ const TripForm: React.FC = () => {
             )}
           </div>
 
+          {/* Number of Days */}
           <div className="form-group">
             <label htmlFor="days">{t("tripForm.labels.days")}</label>
             <input
               type="number"
               id="days"
               value={numberOfDays}
-              onChange={handleDaysChange}
+              onChange={(e) => setNumberOfDays(e.target.value)}
               className="form-control"
               placeholder={t("tripForm.placeholders.days")}
               min="1"
@@ -179,27 +184,55 @@ const TripForm: React.FC = () => {
             )}
           </div>
 
-          <div className="form-group">
+          {/* Country */}
+          <div
+            className="form-group"
+            ref={dropdownRef} // חיבור ה-div ל-ref
+          >
             <label htmlFor="country">{t("tripForm.labels.country")}</label>
             <input
-              list="countries"
+              type="text"
               id="country"
-              value={selectedCountry}
-              onChange={handleCountryChange}
-              className="form-control"
+              value={searchTerm}
               placeholder={t("tripForm.placeholders.country")}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setShowCountrysList(true);
+              }}
+              className="form-control"
+              autoComplete="off"
             />
-            <datalist id="countries">
-              {countries.map((country) => (
-                <option key={country} value={country} />
-              ))}
-            </datalist>
+            {showCountrysList && filteredCountries.length > 0 && (
+              <ul
+                className={`dropdown ${
+                  i18n.language === "he" ? "dropdown-rtl" : "dropdown-ltr"
+                }`}
+              >
+                {filteredCountries.map(([key, name]) => (
+                  <li
+                    key={key}
+                    onClick={() => {
+                      setSelectedCountry(key);
+                      setSearchTerm(name);
+                      setShowCountrysList(false);
+                    }}
+                    className={`dropdown-item ${
+                      selectedCountry === key ? "selected" : ""
+                    } ${
+                      i18n.language === "he" ? "dropdown-rtl" : "dropdown-ltr"
+                    }`}
+                  >
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            )}
             {errors.selectedCountry && (
               <p className="error-message">{errors.selectedCountry}</p>
             )}
           </div>
 
-          <button className="btn-cta-l" onClick={goToCreateTripPage}>
+          <button className="btn-cta-l" onClick={handleSubmit}>
             {t("tripForm.nextButton")}
           </button>
         </div>

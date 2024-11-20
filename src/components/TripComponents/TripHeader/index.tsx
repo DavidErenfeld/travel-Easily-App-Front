@@ -18,6 +18,10 @@ const TripHeader = ({ trip }: TripHeaderProps) => {
 
   const formattedTypeTravelerKey = formatKey(trip.typeTraveler);
 
+  const translatedCountry =
+    t(`countries.${trip.country}`, { defaultValue: trip.country }) ||
+    trip.country;
+
   return (
     <>
       <div className="tags">
@@ -31,7 +35,7 @@ const TripHeader = ({ trip }: TripHeaderProps) => {
             defaultValue: trip.typeTrip,
           })}
         </span>
-        <span className="tag">{trip.country}</span>
+        <span className="tag">{translatedCountry}</span>
         <span className="tag">
           {t("tripHeader.days", { count: trip.tripDescription.length })}
         </span>

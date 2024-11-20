@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import "./style.css";
-import axios from "axios";
-import Header from "../Header";
+import React, { useState, useEffect, useRef } from "react";
+import i18n from "../../i18n";
 import tripsService, { ITrips } from "../../services/tripsService";
 import TripCard from "../TripComponents/TripCard";
 import MenuBar from "../Menus/MenuBar";
 import LoadingDots from "../UIComponents/Loader";
 import { useTranslation } from "react-i18next";
+import "./style.css";
+import Header from "../Header";
 
 const AdvancedSearch: React.FC = () => {
   const { t } = useTranslation();
@@ -16,23 +16,20 @@ const AdvancedSearch: React.FC = () => {
   const [numberOfDays, setNumberOfDays] = useState<string>("");
   const [searchResults, setSearchResults] = useState<ITrips[]>([]);
   const [isSearchSelected, setIsSearchSelected] = useState(false);
-  const [countries, setCountries] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [showCountrysList, setShowCountrysList] = useState(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await axios.get("https://restcountries.com/v3.1/all");
-        const countryNames = response.data.map(
-          (country: any) => country.name.common
-        );
-        setCountries(countryNames);
-      } catch (error) {
-        console.error("Error fetching countries:", error);
-      }
-    };
-    fetchCountries();
-  }, []);
+  // Load countries from translation file
+  const countries = Object.entries(t("countries", { returnObjects: true })) as [
+    string,
+    string
+  ][];
+
+  const filteredCountries = countries.filter(([key, name]) =>
+    name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const handleSubmit = async () => {
     try {
@@ -95,6 +92,23 @@ const AdvancedSearch: React.FC = () => {
     );
   };
 
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowCountrysList(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <Header />
@@ -106,22 +120,21 @@ const AdvancedSearch: React.FC = () => {
           <div className="form-header">
             <h2 className="form-title">{t("advancedSearch.title")}</h2>
           </div>
+          {/* Number of Days */}
           <div className="form-group">
-            <label htmlFor="country">{t("advancedSearch.countryLabel")}</label>
+            <label htmlFor="days">{t("advancedSearch.daysLabel")}</label>
             <input
-              list="countries"
-              id="country"
-              value={selectedCountry}
-              onChange={(e) => setSelectedCountry(e.target.value)}
+              type="number"
+              id="days"
+              value={numberOfDays}
+              onChange={(e) => setNumberOfDays(e.target.value)}
               className="form-control"
-              placeholder={t("advancedSearch.countryPlaceholder")}
+              placeholder={t("advancedSearch.daysPlaceholder")}
+              min="1"
             />
-            <datalist id="countries">
-              {countries.map((country) => (
-                <option key={country} value={country} />
-              ))}
-            </datalist>
           </div>
+
+          {/* Group Type */}
           <div className="form-group">
             <label htmlFor="groupType">
               {t("advancedSearch.groupTypeLabel")}
@@ -155,6 +168,7 @@ const AdvancedSearch: React.FC = () => {
               </option>
             </select>
           </div>
+          {/* Trip Type */}
           <div className="form-group">
             <label htmlFor="tripType">
               {t("advancedSearch.tripTypeLabel")}
@@ -186,17 +200,46 @@ const AdvancedSearch: React.FC = () => {
               </option>
             </select>
           </div>
-          <div className="form-group">
-            <label htmlFor="days">{t("advancedSearch.daysLabel")}</label>
+          {/* Country */}
+          <div className="form-group" ref={dropdownRef}>
+            <label htmlFor="country">{t("advancedSearch.countryLabel")}</label>
             <input
-              type="number"
-              id="days"
-              value={numberOfDays}
-              onChange={(e) => setNumberOfDays(e.target.value)}
+              type="text"
+              id="country"
+              value={searchTerm}
+              placeholder={t("advancedSearch.countryPlaceholder")}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setShowCountrysList(true);
+              }}
               className="form-control"
-              placeholder={t("advancedSearch.daysPlaceholder")}
-              min="1"
+              autoComplete="off"
             />
+            {showCountrysList && filteredCountries.length > 0 && (
+              <ul
+                className={`dropdown ${
+                  i18n.language === "he" ? "dropdown-rtl" : "dropdown-ltr"
+                }`}
+              >
+                {filteredCountries.map(([key, name]) => (
+                  <li
+                    key={key}
+                    onClick={() => {
+                      setSelectedCountry(key);
+                      setSearchTerm(name);
+                      setShowCountrysList(false);
+                    }}
+                    className={`dropdown-item ${
+                      selectedCountry === key ? "selected" : ""
+                    } ${
+                      i18n.language === "he" ? "dropdown-rtl" : "dropdown-ltr"
+                    }`}
+                  >
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
           <button className="btn-cta-l" onClick={handleSubmit}>
             {t("advancedSearch.searchButton")}
