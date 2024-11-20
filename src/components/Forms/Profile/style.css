@@ -1,7 +1,7 @@
 .profile-container {
   padding: 2rem;
   border-radius: 10px;
-  width: 35rem;
+  width: 40rem;
   margin: 0 auto;
   position: relative;
   text-align: center;
@@ -60,11 +60,10 @@
 
 .form-control {
   width: 100%;
-  padding: 10px;
+  padding: 0.5rem;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 1.6rem;
-  font-weight: 500;
 }
 
 .form-row {

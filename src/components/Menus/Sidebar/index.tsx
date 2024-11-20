@@ -127,7 +127,7 @@ const Sidebar = ({
         <p
           className="sidebar-item"
           onClick={() => {
-            navigate("./secontHomPage");
+            navigate("/secontHomPage");
           }}
         >
           {t("sidebar.home")}

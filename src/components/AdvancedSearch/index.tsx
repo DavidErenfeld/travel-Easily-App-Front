@@ -119,19 +119,6 @@ const AdvancedSearch: React.FC = () => {
           <div className="form-header">
             <h2 className="form-title">{t("advancedSearch.title")}</h2>
           </div>
-          {/* Number of Days */}
-          <div className="form-group">
-            <label htmlFor="days">{t("advancedSearch.daysLabel")}</label>
-            <input
-              type="number"
-              id="days"
-              value={numberOfDays}
-              onChange={(e) => setNumberOfDays(e.target.value)}
-              className="form-control"
-              placeholder={t("advancedSearch.daysPlaceholder")}
-              min="1"
-            />
-          </div>
 
           {/* Group Type */}
           <div className="form-group">
@@ -199,6 +186,21 @@ const AdvancedSearch: React.FC = () => {
               </option>
             </select>
           </div>
+
+          {/* Number of Days */}
+          <div className="form-group">
+            <label htmlFor="days">{t("advancedSearch.daysLabel")}</label>
+            <input
+              type="number"
+              id="days"
+              value={numberOfDays}
+              onChange={(e) => setNumberOfDays(e.target.value)}
+              className="form-control"
+              placeholder={t("advancedSearch.daysPlaceholder")}
+              min="1"
+            />
+          </div>
+
           {/* Country */}
           <div className="form-group" ref={dropdownRef}>
             <label htmlFor="country">{t("advancedSearch.countryLabel")}</label>
