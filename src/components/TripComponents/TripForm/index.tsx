@@ -88,7 +88,7 @@ const TripForm = () => {
     <>
       <Header />
       <MenuBar />
-      <section className="main-section">
+      <section className="trip-form-section main-section">
         <div className="profile-container">
           <div className="form-close-icon">
             <CloseIcon color="#fff" />

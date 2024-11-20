@@ -1,3 +1,12 @@
+.trip-form-section {
+  margin-bottom: 2rem;
+}
+
+.trip-form-section .profile-container {
+  margin-top: -2rem;
+  padding-bottom: 1rem;
+}
+
 .dropdown {
   max-height: 14rem;
   overflow-y: auto;
@@ -35,4 +44,12 @@
 .dropdown.dropdown-rtl {
   direction: rtl;
   text-align: right;
+}
+
+/*480*/
+@media (max-width: 30em) {
+  .trip-form-section .profile-container {
+    margin-top: 0rem;
+    padding-bottom: 3rem;
+  }
 }
