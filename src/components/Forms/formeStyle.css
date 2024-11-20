@@ -71,6 +71,13 @@
   color: var(--text-secondary);
 }
 
+/* 480 */
+@media (max-width: 30em) {
+  .form-container {
+    top: 43%;
+  }
+}
+
 /* 320 */
 @media (max-width: 20em) {
   .form-container {

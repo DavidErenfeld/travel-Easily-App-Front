@@ -49,7 +49,7 @@
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
   text-align: left;
 }
 
@@ -75,8 +75,13 @@
 
 .form-row .form-group {
   flex-basis: 48%;
+  margin-bottom: 1.5rem;
 }
 
-/*344*/
-@media (max-width: 21.5em) {
+/* 480 */
+@media (max-width: 30em) {
+  .profile-container .form-group {
+    margin-bottom: 2.2rem;
+    text-align: left;
+  }
 }

@@ -35,37 +35,37 @@ const SecontHomePage = () => {
     {
       name: "Dubai",
       displayName: t("secontHomePage.destinations.dubai.name"),
-      image: "/images/citys/Dubai.jpg",
+      image: "/images/citys/Dubai.webp",
       description: t("secontHomePage.destinations.dubai.description"),
     },
     {
       name: "Greece",
       displayName: t("secontHomePage.destinations.greece.name"),
-      image: "/images/citys/Greece.jpg",
+      image: "/images/citys/Greece.webp",
       description: t("secontHomePage.destinations.greece.description"),
     },
     {
       name: "Hungary",
       displayName: t("secontHomePage.destinations.hungary.name"),
-      image: "/images/citys/Hungarian.jpg",
+      image: "/images/citys/Hungarian.webp",
       description: t("secontHomePage.destinations.hungary.description"),
     },
     {
       name: "Bulgaria",
       displayName: t("secontHomePage.destinations.bulgaria.name"),
-      image: "/images/citys/Bulgaria.jpg",
+      image: "/images/citys/Bulgaria.webp",
       description: t("secontHomePage.destinations.bulgaria.description"),
     },
     {
       name: "Netherlands",
       displayName: t("secontHomePage.destinations.netherlands.name"),
-      image: "/images/citys/Netherlands.jpg",
+      image: "/images/citys/Netherlands.webp",
       description: t("secontHomePage.destinations.netherlands.description"),
     },
     {
       name: "Montenegro",
       displayName: t("secontHomePage.destinations.montenegro.name"),
-      image: "/images/citys/Montenegro.jpg",
+      image: "/images/citys/Montenegro.webp",
       description: t("secontHomePage.destinations.montenegro.description"),
     },
   ];

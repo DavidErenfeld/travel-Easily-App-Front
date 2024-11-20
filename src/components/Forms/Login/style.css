@@ -73,8 +73,9 @@ h1.login-title {
   }
 }
 
-/* 320 */
-@media (max-width: 20em) {
-  .google-login-section {
+/* 480 */
+@media (max-width: 30em) {
+  .login-form {
+    margin: 10rem auto;
   }
 }

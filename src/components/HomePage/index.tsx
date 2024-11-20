@@ -9,7 +9,7 @@ import HowItWorksSection from "../Home/HowItWorks";
 import "./style.css";
 
 const HomePage = () => {
-  const { t } = useTranslation(); // Hook לתרגום
+  const { t } = useTranslation();
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
   useEffect(() => {
