@@ -23,7 +23,8 @@
   gap: 0.5rem;
   z-index: 2;
   cursor: pointer;
-  background-color: var(--background-light-blu);
+  /* background-color: var(--background-light-blu); */
+  /* background-color: none; */
   padding-left: 1rem;
   padding-right: 1rem;
   direction: ltr;
@@ -38,7 +39,8 @@
   gap: 0.5rem;
   z-index: 2;
   cursor: pointer;
-  background-color: var(--background-light-blu);
+  /* background-color: var(--background-light-blu); */
+  /* background-color: none; */
   padding-left: 1rem;
   padding-right: 1rem;
   direction: ltr;
