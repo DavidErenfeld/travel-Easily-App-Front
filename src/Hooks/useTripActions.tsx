@@ -34,17 +34,12 @@ const useTripActions = (trip: ITrips | null) => {
   const [showLikesDetails, setShowLikesDetails] = useState(false);
 
   useEffect(() => {
-    setIsLiked(currentTrip?.isLikedByCurrentUser || false);
-    setNumOfLikes(currentTrip?.numOfLikes || 0);
-    setIsFavorite(currentTrip?.isFavoritedByCurrentUser || false);
-    setNumOfComments(currentTrip?.numOfComments || 0);
-  }, [
-    currentTrip?.isLikedByCurrentUser,
-    currentTrip?.numOfLikes,
-    currentTrip?.isFavoritedByCurrentUser,
-    currentTrip?.numOfComments,
-    trip,
-  ]);
+    const updatedTrip = trips.find((t) => t._id === trip?._id);
+    setIsLiked(updatedTrip?.isLikedByCurrentUser || false);
+    setNumOfLikes(updatedTrip?.numOfLikes || 0);
+    setIsFavorite(updatedTrip?.isFavoritedByCurrentUser || false);
+    setNumOfComments(updatedTrip?.numOfComments || 0);
+  }, [trip?._id, trips]);
 
   const handleLikeClick = async (e: React.MouseEvent) => {
     e.preventDefault();

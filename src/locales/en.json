@@ -8,7 +8,7 @@
   "heroTitle": "The new way to travel",
   "heroDescription": "Travel Easily offers ad-free, inspiration-focused travel plans, letting you find itineraries and share your experiences simply and clearly.",
   "heroAltImage": "Planet Earth",
-  "heroCTA": "Start Exploring Itineraries",
+  "heroCTA": "Get Started Now",
   "howItWorks": {
     "title": "How It Works",
     "createPost": {
@@ -35,7 +35,7 @@
       "title": "Interact with Others",
       "description": "Engage with other travelers by leaving comments, giving likes, or saving posts to favorites."
     },
-    "cta": "Get Started Now"
+    "cta": "Share Experiences"
   },
   "features": {
     "title": "What Makes Us Unique?",

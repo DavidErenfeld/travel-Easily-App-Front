@@ -61,7 +61,7 @@ const Header = () => {
           {localStorage.getItem("loggedUserId") ? (
             <div className="menu">
               <p
-                onClick={() => navigate("/")}
+                onClick={() => navigate("/secontHomPage")}
                 className="menu-item connectet-menu"
               >
                 {t("home")}

@@ -89,6 +89,10 @@
   background-color: var(--background-lightest);
 }
 
+.feature-list .trip-description p {
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
 /*896*/
 @media (max-width: 56em) {
   .features-section {
