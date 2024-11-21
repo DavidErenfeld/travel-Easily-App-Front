@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { useTrips } from "../Context/TripContext";
 import socket from "../Hooks/socketInstance";
-import trips from "../LocalData";
 import TripCard from "./TripComponents/TripCard";
 import TripDetails from "./TripComponents/TripDetails";
 import { ITrips } from "../services/tripsService";
@@ -212,7 +211,7 @@ function SocketListener() {
       socket.off("commentDeleted", handleCommentDeleted);
       socket.off("userDeleted", handleUserDeleted);
     };
-  }, [logout, setTrips, user?._id, trips, TripCard, TripDetails]);
+  }, [logout, setTrips, user?._id]);
 
   return null;
 }

@@ -8,11 +8,13 @@ i18n.use(initReactI18next).init({
     en: { translation: en },
     he: { translation: he },
   },
-  lng: navigator.language.startsWith("he") ? "he" : "en",
-  fallbackLng: "en",
+  lng: "he",
+  fallbackLng: "en", //
   interpolation: {
     escapeValue: false,
   },
 });
+
+document.documentElement.dir = i18n.language === "he" ? "rtl" : "ltr";
 
 export default i18n;

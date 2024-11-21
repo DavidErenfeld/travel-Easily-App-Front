@@ -1,10 +1,32 @@
 import TripCard from "../../TripComponents/TripCard";
-import trips from "../../../LocalData";
 import { useTranslation } from "react-i18next";
 import "./style.css";
 
+// הגדרת הממשק
+interface Trip {
+  typeTraveler: string;
+  country: string;
+  typeTrip: string;
+  numOfDays: number;
+  tripDescription: string[];
+  numOfComments: number;
+  numOfLikes: number;
+  comments: [];
+}
+
+interface LocalTrips {
+  tripA: Trip;
+  tripB: Trip;
+  tripC: Trip;
+}
+
 const FeaturesSection = () => {
   const { t } = useTranslation();
+
+  // המרת הנתונים ל-LocalTrips עם טיפוס
+  const trips = t("localTripsData", {
+    returnObjects: true,
+  }) as LocalTrips;
 
   return (
     <section className="features-section">
@@ -14,7 +36,7 @@ const FeaturesSection = () => {
       <div className="feature-list">
         <div className="feature-item-1">
           <div className="no-pointer-events">
-            <TripCard trip={trips[0]} />
+            <TripCard trip={trips.tripA} />
           </div>
         </div>
         <div className="feature-item-2">
@@ -32,13 +54,13 @@ const FeaturesSection = () => {
         </div>
         <div className="feature-item-4">
           <div className="no-pointer-events">
-            <TripCard trip={trips[1]} />
+            <TripCard trip={trips.tripB} />
           </div>
         </div>
 
         <div className="feature-item-5">
           <div className="no-pointer-events">
-            <TripCard trip={trips[2]} />
+            <TripCard trip={trips.tripC} />
           </div>
         </div>
         <div className="feature-item-6">

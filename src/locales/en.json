@@ -600,5 +600,50 @@
     "yemen": "Yemen",
     "zambia": "Zambia",
     "zimbabwe": "Zimbabwe"
+  },
+  "localTripsData": {
+    "tripA": {
+      "typeTraveler": "Friends",
+      "country": "Netherlands",
+      "typeTrip": "Parties",
+      "numOfDays": 3,
+      "tripDescription": [
+        "We landed in Amsterdam in the morning and checked into The Hoxton hotel, located in the city center with a young and energetic vibe. After a short rest, we took a walk around the city to soak in the atmosphere. We started the evening at SkyLounge Amsterdam, located on the rooftop of the DoubleTree hotel, offering stunning views of the city. After a few cocktails, we warmed up and continued to Paradiso, an iconic club housed in a former church, blending electronic music with live performances. The party went on until the early hours, and the energy was incredible.",
+        "After a light breakfast at a small café called Bakhuys, where we enjoyed fresh pastries and excellent coffee, we decided to spend the day relaxing and exploring Amsterdam. We visited the MOCO Museum, where we enjoyed unique modern art and exhibitions by artists like Banksy. In the evening, we headed to the Rembrandtplein area, filled with bars and pubs. We started at Door 74, a secret speakeasy-style bar serving unique cocktails. Then, we continued to AIR Amsterdam, where top DJs were playing, and the electronic music kept us on our feet. We danced until morning and returned to the hotel with huge smiles.",
+        "In the morning, we took a fast train to Rotterdam (about an hour's ride). There, we stayed at nhow Rotterdam hotel, located by the Maas River. After settling in, we explored the modern area of the city, including the Erasmus Bridge and the restaurant and bar area of Markthal, where we stopped for lunch. In the evening, we went to Maassilo, one of the city's most popular venues for large parties. The club is housed in an old industrial warehouse, and the atmosphere was intense and amazing. The electronic music, lighting, and people made the evening an unforgettable experience."
+      ],
+      "numOfComments": 12,
+      "numOfLikes": 45,
+      "comments": []
+    },
+    "tripB": {
+      "typeTraveler": "Groups",
+      "country": "Greece",
+      "typeTrip": "Food",
+      "numOfDays": 4,
+      "tripDescription": [
+        "We arrived in Athens, the bustling and impressive city. After checking into the Electra Metropolis hotel, we met our culinary guide and embarked on a food tour through the city's streets. We started at Varvakios Agora, Athens' central food market, where we tasted Greek cheeses like feta and mizithra, fresh olives, and sweet pastries like bougatsa with local honey. Next, we visited the restaurant Karamanlidika tou Fani, a culinary institution serving traditional Greek dishes. We sampled souvlaki, gyros, and koulouri (sesame bread), accompanied by a glass of ouzo. The evening ended at a classic taverna in the Plaka district, where we enjoyed live music and a local drink – raki.",
+        "The day began with a traditional Greek breakfast at a small café called Taf Coffee, where we savored authentic Greek yogurt with honey and nuts. Then, we took a short boat trip to Aegina, a small island an hour from Athens, famous for its pistachios. We explored stalls selling pistachio products – butter, ice cream, and sweets – and tasted everything. Lunch was at a seaside taverna called Skotadis Tavern, where we were served fried calamari, fresh fish, and tzatziki on the side. Returning to Athens in the evening, we visited a modern food bar called Couleur Locale, offering a stunning nighttime view of the Acropolis. There, we enjoyed unique cocktails alongside updated Greek dishes.",
+        "The morning began with a trip to the famous archaeological site of Delphi. We toured the Temple of Apollo and the Archaeological Museum, hearing stories from Greek history. Afterward, we stopped for lunch at Taverna To Patriko Mas, located on the mountain slopes with breathtaking views. The menu included moussaka, traditional Greek salad, and a dessert of baklava. On the way back to Athens, we visited the mountainous village of Arachova, perched on the slopes of Mount Parnassus. We strolled through narrow streets, visited the Arahova Cheese Factory to taste local cheeses, and ended with Greek coffee and cookies at Fterolakka Café. Before leaving the village, we enjoyed a stunning panoramic view of the surrounding landscapes.",
+        "On the last day, we returned to Athens and started the morning with a culinary tour in the Psiri district, where we tasted traditional Greek pastries like tiropita (cheese pie) and spanakopita (spinach pie). Later, we stopped for lunch at Mani Mani, a restaurant serving dishes from southern Greece. We tried Greek pasta with lamb and tomato sauce and grilled octopus. Before our flight home, we visited the gourmet store Ergon Agora, where we bought olive oils, olives, and local spices as gifts. It was the perfect end to a trip combining food, culture, and breathtaking scenery."
+      ],
+      "numOfComments": 10,
+      "numOfLikes": 40,
+      "comments": ["wdqf", "efef", "efaef"]
+    },
+    "tripC": {
+      "typeTraveler": "Romantic Couple",
+      "country": "Hungary",
+      "typeTrip": "Romantic",
+      "numOfDays": 3,
+      "tripDescription": [
+        "We arrived in Budapest in the morning, filled with excitement. We started the day with a luxurious breakfast at the New York Café, a grand place that felt like a fairytale palace. After indulging in coffee and cake, we took a boat ride on the Danube. Sitting together on the deck, we enjoyed the cool breeze and the stunning views of the historic buildings along the river. The wine we sipped warmed our hearts, and it was the perfect time for a quiet and relaxing conversation. In the afternoon, we walked up the hill to the Fisherman's Bastion. The panoramic view of the city spread out before us was breathtaking, especially as the sun began to set, painting the sky in orange and gold. In the evening, we had dinner at a romantic restaurant located near the bastion. We sat by giant windows overlooking the illuminated city, ending the perfect day. After dinner, we returned to an amazing boutique hotel with a luxurious room where a small surprise awaited us - a bottle of wine and a warm jacuzzi.",
+        "The day began on a calm note as we visited the Széchenyi Thermal Bath. We spent a few hours moving between the thermal pools, warming ourselves in the hot waters and playing with the steam filling the air. It was a great time to reconnect, surrounded by a serene and peaceful atmosphere. After the baths, we walked to the nearby city park, laid out a small blanket, and enjoyed a romantic picnic. There were Hungarian cheeses, local red wine, and fresh fruits – a simple yet so special experience. When we were done, we went to Buda Castle and took time to wander through the galleries and magnificent halls. It was fascinating to see Hungary's history through its buildings and art. From there, we went down to the city center and stopped for a sweet treat at a street cart selling warm, chocolate-filled Kürtőskalács.",
+        "We started the last day in a relaxed mood as we traveled to the picturesque village of Szentendre, located a short distance from Budapest. From the moment we got off the car, we felt like we had arrived in a completely different place – cobbled streets, colorful houses, and small stalls filled with local crafts. We wandered between the shops and galleries in the village, bought some souvenirs like painted ceramics and handmade jewelry, and marveled at the peaceful atmosphere. Afterward, we stopped for lunch at a small, charming restaurant named Régi Művész Étterem, where we tasted hot goulash and fresh country bread. We sat by a window overlooking the Danube River, and it was a great opportunity to relax and soak in the magic of the place. Before heading back to Budapest, we strolled along the riverbank. The air was crisp, and the sun began to set, painting the water in shades of gold and orange. We watched the ducks swimming in the water and enjoyed these quiet moments together, with no rush to be anywhere. In the evening, we returned to Budapest for one last walk along the river, gazing at the illuminated bridges and saying goodbye to the city in a particularly romantic moment. Szentendre was the perfect end to the trip – peaceful, charming, and filled with memories we'll carry with us for a long time."
+      ],
+      "numOfComments": 18,
+      "numOfLikes": 60,
+      "comments": []
+    }
   }
 }
