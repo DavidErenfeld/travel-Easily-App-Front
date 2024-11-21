@@ -14,14 +14,32 @@ const FavoriteTrips = () => {
   const [trips, setTrips] = useState<ITrips[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [scrollPosition, setScrollPosition] = useState<number | null>(null);
+
+  const handleNavigateToTrip = (tripId: string) => {
+    setScrollPosition(window.scrollY);
+    localStorage.setItem("scrollPosition", window.scrollY.toString());
+    navigate(`/searchTrip/trip/${tripId}`);
+  };
 
   useEffect(() => {
+    const restoreScrollPosition = () => {
+      const savedScrollPosition = localStorage.getItem("scrollPosition");
+      if (savedScrollPosition) {
+        setTimeout(() => {
+          window.scrollTo(0, parseInt(savedScrollPosition, 10));
+        }, 0);
+        localStorage.removeItem("scrollPosition");
+      }
+    };
+
     const loadFavoriteTrips = async () => {
       setLoading(true);
       const userID = localStorage.getItem("loggedUserId") || "";
       try {
         const data = await tripsService.getFavoriteTrips(userID);
         setTrips(data);
+        restoreScrollPosition();
       } catch (error) {
         console.error(t("favoriteTrips.errorLoading"), error);
       } finally {
@@ -41,7 +59,7 @@ const FavoriteTrips = () => {
   const renderFavoriteTrips = () => {
     return trips.map((trip) => (
       <article className="trip-list-item" key={trip._id}>
-        <TripCard trip={trip} />
+        <TripCard trip={trip} onNavigateToTrip={handleNavigateToTrip} />
       </article>
     ));
   };

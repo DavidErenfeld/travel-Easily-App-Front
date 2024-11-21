@@ -15,12 +15,30 @@ const AllTrips = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const handleNavigateToTrip = (tripId: string) => {
+    localStorage.setItem("scrollPosition", window.scrollY.toString());
+    navigate(`/searchTrip/trip/${tripId}`);
+  };
+
   useEffect(() => {
+    const restoreScrollPosition = () => {
+      const savedScrollPosition = localStorage.getItem("scrollPosition");
+      if (savedScrollPosition) {
+        setTimeout(() => {
+          window.scrollTo(0, parseInt(savedScrollPosition, 10));
+        }, 0);
+        localStorage.removeItem("scrollPosition");
+      }
+    };
+
     const loadTrips = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        await refreshTrips();
+        if (!trips || trips.length === 0) {
+          await refreshTrips();
+        }
+        restoreScrollPosition();
       } catch (err) {
         setError(t("allTrips.error"));
         console.error(t("allTrips.errorConsole"), err);
@@ -30,12 +48,12 @@ const AllTrips = () => {
     };
 
     loadTrips();
-  }, [t]);
+  }, [refreshTrips, t, trips]);
 
   const renderTrips = () => {
     return trips.map((trip) => (
-      <article className="trip-list-item" key={trip._id}>
-        <TripCard trip={trip} />
+      <article id={trip._id} className="trip-list-item" key={trip._id}>
+        <TripCard trip={trip} onNavigateToTrip={handleNavigateToTrip} />
       </article>
     ));
   };

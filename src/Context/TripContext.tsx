@@ -23,8 +23,10 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
   const refreshTrips = async () => {
     try {
       const { req } = tripsService.getAllTrips();
+      console.log("refreshTrips(TripContext)req " + req);
       const response = await req;
       setTrips(response.data);
+      console.log("refreshTrips(TripContext):respons data " + response.data);
     } catch (error) {
       console.error("Failed to fetch trips:", error);
     }

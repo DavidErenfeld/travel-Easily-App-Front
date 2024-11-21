@@ -67,7 +67,6 @@ const AdvancedSearch: React.FC = () => {
         </div>
       );
     }
-
     return (
       <>
         <button className="btn-m try-again" onClick={resetSearch}>
