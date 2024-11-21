@@ -23,7 +23,7 @@
 
 .form-input-box {
   width: 100%;
-  direction: ltr;
+  /* direction: ltr; */
   position: relative;
 }
 

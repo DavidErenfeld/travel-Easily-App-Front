@@ -88,7 +88,10 @@ const TripForm = () => {
     <>
       <Header />
       <MenuBar />
-      <section className="trip-form-section main-section">
+      <section
+        className="trip-form-section main-section"
+        dir={i18n.language === "he" ? "rtl" : "ltr"}
+      >
         <div className="profile-container">
           <div className="form-close-icon">
             <CloseIcon color="#fff" />
@@ -99,7 +102,12 @@ const TripForm = () => {
 
           {/* Group Type */}
           <div className="form-group">
-            <label htmlFor="groupType">{t("tripForm.labels.groupType")}</label>
+            <label
+              dir={i18n.language === "he" ? "rtl" : "ltr"}
+              htmlFor="groupType"
+            >
+              {t("tripForm.labels.groupType")}
+            </label>
             <select
               id="groupType"
               value={selectedGroupType}
@@ -129,13 +137,18 @@ const TripForm = () => {
               <option value="groups">{t("tripForm.groupTypes.groups")}</option>
             </select>
             {errors.selectedGroupType && (
-              <p className="error-message">{errors.selectedGroupType}</p>
+              <p className="text-danger">{errors.selectedGroupType}</p>
             )}
           </div>
 
           {/* Trip Type */}
           <div className="form-group">
-            <label htmlFor="tripType">{t("tripForm.labels.tripType")}</label>
+            <label
+              dir={i18n.language === "he" ? "rtl" : "ltr"}
+              htmlFor="tripType"
+            >
+              {t("tripForm.labels.tripType")}
+            </label>
             <select
               id="tripType"
               value={selectedTripType}
@@ -163,13 +176,15 @@ const TripForm = () => {
               </option>
             </select>
             {errors.selectedTripType && (
-              <p className="error-message">{errors.selectedTripType}</p>
+              <p className="text-danger">{errors.selectedTripType}</p>
             )}
           </div>
 
           {/* Number of Days */}
           <div className="form-group">
-            <label htmlFor="days">{t("tripForm.labels.days")}</label>
+            <label dir={i18n.language === "he" ? "rtl" : "ltr"} htmlFor="days">
+              {t("tripForm.labels.days")}
+            </label>
             <input
               type="number"
               id="days"
@@ -180,16 +195,18 @@ const TripForm = () => {
               min="1"
             />
             {errors.numberOfDays && (
-              <p className="error-message">{errors.numberOfDays}</p>
+              <p className="text-danger">{errors.numberOfDays}</p>
             )}
           </div>
 
           {/* Country */}
-          <div
-            className="form-group"
-            ref={dropdownRef} // חיבור ה-div ל-ref
-          >
-            <label htmlFor="country">{t("tripForm.labels.country")}</label>
+          <div className="form-group" ref={dropdownRef}>
+            <label
+              dir={i18n.language === "he" ? "rtl" : "ltr"}
+              htmlFor="country"
+            >
+              {t("tripForm.labels.country")}
+            </label>
             <input
               type="text"
               id="country"
@@ -226,7 +243,7 @@ const TripForm = () => {
               </ul>
             )}
             {errors.selectedCountry && (
-              <p className="error-message">{errors.selectedCountry}</p>
+              <p className="text-danger">{errors.selectedCountry}</p>
             )}
           </div>
 

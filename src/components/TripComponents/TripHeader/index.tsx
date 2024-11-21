@@ -1,6 +1,7 @@
 import { ITrips } from "../../../services/tripsService";
 import { useTranslation } from "react-i18next";
 import "./style.css";
+import i18n from "../../../i18n";
 
 interface TripHeaderProps {
   trip: ITrips;
@@ -24,7 +25,7 @@ const TripHeader = ({ trip }: TripHeaderProps) => {
 
   return (
     <>
-      <div className="tags">
+      <div className={i18n.language === "he" ? "tags-left" : "tags-right"}>
         <span className="tag">
           {t(`tripHeader.typeTraveler.${formattedTypeTravelerKey}`, {
             defaultValue: trip.typeTraveler,

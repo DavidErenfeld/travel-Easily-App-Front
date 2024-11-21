@@ -2,6 +2,16 @@
   margin-bottom: 2rem;
 }
 
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+
 .trip-form-section .profile-container {
   margin-top: -2rem;
   padding-bottom: 1rem;
@@ -24,8 +34,8 @@
 }
 
 .dropdown-item {
-  padding: 1rem;
-  font-size: 1.2rem;
+  padding: 1.2rem;
+  font-size: 1.4rem;
   width: 100%;
   cursor: pointer;
   color: var(--text-primary);

@@ -22,9 +22,15 @@
   margin-top: 12rem;
 }
 
-.main-card-section > .tags {
+.main-card-section > .tags-riget {
   top: 1rem;
   right: 0rem;
+  background-color: var(--primary-teal);
+}
+
+.main-card-section > .tags-left {
+  top: 1rem;
+  left: 0rem;
   background-color: var(--primary-teal);
 }
 
@@ -108,8 +114,11 @@
     /* background-color: #042d43; */
   }
 
-  .main-card-section .tags {
+  .main-card-section .tags-rigt {
     right: 1rem;
+  }
+  .main-card-section .tags-left {
+    left: 1rem;
   }
 
   .trip-details-share-buttons .share-buttons {

@@ -13,10 +13,25 @@
   background-color: var(--card-background);
 }
 
-.trip-card-profile {
+.trip-card-profile-left {
   position: absolute;
   top: -5.5rem;
   left: -1rem;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 0.5rem;
+  z-index: 2;
+  cursor: pointer;
+  background-color: var(--background-light-blu);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  direction: ltr;
+}
+.trip-card-profile-right {
+  position: absolute;
+  top: -5.5rem;
+  right: -1rem;
   display: flex;
   align-items: end;
   justify-content: center;

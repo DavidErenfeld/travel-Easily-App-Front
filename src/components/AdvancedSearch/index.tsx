@@ -122,7 +122,10 @@ const AdvancedSearch: React.FC = () => {
 
           {/* Group Type */}
           <div className="form-group">
-            <label htmlFor="groupType">
+            <label
+              dir={i18n.language === "he" ? "rtl" : "ltr"}
+              htmlFor="groupType"
+            >
               {t("advancedSearch.groupTypeLabel")}
             </label>
             <select
@@ -156,7 +159,10 @@ const AdvancedSearch: React.FC = () => {
           </div>
           {/* Trip Type */}
           <div className="form-group">
-            <label htmlFor="tripType">
+            <label
+              dir={i18n.language === "he" ? "rtl" : "ltr"}
+              htmlFor="tripType"
+            >
               {t("advancedSearch.tripTypeLabel")}
             </label>
             <select
@@ -189,7 +195,9 @@ const AdvancedSearch: React.FC = () => {
 
           {/* Number of Days */}
           <div className="form-group">
-            <label htmlFor="days">{t("advancedSearch.daysLabel")}</label>
+            <label dir={i18n.language === "he" ? "rtl" : "ltr"} htmlFor="days">
+              {t("advancedSearch.daysLabel")}
+            </label>
             <input
               type="number"
               id="days"
@@ -203,7 +211,12 @@ const AdvancedSearch: React.FC = () => {
 
           {/* Country */}
           <div className="form-group" ref={dropdownRef}>
-            <label htmlFor="country">{t("advancedSearch.countryLabel")}</label>
+            <label
+              dir={i18n.language === "he" ? "rtl" : "ltr"}
+              htmlFor="country"
+            >
+              {t("advancedSearch.countryLabel")}
+            </label>
             <input
               type="text"
               id="country"

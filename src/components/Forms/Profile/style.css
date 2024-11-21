@@ -8,8 +8,18 @@
   padding: 3rem;
   box-shadow: var(--shadow-large);
   background-color: var(--card-background);
-  direction: ltr;
+  /* direction: ltr; */
   /* margin-bottom: 2rem; */
+}
+
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
 }
 
 .form-header {
@@ -30,7 +40,6 @@
   position: absolute;
   top: 2rem;
   right: 2rem;
-  cursor: pointer;
   cursor: pointer;
 }
 
@@ -55,11 +64,12 @@
 
 .form-group label {
   display: block;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: 5px;
 }
 
 .form-control {
+  position: relative;
   width: 100%;
   padding: 1rem 0.5rem;
   border-radius: 5px;

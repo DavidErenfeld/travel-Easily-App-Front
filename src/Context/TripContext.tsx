@@ -31,7 +31,6 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   useEffect(() => {
-    // טעינת הנתונים הראשונית
     refreshTrips();
   }, []);
 

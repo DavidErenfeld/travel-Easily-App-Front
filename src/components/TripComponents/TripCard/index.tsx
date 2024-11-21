@@ -8,6 +8,7 @@ import TripCardIcons from "../TripCardIcons";
 import SuccessMessage from "../../UIComponents/SuccessMessage";
 import useTripActions from "../../../Hooks/useTripActions";
 import "./style.css";
+import i18n from "../../../i18n";
 
 interface TripCardProps {
   trip: ITrips;
@@ -55,7 +56,14 @@ const TripCard = ({ trip }: TripCardProps) => {
 
   return (
     <section className="trip-card">
-      <div className="trip-card-profile">
+      <div
+        className={
+          i18n.language === "he"
+            ? "trip-card-profile-right"
+            : "trip-card-profile-left"
+        }
+        dir={i18n.language === "he" ? "rtl" : "ltr"}
+      >
         <img
           className="user-profile"
           src={trip.owner?.imgUrl || "/images/user.png"}

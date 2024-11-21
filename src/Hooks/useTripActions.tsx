@@ -1,4 +1,3 @@
-// useTripActions.ts
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
@@ -6,8 +5,6 @@ import tripsService, { ITrips } from "../services/tripsService";
 import { useTrips } from "../Context/TripContext";
 import { addFavoriteTrip, removeFavoriteTrip } from "../services/usersService";
 import socket from "./socketInstance";
-import TripCard from "../components/TripComponents/TripCard";
-import TripDetails from "../components/TripComponents/TripDetails";
 
 const useTripActions = (trip: ITrips | null) => {
   const navigate = useNavigate();
@@ -36,7 +33,6 @@ const useTripActions = (trip: ITrips | null) => {
   >([]);
   const [showLikesDetails, setShowLikesDetails] = useState(false);
 
-  // עדכון הסטייט המקומי כאשר הסטייט הגלובלי משתנה
   useEffect(() => {
     setIsLiked(currentTrip?.isLikedByCurrentUser || false);
     setNumOfLikes(currentTrip?.numOfLikes || 0);
@@ -48,11 +44,8 @@ const useTripActions = (trip: ITrips | null) => {
     currentTrip?.isFavoritedByCurrentUser,
     currentTrip?.numOfComments,
     trip,
-    TripCard,
-    TripDetails,
   ]);
 
-  // טיפול בלחיצה על לייק
   const handleLikeClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (!isAuthenticated) {
@@ -82,7 +75,6 @@ const useTripActions = (trip: ITrips | null) => {
     }
   };
 
-  // טיפול בלחיצה על מועדף
   const handleFavoriteClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     if (!isAuthenticated) {
@@ -90,7 +82,6 @@ const useTripActions = (trip: ITrips | null) => {
     } else {
       const newIsFavorite = !isFavorite;
 
-      // עדכון אופטימי של הסטייט המקומי והגלובלי
       setIsFavorite(newIsFavorite);
 
       setTrips((prevTrips) =>
@@ -109,7 +100,6 @@ const useTripActions = (trip: ITrips | null) => {
           await addFavoriteTrip(trip?._id!);
           setSuccessMessage("Trip added to favorites!");
 
-          // שליחת אירוע לשרת דרך Socket.IO
           socket.emit("addFavorite", {
             tripId: trip?._id,
             userId: user?._id,
@@ -118,14 +108,12 @@ const useTripActions = (trip: ITrips | null) => {
           await removeFavoriteTrip(trip?._id!);
           setSuccessMessage("Trip removed from favorites!");
 
-          // שליחת אירוע לשרת דרך Socket.IO
           socket.emit("removeFavorite", {
             tripId: trip?._id,
             userId: user?._id,
           });
         }
       } catch (error) {
-        // החזרת הסטייט למצב הקודם במקרה של שגיאה
         setIsFavorite(!newIsFavorite);
 
         setTrips((prevTrips) =>
@@ -155,7 +143,6 @@ const useTripActions = (trip: ITrips | null) => {
     }
   };
 
-  // טיפול בלחיצה על כפתור השיתוף (נשאר ללא שינוי)
   const handleShareClick = async () => {
     if (navigator.share) {
       try {
@@ -172,13 +159,12 @@ const useTripActions = (trip: ITrips | null) => {
     }
   };
 
-  // טיפול בסגירת המודל עם אנימציה (נשאר ללא שינוי)
   const handleModalClose = () => {
     setIsExiting(true);
     setTimeout(() => {
       setShowLikesDetails(false);
       setIsExiting(false);
-    }, 300); // זמן האנימציה במילישניות
+    }, 300);
   };
 
   return {

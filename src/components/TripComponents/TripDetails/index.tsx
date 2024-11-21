@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import { Share2 } from "lucide-react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import tripsService, { ITrips } from "../../../services/tripsService.ts";
 import { useTrips } from "../../../Context/TripContext";
+import { useAuth } from "../../../Context/AuthContext.tsx";
 import TripDescription from "../TripDescription/index.tsx";
 import UpdateTrip from "../UpdateTrip/index.tsx";
 import AddComment from "../../CommentsComponent/AddComment/index.tsx";
@@ -12,15 +12,17 @@ import TripHeader from "../TripHeader/index.tsx";
 import Header from "../../Header/index.tsx";
 import ImageCarousel from "../../UIComponents/ImageCarousel/index.tsx";
 import LoadingDots from "../../UIComponents/Loader";
-import ShareButtons from "../../UIComponents/ShareButtons/index.tsx";
 import TripCardIcons from "../TripCardIcons/index.tsx";
 import SuccessMessage from "../../UIComponents/SuccessMessage/index.tsx";
 import useTripActions from "../../../Hooks/useTripActions.tsx";
 import socket from "../../../Hooks/socketInstance.tsx";
 import "./style.css";
+import i18n from "../../../i18n.ts";
 
 const TripDetails = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const [viewMode, setViewMode] = useState("main");
   const [updateMode, setUpdateMode] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -33,7 +35,6 @@ const TripDetails = () => {
   const loggedUserName = localStorage.getItem("userName") || "";
   const loggedUserId = localStorage.getItem("loggedUserId") || "";
   const isThisTheOwner = loggedUserId === trip?.owner?._id;
-
   const [mMargin, setMMargin] = useState("");
   const {
     isLiked,
@@ -213,7 +214,11 @@ const TripDetails = () => {
                 <section className="details-container flex-center-column">
                   {loggedUserId === trip?.owner?._id && (
                     <button
-                      className="btn-l mode-btn"
+                      className={`btn-l ${
+                        i18n.language === "he"
+                          ? "mode-btn-right"
+                          : "mode-btn-left"
+                      }`}
                       onClick={onClickUpdateMode}
                     >
                       {t("tripDetails.editingMode")}
@@ -230,7 +235,11 @@ const TripDetails = () => {
                   <section className="btn-container-gap-m">
                     <button
                       className="btn-cta-l"
-                      onClick={() => handleViewModeChange("addComment")}
+                      onClick={() =>
+                        isAuthenticated
+                          ? handleViewModeChange("addComment")
+                          : navigate("/login")
+                      }
                     >
                       {t("tripDetails.addComment")}
                     </button>
@@ -289,11 +298,13 @@ const TripDetails = () => {
                         onCommentDeleted={handleCommentDeleted}
                       />
                     )}
+                    (
                     <AddComment
                       isSubmitting={isSubmitting}
                       onClickCancel={() => handleViewModeChange("main")}
                       onSendComment={(text) => onClickSend(text, true)}
                     />
+                    )
                   </>
                 )}
               </div>

@@ -1,6 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import "./style.css";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../Context/AuthContext";
 
 interface AddCommentProps {
   onSendComment: (comment: string) => void;
@@ -14,6 +16,8 @@ const AddComment = ({
   isSubmitting,
 }: AddCommentProps) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [comment, setComment] = useState("");
 

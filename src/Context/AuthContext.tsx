@@ -49,8 +49,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
       localStorage.removeItem("imgUrl");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      // נתק את ה-socket אם צריך
-      // socket.disconnect();
     }
   };
 

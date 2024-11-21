@@ -138,10 +138,15 @@
   color: var(--button-secondary-text);
 }
 
-.mode-btn {
+.mode-btn-left {
   position: absolute;
   top: 1rem;
   left: 1.4rem;
+}
+.mode-btn-right {
+  position: absolute;
+  top: 1rem;
+  right: 1.4rem;
 }
 
 /*************************
@@ -168,7 +173,6 @@ input:focus {
   font-weight: 700;
   letter-spacing: -0.5px;
 }
-
 .error-message {
   margin-top: 5px;
 }
@@ -229,10 +233,15 @@ input:focus {
 
 /*640*/
 @media (max-width: 40em) {
-  .mode-btn {
+  .mode-btn-left {
     position: absolute;
     top: -4.6rem;
     left: 0;
+  }
+  .mode-btn-right {
+    position: absolute;
+    top: -4.6rem;
+    right: 0;
   }
 }
 

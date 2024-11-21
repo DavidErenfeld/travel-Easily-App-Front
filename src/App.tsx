@@ -26,6 +26,7 @@ import "./App.css";
 import "./index.css";
 import AllTrips from "./components/TripComponents/AllTrips";
 import TripsList from "./components/TripComponents/Trips";
+import ViewComment from "./components/CommentsComponent/ViewComment";
 
 function App() {
   useEffect(() => {
