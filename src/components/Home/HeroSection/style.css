@@ -148,7 +148,7 @@
   .hero-section .btn-cta-exl {
     justify-self: center;
     align-self: flex-start;
-    grid-row: 4;
+    grid-row: 3;
     grid-column: 1/-1;
   }
 }
