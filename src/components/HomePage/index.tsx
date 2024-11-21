@@ -7,6 +7,7 @@ import FeaturesSection from "../Home/FeaturesSection";
 import Footer from "../Home/Footer";
 import HowItWorksSection from "../Home/HowItWorks";
 import "./style.css";
+import MenuBar from "../Menus/MenuBar";
 
 const HomePage = () => {
   const { t } = useTranslation();
@@ -28,6 +29,7 @@ const HomePage = () => {
   return (
     <>
       <Header />
+      <MenuBar />
       <section className="main-page">
         <section id="hero-section" className="main-page">
           <HeroSection />

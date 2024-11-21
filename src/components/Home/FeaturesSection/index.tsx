@@ -23,7 +23,6 @@ interface LocalTrips {
 const FeaturesSection = () => {
   const { t } = useTranslation();
 
-  // המרת הנתונים ל-LocalTrips עם טיפוס
   const trips = t("localTripsData", {
     returnObjects: true,
   }) as LocalTrips;

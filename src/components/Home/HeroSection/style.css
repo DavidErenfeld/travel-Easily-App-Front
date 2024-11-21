@@ -3,7 +3,7 @@
   height: 100vh;
   width: 100%;
   text-align: center;
-  padding: 6rem 12.8rem;
+  padding: 1.8rem 12.8rem;
   background-color: var(--background-light-blu);
   display: grid;
   grid-template-columns: 1.7fr 1fr;
@@ -15,13 +15,14 @@
 
 .description-container {
   grid-column: 1/2;
-  grid-row: 2/3;
-  margin-top: 5rem;
+  grid-row: 1;
+  align-self: center;
+  /* margin-top: 5rem; */
 }
 
 .hero-section h1 {
   font-family: "Raleway", sans-serif;
-  font-size: 5.4rem;
+  font-size: 5rem;
   font-weight: 700;
   color: var(--text-primary);
   text-align: start;
@@ -29,7 +30,7 @@
 }
 
 .hero-section p {
-  font-size: 2.3rem;
+  font-size: 2.2rem;
   color: var(--button-cta-text);
   text-align: start;
   line-height: 1.6;
@@ -38,18 +39,35 @@
 
 .hero-section .btn-cta-exl {
   justify-self: center;
-  align-self: flex-end;
-  grid-row: 3;
+  align-self: flex-start;
+  grid-row: 2;
   grid-column: 1/-1;
 }
 
-.earth-container {
-  width: 25rem;
-  height: 25rem;
+.hero-section .btn-hero {
+  justify-self: center;
+  align-self: flex-start;
   grid-row: 2;
+  grid-column: 1/-1;
+  background-color: #00796b; /* ירוק כהה שמתאים לצבעים של האתר */
+  color: #fff; /* צבע טקסט לבן */
+  padding: 15px 25px; /* שוליים פנימיים */
+  border: none; /* בלי מסגרת */
+  border-radius: 10px; /* פינות עגולות */
+  font-size: 1.2rem; /* גודל טקסט */
+  font-weight: bold; /* טקסט מודגש */
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* צל עדין */
+}
+
+.earth-container {
+  width: 20rem;
+  height: 20rem;
+  grid-row: 1;
   grid-column: 2/-1;
   justify-self: center;
-  margin-top: 5rem;
+  align-self: center;
+  /* margin-top: 5rem; */
 }
 
 .earth-image {
@@ -70,75 +88,22 @@
   }
 }
 
-/*1040*/
-@media (max-width: 65em) {
-  .hero-section {
-    padding: 1rem 8rem;
-    gap: 1rem;
-  }
-
-  .description-container {
-    margin-top: 2rem;
-  }
-
-  .hero-section h1 {
-    font-size: 5rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero-section p {
-    font-size: 2.2rem;
-  }
-
-  .earth-container {
-    width: 22rem;
-    height: 22rem;
-    margin-top: 3rem;
-  }
-}
 /*896*/
 @media (max-width: 56em) {
   .hero-section {
-    padding: 1rem 4rem;
+    padding: 0rem 4rem;
   }
 
   .hero-section h1 {
-    font-size: 4rem;
+    font-size: 3.8rem;
   }
 
   .hero-section p {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
-}
-
-/*768*/
-@media (max-width: 48em) {
-  .hero-section {
-    padding: 1rem 6rem;
-    margin-top: 3rem;
-    gap: 2rem;
-  }
-
-  .description-container {
-    margin-top: 1rem;
-  }
-
-  .hero-section h1 {
-    font-size: 3.6rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero-section p {
-    font-size: 1.6rem;
-  }
-
   .earth-container {
-    width: 20rem;
-    height: 20rem;
-    margin-top: 1rem;
-  }
-  .hero-section .btn-cta-exl {
-    align-self: flex-start;
+    width: 15rem;
+    height: 15rem;
   }
 }
 
@@ -147,8 +112,8 @@
   .hero-section {
     position: relative;
     grid-template-columns: 1fr;
-    padding: 1rem 3rem;
-    margin-top: 4rem;
+    padding: 0rem 3rem;
+    /* margin-top: 4rem; */
   }
 
   .description-container {
@@ -157,15 +122,15 @@
 
   .description-container {
     grid-column: 1/-1;
-    grid-row: 3;
+    grid-row: 2;
     align-self: flex-start;
   }
 
   .earth-container {
     grid-column: 1 / -1;
-    grid-row: 2;
-    width: 16rem;
-    height: 16rem;
+    grid-row: 1;
+    width: 15rem;
+    height: 15rem;
     margin-top: 0rem;
   }
 
