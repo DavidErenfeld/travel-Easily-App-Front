@@ -7,7 +7,6 @@ import Profile from "./components/Forms/Profile";
 import Login from "./components/Forms/Login";
 import Register from "./components/Forms/Register";
 import HomePage from "./components/HomePage";
-import Trips from "./components/TripComponents/AllTrips";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TripDetails from "./components/TripComponents/TripDetails";
 import MyTrips from "./components/TripComponents/myTrips";
@@ -24,8 +23,7 @@ import socket from "./Hooks/socketInstance";
 import SecontHomePage from "./components/SecontHomePage";
 import "./App.css";
 import "./index.css";
-import AllTrips from "./components/TripComponents/AllTrips";
-import TripsList from "./components/TripComponents/Trips";
+import TripsList from "./components/TripComponents/TripsList";
 import ViewComment from "./components/CommentsComponent/ViewComment";
 
 function App() {
@@ -50,8 +48,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/forgotPassword" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
-            <Route path="/searchTrip" element={<AllTrips />} />
-            <Route path="/trips/:country" element={<TripsList />} />
+            <Route path="/trips" element={<TripsList />} />
             <Route path="/trip/:id" element={<TripDetails />} />
             <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
             <Route

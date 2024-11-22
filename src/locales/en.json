@@ -370,7 +370,7 @@
   },
   "tripsList": {
     "noTripsMessage": "No trips found for your search criteria.",
-    "backToDestinations": "Back to Destinations"
+    "backToDestinations": "Try again"
   },
   "updateTrip": {
     "dayLabel": "Day",

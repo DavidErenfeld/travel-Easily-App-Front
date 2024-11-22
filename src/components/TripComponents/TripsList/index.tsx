@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useTrips } from "../../../Context/TripContext";
 import TripCard from "../TripCard";
 import Header from "../../Header";
 import MenuBar from "../../Menus/MenuBar";
+import "./style.css";
 
 const TripsList = () => {
   const { t } = useTranslation();
-  const { country } = useParams<{ country: string }>();
   const { trips } = useTrips();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const handleNavigateToTrip = (tripId: string) => {
     localStorage.setItem("scrollPosition", window.scrollY.toString());
@@ -30,9 +31,29 @@ const TripsList = () => {
     restoreScrollPosition();
   }, []);
 
-  const filteredTrips = trips.filter(
-    (trip) => trip.country.toLowerCase() === country?.toLowerCase()
-  );
+  const country = searchParams.get("country")?.toLowerCase() || "";
+  const numOfDays = searchParams.get("numOfDays");
+  const typeTrip = searchParams.get("typeTrip")?.toLowerCase() || "";
+  const typeTraveler = searchParams.get("typeTraveler")?.toLowerCase() || "";
+
+  const filteredTrips = trips.filter((trip) => {
+    const isCountryMatch = country
+      ? trip.country.toLowerCase() === country
+      : true;
+    const isDaysMatch = numOfDays
+      ? trip.numOfDays === parseInt(numOfDays, 10)
+      : true;
+    const isTripTypeMatch = typeTrip
+      ? trip.typeTrip.toLowerCase() === typeTrip
+      : true;
+    const isTravelerTypeMatch = typeTraveler
+      ? trip.typeTraveler.toLowerCase() === typeTraveler
+      : true;
+
+    return (
+      isCountryMatch && isDaysMatch && isTripTypeMatch && isTravelerTypeMatch
+    );
+  });
 
   return (
     <>
@@ -44,7 +65,13 @@ const TripsList = () => {
             <p className="no-trips-message">{t("tripsList.noTripsMessage")}</p>
             <button
               className="btn-cta-exl"
-              onClick={() => navigate(`/secontHomPage`)}
+              onClick={() => {
+                if (window.history.length > 1) {
+                  navigate(-1);
+                } else {
+                  navigate("/");
+                }
+              }}
             >
               {t("tripsList.backToDestinations")}
             </button>

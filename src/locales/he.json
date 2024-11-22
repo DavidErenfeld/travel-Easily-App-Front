@@ -5,7 +5,7 @@
   "exploreNearby": "אטרקציות בסביבתך",
   "profile": "פרופיל",
   "logout": "התנתקות",
-  "heroTitle": "מתכננים, מטיילים, משתפים...",
+  "heroTitle": "מסע שמתחיל בהשראה",
   "heroDescription": "המקום שבו ההשראה פוגשת את הפשטות, ותכנון הטיול הופך לחוויה מרגשת ומשותפת.",
   "heroAltImage": "כדור הארץ",
   "heroCTA": "בואו נתחיל",
@@ -370,7 +370,7 @@
   },
   "tripsList": {
     "noTripsMessage": "לא נמצאו טיולים התואמים לקריטריונים שלך.",
-    "backToDestinations": "חזרה ליעדים"
+    "backToDestinations": "ננסה שוב?"
   },
   "updateTrip": {
     "dayLabel": "יום",

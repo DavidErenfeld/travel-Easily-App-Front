@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ArrowUp } from "lucide-react";
 import Header from "../Header";
@@ -28,7 +28,7 @@ const SecontHomePage = () => {
   };
 
   const searchByCountry = (country: string) => {
-    navigate(`/trips/${country}`);
+    navigate(`/trips?country=${encodeURIComponent(country)}`);
   };
 
   const destinations = [

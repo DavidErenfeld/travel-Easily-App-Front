@@ -8,6 +8,16 @@ import i18n from "./i18n";
 const setDirection = () => {
   const language = i18n.language;
   document.documentElement.dir = language === "he" ? "rtl" : "ltr";
+
+  // עדכון הקלאס של ה-body בהתאם לשפה
+  const body = document.body;
+  if (language === "he") {
+    body.classList.add("body-hebrew");
+    body.classList.remove("body-english");
+  } else {
+    body.classList.add("body-english");
+    body.classList.remove("body-hebrew");
+  }
 };
 
 setDirection();
