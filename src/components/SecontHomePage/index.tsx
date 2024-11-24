@@ -93,7 +93,7 @@ const SecontHomePage = () => {
         <div className="search-buttons flex-center-gap-s ">
           <button
             className="main-search-btn btn-cta-exl"
-            onClick={() => navigate("/searchTrip")}
+            onClick={() => navigate("/trips")}
           >
             {t("secontHomePage.exploreAllButton")}
           </button>

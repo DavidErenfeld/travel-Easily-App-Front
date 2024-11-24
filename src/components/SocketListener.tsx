@@ -3,8 +3,6 @@ import { useEffect } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { useTrips } from "../Context/TripContext";
 import socket from "../Hooks/socketInstance";
-import TripCard from "./TripComponents/TripCard";
-import TripDetails from "./TripComponents/TripDetails";
 import { ITrips } from "../services/tripsService";
 
 interface LikeEventData {

@@ -23,8 +23,13 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
   const refreshTrips = async () => {
     try {
       const { req } = tripsService.getAllTrips();
-      console.log("refreshTrips(TripContext)req " + req);
+
       const response = await req;
+      // console.log("refreshTrips(TripContext)req " + response.data);
+      console.log(
+        "refreshTrips(TripContext):respons data ",
+        JSON.stringify(response.data, null, 2)
+      );
       setTrips(response.data);
       console.log("refreshTrips(TripContext):respons data " + response.data);
     } catch (error) {

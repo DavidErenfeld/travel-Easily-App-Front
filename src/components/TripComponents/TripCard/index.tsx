@@ -78,10 +78,10 @@ const TripCard = ({ trip, onNavigateToTrip }: TripCardProps) => {
           onClick={() => onNavigateToTrip(trip._id || "")}
           className="trip-card-link"
           role="button"
-          tabIndex={0} // מאפשר גישה באמצעות מקלדת
+          tabIndex={0}
           onKeyPress={(e) =>
             e.key === "Enter" && onNavigateToTrip(trip._id || "")
-          } // תמיכה בלחיצה על Enter
+          }
         >
           <div className="trip-description">
             <TripDescription trip={trip} />

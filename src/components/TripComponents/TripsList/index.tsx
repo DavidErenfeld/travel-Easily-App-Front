@@ -6,12 +6,14 @@ import TripCard from "../TripCard";
 import Header from "../../Header";
 import MenuBar from "../../Menus/MenuBar";
 import "./style.css";
+import LoadingDots from "../../UIComponents/Loader";
 
 const TripsList = () => {
   const { t } = useTranslation();
   const { trips } = useTrips();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const [loading, setLoading] = useState(true);
 
   const handleNavigateToTrip = (tripId: string) => {
     localStorage.setItem("scrollPosition", window.scrollY.toString());
@@ -28,7 +30,14 @@ const TripsList = () => {
         localStorage.removeItem("scrollPosition");
       }
     };
+
+    // סימולציית טעינה
+    const simulateLoading = setTimeout(() => {
+      setLoading(false); // מסיימים את מצב הטעינה
+    }, 1000); // זמן טעינה מדומה של 1 שניה
+
     restoreScrollPosition();
+    return () => clearTimeout(simulateLoading);
   }, []);
 
   const country = searchParams.get("country")?.toLowerCase() || "";
@@ -60,7 +69,9 @@ const TripsList = () => {
       <Header />
       <MenuBar />
       <section className="trips-section section">
-        {filteredTrips.length === 0 ? (
+        {loading ? (
+          <LoadingDots />
+        ) : filteredTrips.length === 0 ? (
           <div className="no-trips-container">
             <p className="no-trips-message">{t("tripsList.noTripsMessage")}</p>
             <button
