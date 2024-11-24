@@ -59,6 +59,15 @@ const MyTrips = () => {
       <Header />
       <MenuBar />
       <section className="trips-section section">
+        <div className="trips-summary">
+          {/* <button className="btn-summary">
+            {`${trips.length} ${t("tripsList.tripsFound")}`}
+          </button> */}
+          {/* <div className="flex-center-gap-s"> */}
+          {/* <p> {`(${trips.length})`}</p> */}
+          <h1 className="">{`${t("myTrips.title")} (${trips.length})`}</h1>
+          {/* </div> */}
+        </div>
         {loading ? (
           <div className="trips-loader main-loader-section">
             <LoadingDots />

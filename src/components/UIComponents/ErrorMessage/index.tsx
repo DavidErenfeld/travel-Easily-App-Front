@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import "./style.css";
 
-interface SuccessMessageProps {
+interface ErrorMessageProps {
   messageKey: string;
   onAnimationEnd: () => void;
 }
 
-const SuccessMessage: React.FC<SuccessMessageProps> = ({
+const ErrorMessage: React.FC<ErrorMessageProps> = ({
   messageKey,
   onAnimationEnd,
 }) => {
@@ -23,18 +23,29 @@ const SuccessMessage: React.FC<SuccessMessageProps> = ({
 
   return (
     <>
-      <div className="success-message-background"></div>
-      <div className="success-message">
-        <div className="success-icon">
+      <div className="error-message-background"></div>
+      <div className="error-message">
+        <div className="error-icon">
           {/* SVG icon */}
           <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="32" fill="#ec8305" />
-            <path
-              d="M18 34L28 44L46 26"
+            <circle cx="32" cy="32" r="32" fill="#d32f2f" />
+            <line
+              x1="20"
+              y1="20"
+              x2="44"
+              y2="44"
               stroke="white"
               strokeWidth="4"
               strokeLinecap="round"
-              strokeLinejoin="round"
+            />
+            <line
+              x1="44"
+              y1="20"
+              x2="20"
+              y2="44"
+              stroke="white"
+              strokeWidth="4"
+              strokeLinecap="round"
             />
           </svg>
         </div>
@@ -44,4 +55,4 @@ const SuccessMessage: React.FC<SuccessMessageProps> = ({
   );
 };
 
-export default SuccessMessage;
+export default ErrorMessage;

@@ -8,6 +8,7 @@ import LoadingDots from "../../UIComponents/Loader";
 import Header from "../../Header";
 import MenuBar from "../../Menus/MenuBar";
 import "./style.css";
+import { useTrips } from "../../../Context/TripContext";
 
 const FavoriteTrips = () => {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ const FavoriteTrips = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [scrollPosition, setScrollPosition] = useState<number | null>(null);
-
+  const { refreshTrips } = useTrips();
   const handleNavigateToTrip = (tripId: string) => {
     setScrollPosition(window.scrollY);
     localStorage.setItem("scrollPosition", window.scrollY.toString());
@@ -48,13 +49,13 @@ const FavoriteTrips = () => {
     };
 
     loadFavoriteTrips();
-  }, [t]);
+  }, [t, refreshTrips]);
 
-  useSocket("likeAdded", (newTrip) => {
-    setTrips((prevTrips) =>
-      prevTrips.map((trip) => (trip._id === newTrip._id ? newTrip : trip))
-    );
-  });
+  // useSocket("likeAdded", (newTrip) => {
+  //   setTrips((prevTrips) =>
+  //     prevTrips.map((trip) => (trip._id === newTrip._id ? newTrip : trip))
+  //   );
+  // });
 
   const renderFavoriteTrips = () => {
     return trips.map((trip) => (
@@ -69,6 +70,11 @@ const FavoriteTrips = () => {
       <Header />
       <MenuBar />
       <section className="trips-section section">
+        <div className="trips-summary">
+          <h1 className="">{`${t("favoriteTrips.title")} (${
+            trips.length
+          })`}</h1>
+        </div>
         {loading ? (
           <div className="trips-loader main-loader-section">
             <LoadingDots />

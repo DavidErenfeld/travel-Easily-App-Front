@@ -279,12 +279,14 @@
   "favoriteTrips": {
     "errorLoading": "Failed to load favorite trips:",
     "noTrips": "You don't have any favorite trips yet",
-    "exploreButton": "Start Exploring Itineraries"
+    "exploreButton": "Start Exploring Itineraries",
+    "title": "My Favorite Trips"
   },
   "myTrips": {
     "errorLoading": "Failed to load your trips.",
     "noTrips": "You have no trips yet.",
-    "createTripButton": "Create Your First Trip"
+    "createTripButton": "Create Your First Trip",
+    "title": "My Trips"
   },
   "tripCard": {
     "altProfile": "Profile picture"
@@ -369,8 +371,10 @@
     "days": "{{count}} days"
   },
   "tripsList": {
-    "noTripsMessage": "No trips found for your search criteria.",
-    "backToDestinations": "Try again"
+    "defaultTitle": "All Trips",
+    "customSearch": "Custom Search",
+    "noTripsMessage": "No trips found.",
+    "backToDestinations": "Back to destinations"
   },
   "updateTrip": {
     "dayLabel": "Day",

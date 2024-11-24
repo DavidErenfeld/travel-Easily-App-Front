@@ -28,7 +28,15 @@ const SecontHomePage = () => {
   };
 
   const searchByCountry = (country: string) => {
-    navigate(`/trips?country=${encodeURIComponent(country)}`);
+    const title =
+      country === "All"
+        ? "tripsList.defaultTitle"
+        : `secontHomePage.destinations.${country.toLowerCase()}.name`;
+    navigate(
+      `/trips?country=${encodeURIComponent(country)}&title=${encodeURIComponent(
+        title
+      )}`
+    );
   };
 
   const destinations = [

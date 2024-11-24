@@ -45,6 +45,9 @@ const TripsList = () => {
   const typeTrip = searchParams.get("typeTrip")?.toLowerCase() || "";
   const typeTraveler = searchParams.get("typeTraveler")?.toLowerCase() || "";
 
+  const titleKey = searchParams.get("title") || "tripsList.defaultTitle";
+  const pageTitle = t(titleKey);
+
   const filteredTrips = trips.filter((trip) => {
     const isCountryMatch = country
       ? trip.country.toLowerCase() === country
@@ -69,6 +72,9 @@ const TripsList = () => {
       <Header />
       <MenuBar />
       <section className="trips-section section">
+        <div className="trips-summary">
+          <h1 className="">{`${pageTitle} (${filteredTrips.length})`}</h1>
+        </div>
         {loading ? (
           <LoadingDots />
         ) : filteredTrips.length === 0 ? (

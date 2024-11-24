@@ -57,7 +57,7 @@
     "rights": "כל הזכויות שמורות לדוד ארנפלד"
   },
   "advancedSearch": {
-    "title": "חיפוש מתקדם",
+    "title": "חיפוש מותאם אישית",
     "countryLabel": "מדינה",
     "countryPlaceholder": "התחל להקליד לחיפוש...",
     "groupTypeLabel": "סוג קבוצה",
@@ -279,12 +279,14 @@
   "favoriteTrips": {
     "errorLoading": "שגיאה בטעינת הטיולים המועדפים:",
     "noTrips": "עדיין אין לך טיולים מועדפים",
-    "exploreButton": "התחל לחקור מסלולים"
+    "exploreButton": "התחל לחקור מסלולים",
+    "title": "המועדפים שלי"
   },
   "myTrips": {
     "errorLoading": "טעינת הטיולים שלך נכשלה.",
     "noTrips": "אין לך טיולים עדיין.",
-    "createTripButton": "צור את הטיול הראשון שלך"
+    "createTripButton": "צור את הטיול הראשון שלך",
+    "title": "הטיולים שלי"
   },
   "tripCard": {
     "altProfile": "תמונת פרופיל"
@@ -369,8 +371,10 @@
     "days": "{{count}} ימים"
   },
   "tripsList": {
-    "noTripsMessage": "לא נמצאו טיולים התואמים לקריטריונים שלך.",
-    "backToDestinations": "ננסה שוב?"
+    "defaultTitle": "כל הטיולים",
+    "customSearch": "חיפוש מותאם אישית",
+    "noTripsMessage": "לא נמצאו טיולים.",
+    "backToDestinations": "חזרה ליעדים"
   },
   "updateTrip": {
     "dayLabel": "יום",

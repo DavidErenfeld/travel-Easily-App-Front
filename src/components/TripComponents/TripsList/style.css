@@ -1,5 +1,5 @@
 .trips-section {
-  margin-top: 10rem;
+  margin-top: 0rem;
   padding-bottom: 1rem;
   padding-left: 10rem;
   padding-right: 10rem;
@@ -7,6 +7,31 @@
 
 .main-loader-section p {
   font-size: 1.8rem;
+}
+
+.trips-summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+  margin-top: 4rem;
+}
+
+.btn-summary {
+  /* background-color: var(--navbar-bg); */
+  color: var(--navbar-text);
+  /* padding: 1rem 2rem; */
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+
+.btn-summary:hover {
+  background-color: var(--navbar-text);
+  color: var(--navbar-bg);
 }
 
 /* 768 */

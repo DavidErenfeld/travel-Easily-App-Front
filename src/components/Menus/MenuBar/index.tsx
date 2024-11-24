@@ -13,7 +13,7 @@ const MenuBar = () => {
       <Link to="/secontHomPage">
         <div className="menu-sub-item">{t("menuBar.selectedDestinations")}</div>
       </Link>
-      <Link to="/trips">
+      <Link to="/trips?title=tripsList.defaultTitle">
         <div className="menu-sub-item">{t("menuBar.allTrips")}</div>
       </Link>
       <Link to="/myTrips">

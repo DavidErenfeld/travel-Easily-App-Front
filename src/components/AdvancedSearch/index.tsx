@@ -12,11 +12,8 @@ const AdvancedSearch: React.FC = () => {
   const [selectedGroupType, setSelectedGroupType] = useState<string>("");
   const [selectedTripType, setSelectedTripType] = useState<string>("");
   const [numberOfDays, setNumberOfDays] = useState<string>("");
-  // const [searchResults, setSearchResults] = useState<ITrips[]>([]);
-  // const [isSearchSelected, setIsSearchSelected] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [showCountrysList, setShowCountrysList] = useState(false);
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const countries = Object.entries(t("countries", { returnObjects: true })) as [
@@ -35,17 +32,15 @@ const AdvancedSearch: React.FC = () => {
     if (selectedGroupType) queryParams.typeTraveler = selectedGroupType;
     if (selectedTripType) queryParams.typeTrip = selectedTripType;
     if (numberOfDays) queryParams.numOfDays = parseInt(numberOfDays, 10);
+    queryParams.title = "tripsList.customSearch";
 
-    // יצירת URL עם query parameters
     const queryString = new URLSearchParams(
       queryParams as Record<string, string>
     ).toString();
 
-    // ניווט לעמוד TripsList עם הפרמטרים
     navigate(`/trips?${queryString}`);
   };
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -68,9 +63,9 @@ const AdvancedSearch: React.FC = () => {
       <MenuBar />
 
       <div className="profile-container advanced-search-section">
-        {/* <div className="form-header">
-            <h2 className="form-title">{t("advancedSearch.title")}</h2>
-          </div> */}
+        <div className="form-header">
+          <h2 className="form-title">{t("advancedSearch.title")}</h2>
+        </div>
 
         {/* Group Type */}
         <div className="form-group">
