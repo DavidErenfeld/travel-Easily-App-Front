@@ -17,26 +17,27 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
     <div className="place-card">
       <div className="place-header">
         <h2 className="place-name">{place.name}</h2>
+        <p className="address"> {place.address}</p>
       </div>
 
       <div className="place-details">
-        <div className="detaile-item flex-space-between">
-          <a
+        {/* <div className="detaile-item flex-space-between"> */}
+        {/* <a
             href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`}
             target="_blank"
             rel="noopener noreferrer"
             className="address"
           >
             {place.address}
-          </a>
-          <a
+          </a> */}
+        {/* <a
             href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
             target="_blank"
             rel="noopener noreferrer"
           >
             <MapPin className="icon-search" />
           </a>
-        </div>
+        </div> */}
 
         <div className="detaile-item flex-space-between">
           <a href={`tel:${place.phone}`}>
@@ -46,7 +47,7 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
                 : t("placeCard.notAvailable")}
             </span>
           </a>
-          <a href={`tel:${place.phone}`}>
+          <a className="icon-button" href={`tel:${place.phone}`}>
             <Phone className="icon-search" />
           </a>
         </div>
@@ -99,8 +100,9 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
         </div>
 
         <div className="detaile-item nav-icons">
-          <span>{t("placeCard.navigation")}</span>
-          <div className="flex-center-gap-s">
+          {/* <span className="nav-text">{t("placeCard.navigation")}</span> */}
+          {/* <div className="flex-center-gap-s"> */}
+          <div className="nav-icon">
             <a
               href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
               target="_blank"
@@ -109,15 +111,18 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
             >
               <GoogleMapsIcon />
             </a>
+          </div>
+          <div className="nav-icon">
             <a
               href={`https://waze.com/ul?ll=${place.name}&navigate=yes`}
               target="_blank"
               rel="noopener noreferrer"
-              className="icon-search"
+              className="icon-search "
             >
               <WazeIcon />
             </a>
           </div>
+          {/* </div> */}
         </div>
       </div>
     </div>

@@ -5,6 +5,10 @@
   gap: 3rem;
 }
 
+.places-list-item {
+  width: 100%;
+}
+
 /* 784 */
 @media (max-width: 49em) {
   .places-list {

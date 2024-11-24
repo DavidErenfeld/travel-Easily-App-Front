@@ -1,10 +1,10 @@
 .place-card {
   border-radius: 12px;
-  padding: 1.5rem;
-  width: 100%;
+  padding: 2rem;
   margin: 1.5rem;
   text-align: center;
-  box-shadow: var(--shadow-ex-large);
+  box-shadow: var(--shadow-large);
+  background-color: var(--background-lightest);
   color: var(--text-primary);
   transition: transform 0.3s, box-shadow 0.3s;
 }
@@ -18,13 +18,11 @@
 .place-header {
   text-align: center;
   margin-bottom: 3rem;
-  padding-top: 2rem;
 }
 
 .place-name {
   font-size: 2.2rem;
-  color: var(--text-primary);
-  color: var(--text-highlight);
+  color: var(--button-primary-bg-hover);
   margin-bottom: 1.4rem;
 }
 
@@ -32,13 +30,18 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0rem 2rem;
-  margin-bottom: 4rem;
+  padding: 1rem;
   gap: 2rem;
+}
+
+.address {
+  text-align: center;
+  font-size: 1.6rem;
 }
 
 .detaile-item {
   font-family: "Poppins", sans-serif;
+  color: var(--navbar-bg);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -53,20 +56,20 @@
 .icon-search {
   margin-left: 0.5rem;
   font-size: 1.8rem;
-  height: 3rem;
-  width: 3rem;
-  color: var(--button-hover-bg-primary);
+  height: 2.6rem;
+  width: 2.6rem;
+  color: var(--navbar-bg);
 }
 
+.detaile-item a:hover,
 .icon-search:hover {
   color: var(--button-cta-bg);
 }
 
 .nav-icons {
-  padding: 1rem 2rem;
-  background-color: var(--button-primary-bg);
-  color: var(--text-primary);
-  border-radius: 4px;
-  cursor: pointer;
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+  width: 50%;
   margin-top: 2rem;
 }

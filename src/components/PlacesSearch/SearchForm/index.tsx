@@ -16,7 +16,7 @@ const SearchForm = ({ onResults, setLoading }: SearchFormProps) => {
   const { t } = useTranslation();
   const [location, setLocation] = useState("");
   const [radius, setRadius] = useState<number | "">("");
-  const [type, setType] = useState("restaurant"); // הערך שנשלח לשרת נשאר באנגלית
+  const [type, setType] = useState("restaurant");
   const [errors, setErrors] = useState({ location: "", radius: "" });
 
   const typeOptions = [
@@ -42,7 +42,7 @@ const SearchForm = ({ onResults, setLoading }: SearchFormProps) => {
       const searchParams: SearchParams = {
         location,
         radius: Number(radius),
-        type, // הערך שנשלח לשרת
+        type,
       };
       const places = await fetchPlaces(searchParams);
       onResults(places);
@@ -60,7 +60,7 @@ const SearchForm = ({ onResults, setLoading }: SearchFormProps) => {
         (position) => {
           const { latitude, longitude } = position.coords;
           setLocation(`${latitude},${longitude}`);
-          setErrors({ ...errors, location: "" });
+          setErrors({ ...errors, location: "" }); // מנקה שגיאות אם יש
         },
         (error) => {
           console.error(t("searchForm.errors.locationFailed"), error);
@@ -68,6 +68,11 @@ const SearchForm = ({ onResults, setLoading }: SearchFormProps) => {
             ...errors,
             location: t("searchForm.errors.locationFailed"),
           });
+        },
+        {
+          enableHighAccuracy: true, // מבקש מיקום מדויק יותר
+          timeout: 15000, // ממתין עד 15 שניות לפני שגיאה
+          maximumAge: 0, // מבטל שימוש בנתונים שמורים
         }
       );
     } else {
