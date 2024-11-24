@@ -22,7 +22,7 @@
   bottom: 2.2rem;
   right: 2.2rem;
   border-radius: 50%;
-  background-color: var(--button-cta-bg);
+  background-color: var(--button-primary-bg-hover);
   border: none;
   padding: 1rem;
   cursor: pointer;

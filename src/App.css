@@ -74,7 +74,7 @@
 }
 
 .btn-cta-exl {
-  background-color: var(--button-hover-bg-primary);
+  background-color: var(--button-primary-bg-hover);
   color: var(--text-secondary);
 }
 

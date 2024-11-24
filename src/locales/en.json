@@ -54,7 +54,8 @@
     }
   },
   "footer": {
-    "rights": "All rights reserved to David Erenfeld"
+    "rights": "All rights reserved to David Erenfeld",
+    "privacyPolicy": "Privacy Policy"
   },
   "advancedSearch": {
     "title": "Advanced Search",
@@ -649,5 +650,22 @@
       "numOfLikes": 60,
       "comments": []
     }
+  },
+  "cookieConsent": {
+    "message": "Our website uses cookies to improve user experience and enable login.",
+    "learnMore": "Learn more",
+    "accept": "Accept"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "intro": "Your privacy is important to us. This page explains how we collect and use your information.",
+    "aboutTitle": "About the Website",
+    "aboutDescription": "This website was developed as part of a final project for a Bachelor's degree in Computer Science. It is free to use, non-profit, and serves solely as a technological demonstration.",
+    "cookiesTitle": "Use of Cookies",
+    "cookiesDescription": "We use cookies to enhance user experience and provide certain features, such as login.",
+    "dataTitle": "Data Collection",
+    "dataDescription": "During registration, we may collect information such as your email address and name. We make every effort to secure your information and follow industry-standard practices to protect your privacy. However, as this is a student project developed by a Junior Developer, we cannot guarantee security measures at a commercial level. We recommend avoiding the use of passwords you use on other sites and staying vigilant while using this platform.",
+    "contactTitle": "Contact Us",
+    "contactDescription": "If you have any questions about this policy, you can contact us at: 1020dudu@gmail.com"
   }
 }

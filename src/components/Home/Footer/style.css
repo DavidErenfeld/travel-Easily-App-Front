@@ -4,6 +4,7 @@
   background-color: var(--navbar-bg);
   color: var(--text-secondary);
   padding: 4rem;
+  padding-bottom: 2rem;
   text-align: center;
 }
 
@@ -37,8 +38,23 @@
 
 .footer-text {
   font-size: 1.8rem;
-  margin: 3rem 0;
+  margin: 3rem 0 1rem 0;
   color: var(--text-secondary);
+}
+
+.footer-privacy {
+  font-size: 1.6rem;
+}
+
+.footer-link {
+  color: var(--button-cta-bg-hover);
+  text-decoration: underline;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--tag-bg-hover);
 }
 
 /*576*/

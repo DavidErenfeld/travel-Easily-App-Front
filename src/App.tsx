@@ -25,6 +25,8 @@ import "./App.css";
 import "./index.css";
 import TripsList from "./components/TripComponents/TripsList";
 import ViewComment from "./components/CommentsComponent/ViewComment";
+import CookieConsent from "./components/UIComponents/CookieConsent/CookieConsent";
+import PrivacyPolicy from "./components/UIComponents/PrivacyPolicy";
 
 function App() {
   useEffect(() => {
@@ -41,6 +43,7 @@ function App() {
       <TripProvider>
         <BrowserRouter>
           <SocketListener />
+          <CookieConsent />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/secontHomPage" element={<SecontHomePage />} />
@@ -51,6 +54,7 @@ function App() {
             <Route path="/trips" element={<TripsList />} />
             <Route path="/trip/:id" element={<TripDetails />} />
             <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route
               path="/searchTrip/advancedSearch"
               element={<AdvancedSearch />}

@@ -100,11 +100,9 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
         </div>
 
         <div className="detaile-item nav-icons">
-          {/* <span className="nav-text">{t("placeCard.navigation")}</span> */}
-          {/* <div className="flex-center-gap-s"> */}
           <div className="nav-icon">
             <a
-              href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
+              href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`}
               target="_blank"
               rel="noopener noreferrer"
               className="icon-search"
@@ -114,15 +112,14 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
           </div>
           <div className="nav-icon">
             <a
-              href={`https://waze.com/ul?ll=${place.name}&navigate=yes`}
+              href={`https://waze.com/ul?ll=${place.lat},${place.lon}&navigate=yes`}
               target="_blank"
               rel="noopener noreferrer"
-              className="icon-search "
+              className="icon-search"
             >
               <WazeIcon />
             </a>
           </div>
-          {/* </div> */}
         </div>
       </div>
     </div>
