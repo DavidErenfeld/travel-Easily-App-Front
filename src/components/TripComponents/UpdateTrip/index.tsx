@@ -122,6 +122,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
       try {
         const updatedTrip = {
           ...trip,
+          owner: trip.owner?._id,
           tripDescription: renumberedDays.map((day) => day.description),
         };
         await tripsService.updateTrip(updatedTrip);
@@ -178,6 +179,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
 
       const updatedTrip = {
         ...trip,
+        owner: trip.owner?._id,
         tripDescription: dayEdits.map((day) => day.description),
         tripPhotos: updatedTripPhotos,
       };
