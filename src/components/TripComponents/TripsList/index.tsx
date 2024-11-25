@@ -31,10 +31,9 @@ const TripsList = () => {
       }
     };
 
-    // סימולציית טעינה
     const simulateLoading = setTimeout(() => {
-      setLoading(false); // מסיימים את מצב הטעינה
-    }, 1000); // זמן טעינה מדומה של 1 שניה
+      setLoading(false);
+    }, 1000);
 
     restoreScrollPosition();
     return () => clearTimeout(simulateLoading);
