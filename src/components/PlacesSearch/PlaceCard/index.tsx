@@ -21,24 +21,6 @@ const PlaceCard: React.FC<PlaceCardProps> = ({ place }) => {
       </div>
 
       <div className="place-details">
-        {/* <div className="detaile-item flex-space-between"> */}
-        {/* <a
-            href={`https://www.google.com/maps/search/?api=1&query=${place.lat},${place.lon}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="address"
-          >
-            {place.address}
-          </a> */}
-        {/* <a
-            href={`https://www.google.com/maps/search/?api=1&query=${place.name}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <MapPin className="icon-search" />
-          </a>
-        </div> */}
-
         <div className="detaile-item flex-space-between">
           <a href={`tel:${place.phone}`}>
             <span>

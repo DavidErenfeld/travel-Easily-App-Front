@@ -9,7 +9,6 @@ const setDirection = () => {
   const language = i18n.language;
   document.documentElement.dir = language === "he" ? "rtl" : "ltr";
 
-  // עדכון הקלאס של ה-body בהתאם לשפה
   const body = document.body;
   if (language === "he") {
     body.classList.add("body-hebrew");

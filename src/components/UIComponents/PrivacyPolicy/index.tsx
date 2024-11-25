@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Shield, Info, Database, Mail } from "lucide-react"; // ייבוא אייקונים
+import { Shield, Info, Database, Mail } from "lucide-react";
 import "./style.css";
 import Header from "../../Header";
 import Footer from "../../Home/Footer";

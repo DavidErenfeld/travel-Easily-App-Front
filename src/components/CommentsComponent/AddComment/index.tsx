@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from "react";
-import "./style.css";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../Context/AuthContext";
+import "./style.css";
 
 interface AddCommentProps {
   onSendComment: (comment: string) => void;

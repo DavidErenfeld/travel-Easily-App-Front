@@ -53,15 +53,15 @@
   align-self: flex-start;
   grid-row: 2;
   grid-column: 1/-1;
-  background-color: #00796b; /* ירוק כהה שמתאים לצבעים של האתר */
-  color: #fff; /* צבע טקסט לבן */
-  padding: 15px 25px; /* שוליים פנימיים */
-  border: none; /* בלי מסגרת */
-  border-radius: 10px; /* פינות עגולות */
-  font-size: 1.2rem; /* גודל טקסט */
-  font-weight: bold; /* טקסט מודגש */
+  background-color: #00796b;
+  color: #fff;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* צל עדין */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .earth-container {

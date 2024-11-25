@@ -1,4 +1,3 @@
-// SocketListener.tsx
 import { useEffect } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { useTrips } from "../Context/TripContext";
@@ -49,7 +48,7 @@ function SocketListener() {
     };
 
     const handleTripDeleted = ({ tripId }: { tripId: string }) => {
-      console.log(`Trip deleted: ${tripId}`);
+      console.log(`Trip deleted`);
       setTrips((prevTrips) => prevTrips.filter((trip) => trip._id !== tripId));
     };
 
@@ -116,7 +115,7 @@ function SocketListener() {
     };
 
     const handleCommentAdded = ({ tripId, newComment }: CommentEventData) => {
-      console.log("Received commentAdded event", { tripId, newComment });
+      console.log("Received commentAdded event");
 
       setTrips((prevTrips) =>
         prevTrips.map((trip) =>

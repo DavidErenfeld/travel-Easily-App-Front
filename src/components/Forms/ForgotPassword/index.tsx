@@ -7,9 +7,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { requestPasswordReset } from "../../../services/usersService";
 import CloseIcon from "../../UIComponents/Icons/Close";
 import LoadingDots from "../../UIComponents/Loader";
+import Header from "../../Header";
 import "../formeStyle.css";
 import "./style.css";
-import Header from "../../Header";
 
 const forgotPasswordSchema = z.object({
   email: z.string().email(),

@@ -2,7 +2,6 @@ import TripCard from "../../TripComponents/TripCard";
 import { useTranslation } from "react-i18next";
 import "./style.css";
 
-// הגדרת הממשק
 interface Trip {
   typeTraveler: string;
   country: string;

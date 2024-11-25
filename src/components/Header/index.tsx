@@ -2,11 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { useEffect, useState } from "react";
 import { CirclePlus, Search } from "lucide-react";
-
 import Sidebar from "../Menus/Sidebar";
 import { useTranslation } from "react-i18next";
-import "./style.css";
 import LanguageSwitcher from "../UIComponents/LanguageSwitcher";
+import "./style.css";
 
 const Header = () => {
   const { logout } = useAuth();

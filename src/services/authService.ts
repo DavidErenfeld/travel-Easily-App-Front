@@ -1,5 +1,3 @@
-// authService.ts
-
 import apiClient from "./apiClient";
 import { CredentialResponse } from "@react-oauth/google";
 import { AxiosResponse } from "axios";
@@ -7,7 +5,7 @@ import socket from "../Hooks/socketInstance";
 
 export interface IUser {
   userName?: string;
-  email?: string; // הפכנו לאופציונלי
+  email?: string;
   password?: string;
   imgUrl?: string;
   _id?: string;
@@ -22,27 +20,21 @@ export const loginUser = (user: IUser): Promise<IUser> => {
     apiClient
       .post("/auth/login", user)
       .then((response: any) => {
-        // שמירת הטוקנים ומידע המשתמש ב-localStorage
         localStorage.setItem("accessToken", response.data.accessToken);
         localStorage.setItem("refreshToken", response.data.refreshToken);
         localStorage.setItem("loggedUserId", response.data._id);
         localStorage.setItem("imgUrl", response.data.imgUrl);
         localStorage.setItem("userName", response.data.userName);
-        console.log("accessToken = " + localStorage.getItem("accessToken"));
-        console.log("refreshToken = " + localStorage.getItem("refreshToken"));
 
-        // עדכון הטוקן ב-socket והתחברות
         const token = response.data.accessToken;
 
-        // הגדרת הטוקן ב-socket.auth
         socket.auth = { token };
 
-        // התחברות ל-socket אם לא מחובר
         if (!socket.connected) {
           socket.connect();
         }
 
-        resolve(response.data); // מחזיר את נתוני המשתמש
+        resolve(response.data);
       })
       .catch((error: any) => {
         console.log(error);
@@ -53,12 +45,10 @@ export const loginUser = (user: IUser): Promise<IUser> => {
 export const registerUser = (user: IUser): Promise<IUser> => {
   return new Promise<IUser>((resolve, reject) => {
     console.log("Registering...");
-    console.log(user);
 
     apiClient
       .post("/auth/register", user)
       .then((response) => {
-        console.log(response);
         resolve(response.data);
       })
       .catch((error) => {
@@ -81,15 +71,11 @@ export const googleSignin = (
         localStorage.setItem("loggedUserId", response.data._id);
         localStorage.setItem("imgUrl", response.data.imgUrl);
         localStorage.setItem("userName", response.data.userName);
-        console.log(response);
 
-        // עדכון הטוקן ב-socket והתחברות
         const token = response.data.accessToken;
 
-        // הגדרת הטוקן ב-socket.auth
         socket.auth = { token };
 
-        // התחברות ל-socket אם לא מחובר
         if (!socket.connected) {
           socket.connect();
         }
@@ -110,7 +96,6 @@ export const logout = (): Promise<void> => {
 
     localStorage.clear();
 
-    // נתק את ה-socket אם הוא מחובר
     if (socket.connected) {
       socket.disconnect();
     }
@@ -131,7 +116,6 @@ export const logout = (): Promise<void> => {
         }
       )
       .then((response) => {
-        console.log(response);
         resolve();
       })
       .catch((error) => {

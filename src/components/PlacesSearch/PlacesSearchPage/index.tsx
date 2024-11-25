@@ -5,8 +5,8 @@ import { Place } from "../../../services/placesService";
 import PlacesList from "../PlacesList";
 import Header from "../../Header";
 import LoadingDots from "../../UIComponents/Loader";
-import "./style.css";
 import MenuBar from "../../Menus/MenuBar";
+import "./style.css";
 
 const PlacesSearchPage = () => {
   const { t } = useTranslation();

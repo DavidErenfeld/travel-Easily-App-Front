@@ -10,9 +10,9 @@ import CloseIcon from "../../UIComponents/Icons/Close";
 import LoadingDots from "../../UIComponents/Loader";
 import { useAuth } from "../../../Context/AuthContext";
 import authService from "../../../services/authService";
+import Header from "../../Header";
 import "../formeStyle.css";
 import "./style.css";
-import Header from "../../Header";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -63,9 +63,7 @@ function Login() {
       const response = await authService.googleSignin(credentialResponse);
       login(response);
       navigate("/");
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
 
   const onGoogleLoginFailure = () => {

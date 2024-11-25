@@ -7,16 +7,14 @@ interface IUploadResponse {
 const CLOUDINARY_CLOUD_NAME = "dstyeoecz";
 const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 
-// פונקציה ליצירת URL אופטימלי
 const getOptimizedImageUrl = (publicId: string) => {
   return `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/q_auto,f_auto,w_600,h_400,c_limit/${publicId}`;
 };
 
-// פונקציה להעלאת תמונה ל-Cloudinary
 export const uploadPhoto = async (photo: File): Promise<string> => {
   try {
     const formData = new FormData();
-    const newPhoto = new File([photo], photo.name); // יצירת עותק חדש של הקובץ
+    const newPhoto = new File([photo], photo.name);
     formData.append("file", newPhoto);
     formData.append("upload_preset", "sfrsket2");
 
@@ -37,16 +35,13 @@ export const uploadPhoto = async (photo: File): Promise<string> => {
   }
 };
 
-// פונקציה למחיקת תמונה מ-Cloudinary
 export const deletePhotoFromCloudinary = async (src: string): Promise<void> => {
   try {
-    // חילוץ ה-publicId מה-URL של התמונה
     const publicId = src.split("/").pop()?.split(".")[0];
     if (!publicId) {
       throw new Error("Failed to extract publicId for deletion");
     }
 
-    // קריאה ל-API למחיקת התמונה
     await apiClient.delete("file/delete-image", {
       data: { publicId },
     });
@@ -54,6 +49,6 @@ export const deletePhotoFromCloudinary = async (src: string): Promise<void> => {
     console.log("Image deleted from Cloudinary successfully.");
   } catch (error) {
     console.error("Failed to delete image from Cloudinary:", error);
-    throw error; // להחזיר שגיאה אם יש בעיה
+    throw error;
   }
 };

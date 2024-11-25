@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import "./style.css";
 import i18n from "../../../i18n";
+import "./style.css";
 
 const HeroSection = () => {
   const navigate = useNavigate();

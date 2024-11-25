@@ -18,7 +18,7 @@ const TripForm = () => {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const navigate = useNavigate();
 
-  const dropdownRef = useRef<HTMLDivElement>(null); // יצירת רפרנס לתפריט
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const countries = Object.entries(t("countries", { returnObjects: true })) as [
     string,

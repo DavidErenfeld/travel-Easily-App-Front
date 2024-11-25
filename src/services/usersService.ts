@@ -7,7 +7,6 @@ export interface IUpdateUser {
   imgUrl?: string;
 }
 
-// פונקציה להוספת טיול למועדפים
 export const addFavoriteTrip = (tripId: string) => {
   return new Promise<void>((resolve, reject) => {
     console.log("Adding trip to favorites...");
@@ -33,7 +32,6 @@ export const addFavoriteTrip = (tripId: string) => {
   });
 };
 
-// פונקציה להסרת טיול מהמועדפים
 export const removeFavoriteTrip = (tripId: string) => {
   return new Promise<void>((resolve, reject) => {
     console.log("Removing trip from favorites...");
@@ -55,7 +53,6 @@ export const removeFavoriteTrip = (tripId: string) => {
   });
 };
 
-// פונקציה לעדכון משתמש
 export const updateUser = (userId: string, user: IUpdateUser) => {
   return new Promise<IUpdateUser>((resolve, reject) => {
     console.log("Update user....");
@@ -72,7 +69,6 @@ export const updateUser = (userId: string, user: IUpdateUser) => {
         }
       )
       .then((response) => {
-        console.log(response);
         localStorage.setItem("imgUrl", response.data.imgUrl);
         resolve(response.data);
       })
@@ -83,7 +79,6 @@ export const updateUser = (userId: string, user: IUpdateUser) => {
   });
 };
 
-// פונקציה לשליחת בקשת שחזור סיסמה
 export const requestPasswordReset = (email: string) => {
   return new Promise<void>((resolve, reject) => {
     console.log("Requesting password reset...");
@@ -101,9 +96,6 @@ export const requestPasswordReset = (email: string) => {
   });
 };
 
-// authService.ts
-
-// פונקציה לאיפוס סיסמה
 export const resetPassword = (token: string, newPassword: string) => {
   return new Promise<void>((resolve, reject) => {
     console.log("Resetting password...");
@@ -121,7 +113,6 @@ export const resetPassword = (token: string, newPassword: string) => {
   });
 };
 
-// פונקציה למחיקת משתמש
 export const deleteUser = (userId: string) => {
   return new Promise<void>(async (resolve, reject) => {
     console.log("Delete User...");
@@ -133,7 +124,6 @@ export const deleteUser = (userId: string) => {
     }
 
     try {
-      // בקשת מחיקה לשרת
       await apiClient.delete(`/users/${userId}`, {
         headers: {
           Authorization: `JWT ${accessToken}`,

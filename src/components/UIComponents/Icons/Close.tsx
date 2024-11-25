@@ -9,7 +9,7 @@ function CloseIcon({ color, onClose }: CloseIconProps) {
   const navigate = useNavigate();
 
   const handleClose = (event: React.MouseEvent) => {
-    event.stopPropagation(); // מונע התפשטות האירוע
+    event.stopPropagation();
     if (onClose) {
       onClose();
     } else {

@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const HowItWorksSection = () => {
-  const { t } = useTranslation(); // Translation hook
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const steps = [

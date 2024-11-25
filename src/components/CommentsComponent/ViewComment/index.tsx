@@ -33,7 +33,6 @@ const ViewComment = ({
     if (window.confirm(t("viewComment.deleteConfirmation"))) {
       try {
         await tripsService.deleteComment(tripId, commentId);
-        console.log(t("viewComment.deleteSuccess", { id: commentId }));
         onCommentDeleted();
       } catch (error) {
         console.error(t("viewComment.deleteError"), error);

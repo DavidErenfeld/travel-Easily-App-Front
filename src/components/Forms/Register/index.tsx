@@ -11,10 +11,10 @@ import { uploadPhoto } from "../../../services/fileService";
 import LoadingDots from "../../UIComponents/Loader";
 import { useAuth } from "../../../Context/AuthContext";
 import { useTranslation } from "react-i18next";
-import "./style.css";
-import "../formeStyle.css";
 import authService from "../../../services/authService";
 import Header from "../../Header";
+import "./style.css";
+import "../formeStyle.css";
 
 const defaultImage = "/images/user.png";
 

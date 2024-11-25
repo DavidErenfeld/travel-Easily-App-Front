@@ -39,7 +39,6 @@ const useTripActions = (trip: ITrips | null) => {
     setNumOfLikes(updatedTrip?.numOfLikes || 0);
     setIsFavorite(updatedTrip?.isFavoritedByCurrentUser || false);
     setNumOfComments(updatedTrip?.numOfComments || 0);
-    // console.log("useTripActions: " + trips);
   }, [trip?._id, trips]);
 
   const handleLikeClick = async (e: React.MouseEvent) => {

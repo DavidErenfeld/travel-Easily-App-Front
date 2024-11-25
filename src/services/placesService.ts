@@ -1,15 +1,11 @@
-// placesService.ts
+import apiClient from "./apiClient";
 
-import apiClient from "./apiClient"; // ייבוא ה-client שהוגדר
-
-// הגדרת הטיפוס של הפרמטרים
 export interface SearchParams {
   location: string;
   radius: number;
   type: string;
 }
 
-// הגדרת הטיפוס למבנה הנתונים של המקום
 export interface Place {
   id: string;
   name: string;
@@ -24,11 +20,11 @@ export interface Place {
 }
 
 /**
- * פונקציה שמחזירה את המיקומים מהשרת לפי מיקום, רדיוס וסוג
- * @param location - מיקום בפורמט 'latitude,longitude'
- * @param radius - רדיוס החיפוש במטרים
- * @param type - סוג המקום לחיפוש
- * @returns Promise עם רשימת המיקומים
+ *
+ * @param location
+ * @param radius
+ * @param type
+ * @returns
  */
 const getPlaces = (
   location: string,
@@ -50,7 +46,7 @@ const getPlaces = (
         },
       })
       .then((response) => {
-        console.log("Places fetched successfully:", response.data);
+        console.log("Places fetched successfully");
         resolve(response.data);
       })
       .catch((error) => {
@@ -60,14 +56,13 @@ const getPlaces = (
   });
 };
 
-// פונקציה שמכילה את הלוגיקה עבור קריאת המיקומים
 export const fetchPlaces = async ({
   location,
   radius,
   type,
 }: SearchParams): Promise<Place[]> => {
   try {
-    const places = await getPlaces(location, radius * 1000, type); // המרה למטרים
+    const places = await getPlaces(location, radius * 1000, type);
     return places;
   } catch (error) {
     console.error("Error fetching places:", error);

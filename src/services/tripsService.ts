@@ -82,7 +82,6 @@ const getByOwnerId = (userId: string) => {
         },
       })
       .then((response) => {
-        console.log(response);
         resolve(response.data);
       })
       .catch((error) => {
@@ -102,7 +101,6 @@ const getByTripId = (tripId: string) => {
         },
       })
       .then((response) => {
-        console.log(response);
         resolve(response.data);
       })
       .catch((error) => {
@@ -115,8 +113,6 @@ const getByTripId = (tripId: string) => {
 const postTrip = (trip: ITrips) => {
   return new Promise<ITrips>((resolve, reject) => {
     console.log("Post...");
-    console.log(trip);
-    console.log("accessToken = " + localStorage.getItem("accessToken"));
     apiClient
       .post("/trips", trip, {
         headers: {
@@ -124,7 +120,6 @@ const postTrip = (trip: ITrips) => {
         },
       })
       .then((response) => {
-        console.log(response);
         resolve(response.data);
       })
       .catch((error) => {
@@ -144,7 +139,6 @@ const updateTrip = (trip: IUpdateTrips) => {
         },
       })
       .then((response) => {
-        console.log(response);
         resolve(response.data);
       })
       .catch((error) => {
@@ -164,7 +158,6 @@ const deleteTrip = (tripId: string) => {
         },
       })
       .then((response) => {
-        console.log(response);
         resolve();
       })
       .catch((error) => {
@@ -176,7 +169,7 @@ const deleteTrip = (tripId: string) => {
 
 const searchTripsByParams = (params: Record<string, string | number>) => {
   return new Promise<ITrips[]>((resolve, reject) => {
-    console.log("Search trips by params:", params);
+    console.log("Search trips by params");
     apiClient
       .get("/trips//search/parameters", {
         params,
@@ -185,7 +178,6 @@ const searchTripsByParams = (params: Record<string, string | number>) => {
         },
       })
       .then((response) => {
-        console.log(response);
         resolve(response.data.data);
       })
       .catch((error) => {
@@ -205,7 +197,6 @@ const getFavoriteTrips = (userId: string) => {
         },
       })
       .then((response) => {
-        console.log(response);
         resolve(response.data);
       })
       .catch((error) => {
@@ -225,8 +216,7 @@ const getFavoriteTripIds = (userId: string) => {
         },
       })
       .then((response) => {
-        console.log("Favorite trip IDs:", response.data);
-        resolve(response.data); // מחזיר רק את מזהי הטיולים המועדפים
+        resolve(response.data);
       })
       .catch((error) => {
         console.error("Error fetching favorite trip IDs:", error);
@@ -249,8 +239,6 @@ const addComment = (tripId: string, comment: IComment) => {
         }
       )
       .then((response) => {
-        console.log(response);
-        // socket.emit("addComment", { tripId, comment: response.data }); // שליחת אירוע סוקט
         resolve(response.data);
       })
       .catch((error) => {
@@ -260,7 +248,6 @@ const addComment = (tripId: string, comment: IComment) => {
   });
 };
 
-// פונקציה למחיקת תגובה עם סוקט
 const deleteComment = (tripId: string, commentId: string) => {
   return new Promise<void>((resolve, reject) => {
     console.log("Delete Comment...");
@@ -271,8 +258,7 @@ const deleteComment = (tripId: string, commentId: string) => {
         },
       })
       .then((response) => {
-        console.log(response);
-        socket.emit("deleteComment", { tripId, commentId }); // שליחת אירוע סוקט למחיקה
+        socket.emit("deleteComment", { tripId, commentId });
         resolve();
       })
       .catch((error) => {
@@ -296,7 +282,6 @@ const addLike = (tripId: string) => {
         }
       )
       .then((response) => {
-        console.log(response);
         resolve(response.data);
       })
       .catch((error) => {
@@ -319,8 +304,8 @@ const getLikesDetails = (tripId: string) => {
         },
       })
       .then((response) => {
-        console.log("Likes details:", response.data);
-        resolve(response.data); // מחזיר את נתוני הלייקים כולל שם משתמש ותמונת פרופיל
+        console.log("Likes details");
+        resolve(response.data);
       })
       .catch((error) => {
         console.error("Error fetching likes details:", error);

@@ -7,8 +7,8 @@ import tripsService, { ITrips } from "../../../services/tripsService";
 import LoadingDots from "../../UIComponents/Loader";
 import Header from "../../Header";
 import MenuBar from "../../Menus/MenuBar";
-import "./style.css";
 import { useTrips } from "../../../Context/TripContext";
+import "./style.css";
 
 const FavoriteTrips = () => {
   const { t } = useTranslation();
@@ -51,12 +51,6 @@ const FavoriteTrips = () => {
     loadFavoriteTrips();
   }, [t, refreshTrips]);
 
-  // useSocket("likeAdded", (newTrip) => {
-  //   setTrips((prevTrips) =>
-  //     prevTrips.map((trip) => (trip._id === newTrip._id ? newTrip : trip))
-  //   );
-  // });
-
   const renderFavoriteTrips = () => {
     return trips.map((trip) => (
       <article className="trip-list-item" key={trip._id}>
@@ -83,7 +77,7 @@ const FavoriteTrips = () => {
           <div className="no-trips-container">
             <p className="no-trips-message">{t("favoriteTrips.noTrips")}</p>
             <button
-              onClick={() => navigate("/searchTrip")}
+              onClick={() => navigate("/trips?title=tripsList.defaultTitle")}
               className="btn-cta-exl"
             >
               {t("favoriteTrips.exploreButton")}

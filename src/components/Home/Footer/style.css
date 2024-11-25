@@ -38,13 +38,6 @@
   transition: transform 0.3s;
 }
 
-/* .footer-icon-lucide:hover {
-  margin: 0 0.5rem;
-  width: 4rem;
-  height: 4rem;
-  color: var(--tag-bg);
-  transition: transform 0.3s;
-} */
 .footer-icon-lucide:hover,
 .footer-icon:hover {
   transform: scale(1.2);

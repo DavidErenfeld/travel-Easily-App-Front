@@ -10,7 +10,6 @@ interface TripHeaderProps {
 const TripHeader = ({ trip }: TripHeaderProps) => {
   const { t } = useTranslation();
 
-  // Convert typeTraveler to match translation keys (remove spaces, capitalize first letters)
   const formatKey = (key: string) =>
     key
       .split(" ")

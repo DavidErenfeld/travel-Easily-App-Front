@@ -70,9 +70,9 @@ const SearchForm = ({ onResults, setLoading }: SearchFormProps) => {
           });
         },
         {
-          enableHighAccuracy: true, // מבקש מיקום מדויק יותר
-          timeout: 15000, // ממתין עד 15 שניות לפני שגיאה
-          maximumAge: 0, // מבטל שימוש בנתונים שמורים
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 0,
         }
       );
     } else {

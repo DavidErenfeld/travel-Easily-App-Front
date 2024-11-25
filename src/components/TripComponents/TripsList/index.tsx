@@ -5,8 +5,8 @@ import { useTrips } from "../../../Context/TripContext";
 import TripCard from "../TripCard";
 import Header from "../../Header";
 import MenuBar from "../../Menus/MenuBar";
-import "./style.css";
 import LoadingDots from "../../UIComponents/Loader";
+import "./style.css";
 
 const TripsList = () => {
   const { t } = useTranslation();

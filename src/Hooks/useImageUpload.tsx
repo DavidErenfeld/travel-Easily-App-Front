@@ -1,4 +1,3 @@
-// useImageUpload.ts
 import { useState, useRef, useEffect } from "react";
 import {
   uploadPhoto,
@@ -32,7 +31,6 @@ const useImageUpload = (initialImages: ImageWithFile[] = []) => {
     };
   }, [images]);
 
-  // 1
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const files = Array.from(e.target.files);
@@ -46,28 +44,23 @@ const useImageUpload = (initialImages: ImageWithFile[] = []) => {
     }
   };
 
-  // 2
   const deleteImage = async (imageData: Image) => {
     if (imageData.isFromServer) {
       try {
         await deletePhotoFromCloudinary(imageData.src);
-        console.log("Deleted from Cloudinary:", imageData.src);
       } catch (error) {
         console.error("Error deleting from Cloudinary:", error);
       }
     }
 
-    // עדכון המצב לאחר מחיקת התמונה
     setImages((prevImages) => {
       const updatedImages = prevImages.filter(
         (image) => image.src !== imageData.src
       );
-      console.log("Updated images after delete:", updatedImages);
       return updatedImages;
     });
   };
 
-  //3
   const uploadImages = async () => {
     const newImages = images.filter((image) => !image.isFromServer);
     const urls: string[] = [];
@@ -88,7 +81,6 @@ const useImageUpload = (initialImages: ImageWithFile[] = []) => {
   const handleUploadImage = async (imgFile: File) => {
     try {
       const uploadedUrl = await uploadPhoto(imgFile);
-      console.log(`Image uploaded successfully: ${uploadedUrl}`);
       return uploadedUrl;
     } catch (error) {
       console.error("Upload failed:", error);

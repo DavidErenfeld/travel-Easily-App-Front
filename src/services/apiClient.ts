@@ -11,7 +11,7 @@ interface CustomAxiosRequestConfig extends AxiosRequestConfig {
   skipAuthRefresh?: boolean;
   _retry?: boolean;
 }
-
+console.log;
 let isTokenRefreshing: boolean = false;
 let subscribers: ((accessToken: string) => void)[] = [];
 
@@ -38,21 +38,18 @@ export async function refreshAccessToken(): Promise<string> {
   try {
     console.log("Sending request to refresh access token...");
 
-    // העברת ה-refresh token ב-Authorization Header
     const response: AxiosResponse = await axios.post(
       `${apiClient.defaults.baseURL}/auth/refresh`,
-      {}, // גוף ריק
+      {},
       {
         headers: {
-          Authorization: `Bearer ${refreshToken}`, // שליחת ה-refresh token ב-Header
+          Authorization: `Bearer ${refreshToken}`,
         },
       }
     );
 
     const { accessToken, refreshToken: newRefreshToken } = response.data;
-    console.log("New tokens received:", { accessToken, newRefreshToken });
 
-    // עדכון ה-Access Token וה-Refresh Token
     localStorage.setItem("accessToken", accessToken);
     localStorage.setItem("refreshToken", newRefreshToken);
     apiClient.defaults.headers.common["Authorization"] = `JWT ${accessToken}`;

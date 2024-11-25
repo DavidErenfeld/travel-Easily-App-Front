@@ -16,8 +16,8 @@ import TripCardIcons from "../TripCardIcons/index.tsx";
 import SuccessMessage from "../../UIComponents/SuccessMessage/index.tsx";
 import useTripActions from "../../../Hooks/useTripActions.tsx";
 import socket from "../../../Hooks/socketInstance.tsx";
-import "./style.css";
 import i18n from "../../../i18n.ts";
+import "./style.css";
 
 const TripDetails = () => {
   const { t } = useTranslation();

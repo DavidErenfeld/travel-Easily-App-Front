@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
+import i18n from "../../../i18n";
 import { ThumbsUp, Heart, Share2, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import ShareButtons from "../../UIComponents/ShareButtons";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
-import i18n from "../../../i18n";
 
 interface TripCardIconsProps {
   tripId: string;

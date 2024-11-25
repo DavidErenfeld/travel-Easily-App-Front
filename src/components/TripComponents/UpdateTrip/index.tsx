@@ -8,8 +8,8 @@ import ImageCarousel from "../../UIComponents/ImageCarousel";
 import LoadingDots from "../../UIComponents/Loader";
 import useImageUpload from "../../../Hooks/useImageUpload";
 import PopUp from "../../UIComponents/PopUp";
-import "./style.css";
 import { useTrips } from "../../../Context/TripContext";
+import "./style.css";
 
 interface TripDay {
   dayNum: number;
@@ -128,7 +128,6 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
           tripDescription: renumberedDays.map((day) => day.description),
         };
         await tripsService.updateTrip(updatedTrip);
-        console.log(t("updateTrip.successDayDelete"));
       } catch (error) {
         console.error(t("updateTrip.errorDayDelete"), error);
       }
@@ -146,7 +145,6 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
       }
 
       await tripsService.deleteTrip(trip._id!);
-      console.log(t("updateTrip.successTripDelete"));
       await refreshTrips();
       navigate(-1);
     } catch (error) {
@@ -187,7 +185,6 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
         tripPhotos: updatedTripPhotos,
       };
       await tripsService.updateTrip(updatedTrip);
-      console.log(t("updateTrip.successTripUpdate"));
       onClickReadMode();
     } catch (error) {
       console.error(t("updateTrip.errorTripUpdate"), error);

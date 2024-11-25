@@ -1,6 +1,6 @@
 import React from "react";
 import { ITrips } from "../../../services/tripsService";
-import { useTranslation } from "react-i18next"; // שימוש בתרגום
+import { useTranslation } from "react-i18next";
 import "./style.css";
 
 interface TripDescriptionProps {

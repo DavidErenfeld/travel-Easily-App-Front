@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { FaWhatsapp, FaTelegramPlane, FaEnvelope } from "react-icons/fa";
 import "./style.css";
 

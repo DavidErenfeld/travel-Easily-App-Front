@@ -8,8 +8,6 @@
   padding: 3rem;
   box-shadow: var(--shadow-large);
   background-color: var(--card-background);
-  /* direction: ltr; */
-  /* margin-bottom: 2rem; */
 }
 
 [dir="rtl"] {
@@ -75,7 +73,6 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 1.6rem;
-  /* direction: ltr; */
 }
 
 .form-row {

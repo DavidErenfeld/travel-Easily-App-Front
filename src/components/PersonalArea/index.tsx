@@ -4,14 +4,14 @@ import {
   uploadPhoto,
   deletePhotoFromCloudinary,
 } from "../../services/fileService";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import CloseIcon from "../UIComponents/Icons/Close";
 import LoadingDots from "../UIComponents/Loader";
-import { useNavigate } from "react-router-dom";
 import tripsService from "../../services/tripsService";
 import PopUp from "../UIComponents/PopUp";
-import { useTranslation } from "react-i18next";
-import "./style.css";
 import Header from "../Header";
+import "./style.css";
 
 function PersonalArea() {
   const { t } = useTranslation();
@@ -82,7 +82,7 @@ function PersonalArea() {
       }
 
       const response = await updateUser(loggedUserId || "", { imgUrl: imgUrl });
-      console.log(response);
+
       localStorage.setItem("imgUrl", imgUrl);
       setButtonClicked(false);
     } catch (error) {

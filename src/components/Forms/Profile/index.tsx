@@ -47,7 +47,6 @@ const Profile: React.FC = () => {
       religion: selectedReligion,
       status: selectedStatus,
     };
-    console.log(profileData);
   };
 
   return (
