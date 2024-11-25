@@ -6,7 +6,10 @@ export { CanceledError };
 export interface ITrips {
   _id?: string;
   userName?: string;
-  owner?: any;
+  owner?: {
+    userName?: string;
+    imgUrl?: string;
+  };
   imgUrl?: string;
   typeTraveler: string;
   country: string;

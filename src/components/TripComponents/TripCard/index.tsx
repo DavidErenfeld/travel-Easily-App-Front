@@ -70,7 +70,7 @@ const TripCard = ({ trip, onNavigateToTrip }: TripCardProps) => {
           src={trip.owner?.imgUrl || "/images/user.png"}
           alt={t("tripCard.altProfile")}
         />
-        <p className="profile-name">{trip.owner.userName}</p>
+        <p className="profile-name">{trip.owner?.userName || ""}</p>
       </div>
       {trip && <TripHeader trip={trip} />}
       {onNavigateToTrip ? (
