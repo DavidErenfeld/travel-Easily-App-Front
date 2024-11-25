@@ -26,12 +26,12 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
 
       const response = await req;
       // console.log("refreshTrips(TripContext)req " + response.data);
-      console.log(
-        "refreshTrips(TripContext):respons data ",
-        JSON.stringify(response.data, null, 2)
-      );
+      // console.log(
+      //   "refreshTrips(TripContext):respons data ",
+      //   JSON.stringify(response.data, null, 2)
+      // );
       setTrips(response.data);
-      console.log("refreshTrips(TripContext):respons data " + response.data);
+      // console.log("refreshTrips(TripContext):respons data " + response.data);
     } catch (error) {
       console.error("Failed to fetch trips:", error);
     }

@@ -1,6 +1,7 @@
 import { FaLinkedin, FaEnvelope, FaWhatsapp, FaPhone } from "react-icons/fa";
+import { Phone } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom"; // לשימוש בקישור פנימי
+import { Link } from "react-router-dom";
 import "./style.css";
 
 const Footer = () => {
@@ -29,10 +30,7 @@ const Footer = () => {
         >
           <FaLinkedin className="footer-icon" />
         </a>
-        {/* Email */}
-        <a href={`mailto:${email}`} aria-label="Send an Email">
-          <FaEnvelope className="footer-icon" />
-        </a>
+
         {/* WhatsApp */}
         <a
           href={`https://wa.me/${whatsApp}`}
@@ -42,9 +40,13 @@ const Footer = () => {
         >
           <FaWhatsapp className="footer-icon" />
         </a>
+        {/* Email */}
+        <a href={`mailto:${email}`} aria-label="Send an Email">
+          <FaEnvelope className="footer-icon" />
+        </a>
         {/* Phone */}
         <a href={`tel:${phoneNumber}`} aria-label="Make a Phone Call">
-          <FaPhone className="footer-icon" />
+          <Phone className="footer-icon-lucide" />
         </a>
       </div>
 
