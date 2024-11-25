@@ -47,6 +47,12 @@ function SocketListener() {
           : [...prevTrips, newTrip]
       );
     };
+
+    const handleTripDeleted = ({ tripId }: { tripId: string }) => {
+      console.log(`Trip deleted: ${tripId}`);
+      setTrips((prevTrips) => prevTrips.filter((trip) => trip._id !== tripId));
+    };
+
     const handleLikeAdded = ({ tripId, userId }: LikeEventData) => {
       console.log("handleLikeAdded");
       setTrips((prevTrips) =>
@@ -186,8 +192,8 @@ function SocketListener() {
       );
     };
 
-    // רישום המאזינים
     socket.on("tripPosted", handleTripPosted);
+    socket.on("tripDeleted", handleTripDeleted);
     socket.on("likeAdded", handleLikeAdded);
     socket.on("likeRemoved", handleLikeRemoved);
     socket.on("addFavorite", handleFavoriteAdded);
@@ -200,6 +206,7 @@ function SocketListener() {
       console.log("SocketListener unmounted");
 
       socket.off("disconnectUser", handleDisconnect);
+      socket.off("tripDeleted", handleTripDeleted);
       socket.off("tripPosted", handleTripPosted);
       socket.off("likeAdded", handleLikeAdded);
       socket.off("likeRemoved", handleLikeRemoved);
