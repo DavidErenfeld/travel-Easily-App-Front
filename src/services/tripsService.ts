@@ -1,4 +1,3 @@
-// import { IComment } from "../components/searchTrip/SelectedTrip";
 import socket from "../Hooks/socketInstance";
 import apiClient, { CanceledError } from "./apiClient";
 
@@ -7,6 +6,7 @@ export interface ITrips {
   _id?: string;
   userName?: string;
   owner?: {
+    _id?: string;
     userName?: string;
     imgUrl?: string;
   };
