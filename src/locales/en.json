@@ -233,9 +233,9 @@
     "exploreAllButton": "Show all Trips",
     "advancedSearchButton": "Advanced Search ",
     "destinations": {
-      "dubai": {
-        "name": "Dubai",
-        "description": "The perfect luxury getaway."
+      "romania": {
+        "name": "Romania",
+        "description": "Stunning views and rich history."
       },
       "greece": {
         "name": "Greece",

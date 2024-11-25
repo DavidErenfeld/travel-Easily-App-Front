@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { ArrowUp } from "lucide-react";
 import Header from "../Header";
 import Footer from "../Home/Footer";
-import "./style.css";
 import MenuBar from "../Menus/MenuBar";
 import { useNavigate } from "react-router-dom";
+import "./style.css";
 
 const SecontHomePage = () => {
   const { t } = useTranslation();
@@ -41,10 +41,10 @@ const SecontHomePage = () => {
 
   const destinations = [
     {
-      name: "Dubai",
-      displayName: t("secontHomePage.destinations.dubai.name"),
-      image: "/images/citys/Dubai.webp",
-      description: t("secontHomePage.destinations.dubai.description"),
+      name: "Romania",
+      displayName: t("secontHomePage.destinations.romania.name"),
+      image: "/images/citys/Rumania.webp",
+      description: t("secontHomePage.destinations.romania.description"),
     },
     {
       name: "Greece",
