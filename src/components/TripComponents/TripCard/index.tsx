@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import i18n from "../../../i18n";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ITrips } from "../../../services/tripsService";
@@ -8,7 +9,6 @@ import TripCardIcons from "../TripCardIcons";
 import SuccessMessage from "../../UIComponents/SuccessMessage";
 import useTripActions from "../../../Hooks/useTripActions";
 import "./style.css";
-import i18n from "../../../i18n";
 
 interface TripCardProps {
   trip: ITrips;

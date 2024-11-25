@@ -9,6 +9,7 @@ import LoadingDots from "../../UIComponents/Loader";
 import useImageUpload from "../../../Hooks/useImageUpload";
 import PopUp from "../../UIComponents/PopUp";
 import "./style.css";
+import { useTrips } from "../../../Context/TripContext";
 
 interface TripDay {
   dayNum: number;
@@ -51,6 +52,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
   const [deleteAction, setDeleteAction] = useState<"day" | "trip" | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const imageRef = useRef<HTMLInputElement>(null);
+  const { refreshTrips } = useTrips();
 
   useEffect(() => {
     return () => {
@@ -145,6 +147,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
 
       await tripsService.deleteTrip(trip._id!);
       console.log(t("updateTrip.successTripDelete"));
+      await refreshTrips();
       navigate(-1);
     } catch (error) {
       console.error(t("updateTrip.errorTripDelete"), error);
