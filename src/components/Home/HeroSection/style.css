@@ -29,6 +29,10 @@
   margin-bottom: 1rem;
 }
 
+.hero-section h1.he-title {
+  font-family: "Secular One", sans-serif;
+}
+
 .hero-section p {
   font-size: 2.2rem;
   color: var(--button-cta-text);
