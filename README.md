@@ -47,7 +47,7 @@ npm run dev     # Start the development server
 
 ## Live Site
 
-The application is live at [Travel Easily](https://travel-easily-app.netlify.app/register) .
+The application is live at [Travel Easily](https://travel-easily-app.netlify.app) .
 
 ## Author
 
