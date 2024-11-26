@@ -69,11 +69,11 @@ Below are some screenshots demonstrating the features and design of the applicat
 
 ### Mobile Screenshots
 
-![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile1.png "Travel Easily Screenshot")
-![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile2.png "Travel Easily Screenshot")
-![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile3.png "Travel Easily Screenshot")
-![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile4.png "Travel Easily Screenshot")
-![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile5.png "Travel Easily Screenshot")
-![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile6.png "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile1.jpg "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile2.jpg "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile3.jpg "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile4.jpg "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile5.jpg "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile6.jpg "Travel Easily Screenshot")
 ![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile7.png "Travel Easily Screenshot")
-![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile8.png "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile8.jpg "Travel Easily Screenshot")
