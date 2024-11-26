@@ -53,9 +53,27 @@ The application is live at [Travel Easily](https://travel-easily-app.netlify.app
 
 David Erenfeld
 
+## Screenshots
+
+Below are some screenshots demonstrating the features and design of the application:
+
+### Desktop Screenshots
+
+![Travel Easily Performance](public/images/demoImages/Performance.png "Travel Easily Screenshot")
 ![Travel Easily Desktop Demo](public/images/demoImages/desktopImages/Screenshot1.png "Travel Easily Screenshot")
 ![Travel Easily Desktop Demo](public/images/demoImages/desktopImages/Screenshot2.png "Travel Easily Screenshot")
 ![Travel Easily Desktop Demo](public/images/demoImages/desktopImages/Screenshot3.png "Travel Easily Screenshot")
 ![Travel Easily Desktop Demo](public/images/demoImages/desktopImages/Screenshot4.png "Travel Easily Screenshot")
 ![Travel Easily Desktop Demo](public/images/demoImages/desktopImages/Screenshot5.png "Travel Easily Screenshot")
 ![Travel Easily Desktop Demo](public/images/demoImages/desktopImages/Screenshot6.png "Travel Easily Screenshot")
+
+### Mobile Screenshots
+
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile1.png "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile2.png "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile3.png "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile4.png "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile5.png "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile6.png "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile7.png "Travel Easily Screenshot")
+![Travel Easily Mobile Demo](public/images/demoImages/mobileImages/ScreenshotMobile8.png "Travel Easily Screenshot")
