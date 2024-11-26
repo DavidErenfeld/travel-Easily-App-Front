@@ -52,3 +52,10 @@ The application is live at [Travel Easily](https://travel-easily-app.netlify.app
 ## Author
 
 David Erenfeld
+
+![Travel Easily Demo](images/demoImages/desktopImages/Screenshot1.png "Travel Easily Screenshot")
+![Travel Easily Demo](images/demoImages/desktopImages/Screenshot2.png "Travel Easily Screenshot")
+![Travel Easily Demo](images/demoImages/desktopImages/Screenshot3.png "Travel Easily Screenshot")
+![Travel Easily Demo](images/demoImages/desktopImages/Screenshot4.png "Travel Easily Screenshot")
+![Travel Easily Demo](images/demoImages/desktopImages/Screenshot5.png "Travel Easily Screenshot")
+![Travel Easily Demo](images/demoImages/desktopImages/Screenshot6.png "Travel Easily Screenshot")
