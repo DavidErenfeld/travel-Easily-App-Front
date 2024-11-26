@@ -13,15 +13,18 @@ Travel Easily is a community-based travel sharing application where users can re
 - Edit and delete posts and images.
 - Update profile picture and delete user account entirely.
 - Images are stored using Cloudinary.
+- Multi-language support: The application supports both Hebrew and English, implemented with react-i18next.
 
 ## Technologies
 
 - **React (TypeScript)** for frontend development.
-- **CSS Modules** for modular and managed styling.
 - **React Router** for page navigation.
 - **Context API** for global state management.
 - **Socket.IO** for real-time communications.
+- **Google OAuth** for secure and convenient user authentication.
 - **Cloudinary** for image storage.
+- **react-i18next** for multilingual support.
+- **CSS Modules** for modular and managed styling.
 - **Netlify** for hosting the application.
 
 ## Custom Hooks
