@@ -37,7 +37,7 @@ const AdvancedSearch: React.FC = () => {
     const queryString = new URLSearchParams(
       queryParams as Record<string, string>
     ).toString();
-
+    console.log(queryString);
     navigate(`/trips?${queryString}`);
   };
 

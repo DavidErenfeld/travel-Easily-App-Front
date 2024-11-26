@@ -101,6 +101,7 @@ const getByTripId = (tripId: string) => {
         },
       })
       .then((response) => {
+        console.log(response);
         resolve(response.data);
       })
       .catch((error) => {

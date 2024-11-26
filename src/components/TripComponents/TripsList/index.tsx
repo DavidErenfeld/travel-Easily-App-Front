@@ -52,7 +52,7 @@ const TripsList = () => {
       ? trip.country.toLowerCase() === country
       : true;
     const isDaysMatch = numOfDays
-      ? trip.numOfDays === parseInt(numOfDays, 10)
+      ? trip.tripDescription.length === parseInt(numOfDays, 10)
       : true;
     const isTripTypeMatch = typeTrip
       ? trip.typeTrip.toLowerCase() === typeTrip
