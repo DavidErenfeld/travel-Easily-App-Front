@@ -30,15 +30,23 @@ function SocketListener() {
 
   useEffect(() => {
     console.log("SocketListener mounted");
-
-    const handleDisconnect = () => {
+    const handleDisconnectUser = () => {
       console.log("Received disconnectUser event");
-      logout();
+      logout(); // נתק את המשתמש במקרה של בקשה מהשרת
     };
 
-    if (!socket.hasListeners("disconnectUser")) {
-      socket.on("disconnectUser", handleDisconnect);
-    }
+    const handleDisconnect = (reason: string) => {
+      console.warn(`Socket disconnected: ${reason}`);
+      if (reason === "io server disconnect") {
+        // אם השרת ניתק, נסה להתחבר מחדש
+        console.log("Reconnecting after server disconnect...");
+        socket.connect();
+      } else {
+        console.log("Disconnected due to other reason, notifying user...");
+        // כאן ניתן להוסיף הודעה למשתמש אם החיבור אבד
+      }
+    };
+
     const handleTripPosted = (newTrip: ITrips) => {
       setTrips((prevTrips) =>
         prevTrips.some((trip) => trip._id === newTrip._id)
@@ -191,6 +199,7 @@ function SocketListener() {
       );
     };
 
+    socket.on("disconnect", handleDisconnect);
     socket.on("tripPosted", handleTripPosted);
     socket.on("tripDeleted", handleTripDeleted);
     socket.on("likeAdded", handleLikeAdded);
@@ -203,8 +212,8 @@ function SocketListener() {
 
     return () => {
       console.log("SocketListener unmounted");
-
-      socket.off("disconnectUser", handleDisconnect);
+      socket.off("disconnectUser", handleDisconnectUser);
+      socket.off("disconnect", handleDisconnect);
       socket.off("tripDeleted", handleTripDeleted);
       socket.off("tripPosted", handleTripPosted);
       socket.off("likeAdded", handleLikeAdded);

@@ -10,6 +10,9 @@ const socket: Socket = io(
     auth: {
       token: token,
     },
+    reconnection: true, // אפשר התחברות מחדש אוטומטית
+    reconnectionAttempts: 5, // מספר ניסיונות התחברות מחדש
+    reconnectionDelay: 3000, // השהיה בין ניסיונות התחברות (במילישניות)
   }
 );
 
@@ -23,6 +26,15 @@ socket.on("connect", () => {
 
 socket.on("connect_error", (err) => {
   console.error("Socket connection error:", err.message);
+});
+
+// מאזין חדש לטיפול באירוע disconnect
+socket.on("disconnect", (reason) => {
+  console.warn(`Socket disconnected: ${reason}`);
+  if (reason === "io server disconnect") {
+    console.log("Disconnected by the server, attempting to reconnect...");
+    socket.connect(); // ניסיון להתחבר מחדש אם השרת ניתק את החיבור
+  }
 });
 
 export default socket;
