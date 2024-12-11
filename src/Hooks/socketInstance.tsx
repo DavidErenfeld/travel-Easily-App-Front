@@ -10,9 +10,9 @@ const socket: Socket = io(
     auth: {
       token: token,
     },
-    reconnection: true, // אפשר התחברות מחדש אוטומטית
-    reconnectionAttempts: 5, // מספר ניסיונות התחברות מחדש
-    reconnectionDelay: 3000, // השהיה בין ניסיונות התחברות (במילישניות)
+    reconnection: true,
+    reconnectionAttempts: 5,
+    reconnectionDelay: 3000,
   }
 );
 

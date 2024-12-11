@@ -12,7 +12,6 @@ import tripsService from "../../services/tripsService";
 import PopUp from "../UIComponents/PopUp";
 import Header from "../Header";
 import "./style.css";
-
 function PersonalArea() {
   const { t } = useTranslation();
   const imgRef = useRef<HTMLInputElement>(null);

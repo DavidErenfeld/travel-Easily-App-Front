@@ -21,12 +21,11 @@ import TripFormPage from "./components/PlacesSearch/PlacesSearchPage";
 import { useEffect } from "react";
 import socket from "./Hooks/socketInstance";
 import SecontHomePage from "./components/SecontHomePage";
-import "./App.css";
-import "./index.css";
 import TripsList from "./components/TripComponents/TripsList";
-import ViewComment from "./components/CommentsComponent/ViewComment";
 import CookieConsent from "./components/UIComponents/CookieConsent/CookieConsent";
 import PrivacyPolicy from "./components/UIComponents/PrivacyPolicy";
+import "./index.css";
+import "./App.css";
 
 function App() {
   useEffect(() => {

@@ -32,18 +32,16 @@ function SocketListener() {
     console.log("SocketListener mounted");
     const handleDisconnectUser = () => {
       console.log("Received disconnectUser event");
-      logout(); // נתק את המשתמש במקרה של בקשה מהשרת
+      logout();
     };
 
     const handleDisconnect = (reason: string) => {
       console.warn(`Socket disconnected: ${reason}`);
       if (reason === "io server disconnect") {
-        // אם השרת ניתק, נסה להתחבר מחדש
         console.log("Reconnecting after server disconnect...");
         socket.connect();
       } else {
         console.log("Disconnected due to other reason, notifying user...");
-        // כאן ניתן להוסיף הודעה למשתמש אם החיבור אבד
       }
     };
 
@@ -197,6 +195,9 @@ function SocketListener() {
               ).length || 0,
           }))
       );
+      if (user?._id === userId) {
+        logout();
+      }
     };
 
     socket.on("disconnect", handleDisconnect);
