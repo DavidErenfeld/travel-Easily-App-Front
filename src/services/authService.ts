@@ -2,7 +2,6 @@ import apiClient from "./apiClient";
 import { CredentialResponse } from "@react-oauth/google";
 import { AxiosResponse } from "axios";
 import socket from "../Hooks/socketInstance";
-import { useTrips } from "../Context/TripContext";
 
 export interface IUser {
   userName?: string;
@@ -15,7 +14,6 @@ export interface IUser {
 }
 
 export const loginUser = (user: IUser): Promise<IUser> => {
-  const { refreshTrips } = useTrips();
   return new Promise<IUser>((resolve, reject) => {
     console.log("Login...");
 
@@ -27,7 +25,6 @@ export const loginUser = (user: IUser): Promise<IUser> => {
         localStorage.setItem("loggedUserId", response.data._id);
         localStorage.setItem("imgUrl", response.data.imgUrl);
         localStorage.setItem("userName", response.data.userName);
-        refreshTrips();
 
         const token = response.data.accessToken;
 
@@ -93,11 +90,10 @@ export const googleSignin = (
 };
 
 export const logout = (): Promise<void> => {
-  const { refreshTrips } = useTrips();
   return new Promise<void>((resolve, reject) => {
     console.log("Logging out...");
     const refreshToken = localStorage.getItem("refreshToken");
-    refreshTrips();
+
     localStorage.clear();
 
     if (socket.connected) {

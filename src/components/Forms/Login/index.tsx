@@ -13,6 +13,7 @@ import authService from "../../../services/authService";
 import Header from "../../Header";
 import "../formeStyle.css";
 import "./style.css";
+import { useTrips } from "../../../Context/TripContext";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -27,7 +28,7 @@ function Login() {
   const [loginError, setLoginError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { login } = useAuth();
-
+  const { refreshTrips } = useTrips();
   const {
     register,
     handleSubmit,
@@ -44,6 +45,7 @@ function Login() {
         password: data.password,
       });
       login(response);
+      refreshTrips();
       navigate("/");
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
