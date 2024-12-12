@@ -10,7 +10,7 @@ import "./style.css";
 
 const TripsList = () => {
   const { t } = useTranslation();
-  const { trips } = useTrips();
+  const { trips, contextLoading } = useTrips();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(true);
@@ -74,7 +74,7 @@ const TripsList = () => {
         <div className="trips-summary">
           <h1 className="">{`${pageTitle} (${filteredTrips.length})`}</h1>
         </div>
-        {loading ? (
+        {loading && contextLoading ? (
           <LoadingDots />
         ) : filteredTrips.length === 0 ? (
           <div className="no-trips-container">

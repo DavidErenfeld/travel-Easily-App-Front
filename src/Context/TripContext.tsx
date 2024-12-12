@@ -11,6 +11,7 @@ interface TripContextType {
   trips: ITrips[];
   setTrips: React.Dispatch<React.SetStateAction<ITrips[]>>;
   refreshTrips: () => Promise<void>;
+  contextLoading: boolean;
 }
 
 const TripContext = createContext<TripContextType | undefined>(undefined);
@@ -19,8 +20,10 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [trips, setTrips] = useState<ITrips[]>([]);
+  const [contextLoading, setContextLoading] = useState(true);
 
   const refreshTrips = async () => {
+    setContextLoading(true);
     try {
       const { req } = tripsService.getAllTrips();
 
@@ -29,6 +32,8 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
       setTrips(response.data);
     } catch (error) {
       console.error("Failed to fetch trips:", error);
+    } finally {
+      setContextLoading(false);
     }
   };
 
@@ -37,7 +42,9 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
   return (
-    <TripContext.Provider value={{ trips, setTrips, refreshTrips }}>
+    <TripContext.Provider
+      value={{ trips, setTrips, refreshTrips, contextLoading }}
+    >
       {children}
     </TripContext.Provider>
   );
