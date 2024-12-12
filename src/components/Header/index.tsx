@@ -6,6 +6,7 @@ import Sidebar from "../Menus/Sidebar";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "../UIComponents/LanguageSwitcher";
 import "./style.css";
+import { useTrips } from "../../Context/TripContext";
 
 const Header = () => {
   const { logout } = useAuth();
@@ -15,6 +16,7 @@ const Header = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const { refreshTrips } = useTrips();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -23,6 +25,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await logout();
+      refreshTrips();
       setProfileImg("/images/user.png");
       setIsSidebarOpen(false);
     } catch (error) {
