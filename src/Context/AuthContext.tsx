@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import authService, { IUser } from "../services/authService";
+import { useTrips } from "./TripContext";
 
 interface AuthContextType {
   isAuthenticated: boolean;
