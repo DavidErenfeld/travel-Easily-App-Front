@@ -145,7 +145,12 @@ const AdvancedSearch: React.FC = () => {
             type="number"
             id="days"
             value={numberOfDays}
-            onChange={(e) => setNumberOfDays(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (parseInt(value, 10) >= 0 || value === "") {
+                setNumberOfDays(value);
+              }
+            }}
             className="form-control"
             placeholder={t("advancedSearch.daysPlaceholder")}
             min="1"

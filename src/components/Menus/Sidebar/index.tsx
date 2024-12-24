@@ -57,7 +57,12 @@ const Sidebar = ({
             navigate("/personal-area");
           }}
         >
-          <div className="sidebar-user-name">
+          <div
+            className="sidebar-user-name"
+            onClick={() => {
+              navigate("/personal-area");
+            }}
+          >
             <p>{localStorage.getItem("userName")}</p>
           </div>
           <img
