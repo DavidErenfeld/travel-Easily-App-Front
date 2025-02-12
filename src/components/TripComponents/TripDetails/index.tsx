@@ -253,7 +253,7 @@ const TripDetails = () => {
                 )}
                 {trip && (
                   <TripCardIcons
-                    tripId={trip._id || ""}
+                    slug={trip.slug || ""}
                     country={trip.country}
                     numOfComments={numOfComments}
                     numOfLikes={numOfLikes}

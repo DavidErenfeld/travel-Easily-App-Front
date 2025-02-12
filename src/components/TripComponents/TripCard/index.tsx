@@ -80,7 +80,7 @@ const TripCard = ({ trip, onNavigateToTrip }: TripCardProps) => {
           role="button"
           tabIndex={0}
           onKeyPress={(e) =>
-            e.key === "Enter" && onNavigateToTrip(trip._id || "")
+            e.key === "Enter" && onNavigateToTrip(trip.slug || "")
           }
         >
           <div className="trip-description">
@@ -88,7 +88,7 @@ const TripCard = ({ trip, onNavigateToTrip }: TripCardProps) => {
           </div>
         </div>
       ) : (
-        <Link to={`/searchTrip/trip/${trip._id}`} className="trip-card-link">
+        <Link to={`/searchTrip/trip/${trip.slug}`} className="trip-card-link">
           <div className="trip-description">
             <TripDescription trip={trip} />
           </div>
@@ -96,7 +96,7 @@ const TripCard = ({ trip, onNavigateToTrip }: TripCardProps) => {
       )}
 
       <TripCardIcons
-        tripId={trip._id || ""}
+        slug={trip.slug || ""}
         country={trip.country}
         numOfComments={numOfComments}
         numOfLikes={numOfLikes}

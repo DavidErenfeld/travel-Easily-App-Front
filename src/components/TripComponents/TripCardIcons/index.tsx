@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 interface TripCardIconsProps {
-  tripId: string;
+  slug: string;
   country: string;
   numOfComments: number;
   numOfLikes: number;
@@ -26,7 +26,7 @@ interface TripCardIconsProps {
 }
 
 const TripCardIcons: React.FC<TripCardIconsProps> = ({
-  tripId,
+  slug,
   country,
   numOfComments,
   numOfLikes,
@@ -81,14 +81,14 @@ const TripCardIcons: React.FC<TripCardIconsProps> = ({
       {isShareClicked && !navigator.share && (
         <div className="trip-card-share-buttons">
           <ShareButtons
-            url={`https://travel-easily-app.netlify.app/searchTrip/trip/${tripId}`}
+            url={`https://travel-easily-app.netlify.app/searchTrip/trip/${slug}`}
             text={t("tripCardIcons.shareText", { country })}
             className={isExiting ? "hide" : "show"}
           />
         </div>
       )}
       <div className="coments-and-likes-details">
-        <p onClick={() => navigate(`/searchTrip/trip/${tripId}`)}>
+        <p onClick={() => navigate(`/searchTrip/trip/${slug}`)}>
           {numOfComments} {t("tripCardIcons.comments")}
         </p>
         <p onClick={handleLikesClick}>
