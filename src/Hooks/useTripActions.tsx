@@ -142,10 +142,11 @@ const useTripActions = (trip: ITrips | null) => {
 
   const handleShareClick = async () => {
     if (navigator.share) {
+      const translatedCountry = t(`countries.${trip?.country.toLowerCase()}`);
       try {
         await navigator.share({
-          title: t(`share.tripTitle, countries.${trip?.country}`),
-          text: t(`share.tripText", countries.${trip?.country}`),
+          title: t("share.tripTitle", { country: translatedCountry }),
+          text: t("share.tripText", { country: translatedCountry }),
           url: `https://travel-easily-app.netlify.app/searchTrip/trip/${trip?.slug}`,
         });
       } catch (error) {
