@@ -144,8 +144,8 @@ const useTripActions = (trip: ITrips | null) => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: t("share.tripTitle", { country: trip?.country }),
-          text: t("share.tripText", { country: trip?.country }),
+          title: t(`share.tripTitle, countries.${trip?.country}`),
+          text: t(`share.tripText", countries.${trip?.country}`),
           url: `https://travel-easily-app.netlify.app/searchTrip/trip/${trip?.slug}`,
         });
       } catch (error) {
