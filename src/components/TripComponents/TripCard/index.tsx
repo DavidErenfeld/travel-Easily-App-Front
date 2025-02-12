@@ -12,7 +12,7 @@ import "./style.css";
 
 interface TripCardProps {
   trip: ITrips;
-  onNavigateToTrip?: (tripId: string) => void;
+  onNavigateToTrip?: (tripSlug: string) => void;
 }
 
 const TripCard = ({ trip, onNavigateToTrip }: TripCardProps) => {
@@ -75,7 +75,7 @@ const TripCard = ({ trip, onNavigateToTrip }: TripCardProps) => {
       {trip && <TripHeader trip={trip} />}
       {onNavigateToTrip ? (
         <div
-          onClick={() => onNavigateToTrip(trip._id || "")}
+          onClick={() => onNavigateToTrip(trip.slug || "")}
           className="trip-card-link"
           role="button"
           tabIndex={0}

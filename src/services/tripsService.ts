@@ -4,6 +4,7 @@ import apiClient, { CanceledError } from "./apiClient";
 export { CanceledError };
 export interface ITrips {
   _id?: string;
+  slug?: string;
   userName?: string;
   owner?: {
     _id?: string;
@@ -91,11 +92,11 @@ const getByOwnerId = (userId: string) => {
   });
 };
 
-const getByTripId = (tripId: string) => {
+const getByTripSlug = (slug: string) => {
   return new Promise<ITrips>((resolve, reject) => {
     console.log("Get By Id...");
     apiClient
-      .get(`/trips/FullTrip/${tripId}`, {
+      .get(`/trips/FullTrip/${slug}`, {
         headers: {
           Authorization: `jwt ${localStorage.getItem("accessToken")}`,
         },
@@ -318,7 +319,7 @@ const getLikesDetails = (tripId: string) => {
 export default {
   getAllTrips,
   getByOwnerId,
-  getByTripId,
+  getByTripSlug,
   getFavoriteTripIds,
   postTrip,
   updateTrip,

@@ -27,10 +27,10 @@ const TripDetails = () => {
   const [updateMode, setUpdateMode] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const [searchParams] = useSearchParams();
   const { trips, setTrips } = useTrips();
-  const trip = trips.find((t) => t._id === id) || null;
+  const trip = trips.find((t) => t.slug === slug) || null;
   const [loading, setLoading] = useState(true);
   const loggedUserName = localStorage.getItem("userName") || "";
   const loggedUserId = localStorage.getItem("loggedUserId") || "";
@@ -64,11 +64,11 @@ const TripDetails = () => {
 
   const loadTripFromServer = async () => {
     try {
-      const data = await tripsService.getByTripId(id!);
+      const data = await tripsService.getByTripSlug(slug!);
       setTrips((prevTrips) => {
-        const existingTrip = prevTrips.find((t) => t._id === id);
+        const existingTrip = prevTrips.find((t) => t.slug === slug);
         if (existingTrip) {
-          return prevTrips.map((t) => (t._id === id ? data : t));
+          return prevTrips.map((t) => (t.slug === slug ? data : t));
         } else {
           return [...prevTrips, data];
         }
@@ -92,12 +92,12 @@ const TripDetails = () => {
     const savedTrips = localStorage.getItem("trips");
     if (savedTrips) {
       const trips: ITrips[] = JSON.parse(savedTrips);
-      const foundTrip = trips.find((t) => t._id === id);
+      const foundTrip = trips.find((t) => t.slug === slug);
       if (foundTrip) {
         setTrips((prevTrips) => {
-          const existingTrip = prevTrips.find((t) => t._id === id);
+          const existingTrip = prevTrips.find((t) => t.slug === slug);
           if (existingTrip) {
-            return prevTrips.map((t) => (t._id === id ? foundTrip : t));
+            return prevTrips.map((t) => (t.slug === slug ? foundTrip : t));
           } else {
             return [...prevTrips, foundTrip];
           }
@@ -116,7 +116,7 @@ const TripDetails = () => {
   useEffect(() => {
     loadTrip();
     return () => {};
-  }, [id, updateMode]);
+  }, [slug, updateMode]);
 
   const onClickUpdateMode = () => {
     setUpdateMode(!updateMode);

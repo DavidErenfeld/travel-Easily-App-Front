@@ -51,8 +51,8 @@ function App() {
             <Route path="/forgotPassword" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/trips" element={<TripsList />} />
-            <Route path="/trip/:id" element={<TripDetails />} />
-            <Route path="/searchTrip/trip/:id" element={<TripDetails />} />
+            <Route path="/trip/:slug " element={<TripDetails />} />
+            <Route path="/searchTrip/trip/:slug" element={<TripDetails />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route
               path="/searchTrip/advancedSearch"
