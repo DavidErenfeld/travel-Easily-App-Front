@@ -667,5 +667,9 @@
     "dataDescription": "During registration, we may collect information such as your email address and name. We make every effort to secure your information and follow industry-standard practices to protect your privacy. However, as this is a student project developed by a Junior Developer, we cannot guarantee security measures at a commercial level. We recommend avoiding the use of passwords you use on other sites and staying vigilant while using this platform.",
     "contactTitle": "Contact Us",
     "contactDescription": "If you have any questions about this policy, you can contact us at: 1020dudu@gmail.com"
+  },
+  "share": {
+    "tripTitle": "Amazing trip to {{country}}",
+    "tripText": "Join me on this journey to {{country}}!"
   }
 }

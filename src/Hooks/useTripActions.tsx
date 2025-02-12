@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "../Context/AuthContext";
 import tripsService, { ITrips } from "../services/tripsService";
 import { useTrips } from "../Context/TripContext";
@@ -7,6 +8,7 @@ import { addFavoriteTrip, removeFavoriteTrip } from "../services/usersService";
 import socket from "./socketInstance";
 
 const useTripActions = (trip: ITrips | null) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
   const { trips, setTrips } = useTrips();
@@ -142,9 +144,9 @@ const useTripActions = (trip: ITrips | null) => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: `Amazing trip to ${trip?.country}`,
-          text: `Join me on this journey to ${trip?.country}!`,
-          url: `https://travel-easily-app.netlify.app/searchTrip/trip/${trip?._id}`,
+          title: t("share.tripTitle", { country: trip?.country }),
+          text: t("share.tripText", { country: trip?.country }),
+          url: `https://travel-easily-app.netlify.app/searchTrip/trip/${trip?.slug}`,
         });
       } catch (error) {
         console.error("Error sharing:", error);
