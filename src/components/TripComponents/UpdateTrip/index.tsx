@@ -53,7 +53,7 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const imageRef = useRef<HTMLInputElement>(null);
   const { refreshTrips } = useTrips();
-
+  const isHebrew = (text: string) => /[\u0590-\u05FF]/.test(text);
   useEffect(() => {
     return () => {
       images.forEach((image) => {
@@ -217,7 +217,11 @@ const UpdateTrip = ({ trip, onClickReadMode }: UpdateTripProps) => {
             </button>
           </div>
           <textarea
-            className="update-trip-description"
+            className={`update-trip-description ${
+              isHebrew(dayEdits[currentDayIndex].description)
+                ? "hebrewDirection"
+                : "englishDirection"
+            }`}
             value={dayEdits[currentDayIndex].description}
             onChange={handleDescriptionChange}
           />

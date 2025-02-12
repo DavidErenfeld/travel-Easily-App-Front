@@ -84,6 +84,16 @@ body {
   font-family: "Raleway", sans-serif;
 }
 
+.hebrewDirection {
+  direction: rtl;
+  text-align: right;
+}
+
+.englishDirection {
+  direction: ltr;
+  text-align: left;
+}
+
 .main-section {
   padding-top: 4rem;
 }
