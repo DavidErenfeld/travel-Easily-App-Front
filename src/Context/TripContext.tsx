@@ -1,17 +1,20 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useEffect,
-} from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 import tripsService, { ITrips } from "../services/tripsService";
+
+interface TripsResponse {
+  data: ITrips[];
+  total: number;
+  page: number;
+  limit: number;
+}
 
 interface TripContextType {
   trips: ITrips[];
   setTrips: React.Dispatch<React.SetStateAction<ITrips[]>>;
-  refreshTrips: () => Promise<void>;
+  loadTrips: (page: number, limit: number) => Promise<void>;
   contextLoading: boolean;
+  hasMore: boolean;
+  resetTrips: () => void;
 }
 
 const TripContext = createContext<TripContextType | undefined>(undefined);
@@ -20,30 +23,41 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [trips, setTrips] = useState<ITrips[]>([]);
-  const [contextLoading, setContextLoading] = useState(true);
+  const [contextLoading, setContextLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
 
-  const refreshTrips = async () => {
+  const resetTrips = () => {
+    setTrips([]);
+    setHasMore(true);
+  };
+
+  const loadTrips = async (page: number, limit: number) => {
     setContextLoading(true);
     try {
-      const { req } = tripsService.getAllTrips();
-
+      const { req } = tripsService.getAllTrips(page, limit);
       const response = await req;
-
-      setTrips(response.data);
+      const result: TripsResponse = response.data;
+      setTrips((prevTrips) => [...prevTrips, ...result.data]);
+      if (page * limit >= result.total) {
+        setHasMore(false);
+      }
     } catch (error) {
-      console.error("Failed to fetch trips:", error);
+      console.error("Error loading trips:", error);
     } finally {
       setContextLoading(false);
     }
   };
 
-  useEffect(() => {
-    refreshTrips();
-  }, []);
-
   return (
     <TripContext.Provider
-      value={{ trips, setTrips, refreshTrips, contextLoading }}
+      value={{
+        trips,
+        setTrips,
+        loadTrips,
+        contextLoading,
+        hasMore,
+        resetTrips,
+      }}
     >
       {children}
     </TripContext.Provider>

@@ -65,10 +65,10 @@ const TripDetails = () => {
   const loadTripFromServer = async () => {
     try {
       const data = await tripsService.getByTripSlug(slug!);
-      setTrips((prevTrips) => {
-        const existingTrip = prevTrips.find((t) => t.slug === slug);
+      setTrips((prevTrips: any) => {
+        const existingTrip = prevTrips.find((t: ITrips) => t.slug === slug);
         if (existingTrip) {
-          return prevTrips.map((t) => (t.slug === slug ? data : t));
+          return prevTrips.map((t: ITrips) => (t.slug === slug ? data : t));
         } else {
           return [...prevTrips, data];
         }

@@ -20,11 +20,9 @@ export interface ITrips {
   numOfComments: number;
   numOfLikes: number;
   tripPhotos?: string[];
-
   isLikedByCurrentUser?: boolean;
   isFavoritedByCurrentUser?: boolean;
   comments: IComment[];
-
   likes?: Array<{
     owner: string;
     _id?: string;
@@ -54,21 +52,26 @@ export interface Ilike {
   _id?: string;
   owner?: string;
 }
-
+export interface TripsResponse {
+  data: ITrips[];
+  total: number;
+  page: number;
+  limit: number;
+}
 const accessToken = localStorage.getItem("accessToken");
 const refreshToken = localStorage.getItem("refreshToken");
-
-const getAllTrips = () => {
+const getAllTrips = (page: number, limit: number) => {
   const abortController = new AbortController();
   const token = localStorage.getItem("accessToken");
-
   const headers = token ? { Authorization: `jwt ${token}` } : {};
-
-  const req = apiClient.get<ITrips[]>("trips", {
+  const req = apiClient.get<TripsResponse>("trips", {
     signal: abortController.signal,
     headers,
+    params: {
+      page,
+      limit,
+    },
   });
-
   console.log("getAllTrips");
   return { req, abort: () => abortController.abort() };
 };
