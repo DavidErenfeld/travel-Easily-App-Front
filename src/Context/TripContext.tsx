@@ -12,6 +12,7 @@ interface TripContextType {
   trips: ITrips[];
   setTrips: React.Dispatch<React.SetStateAction<ITrips[]>>;
   loadTrips: (page: number, limit: number) => Promise<void>;
+  refreshTrips: () => Promise<void>;
   contextLoading: boolean;
   hasMore: boolean;
   resetTrips: () => void;
@@ -48,12 +49,18 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
     }
   };
 
+  const refreshTrips = async () => {
+    resetTrips();
+    await loadTrips(1, 10);
+  };
+
   return (
     <TripContext.Provider
       value={{
         trips,
         setTrips,
         loadTrips,
+        refreshTrips,
         contextLoading,
         hasMore,
         resetTrips,
