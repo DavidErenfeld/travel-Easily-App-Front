@@ -58,8 +58,7 @@ export interface TripsResponse {
   page: number;
   limit: number;
 }
-const accessToken = localStorage.getItem("accessToken");
-const refreshToken = localStorage.getItem("refreshToken");
+
 const getAllTrips = (page: number, limit: number) => {
   const abortController = new AbortController();
   const token = localStorage.getItem("accessToken");
@@ -72,7 +71,6 @@ const getAllTrips = (page: number, limit: number) => {
       limit,
     },
   });
-  console.log("getAllTrips");
   return { req, abort: () => abortController.abort() };
 };
 
@@ -174,9 +172,8 @@ const deleteTrip = (tripId: string) => {
 
 const searchTripsByParams = (params: Record<string, string | number>) => {
   return new Promise<ITrips[]>((resolve, reject) => {
-    console.log("Search trips by params");
     apiClient
-      .get("/trips//search/parameters", {
+      .get("/trips/search/parameters", {
         params,
         headers: {
           Authorization: `JWT ${localStorage.getItem("accessToken")}`,

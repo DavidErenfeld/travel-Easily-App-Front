@@ -15,6 +15,7 @@ interface TripContextType {
   refreshTrips: () => Promise<void>;
   contextLoading: boolean;
   hasMore: boolean;
+  setHasMore: React.Dispatch<React.SetStateAction<boolean>>;
   resetTrips: () => void;
 }
 
@@ -63,6 +64,7 @@ export const TripProvider: React.FC<{ children: ReactNode }> = ({
         refreshTrips,
         contextLoading,
         hasMore,
+        setHasMore,
         resetTrips,
       }}
     >

@@ -11,8 +11,15 @@ import "./style.css";
 
 const TripsList = () => {
   const { t } = useTranslation();
-  const { trips, setTrips, loadTrips, contextLoading, hasMore, resetTrips } =
-    useTrips();
+  const {
+    trips,
+    setTrips,
+    loadTrips,
+    contextLoading,
+    hasMore,
+    resetTrips,
+    setHasMore,
+  } = useTrips();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
@@ -30,27 +37,34 @@ const TripsList = () => {
   if (typeTrip) filters.typeTrip = typeTrip;
   if (numOfDays) filters.numOfDays = parseInt(numOfDays, 10);
   if (typeTraveler) filters.typeTraveler = typeTraveler;
+
+  const isFiltering = Object.keys(filters).length > 0;
+
   useEffect(() => {
-    if (Object.keys(filters).length > 0) {
+    resetTrips();
+    if (isFiltering) {
       tripsService
         .searchTripsByParams(filters)
         .then((filteredTrips) => {
           setTrips(filteredTrips);
+          setHasMore(filteredTrips.length > 0);
         })
-        .catch((error) => console.error("Error filtering trips:", error));
+        .catch((error) => {
+          setTrips([]);
+          setHasMore(false);
+        });
     } else {
-      resetTrips();
       setCurrentPage(1);
       loadTrips(1, limit);
     }
   }, [searchParams]);
 
   const loadMore = useCallback(async () => {
-    if (contextLoading || !hasMore) return;
+    if (contextLoading || !hasMore || isFiltering) return;
     const nextPage = currentPage + 1;
     await loadTrips(nextPage, limit);
     setCurrentPage(nextPage);
-  }, [currentPage, contextLoading, hasMore, loadTrips, limit]);
+  }, [currentPage, contextLoading, hasMore, loadTrips, limit, isFiltering]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -98,9 +112,9 @@ const TripsList = () => {
           </div>
         ) : (
           <>
-            {trips.map((trip) => (
+            {trips.map((trip, index) => (
               <TripCard
-                key={trip._id}
+                key={`${trip._id}-${index}`}
                 trip={trip}
                 onNavigateToTrip={handleNavigateToTrip}
               />
