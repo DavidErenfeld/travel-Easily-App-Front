@@ -6,20 +6,43 @@ import TripCard from "../TripCard";
 import Header from "../../Header";
 import MenuBar from "../../Menus/MenuBar";
 import LoadingDots from "../../UIComponents/Loader";
+import tripsService from "../../../services/tripsService";
 import "./style.css";
 
 const TripsList = () => {
   const { t } = useTranslation();
-  const { trips, loadTrips, contextLoading, hasMore, resetTrips } = useTrips();
+  const { trips, setTrips, loadTrips, contextLoading, hasMore, resetTrips } =
+    useTrips();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 10;
 
+  const country = searchParams.get("country")?.toLowerCase() || "";
+  const numOfDays = searchParams.get("numOfDays");
+  const typeTrip = searchParams.get("typeTrip")?.toLowerCase() || "";
+  const typeTraveler = searchParams.get("typeTraveler")?.toLowerCase() || "";
+  const titleKey = searchParams.get("title") || "tripsList.defaultTitle";
+  const pageTitle = t(titleKey);
+
+  const filters: Record<string, string | number> = {};
+  if (country) filters.country = country;
+  if (typeTrip) filters.typeTrip = typeTrip;
+  if (numOfDays) filters.numOfDays = parseInt(numOfDays, 10);
+  if (typeTraveler) filters.typeTraveler = typeTraveler;
   useEffect(() => {
-    resetTrips();
-    setCurrentPage(1);
-    loadTrips(1, limit);
+    if (Object.keys(filters).length > 0) {
+      tripsService
+        .searchTripsByParams(filters)
+        .then((filteredTrips) => {
+          setTrips(filteredTrips);
+        })
+        .catch((error) => console.error("Error filtering trips:", error));
+    } else {
+      resetTrips();
+      setCurrentPage(1);
+      loadTrips(1, limit);
+    }
   }, [searchParams]);
 
   const loadMore = useCallback(async () => {
@@ -47,42 +70,17 @@ const TripsList = () => {
     navigate(`/searchTrip/trip/${tripId}`);
   };
 
-  const country = searchParams.get("country")?.toLowerCase() || "";
-  const numOfDays = searchParams.get("numOfDays");
-  const typeTrip = searchParams.get("typeTrip")?.toLowerCase() || "";
-  const typeTraveler = searchParams.get("typeTraveler")?.toLowerCase() || "";
-  const titleKey = searchParams.get("title") || "tripsList.defaultTitle";
-  const pageTitle = t(titleKey);
-
-  const filteredTrips = trips.filter((trip) => {
-    const isCountryMatch = country
-      ? trip.country.toLowerCase() === country
-      : true;
-    const isDaysMatch = numOfDays
-      ? trip.tripDescription.length === parseInt(numOfDays, 10)
-      : true;
-    const isTripTypeMatch = typeTrip
-      ? trip.typeTrip.toLowerCase() === typeTrip
-      : true;
-    const isTravelerTypeMatch = typeTraveler
-      ? trip.typeTraveler.toLowerCase() === typeTraveler
-      : true;
-    return (
-      isCountryMatch && isDaysMatch && isTripTypeMatch && isTravelerTypeMatch
-    );
-  });
-
   return (
     <>
       <Header />
       <MenuBar />
       <section className="trips-section section">
         <div className="trips-summary">
-          <h1>{`${pageTitle} `}</h1>
+          <h1>{`${pageTitle}`}</h1>
         </div>
         {contextLoading && trips.length === 0 ? (
           <LoadingDots />
-        ) : filteredTrips.length === 0 ? (
+        ) : trips.length === 0 ? (
           <div className="no-trips-container">
             <p className="no-trips-message">{t("tripsList.noTripsMessage")}</p>
             <button
@@ -100,7 +98,7 @@ const TripsList = () => {
           </div>
         ) : (
           <>
-            {filteredTrips.map((trip) => (
+            {trips.map((trip) => (
               <TripCard
                 key={trip._id}
                 trip={trip}
