@@ -149,10 +149,10 @@ const CreateTrip: React.FC = () => {
             type="file"
             multiple
             ref={imageRef}
+            accept="image/*"
             style={{ display: "none" }}
             onChange={handleImageChange}
           />
-
           <button
             className="scroll-button left"
             onClick={() => setCurrentDayIndex(currentDayIndex - 1)}

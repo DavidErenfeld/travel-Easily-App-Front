@@ -34,13 +34,54 @@ const useImageUpload = (initialImages: ImageWithFile[] = []) => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const files = Array.from(e.target.files);
-      const newImages = files.map((file) => ({
+      const validImageTypes = [
+        "image/jpeg",
+        "image/jpg",
+        "image/png",
+        "image/gif",
+      ];
+      const MAX_SIZE = 5 * 1024 * 1024;
+      const MAX_TOTAL_SIZE = 10 * 1024 * 1024;
+
+      const currentTotalSize = images.reduce(
+        (acc, img) => acc + (img.file?.size ?? 0),
+        0
+      );
+
+      let newTotalSize = currentTotalSize;
+      const filteredFiles: File[] = [];
+
+      for (const file of files) {
+        if (!validImageTypes.includes(file.type)) {
+          alert(
+            `File type "${file.name}" is not supported. Please upload only images (JPG/PNG/GIF).`
+          );
+          continue;
+        }
+        if (file.size > MAX_SIZE) {
+          alert(`File "${file.name}" is too large (over 5MB).`);
+          continue;
+        }
+        newTotalSize += file.size;
+        if (newTotalSize > MAX_TOTAL_SIZE) {
+          alert(
+            `Adding file "${file.name}" exceeds the total size limit of 10MB.`
+          );
+          newTotalSize -= file.size;
+          continue;
+        }
+        filteredFiles.push(file);
+      }
+
+      const newImages = filteredFiles.map((file) => ({
         file,
         src: URL.createObjectURL(file),
         alt: file.name || "Trip Image",
         isFromServer: false,
       }));
+
       setImages((prevImages) => [...prevImages, ...newImages]);
+      e.target.value = "";
     }
   };
 
